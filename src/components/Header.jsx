@@ -21,7 +21,6 @@ const Header = () => {
           </div>
           <div className="header-right">
             <a href="#">Home</a>
-            <Link to="/insprogetto">InsProgetto</Link>
             <a href="#">Guadagna</a>
             <a href="#">Impara</a>
             <a href="#">Community</a>
