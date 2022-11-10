@@ -28,5 +28,11 @@ const progettiState = atom({
   effects_UNSTABLE: [persistAtom],
 })
 
+const progettiImageState = atom({
+  key: 'progettiImage',
+  default: {},
+  effects_UNSTABLE: [persistAtom],
+})
 
-export {IpfsState, progettiAddressState,progettiState, providerState}
+
+export {IpfsState, progettiAddressState,progettiState, providerState, progettiImageState}

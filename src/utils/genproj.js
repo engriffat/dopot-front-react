@@ -43,10 +43,12 @@ async function genproj(params) {
         supply:parseInt( params["supply"+i]) });
         i++;
     }
+
+    
      
     //getAllProject();
-    getIPFSprojectAddr(getRecoil(progettiAddressState)[0][0]);
-    //contrattoprojectFactory(45 * 86400, hash.path, Tier);
+    //getIPFSprojectAddr(getRecoil(progettiAddressState)[0][0]);
+    contrattoprojectFactory(45 * 86400, hash.path, Tier);
 }
 
 async function addFilesIpfs(files) {

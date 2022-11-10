@@ -11,29 +11,11 @@ export const GetAccount = async (setState) => {
 
     await IPFS.initIPFS();
     setRecoil(IpfsState, IPFS);
-    setState(await (await IPFS.getAddress()).toString().substring(0, 7) + "...");
 
+    if (setState != null) {
+      setState(await (await IPFS.getAddress()).toString().substring(0, 7) + "...");
+    }
 
-    
-    const media = await IPFS.add("iygiunygiv j h  prova prova");
-    console.log("Original IPFS object: ");
-    console.dir(media);
-    console.log(IPFS);
-    localStorage.setItem('SessionIpfs', IPFS);
-  
-    // //////////////////////////////////////
-    // console.log("Project IPFS hash: ");
-    // const hash1 = await ipfs.add(rndString(50), {cidVersion: 1});
-    // console.dir(hash1);
-    // //console.dir(getBytes32FromMultiash(media.path)) << no
-    // //////////////////////////////////////
-  
-  
-    // ////////////////////////////////////////
-    // console.log("DopotReward IPFS hash: ");
-    // const hash2 = await ipfs.add(rndString(50), {cidVersion: 1});
-    // console.dir(hash2);
-    // ////////////////////////////////////////
   }
 
   async function persistentStorage() {

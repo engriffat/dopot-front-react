@@ -15,8 +15,30 @@ import BlogPost from "../components/PaginaCard/BlogPost";
 import InvestiCard from "../components/PaginaCard/InvestiCard";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import {useParams} from "react-router-dom";
+import { progettiState, progettiImageState} from "../recoilState";
+import { getRecoil, setRecoil } from 'recoil-nexus';
+import {getIPFSimage} from "../utils/downloadProj";
 
-const PaginaCard = () => {
+const PaginaCard =  () => {
+  let { address } = useParams();
+  var progetto=getRecoil(progettiState).find(x => x.address === address);
+  var immagini= getRecoil(progettiImageState)[address];
+ 
+  console.log(immagini);
+  const cards = []
+  var i = 1;
+  
+  for (const key in immagini) { 
+    
+    if (key.includes("Prodotto")) {
+       cards.push(<InvestiCard img={immagini[key][0]["base64"]} titolo={progetto["nomeProdotto"+i]}> 
+        </InvestiCard>);
+        i++;
+    }
+  }
+ 
+
   const percentage = 90;
   return (
     <div className="app">
@@ -31,18 +53,9 @@ const PaginaCard = () => {
             <img className="image-icon" src={ImageIcon} alt="ImageIcon" />
             <div className="pc-hero-grid">
               <div className="pc-hero-grid-left">
-                <h1>Nome del progetto</h1>
+                <h1>{progetto.nomeAzienda}</h1>
                 <p>
-                  Testo introduttivo sul progetto, cosa fa e quali problemi
-                  risolve, questo testo serve a riempire lo spazio necessario a
-                  scrivere questo testo. Testo introduttivo sul progetto, cosa
-                  fa e quali problemi risolve, questo testo serve a riempire lo
-                  spazio necessario a <br /> scrivere questo testo Testo
-                  introduttivo sul progetto, cosa fa e quali problemi risolve,
-                  questo testo serve a riempire lo <br /> spazio necessario a
-                  scrivere questo testo. Testo introduttivo sul progetto, cosa
-                  fa e quali problemi risolve, questo testo serve a riempire lo
-                  spazio necessario a scrivere questo testo
+                 {progetto.descProgetto}<br /> 
                 </p>
                 <div className="pc-btn-box">
                   <button className="grd-btn dopot-btn-lg">
@@ -177,39 +190,8 @@ const PaginaCard = () => {
                   </p>
                 </div>
                 <h5>Investi</h5>
-                <InvestiCard img={BlogImg}>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sint dicta fugit sapiente minus fuga distinctio!
-                  </p>
-                  <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                  <h5>$100</h5>
-                </InvestiCard>
-                <InvestiCard img={BlogImg}>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sint dicta fugit sapiente minus fuga distinctio!
-                  </p>
-                  <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                  <h5>$100</h5>
-                </InvestiCard>
-                <InvestiCard img={BlogImg}>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sint dicta fugit sapiente minus fuga distinctio!
-                  </p>
-                  <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                  <h5>$100</h5>
-                </InvestiCard>
+                
+                {cards}
               </div>
             </div>
           </div>

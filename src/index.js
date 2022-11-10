@@ -8,13 +8,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 var identity, ipfs;
 
 root.render(
-  <React.StrictMode>
     <RecoilRoot>
     <RecoilNexus />
       <App />
-    </RecoilRoot>
-  </React.StrictMode>
-);
+    </RecoilRoot>);
 
 
 

@@ -1,5 +1,7 @@
 import { concat } from "uint8arrays";
 import {create} from "ipfs"
+import { blobToBase64 } from "./base64utils";
+
 const { ethers } = require("ethers");
 const { ethereum } = window;
 
@@ -68,10 +70,13 @@ async function getImage(param) {
   for await (const file of res) {
     let blob = new Blob([file], {type:"image/png"})
     let url = URL.createObjectURL(blob)
-    return url
+    let b64 = await blobToBase64(blob);
+    return {url: url, base64: b64}
   }
   
 }
+
+
 
 function GetAccount() {
     return account;
