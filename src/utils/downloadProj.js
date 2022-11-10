@@ -68,7 +68,7 @@ async function getAllProject() {
 
   async function getIPFSimage(element) {
 
- 
+    var ipfs =  getRecoil(IpfsState);
    
     var i = 1;
     var progettiImage =JSON.parse(JSON.stringify( getRecoil(progettiImageState)));
@@ -77,10 +77,11 @@ async function getAllProject() {
     while (element["fotoProdotto"+i+"ipfs"] != null) { 
         progettiImage[element.address]["fotoProdotto"+i+"ipfs" ] = {}
         var n=0;
-        element["fotoProdotto"+i+"ipfs" ].forEach(async elementipfs => {
-            progettiImage[element.address]["fotoProdotto"+i+"ipfs" ][n] =await getRecoil(IpfsState).getImage(elementipfs.path); 
-            n++;
-        });
+        for await (const elementipfs of  element["fotoProdotto"+i+"ipfs" ]) {
+          progettiImage[element.address]["fotoProdotto"+i+"ipfs" ][n] = await ipfs.getImage(elementipfs.path); 
+          n++;
+        }
+        
         
         i++;
     }

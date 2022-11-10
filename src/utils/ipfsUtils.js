@@ -66,14 +66,17 @@ async function getJSON(param) {
 
 
 async function getImage(param) {
-  const res = ipfs.cat(param)
-  for await (const file of res) {
-    let blob = new Blob([file], {type:"image/png"})
-    let url = URL.createObjectURL(blob)
-    let b64 = await blobToBase64(blob);
-    return {url: url, base64: b64}
-  }
   
+  
+  let url;
+  let b64;
+  for await (const file of ipfs.cat( param )) {
+    let blob = new Blob([file], {type:"image/png"})
+    url = URL.createObjectURL(blob)
+    b64 = await blobToBase64(blob);
+    
+  }
+  return {url: url, base64: b64}
 }
 
 
