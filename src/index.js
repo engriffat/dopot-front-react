@@ -4,8 +4,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from 'recoil';
 import RecoilNexus from "recoil-nexus";
+// import i18n (needs to be bundled ;)) 
+import './i18n';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-var identity, ipfs;
+
 
 root.render(
     <RecoilRoot>

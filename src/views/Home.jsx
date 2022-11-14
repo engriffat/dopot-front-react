@@ -36,11 +36,12 @@ import "../styles/globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { MdMenu, MdClear } from "react-icons/md";
-
+import { useTranslation } from 'react-i18next';
 
 
 const Home = () => {
 
+  const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
   return (
     <div className="app">
@@ -67,17 +68,16 @@ const Home = () => {
             <div className="hero-content">
               {/* <img src={LogoWhite} alt="LogoWhite" /> */}
               <h1>
-                Il crowdfunding incontra la <br /> potenza della Blockchain.{" "}
+              {t('title')}
               </h1>
               <h2>
-                Dopot è la prima piattaforma di crypto-crowdfunding
-                decentralizzata in Italia
+              {t('subtitle')}
               </h2>
               <div className="main-btns-box">
                 <div className="box">
                   <div className="mbb-content">
                     <button className="grd-btn dopot-btn-lg">
-                      <img src={IconPlane} alt="IconPlane" /> Esplora i progetti
+                      <img src={IconPlane} alt="IconPlane" /> {t('discovery')}
                     </button>
                     <button className="purple-border-btn dopot-btn-lg">
                       {" "}
@@ -100,34 +100,33 @@ const Home = () => {
           />
           <div className="box">
             <div className="scorpi-content">
-              <h3 className="section-heading">Scopri cosa puoi fare</h3>
+              <h3 className="section-heading">{t('find')}</h3>
               <div className="scorpi-grid">
                 <div className="scorpi-grid-card">
                   <img src={IconArrowGrd} alt="IconArrowGrd" />
-                  <h4>Investi</h4>
+                  <h4>{t('invest')}</h4>
                   <p>
-                    Aiuta a crescere progetti ambiziosi e vinci insieme a loro
+                  {t('investsub')}
                   </p>
                 </div>
                 <div className="scorpi-grid-card">
                   <img src={IconDollarGrd} alt="IconDollarGrd" />
-                  <h4>Guadagna</h4>
+                  <h4>{t('earn')}</h4>
                   <p>
-                    Guadagna token Dopot invitando persone nella piattaforma
+                  {t('earnsub')}
                   </p>
                 </div>
                 <div className="scorpi-grid-card">
                   <img src={IconPersonGrd} alt="IconPersonGrd" />
-                  <h4>Impara</h4>
+                  <h4>{t('learn')}</h4>
                   <p>
-                    Scopri di più sulle criptovalute grazie ai nostri percorsi
-                    gratuiti
+                  {t('learnsub')}
                   </p>
                 </div>
                 <div className="scorpi-grid-card">
                   <img src={IconCommentsGrd} alt="IconCommentsGrd" />
-                  <h4>Connettiti</h4>
-                  <p>Conosci e confrontati con la nostra community</p>
+                  <h4>{t('connect')}</h4>
+                  <p>{t('connectsub')}</p>
                 </div>
               </div>
             </div>
@@ -151,21 +150,15 @@ const Home = () => {
               <div>
                 <h4>
                   {" "}
-                  Il web 3.0
-                  <br /> è qui
+                  {t('web3')}
                 </h4>
                 <p>
-                  Il futuro del web è qui, le novità tecnologiche del web 3.0 e
-                  in particolare la blockchain sta permettendo a startup e
-                  progetti di innovare sempre di più.
-                  <br />
-                  Noi siamo qui per permetterti di contribuire alla nascita di
-                  questi progetti ed essere parte della rivoluzione
+                {t('web3sub')}
                 </p>
               </div>
             </div>
             <h4 className="crowd-funding">
-              Perché investire <br /> nel Crowdfounding 3.0
+            {t('whyinvest')}
             </h4>
           </div>
           <img
@@ -176,33 +169,17 @@ const Home = () => {
           <div className="box">
             <div className="ill-text-info-box-1">
               <div className="ill-text-info-box">
-                <h5>I vantaggi della decentralizzazione</h5>
+                <h5>{t('decentralization')}</h5>
                 <p>
-                  La piattaforma Dopot sarà al 100% decentralizzata, questo
-                  significa che nessun individuo può manomettere i dati o
-                  compiere azioni fraudolente con i fondi raccolti grazie alla
-                  sicurezza fornita dalla blockchain.
-                  <br />
-                  <br />
-                  Ciò che le persone investono viene trasferito su un contratto
-                  intelligente senza intermediari e in maniera totalmente sicura
-                  grazie alla crittografia.
+                {t('decentralizationsub')}
                 </p>
               </div>
             </div>
             <div className="ill-text-info-box-2">
               <div className="ill-text-info-box">
-                <h5>QUALI BENEFICI COMPORTA ?</h5>
+                <h5>{t('benefits')}</h5>
                 <p>
-                  Tramite il multi-sig presente nello smart contract si avrà la
-                  totale sicurezza sulla raccolta fondi senza richiedere
-                  collaterali ai richiedenti denaro.
-                  <br />
-                  <br />
-                  Questo sistema estenderà la possibilità a chiunque voglia,
-                  indipendentemente dalle possibilità economiche, di effettuare
-                  un crowdfunding; e allo stesso tempo mettere in sicurezza i
-                  soldi degli investitori
+                {t('benefitssub')}
                 </p>
               </div>
             </div>
@@ -212,18 +189,15 @@ const Home = () => {
         <section className="scelgono-section">
           <div className="box">
             <h3 className="section-heading">
-              Perché le aziende <br /> scelgono Dopot ?
+            {t('whydopot')}
             </h3>
             <div className="scelgono-grid-box">
               <div className="scelgono-grid-text-box">
                 <h5>
-                  Meno burocrazia grazie <br /> agli Smart Contract
+                {t('lessbureaucracy')}
                 </h5>
                 <p>
-                  Grazie alla tecnologia oggi è possibile creare contratti
-                  intelligenti che sostituiscono tutta la procedura burocratica,
-                  svolgendo un rapporto contrattuale in modo completamente
-                  autonomo.
+                {t('lessbureaucracysub')}
                 </p>
               </div>
               <img src={ScelgonoImg1} alt="ScelgonoImg1" />
@@ -231,20 +205,17 @@ const Home = () => {
             <div className="scelgono-grid-box">
               <img src={ScelgonoImg2} alt="ScelgonoImg2" />
               <div className="scelgono-grid-text-box">
-                <h5>Transazioni veloci</h5>
+                <h5>{t('fasttransaction')}</h5>
                 <p>
-                  Grazie al peer-to-peer le transazioni saranno istantanee e
-                  molto più sicure dei sistemi di pagamento tradizionali.
+                {t('fasttransactionsub')}
                 </p>
               </div>
             </div>
             <div className="scelgono-grid-box">
               <div className="scelgono-grid-text-box">
-                <h5>Nessun intermediario</h5>
+                <h5>{t('intermediary')}</h5>
                 <p>
-                  Il funzionamento dei contratti intelligenti, permette di non
-                  avere intermediari, ciò riduce i costi e velocizza il processo
-                  d’investimento.
+                {t('intermediarysub')}
                 </p>
               </div>
               <img src={ScelgonoImg3} alt="ScelgonoImg3" />
@@ -324,7 +295,7 @@ const Home = () => {
         </section>
         {/* Big Image */}
         <section className="hand-to-hand-section">
-          <h4>Scopri DopotShare Token, Il Token della piattaforma</h4>
+          <h4>{t('dst')}</h4>
           <img src={HandToHand} alt="HandToHand" />
         </section>
         <section className="supply-section">
@@ -347,7 +318,7 @@ const Home = () => {
             <div className="box">
               <div className="della-msg-box">
                 <img src={RoboImg} alt="RoboImg" />{" "}
-                <h5>I VANTAGGI DELLA DAI</h5>
+                <h5>{t('dai')}</h5>
               </div>
             </div>
           </div>
@@ -358,64 +329,50 @@ const Home = () => {
           <div className="box">
             <div className="dai-right-text-box">
               <div>
-                <h4>Cos’è DAI?</h4>
+                <h4>{t('whatdai')}</h4>
                 <p>
-                  La criptovaluta DAI (DAI) è un token ERC-20 che è stato
-                  progettato per funzionare come stablecoin o valuta stabile il
-                  cui valore è ancorato al dollaro.
-                  <br />
-                  <br />
-                  Tale valuta è emessa in maniera decentralizzata grazie alla
-                  collateralizzazione di garanzie che servono a garantirne in
-                  ogni momento l’emissione.
+                {t('daisub')}
                 </p>
               </div>
             </div>
             <div className="dai-grid-box">
               <img src={ProfitIcon} alt="ProfitIcon" />
               <p>
-                Proﬁt
+              {t('profit')}
                 <br />
-                L’aggiunta di vari prodotti di credito consente agli utenti di
-                investire i propri DAI e guadagnare interessi annui che battono
-                il mercato tradizionale.
+                {t('profitsub')}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={BlockChainIcon} alt="BlockChainIcon" />
               <p>
-                Multi Blockchain
+              {t('multibc')}
                 <br />
-                Può essere trasferito fra tutte le principali blockchain ed è
-                supportato da oltre 200 exchange
+                {t('multibcsub')}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={ValoreIcon} alt="ValoreIcon" />
               <p>
-                Valore
+              {t('value')}
                 <br />
-                DAI sta dimostrando il suo valore diventando parte di oltre 400
-                app e servizi decentralizzati.
+                {t('valuesub')}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={StableIcon} alt="StableIcon" />
               <p>
-                Stablecoin
+              {t('stablecoin')}
                 <br />
-                gli smart contracts di makerDAO permettono a chiunque di fare
-                transazioni dal valore stabile alla velocità della blockchain
+                {t('stablecoinsub')}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={HoldingIcon} alt="HoldingIcon" />
               <p>
-                Holding
+              {t('holding')}
                 <br />
-                Gli utenti possono tenere DAI nei loro portafogli, coprendo le
-                loro scommesse contro la volatilità delle risorse digitali
-                accumulate, oppure possono scambiarlo sul mercato.
+                {t('holdingsub')}
               </p>
             </div>
           </div>
