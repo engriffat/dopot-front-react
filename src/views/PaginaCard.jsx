@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import PaginaCardHero from "../assets/img/pc-hero-img.png";
@@ -9,9 +9,7 @@ import PC70 from "../assets/img/pc-70.png";
 import IconPlane from "../assets/img/icon-plane.svg";
 import IconHeart from "../assets/img/pc-heart-icon-02.svg";
 import ImageIcon from "../assets/img/pc-img-icon.png";
-import BlogImg from "../assets/img/void.jpg";
 import IconInfoCard from "../components/PaginaCard/IconInfoCard";
-import BlogPost from "../components/PaginaCard/BlogPost";
 import InvestiCard from "../components/PaginaCard/InvestiCard";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -19,6 +17,9 @@ import {useParams} from "react-router-dom";
 import { progettiState, progettiImageState} from "../recoilState";
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import {getIPFSimage} from "../utils/downloadProj";
+import TabCampagna from "../components/TabCampagna";
+import TabRoadmap from "../components/TabRoadmap";
+import TabFaq from "../components/TabFaq";
 
 const PaginaCard =  () => {
   let { address } = useParams();
@@ -32,7 +33,7 @@ const PaginaCard =  () => {
   for (const key in immagini) { 
     
     if (key.includes("Prodotto")) {
-       cards.push(<InvestiCard img={immagini[key][0]["base64"]} titolo={progetto["nomeProdotto"+i]}> 
+       cards.push(<InvestiCard spec={progetto["specTecnica"+i]} supply={progetto["supply"+i]} prezzo={progetto["prezzo"+i]} img={immagini[key][0]["base64"]} titolo={progetto["nomeProdotto"+i]}> 
         </InvestiCard>);
         i++;
     }
@@ -40,6 +41,16 @@ const PaginaCard =  () => {
  
 
   const percentage = 90;
+
+  const [tab, setTab] = useState(0);
+
+  function isCurrentState(i) {
+    if (tab==i) {
+      return true;
+    }
+    return false
+  }
+
   return (
     <div className="app">
       <main className="pagina-card">
@@ -101,92 +112,44 @@ const PaginaCard =  () => {
         <section className="anchor-links-box">
           <div className="box">
             <div className="alb-content">
-              <a href="#" className="pc-active-link">
+              <a onClick={() => setTab(0)}  className={isCurrentState(0) ? ("pc-active-link"  ) : ("")}>
                 Campagna
               </a>
-              <a href="#">Roadmap</a>
-              <a href="#">Reward</a>
-              <a href="#">Community</a>
-              <a href="#">FAQ</a>
+              <a onClick={() => setTab(1)} className={isCurrentState(1) ? ("pc-active-link"  ) : ("")}>Roadmap</a>
+              <a onClick={() => setTab(2)} className={isCurrentState(2) ? ("pc-active-link"  ) : ("")}>Reward</a>
+              <a onClick={() => setTab(3)} className={isCurrentState(3) ? ("pc-active-link"  ) : ("")}>Community</a>
+              <a onClick={() => setTab(4)} className={isCurrentState(4) ? ("pc-active-link"  ) : ("")}>FAQ</a>
             </div>
           </div>
         </section>
         <section className="pc-main-content">
           <div className="box">
             <div className="pc-content-grid">
-              <div className="pc-content-grid-left">
-                <BlogPost
-                  heading="Introduzione"
-                  text="Testo introduttivo sul progetto, cosa fa e quali problemi
-                risolve, questo testo serve a riempire lo spazio necessario
-                a scrivere questo testo per questa sezione della pagina
-                corrente
-                Testo introduttivo sul progetto, cosa fa e quali problemi
-                risolve, questo testo serve a riempire lo spazio necessario
-                a scrivere questo testo per questa sezione della pagina
-                corrente Testo introduttivo sul progetto, cosa fa e quali
-                problemi risolve, questo testo serve a riempire lo spazio
-                necessario a scrivere questo testo per questa sezione della
-                pagina corrente Testo introduttivo sul progetto, cosa fa e
-                quali problemi risolve, questo testo serve a riempire lo
-                spazio necessario a scrivere questo testo per questa sezione
-                della pagina corrente Testo introduttivo sul progetto, cosa
-                fa e quali problemi risolve, questo testo serve a riempire
-                lo spazio necessario a scrivere questo testo per questa
-                sezione della pagina corrente."
-                  img={BlogImg}
-                />
-                <BlogPost
-                  heading="Storia"
-                  text="Testo introduttivo sul progetto, cosa fa e quali problemi
-                  risolve, questo testo serve a riempire lo spazio necessario
-                  a scrivere questo testo per questa sezione della pagina
-                  corrente
-                  Testo introduttivo sul progetto, cosa fa e quali problemi
-                  risolve, questo testo serve a riempire lo spazio necessario
-                  a scrivere questo testo per questa sezione della pagina
-                  corrente Testo introduttivo sul progetto, cosa fa e quali
-                  problemi risolve, questo testo serve a riempire lo spazio
-                  necessario a scrivere questo testo per questa sezione della
-                  pagina corrente Testo introduttivo sul progetto, cosa fa e
-                  quali problemi risolve, questo testo serve a riempire lo
-                  spazio necessario a scrivere questo testo per questa sezione
-                  della pagina corrente Testo introduttivo sul progetto, cosa
-                  fa e quali problemi risolve, questo testo serve a riempire
-                  lo spazio necessario a scrivere questo testo per questa
-                  sezione della pagina corrente."
-                  img={BlogImg}
-                />
-                <BlogPost
-                  heading="Vison"
-                  text="Testo introduttivo sul progetto, cosa fa e quali problemi
-                    risolve, questo testo serve a riempire lo spazio necessario
-                    a scrivere questo testo per questa sezione della pagina
-                    corrente
-                    Testo introduttivo sul progetto, cosa fa e quali problemi
-                    risolve, questo testo serve a riempire lo spazio necessario
-                    a scrivere questo testo per questa sezione della pagina
-                    corrente Testo introduttivo sul progetto, cosa fa e quali
-                    problemi risolve, questo testo serve a riempire lo spazio
-                    necessario a scrivere questo testo per questa sezione della
-                    pagina corrente Testo introduttivo sul progetto, cosa fa e
-                    quali problemi risolve, questo testo serve a riempire lo
-                    spazio necessario a scrivere questo testo per questa sezione
-                    della pagina corrente Testo introduttivo sul progetto, cosa
-                    fa e quali problemi risolve, questo testo serve a riempire
-                    lo spazio necessario a scrivere questo testo per questa
-                    sezione della pagina corrente."
-                  img={BlogImg}
-                />
-              </div>
+              {(() => {
+              switch (tab) {
+                case 0:
+                  return <TabCampagna/>
+                case 1:
+                  return <TabRoadmap titoloRoadStep1={progetto.titoloRoadStep1} titoloRoadStep2={progetto.titoloRoadStep2} descrRoadStep1={progetto.descrRoadStep1} descrRoadStep2={progetto.descrRoadStep2} />
+                case 4:
+                  return <TabFaq progetto={progetto} />
+
+                default:
+                  break;
+              }
+            })()}
               <div className="pc-content-grid-right">
                 <div className="basic-info-box">
-                  <img src={ImageIcon} alt="ImageIcon" />
-                  <h3>Namo Startup</h3>
+                  <img src={(() => {if (immagini.logoAzienda !=null) {
+                    return immagini.logoAzienda.base64;
+                  } else return ImageIcon})()}alt="ImageIcon" />
+                  <h3>{progetto.nomeAzienda}</h3>
                   <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    aut cumque perferendis delectus, minus, tempora aliquid
-                    exercitationem nemo expedita repudiandae perspiciatis est!
+                   Campagna di {progetto.tipoCampagna}. <br/>
+                   Team composta da {progetto.team}.<br/>
+                   Nel settore della {progetto.settore}.<br/>
+                   Sito Web  {progetto.sito} 
+                   P.iva  {progetto.pIva}
                   </p>
                 </div>
                 <h5>Investi</h5>
@@ -196,6 +159,7 @@ const PaginaCard =  () => {
             </div>
           </div>
         </section>
+        
       </main>
     </div>
   );

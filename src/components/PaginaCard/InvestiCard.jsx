@@ -5,16 +5,14 @@ const InvestiCard = (props) => {
     <div className="investi-card">
       <img src={props.img} alt="BlogImg" />
       <div className="investi-card-box">
-        <h6>{props.titolo}</h6>
+        <h3>{props.titolo}</h3>
       <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sint dicta fugit sapiente minus fuga distinctio!
+      {props.spec}
                   </p>
                   <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                  <h5>$100</h5>
+                  <p>- supply {props.supply}</p>
+                  
+                  <h5>{props.prezzo}€</h5>
         <button className="grd-btn dopot-btn-sm">Investi</button>
       </div>
     </div>

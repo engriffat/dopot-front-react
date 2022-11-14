@@ -265,8 +265,7 @@ const Home = () => {
                     <div>
                       <h6>Fase Mercurio</h6>
                       <p>
-                        Apertura ufﬁciale della prima sezione di Reward
-                        crowdfunding
+                      DAO Launch & DopotShare Token (DST) private sale
                       </p>
                     </div>
                   </div>
@@ -279,7 +278,7 @@ const Home = () => {
                     <h4>02</h4>
                     <div>
                       <h6>Fase Venere</h6>
-                      <p>Vendita NFT limitati ai primi sostenitori</p>
+                      <p>DST Public sale</p>
                     </div>
                   </div>
                 </div>
@@ -291,7 +290,7 @@ const Home = () => {
                     <h4>03</h4>
                     <div>
                       <h6>Fase Terra</h6>
-                      <p>Lancio del token “Dopot token” e apertura IDO</p>
+                      <p>Reward Crowdfunding protocol launch </p>
                     </div>
                   </div>
                 </div>
@@ -303,12 +302,12 @@ const Home = () => {
                     <h4>04</h4>
                     <div>
                       <h6>Fase Luna</h6>
-                      <p>Istituzione della DAO</p>
+                      <p>Equity protocol launch</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="roadmap-con">
+              {/* <div className="roadmap-con">
                 <div className="roadmap-step-box">
                   <img src={Planet5} alt="Planet5" />
                   <div className="roadmap-step-content-box">
@@ -319,7 +318,7 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

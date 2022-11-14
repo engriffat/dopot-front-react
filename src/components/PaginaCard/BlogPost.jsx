@@ -5,7 +5,12 @@ const BlogPost = (props) => {
     <div className="blogpost-box">
       <h2>{props.heading}</h2>
       <p>{props.text}</p>
-      <img src={props.img} alt="BlogImg" />
+      {(() => {
+          if (props.img !=null) {
+            return <img src={props.img} alt="BlogImg" />
+          }
+      })()}
+      
     </div>
   );
 };
