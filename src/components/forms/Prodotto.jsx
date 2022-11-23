@@ -78,6 +78,8 @@ onChange={props.handleChange} type="text" placeholder="inserisci il nome"  />
 </div><div className="ins-input-box">
     <h4>Descrizione</h4>
     <input
+        name={"descProdotto" + props.nProdotto} value={props.inputs["descProdotto" + props.nProdotto]}
+        onChange={props.handleChange}
         type="text"
         placeholder="descrivi il tuo prodotto" />
 </div><div className="ins-input-box">

@@ -21,9 +21,6 @@ const Header = () => {
           </div>
           <div className="header-right">
             <a href="#">Home</a>
-            <a href="#">Guadagna</a>
-            <a href="#">Impara</a>
-            <a href="#">Community</a>
             <a href="#">FAQ</a>
             <a href="#">DS Token</a>
             <button className="grd-btn dopot-btn-sm">Account</button>
@@ -57,9 +54,6 @@ const Header = () => {
             <div className="header-mob-box">
               <a href="#">Home</a>
               <a href="insprogetto">Investi</a>
-              <a href="#">Guadagna</a>
-              <a href="#">Impara</a>
-              <a href="#">Community</a>
               <a href="#">FAQ</a>
               <a href="#">DS Token</a>
               <button className="grd-btn dopot-btn-lg">Account</button>

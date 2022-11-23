@@ -56,6 +56,47 @@ const InfBase = (props) => {
                 
                 />
         </div>
+
+        <div className="ins-input-box">
+
+    <h4>Introduzione</h4>
+    <textarea  value={props.inputs.introduzione || ""} 
+        onChange={props.handleChange} name="introduzione" placeholder="inserisci un introduzione" />
+    <div className="ins-input-box">
+        <h4>Immagine Introduzione </h4>
+        <input
+        name="fotoIntro" value={props.inputs.fotoIntro || ""} 
+        onChange={props.handleChange}
+            type="file" 
+            />
+    </div>
+
+    <h4>Storia</h4>
+    <textarea value={props.inputs.storia || ""} 
+        onChange={props.handleChange} name="storia" placeholder="inserisci la storia della tua azienda" />
+    <div className="ins-input-box">
+        <h4>Immagine Introduzione </h4>
+        <input
+        name="fotoStoria" value={props.inputs.fotoStoria || ""} 
+        onChange={props.handleChange}
+            type="file" 
+            />
+    </div>
+
+    <h4>Vision</h4>
+    <textarea value={props.inputs.vision || ""} 
+        onChange={props.handleChange} name="vision" placeholder="inserisci la vision della vostra azienda" />
+    <div className="ins-input-box">
+        <h4>Immagine Introduzione </h4>
+        <input
+        name="fotoVision" value={props.inputs.fotoVision || ""} 
+        onChange={props.handleChange}
+            type="file" 
+            />
+    </div>
+
+    
+</div>
         {(() => {
         if (props.setState != null ) {
           return (

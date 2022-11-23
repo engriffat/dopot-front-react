@@ -1,6 +1,7 @@
 import { IpfsState, progettiAddressState , providerState, progettiState} from "../recoilState";
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import {GetAccount} from "./ethersUtils"
+import addressProjectFactory from '../abi/projectFactory/address';
 
 const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
@@ -21,32 +22,103 @@ async function genproj(params) {
     console.log(params);
 
     // Carico prima i file ipfs
-    params.logoAzienda=await addFilesIpfs(params.logoAziendaListFiles);
-    params.documentazione=await addFilesIpfs(params.documentazioneListFiles);
+    params.logoAziendaipfs=await addFilesIpfs(params.logoAziendaListFiles);
+    params.documentazioneipfs=await addFilesIpfs(params.documentazioneListFiles);
+    params.fotoIntroipfs=await addFilesIpfs(params.fotoIntroListFiles);
+    params.fotoVisionipfs=await addFilesIpfs(params.fotoVisionListFiles);
+    params.fotoStoriaipfs=await addFilesIpfs(params.fotoStoriaListFiles);
     params["fotoProdotto1ipfs"]=await addFilesIpfs(params["fotoProdotto1ListFiles"]);
     params["fotoProdotto2ipfs"]=await addFilesIpfs(params["fotoProdotto2ListFiles"]);
     params["fotoProdotto3ipfs"]=await addFilesIpfs(params["fotoProdotto3ListFiles"]);
     params["fotoProdotto4ipfs"]=await addFilesIpfs(params["fotoProdotto4ListFiles"]);
     
     
-    const hash= await IPFS.add( JSON.stringify(params) );
-    console.log(hash);
+    // const hash= await IPFS.add( JSON.stringify(params) );
+    // console.log(hash);
     //var ipfsLogo=addImageIpfs(params.fotoProdottoListFiles);
 
     var i = 1;
     var Tier = [];   
+    var TierCompleto = [];   
     while (params["nomeProdotto"+i] != null) {
         
         console.log(i)
         Tier.push({ipfshash:params["fotoProdotto"+i+"ipfs"][0].path,
         investment: ethers.utils.parseUnits(params["prezzo"+i].toString(), 18),
         supply:parseInt( params["supply"+i]) });
+        
+        TierCompleto.push({ipfshash:params["fotoProdotto"+i+"ipfs"],
+        nomeProdotto: params["nomeProdotto"+i],
+        descProdotto: params["descProdotto"+i],
+        specTecnica: params["specTecnica"+i],
+        prezzo: params["prezzo"+i],
+        supply:parseInt( params["supply"+i]) });
         i++;
     }
 
     
-     
-    //getAllProject();
+    var progetto=params;
+    delete progetto.fotoProdotto1;
+    delete progetto.fotoProdotto1ListFiles;
+    delete progetto.fotoProdotto2;
+    delete progetto.fotoProdotto2ListFiles;
+    delete progetto.fotoProdotto3;
+    delete progetto.fotoProdotto3ListFiles;
+    delete progetto.fotoProdotto4;
+    delete progetto.fotoProdotto4ListFiles;
+
+    delete progetto.fotoProdotto1ipfs;
+    delete progetto.fotoProdotto2ipfs;
+    delete progetto.fotoProdotto3ipfs;
+    delete progetto.fotoProdotto4ipfs;
+
+    delete progetto.nomeProdotto1;
+    delete progetto.nomeProdotto2;
+    delete progetto.nomeProdotto3;
+    delete progetto.nomeProdotto4;
+
+    delete progetto.descProdotto1;
+    delete progetto.descProdotto2;
+    delete progetto.descProdotto3;
+    delete progetto.descProdotto4;
+
+    delete progetto.specTecnica1;
+    delete progetto.specTecnica2;
+    delete progetto.specTecnica3;
+    delete progetto.specTecnica4;
+
+    delete progetto.supply1;
+    delete progetto.supply2;
+    delete progetto.supply3;
+    delete progetto.supply4;
+
+    delete progetto.fotoIntro;
+    delete progetto.fotoIntroListFiles;
+
+    delete progetto.fotoStoria;
+    delete progetto.fotoStoriaListFiles;
+
+    delete progetto.fotoVision;
+    delete progetto.fotoVisionListFiles;
+
+    delete progetto.documentazione;
+    delete progetto.documentazioneListFiles;
+
+    delete progetto.logoAzienda;
+    delete progetto.logoAziendaListFiles;
+
+    delete progetto.prezzo1;
+    delete progetto.prezzo2;
+    delete progetto.prezzo3;
+    delete progetto.prezzo4;
+
+
+
+    progetto.tier = TierCompleto;
+    console.log(progetto);
+    const hash= await IPFS.add( JSON.stringify(params) );
+
+     //getAllProject();
     //getIPFSprojectAddr(getRecoil(progettiAddressState)[0][0]);
     contrattoprojectFactory(45 * 86400, hash.path, Tier);
 }
@@ -70,7 +142,7 @@ async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
     console.log(infoIpfs);
     console.log(abiProjectFactory);
   
-    const Address = "0xEe784386066cd3B340C6A97626B74b57009f7935";
+    const Address = addressProjectFactory;
   
     // The ERC-20 Contract ABI, which is a common contract interface
     // for tokens (this is the Human-Readable ABI format)
@@ -129,7 +201,7 @@ async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
 
   async function getAllProject() {
    
-    const Address = "0xEe784386066cd3B340C6A97626B74b57009f7935";
+    const Address = addressProjectFactory;
     var contract = new Contract(Address, abiProjectFactory, getRecoil(providerState));
    
     var progetti=[];
