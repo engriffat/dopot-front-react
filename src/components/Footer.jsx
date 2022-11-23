@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/components/footer.css";
-
+import { SocialIcon } from 'react-social-icons';
+import Pdf from '../assets/dopot.pdf';
 const BADGE_ID = 'fb48ca1409e7f6fe';
 let ALCHEMY_URL = `https://alchemyapi.io/?r=badge:${BADGE_ID}`;
 const ALCHEMY_ANALYTICS_URL = `https://analytics.alchemyapi.io/analytics`
@@ -55,18 +56,33 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-grid-box">
             <h4>Contatti</h4>
-            <a href="#">Mail</a>
+            <a href="mailto:info@dopot.fi ">info@dopot.fi </a>
           </div>
           <div className="footer-grid-box">
             <h4>Servizi</h4>
-            <a href="#">Area Developer</a>
-            <a href="#">Lancia il tuo progetto</a>
-            <a href="#">Learn with Dopot</a>
-            <a href="#">Eventi</a>
+            <a href="#">Crea Campagna</a>
+            <a href="#">DS Token</a>
+            <a href="#">Impara</a>
+            <a href="#">FAQ</a>
           </div>
           <div className="footer-grid-box">
             <h4>Community</h4>
-            <a href="#">Blog</a>
+            <div className="footer-social-div">
+              <SocialIcon fgColor="white" url="https://www.instagram.com/dopotfi" />
+              <SocialIcon fgColor="white" url="https://www.facebook.com/dopot.fi" />
+              <SocialIcon fgColor="white" url="https://twitter.com/Dopot_fi" />
+            </div>
+            <div  className="footer-social-div">
+              <SocialIcon fgColor="white" bgColor="#EE1D52" url="https://www.tiktok.com/@dopotfi" />
+              <SocialIcon fgColor="white" url="https://www.reddit.com/user/Dopotfi/" />
+              <SocialIcon fgColor="white" url="https://discord.gg/j8xxZFsyvd" />
+            </div>
+            
+          </div>
+          <div className="footer-grid-box">
+            <h4>Documenti</h4>
+            <a href={Pdf}>Whitepaper </a>
+            <a href="https://dopot.gitbook.io/dopot/">GitBook </a>
           </div>
         </div>
         <div className="footer-bottom">

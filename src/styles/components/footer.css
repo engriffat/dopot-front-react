@@ -5,7 +5,7 @@ footer {
 .footer-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 5rem;
 }
@@ -53,6 +53,15 @@ footer {
   font-weight: 400;
   color: #fff;
 }
+.footer-social-div a{
+  height: 40px !important;
+  width: 40px !important;
+  margin-right : 10px;
+  float:left;
+}
+
+
+
 @media screen and (max-width: 650px) {
   .footer-grid {
     grid-template-columns: 1fr;

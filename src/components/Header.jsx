@@ -25,7 +25,7 @@ const Header = () => {
             <a href="#">Impara</a>
             <a href="#">Community</a>
             <a href="#">FAQ</a>
-            <a href="#/dopotshare">DS Token</a>
+            <a href="#">DS Token</a>
             <button className="grd-btn dopot-btn-sm">Account</button>
             <button className="purple-border-btn dopot-btn-sm" onClick={() => GetAccount(setwalletText)}>{walletText}</button>
           </div>
@@ -61,7 +61,7 @@ const Header = () => {
               <a href="#">Impara</a>
               <a href="#">Community</a>
               <a href="#">FAQ</a>
-              <a href="#/dopotshare">DS Token</a>
+              <a href="#">DS Token</a>
               <button className="grd-btn dopot-btn-lg">Account</button>
               <button className="purple-border-btn dopot-btn-lg" onClick={GetAccount}>Wallet</button>
             </div>

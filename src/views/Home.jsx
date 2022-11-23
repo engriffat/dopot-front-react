@@ -37,6 +37,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { MdMenu, MdClear } from "react-icons/md";
 import { useTranslation } from 'react-i18next';
+import Pdf from '../assets/dopot.pdf';
 
 
 const Home = () => {
@@ -79,11 +80,14 @@ const Home = () => {
                     <button className="grd-btn dopot-btn-lg">
                       <img src={IconPlane} alt="IconPlane" /> {t('discovery')}
                     </button>
-                    <button className="purple-border-btn dopot-btn-lg">
+                    <a href={Pdf}>
+                      <button className="purple-border-btn dopot-btn-lg">
                       {" "}
                       <img src={IconWhitePaper} alt="IconWhitePaper" />{" "}
                       Whitepaper
                     </button>
+                    </a>
+                    
                   </div>
                 </div>
               </div>
@@ -329,7 +333,7 @@ const Home = () => {
           <div className="box">
             <div className="dai-right-text-box">
               <div>
-                <h4>{t('whatdai')}</h4>
+                <h4>{t('whatsdai')}</h4>
                 <p>
                 {t('daisub')}
                 </p>
