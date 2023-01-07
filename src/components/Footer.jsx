@@ -2,6 +2,8 @@ import React from "react";
 import "../styles/components/footer.css";
 import { SocialIcon } from 'react-social-icons';
 import Pdf from '../assets/dopot.pdf';
+import { useTranslation } from 'react-i18next';
+
 const BADGE_ID = 'fb48ca1409e7f6fe';
 let ALCHEMY_URL = `https://alchemyapi.io/?r=badge:${BADGE_ID}`;
 const ALCHEMY_ANALYTICS_URL = `https://analytics.alchemyapi.io/analytics`
@@ -49,20 +51,22 @@ var intervalId = setInterval(() => {
 }, 2000);
 
 
+
 const Footer = () => {
+  const { t, i18n } = useTranslation();
   return (
     <footer>
       <div className="box">
         <div className="footer-grid">
           <div className="footer-grid-box">
-            <h4>Contatti</h4>
+            <h4>{t('contact')}</h4>
             <a href="mailto:info@dopot.fi ">info@dopot.fi </a>
           </div>
           <div className="footer-grid-box">
-            <h4>Servizi</h4>
-            <a href="#">Crea Campagna</a>
+            <h4>{t('services')}</h4>
+            <a href="#">{t('createcampaign')}</a>
             <a href="#">DS Token</a>
-            <a href="#">Impara</a>
+            <a href="#">{t('learn')}</a>
             <a href="#">FAQ</a>
           </div>
           <div className="footer-grid-box">
@@ -80,7 +84,7 @@ const Footer = () => {
             
           </div>
           <div className="footer-grid-box">
-            <h4>Documenti</h4>
+            <h4>{t('documents')}</h4>
             <a href={Pdf}>Whitepaper </a>
             <a href="https://dopot.gitbook.io/dopot/">GitBook </a>
           </div>

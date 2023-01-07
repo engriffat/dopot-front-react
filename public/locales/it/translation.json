@@ -38,7 +38,10 @@
     "stablecoin": "Stablecoin",
     "stablecoinsub": "gli smart contracts di makerDAO permettono a chiunque di fare transazioni dal valore stabile alla velocità della blockchain ",
     "holding": "Holding",
-    "holdingsub": "Gli utenti possono tenere DAI nei loro portafogli, coprendo le loro scommesse contro la volatilità delle risorse digitali accumulate, oppure possono scambiarlo sul mercato. "
-
+    "holdingsub": "Gli utenti possono tenere DAI nei loro portafogli, coprendo le loro scommesse contro la volatilità delle risorse digitali accumulate, oppure possono scambiarlo sul mercato. ",
+    "documents": "Documenti",
+    "contact": "Contatti",
+    "services": "Servizi",
+    "createcampaign": "Crea Campagna"
 
 }

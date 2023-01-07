@@ -55,9 +55,11 @@ function getIPFS() {
 }
 
 async function getJSON(param) {
+  
   const chunks = [];
-
+ console.log("ahhh");
   for await (const chunk of ipfs.cat( param )) {
+   
     chunks.push(chunk);
   }
 
