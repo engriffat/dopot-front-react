@@ -42,8 +42,17 @@ import Pdf from '../assets/dopot.pdf';
 
 const Home = () => {
 
+
+
   const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
+  const [isDemoEnable, setisDemoEnable] = useState(false);
+
+  function handleDemoButton() {
+    if (isDemoEnable) {
+      setisDemoEnable(false)
+    }else setisDemoEnable(true)
+  }
   return (
     <div className="app">
       <main className="home">
@@ -63,7 +72,7 @@ const Home = () => {
 
         {/* Hero Section */}
         <section className="hero-section" id="hero-section">
-          <Header />
+          <Header demo={isDemoEnable} />
           <img className="hero-bg" src={HeroImg} alt="HeroImg" />
           <div className="box">
             <div className="hero-content">
@@ -77,9 +86,14 @@ const Home = () => {
               <div className="main-btns-box">
                 <div className="box">
                   <div className="mbb-content">
+                  <button onClick={ handleDemoButton  } className="grd-btn dopot-btn-lg">
+                  {isDemoEnable ? 'Disable demo' : 'Enable demo'}
+                    </button>
+                    <a href={isDemoEnable ? '/#/loading' : ''}>
                     <button className="grd-btn dopot-btn-lg">
                       <img src={IconPlane} alt="IconPlane" /> {t('discovery')}
                     </button>
+                    </a>
                     <a href={Pdf}>
                       <button className="purple-border-btn dopot-btn-lg">
                       {" "}
@@ -192,7 +206,7 @@ const Home = () => {
         {/* Perché le Aziende Scelgono Dopot Section */}
         <section className="scelgono-section">
           <div className="box">
-            <h3 className="section-heading">
+            <h3 id="faq" className="section-heading">
             {t('whydopot')}
             </h3>
             <div className="scelgono-grid-box">
