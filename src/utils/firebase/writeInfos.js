@@ -1,7 +1,13 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebaseInit.js"
-import { blobToBase64 } from "../base64utils.js";
+import { getRecoil, setRecoil } from 'recoil-nexus';
+import { addressState } from '../../recoilState';
+
+
 export async function addproj(inputs) {
+    inputs.addressCreator=getRecoil(addressState)
+    inputs.address=(Math.random() + 1).toString(36).substring(7);//dovrebbe essere l'address del contratto
+    console.log(inputs)
     try {
         convertToBase64(inputs).then(async (result) => {
           const docRef = await addDoc(collection(db, "progetti"), result);
@@ -52,4 +58,28 @@ async function convertToBase64(input) {
 
   // Ritorna l'input con i file convertiti
   return tInput;
+}
+
+
+export async function addFavorites(address) {
+  var addressLogged=getRecoil(addressState)
+  try {
+    const docRef = await addDoc(collection(db, "favorites"), {addressUser: addressLogged, addressContract: address});
+    console.log("Document written with ID: ", docRef.id);
+    alert("Aggiunto ai preferiti!")
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+
+export async function addInvestment(address, numTier) {
+  var addressLogged=getRecoil(addressState)
+  try {
+    const docRef = await addDoc(collection(db, "investment"), {addressUser: addressLogged, addressContract: address, tier: numTier});
+    console.log("Document written with ID: ", docRef.id);
+    alert("Investimento avvenuto con successo!")
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 }

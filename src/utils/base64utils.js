@@ -6,4 +6,5 @@ function blobToBase64(blob) {
     });
   }
 
+  
   export  {blobToBase64};

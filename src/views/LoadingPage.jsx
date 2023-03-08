@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
 import gifLoading from "../assets/img/gifLoading.gif"
 import "../styles/loading.css";
-import {DownloadProj} from "../utils/downloadProj";
+// import {DownloadProj} from "../utils/downloadProj";
+import { downloadProj } from "../utils/firebase/retriveInfo";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 
@@ -12,7 +13,7 @@ function LoadingPage(props) {
 
   useEffect(()=>{
     const asyncFn = async () => { 
-      var status= await DownloadProj();
+      var status= await downloadProj();
       if (status == true) {
         navigate('/dashboard');
       }

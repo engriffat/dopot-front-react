@@ -6,7 +6,8 @@ const { persistAtom } = recoilPersist()
 
 const addressState = atom({
   key: "address",
-  default: null
+  default: null,
+  effects_UNSTABLE: [persistAtom],
 });
 
 const IpfsState = atom({
