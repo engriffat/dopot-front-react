@@ -20,6 +20,7 @@ import {getIPFSimage} from "../utils/downloadProj";
 import TabCampagna from "../components/TabCampagna";
 import TabRoadmap from "../components/TabRoadmap";
 import TabFaq from "../components/TabFaq";
+import TabSocial from "../components/TabSocial";
 import { addFavorites } from "../utils/firebase/writeInfos";
 
 const PaginaCard =  () => {
@@ -125,6 +126,8 @@ const PaginaCard =  () => {
                   return <TabCampagna introduzione={progetto.introduzione} fotoIntroListFiles={progetto.fotoStoriaListFiles} vision={progetto.vision} fotoVisionListFiles={progetto.fotoVisionListFiles} storia={progetto.storia} fotoStoriaListFiles={progetto.fotoStoriaListFiles}/>
                 case 1:
                   return <TabRoadmap titoloRoadStep1={progetto.titoloRoadStep1} titoloRoadStep2={progetto.titoloRoadStep2} descrRoadStep1={progetto.descrRoadStep1} descrRoadStep2={progetto.descrRoadStep2} />
+                case 3:
+                  return <TabSocial socialMedia={progetto.socialMedia.split(',')}></TabSocial>
                 case 4:
                   return <TabFaq progetto={progetto} />
 

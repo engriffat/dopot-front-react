@@ -5,71 +5,23 @@ import BlogImg from "../assets/img/void.jpg";
 import ImageIcon from "../assets/img/pc-img-icon.png";
 
 
-const TabCampagna = () => {
+const TabCampagna = (props) => {
   return (
     <div className="pc-content-grid-left">
                 <BlogPost
                   heading="Introduzione"
-                  text="Testo introduttivo sul progetto, cosa fa e quali problemi
-                risolve, questo testo serve a riempire lo spazio necessario
-                a scrivere questo testo per questa sezione della pagina
-                corrente
-                Testo introduttivo sul progetto, cosa fa e quali problemi
-                risolve, questo testo serve a riempire lo spazio necessario
-                a scrivere questo testo per questa sezione della pagina
-                corrente Testo introduttivo sul progetto, cosa fa e quali
-                problemi risolve, questo testo serve a riempire lo spazio
-                necessario a scrivere questo testo per questa sezione della
-                pagina corrente Testo introduttivo sul progetto, cosa fa e
-                quali problemi risolve, questo testo serve a riempire lo
-                spazio necessario a scrivere questo testo per questa sezione
-                della pagina corrente Testo introduttivo sul progetto, cosa
-                fa e quali problemi risolve, questo testo serve a riempire
-                lo spazio necessario a scrivere questo testo per questa
-                sezione della pagina corrente."
-                  img={BlogImg}
+                  text={props.introduzione}
+                  img={props.fotoIntroduzioneListFiles}
                 />
                 <BlogPost
                   heading="Storia"
-                  text="Testo introduttivo sul progetto, cosa fa e quali problemi
-                  risolve, questo testo serve a riempire lo spazio necessario
-                  a scrivere questo testo per questa sezione della pagina
-                  corrente
-                  Testo introduttivo sul progetto, cosa fa e quali problemi
-                  risolve, questo testo serve a riempire lo spazio necessario
-                  a scrivere questo testo per questa sezione della pagina
-                  corrente Testo introduttivo sul progetto, cosa fa e quali
-                  problemi risolve, questo testo serve a riempire lo spazio
-                  necessario a scrivere questo testo per questa sezione della
-                  pagina corrente Testo introduttivo sul progetto, cosa fa e
-                  quali problemi risolve, questo testo serve a riempire lo
-                  spazio necessario a scrivere questo testo per questa sezione
-                  della pagina corrente Testo introduttivo sul progetto, cosa
-                  fa e quali problemi risolve, questo testo serve a riempire
-                  lo spazio necessario a scrivere questo testo per questa
-                  sezione della pagina corrente."
-                  img={BlogImg}
+                  text={props.storia}
+                  img={props.fotoStoriaListFiles}
                 />
                 <BlogPost
                   heading="Vison"
-                  text="Testo introduttivo sul progetto, cosa fa e quali problemi
-                    risolve, questo testo serve a riempire lo spazio necessario
-                    a scrivere questo testo per questa sezione della pagina
-                    corrente
-                    Testo introduttivo sul progetto, cosa fa e quali problemi
-                    risolve, questo testo serve a riempire lo spazio necessario
-                    a scrivere questo testo per questa sezione della pagina
-                    corrente Testo introduttivo sul progetto, cosa fa e quali
-                    problemi risolve, questo testo serve a riempire lo spazio
-                    necessario a scrivere questo testo per questa sezione della
-                    pagina corrente Testo introduttivo sul progetto, cosa fa e
-                    quali problemi risolve, questo testo serve a riempire lo
-                    spazio necessario a scrivere questo testo per questa sezione
-                    della pagina corrente Testo introduttivo sul progetto, cosa
-                    fa e quali problemi risolve, questo testo serve a riempire
-                    lo spazio necessario a scrivere questo testo per questa
-                    sezione della pagina corrente."
-                  img={BlogImg}
+                  text={props.vision}
+                  img={props.fotoVisionListFiles}
                 />
               </div>
   );
