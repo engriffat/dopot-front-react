@@ -2,13 +2,16 @@ import React,  { useState } from "react";
 import "../styles/globals.css";
 import "../styles/ins-progetto.css";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
-import genproj from "../utils/genproj";
+
+
 
 import {InfBase, InfBaseHeader} from "../components/forms/InfBase";
 import { Questionario, QuestionarioHeader } from "../components/forms/Questionario";
 import { Progetto, ProgettoHeader } from "../components/forms/Progetto";
 import { Prodotto, ProdottoHeader } from "../components/forms/Prodotto";
 import { Faq, FaqHeader } from "../components/forms/Faq";
+
+import { addproj } from "../utils/firebase/writeInfos";
 
 const InsProgetto = () => {
   var step = [];
@@ -31,7 +34,7 @@ const InsProgetto = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    genproj(inputs);
+    addproj(inputs);
   }
   
   const renderCurrentSelection = () => {
