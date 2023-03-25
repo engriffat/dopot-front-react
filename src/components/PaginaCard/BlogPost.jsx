@@ -7,8 +7,8 @@ const BlogPost = (props) => {
       <p>{props.text}</p>
       {(() => {
           if (props.img !=null) {
-            return <img src={props.img} alt="BlogImg" />
-          }
+            return <img src={ "data:image/jpg;base64," +  props.img.base64} alt="BlogImg" />
+          } 
       })()}
       
     </div>

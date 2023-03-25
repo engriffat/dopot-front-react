@@ -1,4 +1,5 @@
 import React from "react";
+import { addInvestment } from "../../utils/firebase/writeInfos";
 
 const InvestiCard = (props) => {
   return (
@@ -13,7 +14,7 @@ const InvestiCard = (props) => {
                   <p>- supply {props.supply}</p>
                   
                   <h5>{props.prezzo}€</h5>
-        <button className="grd-btn dopot-btn-sm">Investi</button>
+        <button onClick={() => addInvestment(props.address, props.numTier)} className="grd-btn dopot-btn-sm">Investi</button>
       </div>
     </div>
   );

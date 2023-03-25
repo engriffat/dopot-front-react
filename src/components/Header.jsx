@@ -5,9 +5,9 @@ import LogoWhite from "../assets/img/logo-white.svg";
 import { Outlet, Link } from "react-router-dom";
 
 import GetAccount from "../utils/ethersUtils.js";
+import { getAddr } from "../utils/firebase/retriveInfo";
 
-
-const Header = () => {
+const Header = (props) => {
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
   const [walletText, setwalletText] = useState('Wallet');
 
@@ -21,10 +21,11 @@ const Header = () => {
           </div>
           <div className="header-right">
             <a href="#">Home</a>
+            <a href={props.demo ? '/#/insprogetto' : ''}>Crea Progetto</a>
             <a href="#">FAQ</a>
-            <a href="#">DS Token</a>
-            <button className="grd-btn dopot-btn-sm">Account</button>
-            <button className="purple-border-btn dopot-btn-sm" onClick={() => GetAccount(setwalletText)}>{walletText}</button>
+            <a href={props.demo ? '/#/dopotpower' : ''}>DS Token</a>
+            <a href={props.demo ? '/#/profile' : ''}><button  className="grd-btn dopot-btn-sm">Account</button></a>
+            <button className="purple-border-btn dopot-btn-sm" onClick={() => getAddr(setwalletText)}>{walletText}</button>
           </div>
         </div>
         {/* Header for Mobile Devices */}

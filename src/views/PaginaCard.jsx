@@ -20,23 +20,18 @@ import {getIPFSimage} from "../utils/downloadProj";
 import TabCampagna from "../components/TabCampagna";
 import TabRoadmap from "../components/TabRoadmap";
 import TabFaq from "../components/TabFaq";
+import TabSocial from "../components/TabSocial";
+import { addFavorites } from "../utils/firebase/writeInfos";
 
 const PaginaCard =  () => {
   let { address } = useParams();
   var progetto=getRecoil(progettiState).find(x => x.address === address);
-  var immagini= getRecoil(progettiImageState)[address];
- 
-  console.log(immagini);
   const cards = []
   var i = 1;
   
-  for (const key in immagini) { 
-    
-    if (key.includes("Prodotto")) {
-       cards.push(<InvestiCard spec={progetto["specTecnica"+i]} supply={progetto["supply"+i]} prezzo={progetto["prezzo"+i]} img={immagini[key][0]["base64"]} titolo={progetto["nomeProdotto"+i]}> 
+  for (var i=1; i< parseInt(progetto.numeroProdotti)+1; i++) { 
+       cards.push(<InvestiCard address={progetto.address} numTier={i} spec={progetto["specTecnica"+i]} supply={progetto["supply"+i]} prezzo={progetto["prezzo"+i]} img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} titolo={progetto["nomeProdotto"+i]}> 
         </InvestiCard>);
-        i++;
-    }
   }
  
 
@@ -69,7 +64,7 @@ const PaginaCard =  () => {
                  {progetto.descProgetto}<br /> 
                 </p>
                 <div className="pc-btn-box">
-                  <button className="grd-btn dopot-btn-lg">
+                  <button  onClick={() => addFavorites(progetto.address)} className="grd-btn dopot-btn-lg">
                     <img src={IconHeart} alt="IconPlane" /> Salva
                   </button>
                   <button className="grd-btn dopot-btn-lg">
@@ -128,9 +123,11 @@ const PaginaCard =  () => {
               {(() => {
               switch (tab) {
                 case 0:
-                  return <TabCampagna/>
+                  return <TabCampagna introduzione={progetto.introduzione} fotoIntroListFiles={progetto.fotoStoriaListFiles} vision={progetto.vision} fotoVisionListFiles={progetto.fotoVisionListFiles} storia={progetto.storia} fotoStoriaListFiles={progetto.fotoStoriaListFiles}/>
                 case 1:
                   return <TabRoadmap titoloRoadStep1={progetto.titoloRoadStep1} titoloRoadStep2={progetto.titoloRoadStep2} descrRoadStep1={progetto.descrRoadStep1} descrRoadStep2={progetto.descrRoadStep2} />
+                case 3:
+                  return <TabSocial socialMedia={progetto.socialMedia.split(',')}></TabSocial>
                 case 4:
                   return <TabFaq progetto={progetto} />
 
@@ -140,8 +137,8 @@ const PaginaCard =  () => {
             })()}
               <div className="pc-content-grid-right">
                 <div className="basic-info-box">
-                  <img src={(() => {if (immagini.logoAzienda !=null) {
-                    return immagini.logoAzienda.base64;
+                  <img src={(() => {if (progetto.logoAzienda !=null) {
+                    return "data:image/jpg;base64," + progetto.logoAziendaListFiles.base64;
                   } else return ImageIcon})()}alt="ImageIcon" />
                   <h3>{progetto.nomeAzienda}</h3>
                   <p>

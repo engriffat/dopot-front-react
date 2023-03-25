@@ -38,7 +38,11 @@
     "stablecoin": "Stablecoin",
     "stablecoinsub": "makerDAO's smart contracts allow anyone to make value transactions stable at the speed of the blockchain",
     "holding": "Holding",
-    "holdingsub": "Users can keep DAI in their wallets, hedging their bets against the volatility of accumulated digital assets, or they can trade it on the market."
+    "holdingsub": "Users can keep DAI in their wallets, hedging their bets against the volatility of accumulated digital assets, or they can trade it on the market.",
+    "documents": "Documents",
+    "contact": "Contact",
+    "services": "Services",
+    "createcampaign": "Create Campaign"
 
 
 }

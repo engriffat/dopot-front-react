@@ -2,19 +2,23 @@ import React,  { useState } from "react";
 import "../styles/globals.css";
 import "../styles/ins-progetto.css";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
-import genproj from "../utils/genproj";
-
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import {InfBase, InfBaseHeader} from "../components/forms/InfBase";
 import { Questionario, QuestionarioHeader } from "../components/forms/Questionario";
 import { Progetto, ProgettoHeader } from "../components/forms/Progetto";
 import { Prodotto, ProdottoHeader } from "../components/forms/Prodotto";
 import { Faq, FaqHeader } from "../components/forms/Faq";
 
+import { addproj } from "../utils/firebase/writeInfos";
+
 const InsProgetto = () => {
   var step = [];
   const [inputs, setInputs] = useState({});
   const [progressionStep, setprogressionStep] = useState(0);
-  
+  const navigate = useNavigate();
+
+
+
   const handleChange = (event) => {
 
     const name = event.target.name;
@@ -31,7 +35,13 @@ const InsProgetto = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    genproj(inputs);
+    try {
+      addproj(inputs);
+      navigate('/loading', { replace: true });
+    } catch (error) {
+      
+    }
+    
   }
   
   const renderCurrentSelection = () => {

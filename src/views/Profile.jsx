@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
@@ -13,13 +12,49 @@ import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import BlogImg from "../assets/img/void.jpg";
 import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
-import IconInfoCard from "../components/PaginaCard/IconInfoCard";
-import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
-import PCUserIcon from "../assets/img/pc-person-icon.png";
-import { CircularProgressbar } from "react-circular-progressbar";
+import React, { useState, useEffect } from 'react';
+import { getRecoil, setRecoil } from 'recoil-nexus';
+import { addressState } from '../recoilState';
+
 import "react-circular-progressbar/dist/styles.css";
+import SmallProject from "../components/SmallProject";
+import SmallTier from "../components/SmallTier";
+import { retriveFavorites, retriveInvestment } from "../utils/firebase/retriveInfo";
 
 const Profile = () => {
+  
+  const [investedCard, setinvestedCard] = useState([]);
+  const [favoriteCard, setfavoriteCard] = useState([]);
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    async function fetchData() {
+
+
+      var invested = await retriveInvestment()      
+      var tempCard =[] 
+      for (let index = 0; index < invested.length; index++) {
+        const element = invested[index];
+        tempCard.push( <SmallTier address={element.addressContract} tier={element.tier}></SmallTier>)
+      }
+      setinvestedCard(tempCard)
+
+
+      var favorites = await retriveFavorites()      
+      var tempCard =[] 
+      for (let index = 0; index < favorites.length; index++) {
+        const element = favorites[index];
+        tempCard.push( <SmallProject address={element.addressContract} tier={element.tier}></SmallProject>)
+      }
+      setfavoriteCard(tempCard)
+
+    }
+
+    fetchData();
+    
+  },[])
+
+
   const percentage = 65;
   return (
     <div className="app">
@@ -33,7 +68,7 @@ const Profile = () => {
                   <img src={ProfileIconArrowLeft} alt="ProfileIconArrowLeft" />
                 </a>
                 <div className="profile-img-box">
-                  <h3>Profilo di Tommaso</h3>
+                  <h3>Profilo di {getRecoil(addressState).toString().substring(0, 10) + "..."}</h3>
                   <img src={ProfileImg} alt="ProfileImg" />
                 </div>
               </div>
@@ -74,38 +109,9 @@ const Profile = () => {
         <section className="profile-bottom">
           <div className="box">
             <div className="profile-main-grid">
-              <div className="pmg-left">
-                <ProfileCardLeft img={BlogImg} price="$100">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Itaque asperiores, soluta obcaecati quae unde corrupti?
-                  </p>
-                  <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                </ProfileCardLeft>
-                <ProfileCardLeft img={BlogImg} price="$100">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Itaque asperiores, soluta obcaecati quae unde corrupti?
-                  </p>
-                  <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                </ProfileCardLeft>
-                <ProfileCardLeft img={BlogImg} price="$100">
-                  <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Itaque asperiores, soluta obcaecati quae unde corrupti?
-                  </p>
-                  <br />
-                  <p>- Feature 1</p>
-                  <p>- Feature 2</p>
-                  <p>- Feature 3</p>
-                </ProfileCardLeft>
-              </div>
+            <div className="pmg-left">
+            {investedCard}
+            </div>
               <div className="pts-icons-box-1">
                 <div className="pts-icons-card-1">
                   <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
@@ -117,62 +123,8 @@ const Profile = () => {
                 </div>
               </div>
               <div className="pmg-right">
-                <div className="pmg-right-card">
-                  <div className="pmg-rc-left">
-                    <h3>Nome del progetto</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Vitae porro eius quasi inventore voluptate? Nam libero
-                      quas ipsa unde nihil perspiciatis maxime soluta mollitia
-                      quae. Lorem ipsum dolor sit amet consectetur, adipisicing
-                      elit. Vitae porro eius quasi inventore voluptate? Nam
-                      libero quas ipsa unde nihil perspiciatis maxime soluta
-                      mollitia quae.
-                      <br />
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Vitae porro eius quasi inventore voluptate? Nam libero
-                      quas ipsa unde nihil perspiciatis maxime soluta mollitia
-                      quae. Quae quibusdam veritatis architecto ipsam similique
-                      asperiores.
-                    </p>
-                  </div>
 
-                  <div className="pmg-rc-right">
-                    <div className="pc-hero-icon-grid">
-                      <IconInfoCard
-                        img={PCDollarIcon}
-                        text="324.211 su 200.00 Draccolti"
-                      />
-                      <IconInfoCard
-                        img={PCUserIcon}
-                        text="2304 persone hanno investito"
-                      />
-                      <IconInfoCard
-                        img={PCDollarIcon}
-                        text="21 giorni al termine"
-                      />
-                    </div>
-                    <div className="pc-70-box">
-                      <p>
-                        Investimento <br /> completo al
-                      </p>
-                      <div className="graph-box">
-                        <CircularProgressbar
-                          value={percentage}
-                          text={`${percentage}%`}
-                          strokeWidth={5}
-                        />
-                        ;
-                      </div>
-                    </div>
-                  </div>
-                  <div className="pmg-btn-box">
-                    <button className="grd-btn dopot-btn-lg">
-                      Scopri di più
-                    </button>
-                  </div>
-                </div>
+              {favoriteCard}
               </div>
             </div>
           </div>

@@ -4,6 +4,12 @@ import { recoilPersist } from 'recoil-persist'
 const { persistAtom } = recoilPersist()
 
 
+const addressState = atom({
+  key: "address",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
+
 const IpfsState = atom({
   key: "IPFS",
   default: null
@@ -35,4 +41,4 @@ const progettiImageState = atom({
 })
 
 
-export {IpfsState, progettiAddressState,progettiState, providerState, progettiImageState}
+export {IpfsState, progettiAddressState,progettiState, providerState, progettiImageState, addressState}

@@ -19,7 +19,8 @@ async function DownloadProj() {
     var progetti = await getAllProject();
     var progettiIpfs = [];
     try {
-       for await(const element of progetti) {
+       
+       for await(const element of progetti) { 
         progettiIpfs.push(await getIPFSprojectAddr(element.projectAddress));
        }
     } catch (error) {
@@ -58,7 +59,9 @@ async function getAllProject() {
 }
 
   async function getIPFSprojectAddr(Address) {
+    
     const Contract = new ethers.Contract(Address, abiProject, getRecoil(providerState));
+    console.log(await Contract.projectMedia());
     var temp = await getRecoil(IpfsState).getJSON(await Contract.projectMedia());
     temp.address= Address;
     console.log(temp);
