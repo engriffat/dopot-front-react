@@ -338,6 +338,46 @@
 .swap-btns-box button.purple-border-btn {
   background-color: #fff !important;
 }
+
+/*stile load more*/
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  font-size: initial !important;
+  opacity: 1;
+  height: 9.5rem;
+  overflow: hidden;
+  transition: 0.25s ease;
+  word-break: break-word;
+  margin: 0 !important;
+}
+
+.read-more-state:checked ~ .read-more-target {
+  opacity: 1;
+  font-size: initial !important;
+  height: fit-content;
+  word-break: break-word;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: "Mostra di più";
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: "Mostra meno";
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  color: #fff;
+  font-size: 1.2em;
+  line-height: 2;
+  margin-bottom: 3rem;
+}
+
 /* Styles for Large Laptops */
 @media screen and (max-width: 1040px) {
   .profile-main-grid {
@@ -372,7 +412,7 @@
     width: 100%;
   }
   .pmg-rc-right .pc-70-box {
-    width: 65%;
+    width: 55%;
   }
   .pts-icons-card-1 {
     display: none;
@@ -393,6 +433,9 @@
 
 /* Styles for Mobile Devices */
 @media screen and (max-width: 650px) {
+  .pmg-rc-right .pc-70-box {
+    width: 40%;
+  }
   .profile-img-box img {
     width: 15rem;
     height: 15rem;

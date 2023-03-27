@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React, { useState } from "react";
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import PaginaCardHero from "../assets/img/pc-hero-img.png";
@@ -13,37 +13,45 @@ import IconInfoCard from "../components/PaginaCard/IconInfoCard";
 import InvestiCard from "../components/PaginaCard/InvestiCard";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import {useParams} from "react-router-dom";
-import { progettiState, progettiImageState} from "../recoilState";
-import { getRecoil, setRecoil } from 'recoil-nexus';
-import {getIPFSimage} from "../utils/downloadProj";
+import { useParams } from "react-router-dom";
+import { progettiState, progettiImageState } from "../recoilState";
+import { getRecoil, setRecoil } from "recoil-nexus";
+import { getIPFSimage } from "../utils/downloadProj";
 import TabCampagna from "../components/TabCampagna";
 import TabRoadmap from "../components/TabRoadmap";
 import TabFaq from "../components/TabFaq";
 import TabSocial from "../components/TabSocial";
 import { addFavorites } from "../utils/firebase/writeInfos";
 
-const PaginaCard =  () => {
+const PaginaCard = () => {
   let { address } = useParams();
-  var progetto=getRecoil(progettiState).find(x => x.address === address);
-  const cards = []
+  var progetto = getRecoil(progettiState).find((x) => x.address === address);
+  const cards = [];
   var i = 1;
-  
-  for (var i=1; i< parseInt(progetto.numeroProdotti)+1; i++) { 
-       cards.push(<InvestiCard address={progetto.address} numTier={i} spec={progetto["specTecnica"+i]} supply={progetto["supply"+i]} prezzo={progetto["prezzo"+i]} img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} titolo={progetto["nomeProdotto"+i]}> 
-        </InvestiCard>);
+
+  for (var i = 1; i < parseInt(progetto.numeroProdotti) + 1; i++) {
+    cards.push(
+      <InvestiCard
+        address={progetto.address}
+        numTier={i}
+        spec={progetto["specTecnica" + i]}
+        supply={progetto["supply" + i]}
+        prezzo={progetto["prezzo" + i]}
+        img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]}
+        titolo={progetto["nomeProdotto" + i]}
+      ></InvestiCard>
+    );
   }
- 
 
   const percentage = 90;
 
   const [tab, setTab] = useState(0);
 
   function isCurrentState(i) {
-    if (tab==i) {
+    if (tab == i) {
       return true;
     }
-    return false
+    return false;
   }
 
   return (
@@ -61,18 +69,9 @@ const PaginaCard =  () => {
               <div className="pc-hero-grid-left">
                 <h1>{progetto.nomeAzienda}</h1>
                 <p>
-                 {progetto.descProgetto}<br /> 
+                  {progetto.descProgetto}
+                  <br />
                 </p>
-                <div className="pc-btn-box">
-                  <button  onClick={() => addFavorites(progetto.address)} className="grd-btn dopot-btn-lg">
-                    <img src={IconHeart} alt="IconPlane" /> Salva
-                  </button>
-                  <button className="grd-btn dopot-btn-lg">
-                    <img src={IconPlane} alt="IconPlane" /> Scopri di più
-                  </button>
-                </div>
-              </div>
-              <div className="pc-hero-grid-right">
                 <div className="pc-hero-icon-grid">
                   <IconInfoCard
                     img={PCDollarIcon}
@@ -87,6 +86,19 @@ const PaginaCard =  () => {
                     text="21 giorni al termine"
                   />
                 </div>
+                {/*<div className="pc-btn-box">
+                  <button
+                    onClick={() => addFavorites(progetto.address)}
+                    className="grd-btn dopot-btn-lg"
+                  >
+                    <img src={IconHeart} alt="IconPlane" /> Salva
+                  </button>
+                  <button className="grd-btn dopot-btn-lg">
+                    <img src={IconPlane} alt="IconPlane" /> Scopri di più
+                  </button>
+              </div>*/}
+              </div>
+              <div className="pc-hero-grid-right">
                 <div className="pc-70-box">
                   <p>
                     Investimento <br /> completo al
@@ -107,13 +119,36 @@ const PaginaCard =  () => {
         <section className="anchor-links-box">
           <div className="box">
             <div className="alb-content">
-              <a onClick={() => setTab(0)}  className={isCurrentState(0) ? ("pc-active-link"  ) : ("")}>
+              <a
+                onClick={() => setTab(0)}
+                className={isCurrentState(0) ? "pc-active-link" : ""}
+              >
                 Campagna
               </a>
-              <a onClick={() => setTab(1)} className={isCurrentState(1) ? ("pc-active-link"  ) : ("")}>Roadmap</a>
-              <a onClick={() => setTab(2)} className={isCurrentState(2) ? ("pc-active-link"  ) : ("")}>Reward</a>
-              <a onClick={() => setTab(3)} className={isCurrentState(3) ? ("pc-active-link"  ) : ("")}>Community</a>
-              <a onClick={() => setTab(4)} className={isCurrentState(4) ? ("pc-active-link"  ) : ("")}>FAQ</a>
+              <a
+                onClick={() => setTab(1)}
+                className={isCurrentState(1) ? "pc-active-link" : ""}
+              >
+                Roadmap
+              </a>
+              <a
+                onClick={() => setTab(2)}
+                className={isCurrentState(2) ? "pc-active-link" : ""}
+              >
+                Reward
+              </a>
+              <a
+                onClick={() => setTab(3)}
+                className={isCurrentState(3) ? "pc-active-link" : ""}
+              >
+                Community
+              </a>
+              <a
+                onClick={() => setTab(4)}
+                className={isCurrentState(4) ? "pc-active-link" : ""}
+              >
+                FAQ
+              </a>
             </div>
           </div>
         </section>
@@ -121,42 +156,69 @@ const PaginaCard =  () => {
           <div className="box">
             <div className="pc-content-grid">
               {(() => {
-              switch (tab) {
-                case 0:
-                  return <TabCampagna introduzione={progetto.introduzione} fotoIntroListFiles={progetto.fotoStoriaListFiles} vision={progetto.vision} fotoVisionListFiles={progetto.fotoVisionListFiles} storia={progetto.storia} fotoStoriaListFiles={progetto.fotoStoriaListFiles}/>
-                case 1:
-                  return <TabRoadmap titoloRoadStep1={progetto.titoloRoadStep1} titoloRoadStep2={progetto.titoloRoadStep2} descrRoadStep1={progetto.descrRoadStep1} descrRoadStep2={progetto.descrRoadStep2} />
-                case 3:
-                  return <TabSocial socialMedia={progetto.socialMedia.split(',')}></TabSocial>
-                case 4:
-                  return <TabFaq progetto={progetto} />
+                switch (tab) {
+                  case 0:
+                    return (
+                      <TabCampagna
+                        introduzione={progetto.introduzione}
+                        fotoIntroListFiles={progetto.fotoStoriaListFiles}
+                        vision={progetto.vision}
+                        fotoVisionListFiles={progetto.fotoVisionListFiles}
+                        storia={progetto.storia}
+                        fotoStoriaListFiles={progetto.fotoStoriaListFiles}
+                      />
+                    );
+                  case 1:
+                    return (
+                      <TabRoadmap
+                        titoloRoadStep1={progetto.titoloRoadStep1}
+                        titoloRoadStep2={progetto.titoloRoadStep2}
+                        descrRoadStep1={progetto.descrRoadStep1}
+                        descrRoadStep2={progetto.descrRoadStep2}
+                      />
+                    );
+                  case 3:
+                    return (
+                      <TabSocial
+                        socialMedia={progetto.socialMedia.split(",")}
+                      ></TabSocial>
+                    );
+                  case 4:
+                    return <TabFaq progetto={progetto} />;
 
-                default:
-                  break;
-              }
-            })()}
+                  default:
+                    break;
+                }
+              })()}
               <div className="pc-content-grid-right">
                 <div className="basic-info-box">
-                  <img src={(() => {if (progetto.logoAzienda !=null) {
-                    return "data:image/jpg;base64," + progetto.logoAziendaListFiles.base64;
-                  } else return ImageIcon})()}alt="ImageIcon" />
+                  <img
+                    src={(() => {
+                      if (progetto.logoAzienda != null) {
+                        return (
+                          "data:image/jpg;base64," +
+                          progetto.logoAziendaListFiles.base64
+                        );
+                      } else return ImageIcon;
+                    })()}
+                    alt="ImageIcon"
+                  />
                   <h3>{progetto.nomeAzienda}</h3>
                   <p>
-                   Campagna di {progetto.tipoCampagna}. <br/>
-                   Team composta da {progetto.team}.<br/>
-                   Nel settore della {progetto.settore}.<br/>
-                   Sito Web  {progetto.sito} 
-                   P.iva  {progetto.pIva}
+                    Campagna di {progetto.tipoCampagna}. <br />
+                    Team composta da {progetto.team}.<br />
+                    Nel settore della {progetto.settore}.<br />
+                    Sito Web {progetto.sito}
+                    P.iva {progetto.pIva}
                   </p>
                 </div>
                 <h5>Investi</h5>
-                
+
                 {cards}
               </div>
             </div>
           </div>
         </section>
-        
       </main>
     </div>
   );

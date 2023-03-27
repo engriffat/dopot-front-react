@@ -10,15 +10,18 @@ import Card from "../components/PaginaCard/Card";
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
-import { progettiState, progettiImageState} from "../recoilState";
-import { getRecoil, setRecoil } from 'recoil-nexus';
-
+import { progettiState, progettiImageState } from "../recoilState";
+import { getRecoil, setRecoil } from "recoil-nexus";
 
 const Home = () => {
-  
   const cards = [];
-  getRecoil(progettiState).forEach(element => {
-    cards.push(<Card progetto={element} immagini={getRecoil(progettiImageState)[element.address]}></Card>)
+  getRecoil(progettiState).forEach((element) => {
+    cards.push(
+      <Card
+        progetto={element}
+        immagini={getRecoil(progettiImageState)[element.address]}
+      ></Card>
+    );
   });
 
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
@@ -26,7 +29,7 @@ const Home = () => {
     <div className="app">
       <main className="dashboard">
         <div className="dashboard-header">
-        <Header />
+          <Header />
         </div>
         <div className="box">
           <div className="dashboard-select-btn">
@@ -81,9 +84,7 @@ const Home = () => {
             <h2>{cards.length} Risultati</h2>
             <h6>ordina</h6>
           </div>
-          
-          {cards}
-          
+          <div class="profile-dash-cards">{cards}</div>
         </div>
       </main>
     </div>

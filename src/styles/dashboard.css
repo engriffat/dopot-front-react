@@ -6,6 +6,15 @@
   background-position: center center;
 }
 
+.profile-dash-cards {
+  grid-gap: 30px;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
 .dashboard-select-btn {
   display: flex;
   justify-content: space-between;
@@ -113,10 +122,15 @@
   width: 100%;
   border-radius: 1.5rem;
   background-image: url("../assets/img/pc-card-bg.png");
-  background-position: center;
+  background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 4rem;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
 }
 .pmg-right-card h3 {
   font-size: 3.25rem;
@@ -127,7 +141,7 @@
 }
 .pmg-rc-right .pc-70-box {
   margin: 5rem auto 0 auto;
-  width: 65%;
+  width: 75% !important;
 }
 .pmg-rc-right .pc-hero-icon-grid {
   grid-gap: 2.5rem;
@@ -163,9 +177,9 @@
 .pc-70-box p {
   font-size: 1.75rem;
 }
-.profile-box-dash {
-  width: 50%;
-  margin: 6rem auto;
+.profile-dash-cards .profile-box-dash {
+  margin: 0;
+  width: 100%;
 }
 .pc-hero-icon-grid-card p {
   font-size: 1.65rem;
@@ -176,24 +190,34 @@
   margin: 0 5rem 0 0;
   text-align: center;
 }
-.pmg-rc-right .pc-70-box {
-  margin: 5rem auto 0 auto;
-  width: 65%;
-}
 .pc-70-box {
-  width: 100%;
-  margin: 10rem 0 0 0;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
+  margin: 10rem 0 0;
+  width: 100%;
 }
 
 @media screen and (max-width: 1150px) {
+  .profile-dash-cards {
+    grid-gap: 30px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
   .dashboard-select-btn {
     width: 100%;
   }
   .dash-sel-opt-content select {
     padding: 1rem 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .pmg-rc-right .pc-70-box {
+    width: 100% !important;
   }
 }
 
@@ -231,7 +255,31 @@
   }
 }
 
+@media screen and (max-width: 950px) {
+  .pmg-rc-right .pc-70-box {
+    width: 100% !important;
+  }
+}
+
 @media screen and (max-width: 750px) {
+  .pmg-rc-right .pc-70-box {
+    width: 100% !important;
+  }
+  .profile-dash-cards .pc-hero-icon-grid {
+    display: flex;
+  }
+  .profile-dash-cards {
+    grid-gap: 30px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .profile-dash-cards .graph-box {
+    margin-left: 20px;
+    width: 90px;
+  }
   .dashboard-select-opt {
     grid-template-columns: 1fr;
     grid-gap: 2rem;
@@ -253,6 +301,16 @@
     font-size: 1.4rem;
   }
   .pc-70-box p {
-    margin: 0 0 2.5rem 0;
+    margin-bottom: 0.5rem !important;
+  }
+  .profile-box-dash {
+    margin: 0;
+    width: 100%;
+  }
+  .profile-box-dash .pc-70-box {
+    align-items: center;
+    display: flex !important;
+    flex-direction: row;
+    width: 100%;
   }
 }

@@ -13,6 +13,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 .ins-head a img {
   width: 5rem;
@@ -29,7 +31,9 @@
   align-items: center;
   justify-content: center;
   max-width: 1000px;
-  margin: 15rem auto;
+  margin: -10rem 20rem;
+  position: fixed;
+  top: 165px;
 }
 .ins-circle {
   min-width: 4rem;
@@ -89,7 +93,7 @@
   width: 100%;
   border: 1px solid #ff43a0;
   padding: 1.5rem;
-  background-color: unset;
+  background-color: #fffafa;
   border-radius: 0.5rem;
   font-size: 1.75rem;
   outline: 0;
@@ -139,21 +143,24 @@
 }
 @media screen and (max-width: 700px) {
   .ins-progress {
-    flex-direction: column;
-    width: min-content;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-start;
-    margin: 10rem 0;
+    margin: 10rem auto;
+    padding-left: 1rem;
+    padding-right: 4rem;
+    top: -35px;
+    width: 100%;
   }
   .ins-line {
-    width: 0.75rem;
-    height: 10rem;
+    width: 100% !important;
+    height: 0.55rem;
   }
   .ins-circle p {
-    top: 50%;
+    /* top: 50%;
     right: 0;
     transform: translate(3.5rem, -50%);
-    width: max-content;
+    width: max-content; */
+    font-size: 1rem;
   }
   .ins-btn-box {
     flex-direction: column;
@@ -174,10 +181,10 @@
     font-size: 2.5rem;
   }
   .ins-circle {
-    min-width: 3.5rem;
-    max-width: 3.5rem;
-    min-height: 3.5rem;
-    max-height: 3.5rem;
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
   }
   .ins-line {
     width: 0.5rem;

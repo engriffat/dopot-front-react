@@ -30,6 +30,11 @@
   grid-gap: 10rem;
   position: relative;
   z-index: 10;
+  align-items: center;
+}
+
+.pc-hero-grid p {
+  margin-bottom: 7rem;
 }
 .pc-hero-grid-left {
   width: 100%;
