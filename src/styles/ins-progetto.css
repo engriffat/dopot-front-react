@@ -1,3 +1,9 @@
+.camp-img {
+  box-sizing: content-box;
+  box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.8);
+  border-radius: 10%;
+}
+
 .ins-progetto-content {
   width: 100%;
   position: relative;
@@ -13,7 +19,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-  margin-top: 5rem;
+  margin-top: 15rem;
   margin-bottom: 5rem;
 }
 .ins-head a img {
@@ -31,10 +37,12 @@
   align-items: center;
   justify-content: center;
   max-width: 1000px;
-  margin: -10rem 20rem;
+  margin: -10rem 23rem;
   position: fixed;
-  top: 165px;
+  top: 170px;
+  z-index: 0;
 }
+
 .ins-circle {
   min-width: 4rem;
   max-width: 4rem;

@@ -5,55 +5,61 @@ import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
 import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
-import ProfileIcon2 from "../assets/img/profile-icon-2.png";
+import ProfileIcon2 from "../assets/img/profile-icon-camp.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import BlogImg from "../assets/img/void.jpg";
 import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
-import React, { useState, useEffect } from 'react';
-import { getRecoil, setRecoil } from 'recoil-nexus';
-import { addressState } from '../recoilState';
+import React, { useState, useEffect } from "react";
+import { getRecoil, setRecoil } from "recoil-nexus";
+import { addressState } from "../recoilState";
 
 import "react-circular-progressbar/dist/styles.css";
 import SmallProject from "../components/SmallProject";
 import SmallTier from "../components/SmallTier";
-import { retriveFavorites, retriveInvestment } from "../utils/firebase/retriveInfo";
+import {
+  retriveFavorites,
+  retriveInvestment,
+} from "../utils/firebase/retriveInfo";
 
 const Profile = () => {
-  
   const [investedCard, setinvestedCard] = useState([]);
   const [favoriteCard, setfavoriteCard] = useState([]);
 
   useEffect(() => {
     // Update the document title using the browser API
     async function fetchData() {
-
-
-      var invested = await retriveInvestment()      
-      var tempCard =[] 
+      var invested = await retriveInvestment();
+      var tempCard = [];
       for (let index = 0; index < invested.length; index++) {
         const element = invested[index];
-        tempCard.push( <SmallTier address={element.addressContract} tier={element.tier}></SmallTier>)
+        tempCard.push(
+          <SmallTier
+            address={element.addressContract}
+            tier={element.tier}
+          ></SmallTier>
+        );
       }
-      setinvestedCard(tempCard)
+      setinvestedCard(tempCard);
 
-
-      var favorites = await retriveFavorites()      
-      var tempCard =[] 
+      var favorites = await retriveFavorites();
+      var tempCard = [];
       for (let index = 0; index < favorites.length; index++) {
         const element = favorites[index];
-        tempCard.push( <SmallProject address={element.addressContract} tier={element.tier}></SmallProject>)
+        tempCard.push(
+          <SmallProject
+            address={element.addressContract}
+            tier={element.tier}
+          ></SmallProject>
+        );
       }
-      setfavoriteCard(tempCard)
-
+      setfavoriteCard(tempCard);
     }
 
     fetchData();
-    
-  },[])
-
+  }, []);
 
   const percentage = 65;
   return (
@@ -68,27 +74,53 @@ const Profile = () => {
                   <img src={ProfileIconArrowLeft} alt="ProfileIconArrowLeft" />
                 </a>
                 <div className="profile-img-box">
-                  <h3>Profilo di {getRecoil(addressState).toString().substring(0, 10) + "..."}</h3>
-                  <img src={ProfileImg} alt="ProfileImg" />
+                  <h3>
+                    Profilo di{" "}
+                    {getRecoil(addressState).toString().substring(0, 5) +
+                      "..." +
+                      getRecoil(addressState).toString().substring(38, 42)}
+                  </h3>
+
+                  <img src={ProfileImg} alt="" />
                 </div>
               </div>
               <div className="pts-right">
                 <div className="pts-right-grid">
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon1} alt="ProfileIcon" />
-                    <p>Panoramica</p>
+                    <a href={"/#/profile"}>
+                      <img
+                        className="panoramica-img"
+                        src={ProfileIcon1}
+                        alt="ProfileIcon"
+                      />
+                    </a>
+                    <a href={"/#/profile"}>
+                      <p>Panoramica</p>
+                    </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon2} alt="ProfileIcon" />
-                    <p>Crea Campagna</p>
+                    <a href={"/#/insprogetto"}>
+                      <img src={ProfileIcon2} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/insprogetto"}>
+                      <p>Crea Campagna</p>
+                    </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon3} alt="ProfileIcon" />
-                    <p>I Miei NFT</p>
+                    <a href={"/#/mynft"}>
+                      <img src={ProfileIcon3} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/mynft"}>
+                      <p>I Miei NFT</p>
+                    </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon4} alt="ProfileIcon" />
-                    <p>I Miei Progetti</p>
+                    <a href={"/#/myprojects"}>
+                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/myprojects"}>
+                      <p>I Miei Progetti</p>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -109,9 +141,43 @@ const Profile = () => {
         <section className="profile-bottom">
           <div className="box">
             <div className="profile-main-grid">
-            <div className="pmg-left">
-            {investedCard}
-            </div>
+              {/* <div className="pmg-left">{investedCard}</div> */}
+              {/* provvisorio */}
+              <div className="pmg-right">
+                <div className="pmg-right-card">
+                  <div className="pmg-rc-left-invest">
+                    <h3>Mentadent</h3>
+                    <div class="menu-nav">
+                      <div class="dropdown-container" tabindex="-1">
+                        <div class="three-dots"></div>
+                        <div class="dropdown">
+                          <a href="https://dopot.fi/#/swap">
+                            <div>Swap</div>
+                          </a>
+                          <a href="#">
+                            <div>Dati Spedizione</div>
+                          </a>
+                          <a href="#">
+                            <div>Rimborso</div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pmg-rc-right">
+                    <div className="pc-hero-icon-grid"></div>
+                    <div className="pc-70-box"></div>
+                  </div>
+                  <div className="pmg-btn-box">
+                    <button className="grd-btn dopot-btn-lg">
+                      Scopri di più
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* provvisorio */}
+
               <div className="pts-icons-box-1">
                 <div className="pts-icons-card-1">
                   <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
@@ -122,10 +188,7 @@ const Profile = () => {
                   <p>I miei preferiti</p>
                 </div>
               </div>
-              <div className="pmg-right">
-
-              {favoriteCard}
-              </div>
+              <div className="pmg-right">{favoriteCard}</div>
             </div>
           </div>
         </section>

@@ -68,6 +68,7 @@ const PaginaCard = () => {
             <div className="pc-hero-grid">
               <div className="pc-hero-grid-left">
                 <h1>{progetto.nomeAzienda}</h1>
+
                 <p>
                   {progetto.descProgetto}
                   <br />
@@ -86,17 +87,21 @@ const PaginaCard = () => {
                     text="21 giorni al termine"
                   />
                 </div>
-                {/*<div className="pc-btn-box">
+                <div className="pc-btn-box">
                   <button
-                    onClick={() => addFavorites(progetto.address)}
+                    // onClick={() => addFavorites(progetto.address)}
                     className="grd-btn dopot-btn-lg"
                   >
-                    <img src={IconHeart} alt="IconPlane" /> Salva
+                    <img
+                      className="img-heart"
+                      src={IconHeart}
+                      alt="IconPlane"
+                    />
                   </button>
-                  <button className="grd-btn dopot-btn-lg">
+                  {/* <button className="grd-btn dopot-btn-lg">
                     <img src={IconPlane} alt="IconPlane" /> Scopri di più
-                  </button>
-              </div>*/}
+                  </button> */}
+                </div>
               </div>
               <div className="pc-hero-grid-right">
                 <div className="pc-70-box">

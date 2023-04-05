@@ -24,7 +24,7 @@ footer {
   font-size: 1.75rem;
   font-weight: 400;
   margin: 0.5rem 0 0 0;
-  color: var(--white);
+  color: var(--white) !important;
   transition: var(--trns1);
   width: max-content;
 }
@@ -53,14 +53,12 @@ footer {
   font-weight: 400;
   color: #fff;
 }
-.footer-social-div a{
+.footer-social-div a {
   height: 40px !important;
   width: 40px !important;
-  margin-right : 10px;
-  float:left;
+  margin-right: 10px;
+  float: left;
 }
-
-
 
 @media screen and (max-width: 650px) {
   .footer-grid {

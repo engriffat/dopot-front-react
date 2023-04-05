@@ -155,6 +155,8 @@
   font-size: 5.5rem;
   color: #fff;
   font-weight: 500;
+  position: relative;
+  z-index: 10;
 }
 .qui-section p {
   font-size: 1.85rem;

@@ -6,6 +6,9 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import { useNavigate } from "react-router-dom";
+import { addFavorites } from "../utils/firebase/writeInfos";
+import IconPlane from "../assets/img/icon-plane.svg";
+import IconHeart from "../assets/img/pc-heart-icon-02.svg";
 
 const SmallProject = (props) => {
   var progetto = getRecoil(progettiState).find(
@@ -59,6 +62,13 @@ const SmallProject = (props) => {
         <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
           Scopri di più
         </button>
+
+        {/* <button
+          onClick={() => addFavorites(progetto.address)}
+          className="grd-btn-favorites"
+        >
+          <img src={IconHeart} alt="IconHeart" />
+        </button> */}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 /* Global Styles throughout the app */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
-  font-size: 10px;
+  font-size: 9px;
   --white: #fff;
   --black: #000;
   --main-yellow: #ffe425;
@@ -34,6 +34,25 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+.grd-btn-favorites {
+  font-size: 1.85rem;
+  color: var(--white);
+  background: linear-gradient(30deg, #fca040, #c22e80);
+  /* border: 2px solid var(--white); */
+  outline: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px 10px rgba(255, 67, 161, 0.35);
+  transition: var(--trns1);
+  z-index: 100;
+  position: relative;
+  border-radius: 1000px;
+  width: 10%;
+  cursor: pointer;
+}
+.img-heart {
+  color: #fca040;
+}
 .grd-btn {
   font-size: 1.85rem;
   color: var(--white);
@@ -46,6 +65,8 @@ body {
   z-index: 100;
   position: relative;
   border-radius: 1000px;
+  width: fit-content;
+  cursor: pointer;
 }
 .purple-border-btn {
   font-size: 1.85rem;
@@ -58,6 +79,8 @@ body {
   box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.5);
   transition: var(--trns1);
   border-radius: 1000px;
+  width: fit-content;
+  cursor: pointer;
 }
 .grd-btn:hover,
 .purple-border-btn:hover {

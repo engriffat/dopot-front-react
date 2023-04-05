@@ -26,11 +26,11 @@ import "../styles/paginacard.css";
 import "../styles/profile.css";
 import "../styles/dopotpower.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const DopotPower = () => {
-  let navigate = useNavigate(); 
-  
-  
+  let navigate = useNavigate();
+
   return (
     <div className="app">
       <main className="dashboard">
@@ -41,7 +41,10 @@ const DopotPower = () => {
           <div className="dopot-power">
             <h2>il token di governance della piattaforma</h2>
             <div className="p-btn-box">
-              <button onClick={ (e) => navigate("/dopotshare")} className="purple-border-btn dopot-btn-lg">
+              <button
+                onClick={(e) => navigate("/dopotshare")}
+                className="purple-border-btn dopot-btn-lg"
+              >
                 Dopotshare
               </button>
               <button className="grd-btn dopot-btn-lg">Dopotpower</button>
@@ -89,6 +92,7 @@ const DopotPower = () => {
           </div>
         </div>
         <img className="dopot-power-img" src={PBottom} alt="PBottom" />
+        <Footer />
       </main>
     </div>
   );

@@ -14,13 +14,26 @@ const Card = (props) => {
     navigate(`/card/${props.progetto.address}`);
     window.scrollTo(0, -1000000);
   }
-
+  let desc = String(props.progetto.descProgetto);
   return (
     <div className="profile-box-dash">
       <div className="pmg-right-card">
-        <div className="pmg-rc-left">
+        <div className="pmg-rc-left-card">
           <h3>{props.progetto.nomeAzienda}</h3>
-          <p>{props.progetto.descProgetto}</p>
+
+          <input
+            type="checkbox"
+            class="read-more-state"
+            id="post-{props.progetto.nomeAzienda}"
+          />
+          <p class="read-more-target">{desc}</p>
+
+          {desc.length > 200 ? (
+            <label
+              for="post-{props.progetto.nomeAzienda}"
+              class="read-more-trigger"
+            ></label>
+          ) : null}
         </div>
 
         <div className="pmg-rc-right">

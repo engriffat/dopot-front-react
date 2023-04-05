@@ -13,7 +13,7 @@ const firebaseConfig = {
   storageBucket: "dopot-a8409.appspot.com",
   messagingSenderId: "402856554024",
   appId: "1:402856554024:web:50a0a71d1aa5ff0e694f1d",
-  measurementId: "G-MTEEVBM5YW"
+  measurementId: "G-MTEEVBM5YW",
 };
 
 const app = initializeApp(firebaseConfig);

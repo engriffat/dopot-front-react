@@ -7,6 +7,10 @@ header {
   font-size: 2rem;
   color: green;
 }
+
+.header-right a {
+  color: white !important;
+}
 .header-content {
   width: 100%;
   display: flex;
@@ -19,7 +23,7 @@ header {
   margin: 0 2.5rem 0 0;
 }
 .header-content a {
-  font-size: 1.65rem;
+  font-size: 1.65rem !important;
   color: var(--white);
   font-weight: 400;
   margin: 0 3.5rem 0 0;
@@ -62,6 +66,11 @@ header {
   align-items: flex-start;
   justify-content: flex-start;
 }
+
+.header-mob-box a {
+  font-size: 2.3rem !important;
+  color: #fff !important;
+}
 .dashboard-header .header-mob-box {
   background-color: #fff;
   background-image: url("../../assets/img/pc-hero-img.png");
@@ -90,6 +99,10 @@ header {
   margin: 0 0 2.5rem 0;
   width: 100%;
 }
+
+@media screen and (min-width: 1600px) {
+}
+
 @media screen and (max-width: 1150px) {
   .header-content a {
     margin: 0 2rem 0 0;

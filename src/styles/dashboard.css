@@ -19,8 +19,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30rem 0rem 15rem 0;
-  width: 80%;
+  padding: 20rem 0rem 15rem 0;
+  width: 100%;
   margin: 0 auto;
 }
 .dashboard-select-opt {
@@ -35,7 +35,7 @@
   justify-content: center;
 }
 .dash-sel-opt-content label {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   color: var(--black);
   font-weight: 400;
   margin: 0 0 0.5rem 0;
