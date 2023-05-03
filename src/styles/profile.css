@@ -1,5 +1,52 @@
 /* provvisorio*/
 
+.shadow-inv {
+  box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.8);
+  border-radius: 10%;
+  background: transparent;
+}
+
+.box0 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.box1 {
+  display: none;
+}
+
+.sec-inv-desk-flex,
+.sec-pref-desk-flex {
+  display: flex;
+  margin: 15rem 0;
+}
+.box0 img {
+  width: 4rem;
+  object-fit: contain;
+  margin: 0 1.5rem 0 0;
+}
+.box0 p {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin: 1rem 0 0 0;
+}
+.box1 img {
+  width: 5rem;
+  object-fit: contain;
+  margin: 0 1.5rem 0 0;
+}
+.box1 p {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin: 1rem 0 0 0;
+}
+.sec-inv-mob button,
+.sec-pref-mob button {
+  background: none;
+}
+/* provvisorio*/
+/* provvisorio*/
+
 .panoramica-img,
 .nft-img,
 .myprojects-img {
@@ -88,7 +135,8 @@ a div {
 }
 
 .center,
-.content {
+.content,
+.content-invest {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -105,9 +153,11 @@ a div {
   line-height: 50px;
   cursor: pointer;
 }
-#click {
+#click,
+#click-invest {
   display: none;
 }
+
 .click-me:hover {
   color: #0a5878;
 }
@@ -121,13 +171,32 @@ a div {
   border-radius: 1.5rem;
   position: fixed;
 }
+.content-invest {
+  visibility: hidden;
+  width: 90%;
+  height: 90vh;
+  background: white;
+  border: 2px solid lightgray;
+  box-sizing: border-box;
+  border-radius: 1.5rem;
+  position: fixed;
+}
+.content-invest img {
+  width: 100%;
+  height: 40%;
+  border-radius: 1.5rem;
+}
+.content.logo-center img {
+  margin-top: 20%;
+}
 
 .content img {
   width: 100%;
   height: 290px;
   border-radius: 1.5rem;
 }
-#temp {
+#temp,
+#temp-invest {
   position: absolute;
   right: 10px;
   top: -20px;
@@ -139,7 +208,8 @@ a div {
   border-radius: 50%;
   cursor: pointer;
 }
-#click:checked ~ .content {
+#click:checked ~ .content,
+#click-invest:checked ~ .content-invest {
   opacity: 1;
   visibility: visible;
   z-index: 1000000;
@@ -150,6 +220,16 @@ a div {
   font-weight: 600;
   text-align: center;
   letter-spacing: 2px;
+}
+.text-invest {
+  font-size: 30px;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background: linear-gradient(30deg, #fca040, #d364a1);
+  padding: 5rem;
+  height: 60%;
+  border-radius: 0px 0px 15px 15px;
 }
 
 .text li {
@@ -249,7 +329,7 @@ a {
 .pts-right-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 5rem;
 }
@@ -285,6 +365,7 @@ a {
   align-items: center;
   justify-content: center;
 }
+
 .pts-icons-card img {
   width: 4rem;
   object-fit: contain;
@@ -383,11 +464,12 @@ a {
 .pmg-right-card {
   width: 100%;
   border-radius: 1.5rem;
-  background-image: url("../assets/img/pc-card-bg.png");
+  background-image: url("../assets/img/logo_Mentadent-2.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   padding: 4rem;
+  border: 2px solid #c22e80;
 }
 .pmg-right-card-nft {
   width: 100%;
@@ -418,6 +500,10 @@ a {
   border-radius: 1.5rem 1.5rem 0 0;
 
   width: 100%;
+}
+
+.pmg-rc-right {
+  margin: 0 auto;
 }
 .pmg-rc-right .pc-70-box {
   margin: 5rem auto 0 auto;
@@ -489,13 +575,11 @@ a {
   border-radius: 2.5rem;
 }
 .swap-input-box {
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   border: 1px solid #fca040;
   border-radius: 1rem;
   overflow: hidden;
-  min-height: 6rem;
 }
 .swap-input-box input {
   width: 100%;
@@ -523,7 +607,7 @@ a {
   color: #fff;
 }
 .swap-down-arrow {
-  width: 4rem;
+  width: 7rem;
   object-fit: contain;
   margin: -1rem auto;
   position: relative;
@@ -555,7 +639,7 @@ a {
   position: relative;
 }
 .swap-btn img {
-  width: 25rem;
+  width: 18rem;
   object-fit: contain;
   z-index: 8;
   position: relative;
@@ -585,7 +669,6 @@ a {
   overflow: hidden;
   transition: 0.25s ease;
   word-break: break-word;
-  margin: 0 !important;
 }
 
 .read-more-state:checked ~ .read-more-target {
@@ -627,6 +710,18 @@ a {
 
 /* Styles for Tablets */
 @media screen and (max-width: 950px) {
+  .sec-inv-desk-flex,
+  .sec-pref-desk-flex {
+    display: none !important;
+  }
+
+  .box1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 8rem 0;
+  }
+
   .profile-img-box img {
     width: 25rem;
     height: 25rem;
@@ -657,6 +752,10 @@ a {
   .pts-icons-card-1 {
     display: none;
   }
+  .sec-display-none-pref,
+  .sec-display-none-inv {
+    display: none !important;
+  }
   .pts-icons-box {
     margin: 15rem 0 12.5rem 0;
     padding: 0 5rem;
@@ -665,9 +764,17 @@ a {
     width: 100%;
     justify-content: flex-start;
   }
+  .pts-icons-card button {
+    background: none;
+    display: flex;
+    justify-content: flex-start;
+  }
   .pts-icons-box-1 {
     margin: 5rem 0;
     display: flex;
+  }
+  .pts-right-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -700,7 +807,9 @@ a {
     grid-gap: 23rem;
   }
   .profile-img-box {
-    align-items: flex-start;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0;
   }
   .pts-icons-card {
     justify-content: flex-start;

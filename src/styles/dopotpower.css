@@ -1,19 +1,28 @@
 .dopot-power {
   width: 100%;
-  padding: 30rem 0 0 0;
+  padding: 22rem 0 0 0;
 }
+
 .p-btn-box {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: start;
   margin: 10rem 0;
+  border-bottom: 2px solid rgb(186, 178, 178);
 }
 .p-btn-box .purple-border-btn {
   background-color: white;
 }
+.dopot-power h1 {
+  font-size: 5rem;
+  text-align: center;
+}
 .dopot-power h2 {
+  color: rgba(227, 62, 144, 0.8);
   font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 5rem;
 }
 .dopot-power h3 {
   font-size: 2.25rem;
@@ -47,7 +56,7 @@
 }
 .dopot-power ul li {
   font-size: 1.85rem;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 3rem 0;
   list-style-image: url("../assets/img/d-circle.jpg");
 }
 .dopot-power-img {

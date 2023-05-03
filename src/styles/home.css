@@ -43,7 +43,7 @@
   font-size: 6rem;
   color: var(--white);
   font-weight: 400;
-  margin: 5rem 0 0 0;
+  margin: 0;
 }
 .hero-content h2 {
   font-size: 2rem;
@@ -62,7 +62,6 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 }
 /* Scorpi Section */
 .scorpi-section {
@@ -214,6 +213,8 @@
   grid-template-rows: auto;
   grid-gap: 15rem;
   margin: 10rem 0 0 0;
+  position: relative;
+  z-index: 200;
 }
 .scelgono-grid-text-box {
   width: 100%;
@@ -273,7 +274,8 @@
 }
 .roadmap-grid {
   width: 100%;
-  padding: 10rem 0 40rem 0;
+  padding: 10rem 0 15rem 0;
+
   z-index: 2;
   position: relative;
 }

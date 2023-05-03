@@ -1,3 +1,30 @@
+/*plus*/
+.container-plus {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.btn-plus-minus {
+  color: var(--white);
+  background: linear-gradient(30deg, #fca040, #c22e80);
+  border: 2px solid var(--white);
+  outline: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px 10px rgba(255, 67, 161, 0.35);
+  transition: var(--trns1);
+  z-index: 100;
+  position: relative;
+  border-radius: 1000px;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+
+  width: 5% !important;
+
+  font-size: 2.5rem !important;
+  padding: 0 !important;
+}
+
 .camp-img {
   box-sizing: content-box;
   box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.8);
@@ -81,6 +108,11 @@
   margin: 0 auto 5rem auto;
   max-width: 1000px;
 }
+.ins-input-box h1 {
+  text-transform: uppercase;
+  color: #ff43a0;
+  margin-bottom: 2%;
+}
 .ins-input-box h4 {
   font-size: 2rem;
   font-weight: 400;
@@ -97,7 +129,8 @@
   margin: 0 5rem 0 0;
 }
 .ins-input-box input,
-.ins-input-box textarea {
+.ins-input-box textarea,
+.ins-input-box select {
   width: 100%;
   border: 1px solid #ff43a0;
   padding: 1.5rem;
@@ -108,6 +141,10 @@
   color: #000;
   transition: 0.5s;
   font-weight: 400;
+}
+
+.ins-input-box input[type="file"] {
+  height: auto;
 }
 .ins-input-box input:focus,
 .ins-input-box textarea:focus {
