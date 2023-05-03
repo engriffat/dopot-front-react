@@ -5,6 +5,7 @@ const Questionario = (props) => {
   return (
     <>
       <div className="ins-input-box">
+        <h1>Questionario</h1>
         <h4>
           State partendo in un mercato piccolo o in un mercato già ben
           strutturato?
@@ -78,7 +79,7 @@ const Questionario = (props) => {
           placeholder="inserisci la risposta"
         />
 
-        <h4>il team presenta tutti i ruoli chiave per lo sviluppo?</h4>
+        <h4>Il team presenta tutti i ruoli chiave per lo sviluppo?</h4>
         <textarea
           value={props.inputs.domanda9 || ""}
           onChange={props.handleChange}
@@ -127,6 +128,10 @@ const QuestionarioHeader = (props) => {
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
           <p>Prodotto</p>
+        </div>
+        <div className="ins-line ins-line-pending"></div>
+        <div className="ins-circle ins-circle-pending">
+          <p>Nft Mint</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">

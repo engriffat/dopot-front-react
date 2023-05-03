@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 
 const InfBase = (props) => {
+  const [val, setVal] = useState([]);
+  const handleAdd = () => {
+    const abc = [...val, []];
+    setVal(abc);
+  };
+  const handleChange = (onChangeValue, i) => {
+    const inputdata = [...val];
+    inputdata[i] = onChangeValue.target.value;
+    setVal(inputdata);
+  };
+  const handleDelete = (i) => {
+    const deletVal = [...val];
+    deletVal.splice(i, 1);
+    setVal(deletVal);
+  };
+  //val 2
+  const [val2, setVal2] = useState([]);
+  const handleAdd2 = () => {
+    const abc2 = [...val2, []];
+    setVal2(abc2);
+  };
+  const handleChange2 = (onChangeValue, i) => {
+    const inputdata2 = [...val];
+    inputdata2[i] = onChangeValue.target.value;
+    setVal2(inputdata2);
+  };
+  const handleDelete2 = (i) => {
+    const deletVal2 = [...val2];
+    deletVal2.splice(i, 1);
+    setVal2(deletVal2);
+  };
+
   return (
     <>
       <div className="ins-input-box">
+        <h1>Informazioni di Base</h1>
         <h4>Nome dell'azienda</h4>
         <input
           type="text"
@@ -115,6 +148,16 @@ const InfBase = (props) => {
         />
       </div>
       <div className="ins-input-box">
+        <h4>Descrizione Progetto</h4>
+        <textarea
+          name="descrizione"
+          value={props.inputs.descrizione || ""}
+          onChange={props.handleChange}
+          type="textarea"
+          placeholder="Inserisci una breve Descrizione"
+        />
+      </div>
+      <div className="ins-input-box">
         <h4>Numero P.IVA (favoltativo)</h4>
         <input
           name="pIva"
@@ -134,29 +177,82 @@ const InfBase = (props) => {
           placeholder="Inserisci link "
         />
       </div>
-      <div className="ins-input-box">
+      <div className="ins-input-box ">
         <h4>Social Media </h4>
-        <input
-          name="socialMedia"
-          value={props.inputs.socialMedia || ""}
-          onChange={props.handleChange}
-          type="text"
-          placeholder="Inserisci link eventuali Social Media"
-        />
+        <div className="container-plus">
+          <input
+            name="socialMediaDef"
+            type="text"
+            placeholder="Inserisci link eventuali Social Media"
+          />
+
+          <button className="btn-plus-minus" onClick={() => handleAdd()}>
+            +
+          </button>
+        </div>
+        {val.map((data, i) => {
+          return (
+            <div className="container-plus">
+              <input
+                name={"socialMedia" + i}
+                type="text"
+                placeholder="Inserisci link eventuali Social Media"
+                value={data}
+                onChange={(e) => handleChange(e, i)}
+              />
+              <button
+                className="btn-plus-minus"
+                onClick={() => handleDelete(i)}
+              >
+                x
+              </button>
+            </div>
+          );
+        })}
       </div>
       <div className="ins-input-box">
         <h4>
           documentazione aziendale (pitch, business plan, relazioni coi partner)
         </h4>
-        <input
-          name="documentazione"
-          value={props.inputs.documentazione || ""}
-          onChange={props.handleChange}
-          type="file"
-          placeholder="trascina il o
+        <div className="container-plus">
+          <input
+            name="documentazioneDef"
+            type="file"
+            placeholder="trascina il o
                 clicca per inserirlo
                 (.pdf)"
-        />
+          />
+
+          <button
+            style={{ marginTop: "0.9%", marginBottom: "0.9%" }}
+            className="btn-plus-minus"
+            onClick={() => handleAdd2()}
+          >
+            +
+          </button>
+        </div>
+        {val2.map((data, i) => {
+          return (
+            <div className="container-plus">
+              <input
+                name={"documentazione" + i}
+                type="file"
+                placeholder="trascina il o
+                clicca per inserirlo
+                (.pdf)"
+                value={data}
+                onChange={(e) => handleChange2(e, i)}
+              />
+              <button
+                style={{ marginTop: "0.9%", marginBottom: "0.9%" }}
+                className="btn-plus-minus"
+                onClick={() => handleDelete2(i)}
+              >
+                x
+              </button>
+            </div>
+          );
+        })}
       </div>
 
       <div className="ins-input-box">
@@ -167,7 +263,7 @@ const InfBase = (props) => {
           name="introduzione"
           placeholder="inserisci un introduzione"
         />
-        <div className="ins-input-box">
+        {/* <div className="ins-input-box">
           <h4>Immagine Introduzione </h4>
           <input
             name="fotoIntro"
@@ -175,7 +271,7 @@ const InfBase = (props) => {
             onChange={props.handleChange}
             type="file"
           />
-        </div>
+        </div> */}
 
         <h4>Storia</h4>
         <textarea
@@ -184,7 +280,7 @@ const InfBase = (props) => {
           name="storia"
           placeholder="inserisci la storia della tua azienda"
         />
-        <div className="ins-input-box">
+        {/* <div className="ins-input-box">
           <h4>Immagine Introduzione </h4>
           <input
             name="fotoStoria"
@@ -192,7 +288,7 @@ const InfBase = (props) => {
             onChange={props.handleChange}
             type="file"
           />
-        </div>
+        </div> */}
 
         <h4>Vision</h4>
         <textarea
@@ -201,7 +297,7 @@ const InfBase = (props) => {
           name="vision"
           placeholder="inserisci la vision della vostra azienda"
         />
-        <div className="ins-input-box">
+        {/* <div className="ins-input-box">
           <h4>Immagine Introduzione </h4>
           <input
             name="fotoVision"
@@ -209,7 +305,7 @@ const InfBase = (props) => {
             onChange={props.handleChange}
             type="file"
           />
-        </div>
+        </div> */}
       </div>
       {(() => {
         if (props.setState != null) {
@@ -244,6 +340,10 @@ const InfBaseHeader = (props) => {
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
           <p>Prodotto</p>
+        </div>
+        <div className="ins-line ins-line-pending"></div>
+        <div className="ins-circle ins-circle-pending">
+          <p>Nft Mint</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
