@@ -18,15 +18,41 @@ const Card = (props) => {
   return (
     <div className="profile-box-dash">
       <div className="pmg-right-card">
-        <div className="pmg-rc-left-card">
-          <h3>{props.progetto.nomeAzienda}</h3>
+        <div className="pmg-rc-left-card" style={{ width: "100%" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <div className="settore">
+              <span className="box-bk-over-logo">{props.progetto.settore}</span>
+            </div>
+            <div style={{ marginBottom: "1rem" }} className="settore">
+              <span className="box-bk-over-logo">
+                {props.progetto.tipoCampagna}
+              </span>
+            </div>
+          </div>
+          <h3 className="box-bk-over-logo">{props.progetto.nomeAzienda}</h3>
+          <h3 style={{ marginBottom: "2rem" }}>
+            <span>
+              <a
+                className="link-social-new  box-bk-over-logo"
+                href={props.progetto.sito}
+                target="_blank"
+              >
+                {props.progetto.sito}
+              </a>
+            </span>
+          </h3>
 
           <input
             type="checkbox"
             class="read-more-state"
             id="post-{props.progetto.nomeAzienda}"
           />
-          <p class="read-more-target">{desc}</p>
+          <p class="read-more-target box-bk-over-logo">{desc}</p>
 
           {desc.length > 200 ? (
             <label
@@ -48,7 +74,7 @@ const Card = (props) => {
             />
             <IconInfoCard img={PCDollarIcon} text="21 giorni al termine" />
           </div>
-          <div className="pc-70-box">
+          <div className="pc-70-box box-bk-over-logo">
             <p>
               Investimento <br /> completo al
             </p>
