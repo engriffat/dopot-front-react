@@ -25,32 +25,51 @@ import "../styles/paginacard.css";
 import "../styles/profile.css";
 import "../styles/dopotpower.css";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../components/Footer";
 
 const DopotShare = () => {
-  let navigate = useNavigate(); 
-  
+  let navigate = useNavigate();
+
   return (
     <div className="app">
       <main className="dashboard">
         <div className="dashboard-header">
-        <Header></Header>
+          <Header></Header>
         </div>
         <div className="box">
           <div className="dopot-power">
-            <h2>l'utility token della piattaforma</h2>
+            <h1>SCOPRI I DUE TOKEN DI DOPOT</h1>
+
             <div className="p-btn-box">
-              <button className="grd-btn dopot-btn-lg">
+              <button
+                style={{
+                  border: "2px solid rgb(186, 178, 178)",
+                  borderRadius: "10px 10px 0 0",
+                  padding: "8px 15px",
+                  boxShadow: "none",
+                }}
+                onClick={(e) => navigate("/dopotpower")}
+                className="purple-border-btn dopot-btn-lg"
+              >
+                Dopotpower
+              </button>
+              <button
+                style={{
+                  border: "2px solid rgb(186, 178, 178)",
+                  borderRadius: "10px 10px 0 0",
+                  padding: "8px 15px",
+                }}
+                className="grd-btn dopot-btn-lg"
+              >
                 Dopotshare
               </button>
-              <button onClick={ (e) => navigate("/dopotpower")}  className="purple-border-btn dopot-btn-lg" >Dopotpower</button>
-              
             </div>
+            <h2>DOPOTSHARE TOKEN: L’UTILITY TOKEN DELLA PIATTAFORMA</h2>
             <h3>
               DopotShare è il token della piattaforma, è un LP Token, con cui la
               gente potrà avere questi vantaggi:
             </h3>
-            <img className="p-hand-img" src={PHand2} alt="PHand1" />
+            {/* <img className="p-hand-img" src={PHand2} alt="PHand1" /> */}
 
             <div className="p-cards-grid">
               <div className="p-card">
@@ -89,7 +108,8 @@ const DopotShare = () => {
             </ul>
           </div>
         </div>
-        <img className="dopot-power-img" src={PBottom} alt="PBottom" />
+        {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
+        <Footer />
       </main>
     </div>
   );

@@ -74,11 +74,7 @@ const Profile = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/myprojects"}>
-                      <img
-                        className="myprojects-img"
-                        src={ProfileIcon4}
-                        alt="ProfileIcon"
-                      />
+                      <img className="" src={ProfileIcon4} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/myprojects"}>
                       <p>I Miei Progetti</p>
@@ -86,7 +82,11 @@ const Profile = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/xdao"}>
-                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                      <img
+                        className="myprojects-img"
+                        src={ProfileIcon4}
+                        alt="ProfileIcon"
+                      />
                     </a>
                     <a href={"/#/xdao"}>
                       <p>xDao Widget</p>

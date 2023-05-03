@@ -36,22 +36,18 @@ import "../styles/globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { MdMenu, MdClear } from "react-icons/md";
-import { useTranslation } from 'react-i18next';
-import Pdf from '../assets/dopot.pdf';
-
+import { useTranslation } from "react-i18next";
+import Pdf from "../assets/dopot.pdf";
 
 const Home = () => {
-
-
-
   const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
   const [isDemoEnable, setisDemoEnable] = useState(false);
 
   function handleDemoButton() {
     if (isDemoEnable) {
-      setisDemoEnable(false)
-    }else setisDemoEnable(true)
+      setisDemoEnable(false);
+    } else setisDemoEnable(true);
   }
   return (
     <div className="app">
@@ -77,31 +73,30 @@ const Home = () => {
           <div className="box">
             <div className="hero-content">
               {/* <img src={LogoWhite} alt="LogoWhite" /> */}
-              <h1>
-              {t('title')}
-              </h1>
-              <h2>
-              {t('subtitle')}
-              </h2>
+              <h1>{t("title")}</h1>
+              <h2>{t("subtitle")}</h2>
               <div className="main-btns-box">
-                <div className="box">
+                <div style={{ padding: 0 }} className="box">
                   <div className="mbb-content">
-                  <button onClick={ handleDemoButton  } className="grd-btn dopot-btn-lg">
-                  {isDemoEnable ? 'Disable demo' : 'Enable demo'}
+                    <button
+                      onClick={handleDemoButton}
+                      className="grd-btn dopot-btn-lg"
+                      style={{ margin: 0 }}
+                    >
+                      {isDemoEnable ? "Disable demo" : "Enable demo"}
                     </button>
-                    <a href={isDemoEnable ? '/#/loading' : ''}>
-                    <button className="grd-btn dopot-btn-lg">
-                      <img src={IconPlane} alt="IconPlane" /> {t('discovery')}
-                    </button>
+                    <a href={isDemoEnable ? "/#/loading" : ""}>
+                      <button className="grd-btn dopot-btn-lg">
+                        <img src={IconPlane} alt="IconPlane" /> {t("discovery")}
+                      </button>
                     </a>
-                    <a href={Pdf}>
+                    {/* <a href={Pdf}>
                       <button className="purple-border-btn dopot-btn-lg">
                       {" "}
                       <img src={IconWhitePaper} alt="IconWhitePaper" />{" "}
                       Whitepaper
                     </button>
-                    </a>
-                    
+                    </a> */}
                   </div>
                 </div>
               </div>
@@ -118,33 +113,27 @@ const Home = () => {
           />
           <div className="box">
             <div className="scorpi-content">
-              <h3 className="section-heading">{t('find')}</h3>
+              <h3 className="section-heading">{t("find")}</h3>
               <div className="scorpi-grid">
                 <div className="scorpi-grid-card">
                   <img src={IconArrowGrd} alt="IconArrowGrd" />
-                  <h4>{t('invest')}</h4>
-                  <p>
-                  {t('investsub')}
-                  </p>
+                  <h4>{t("invest")}</h4>
+                  <p>{t("investsub")}</p>
                 </div>
                 <div className="scorpi-grid-card">
                   <img src={IconDollarGrd} alt="IconDollarGrd" />
-                  <h4>{t('earn')}</h4>
-                  <p>
-                  {t('earnsub')}
-                  </p>
+                  <h4>{t("earn")}</h4>
+                  <p>{t("earnsub")}</p>
                 </div>
                 <div className="scorpi-grid-card">
                   <img src={IconPersonGrd} alt="IconPersonGrd" />
-                  <h4>{t('learn')}</h4>
-                  <p>
-                  {t('learnsub')}
-                  </p>
+                  <h4>{t("learn")}</h4>
+                  <p>{t("learnsub")}</p>
                 </div>
                 <div className="scorpi-grid-card">
                   <img src={IconCommentsGrd} alt="IconCommentsGrd" />
-                  <h4>{t('connect')}</h4>
-                  <p>{t('connectsub')}</p>
+                  <h4>{t("connect")}</h4>
+                  <p>{t("connectsub")}</p>
                 </div>
               </div>
             </div>
@@ -166,18 +155,11 @@ const Home = () => {
           <div className="box">
             <div className="ill-web">
               <div>
-                <h4>
-                  {" "}
-                  {t('web3')}
-                </h4>
-                <p>
-                {t('web3sub')}
-                </p>
+                <h4> {t("web3")}</h4>
+                <p>{t("web3sub")}</p>
               </div>
             </div>
-            <h4 className="crowd-funding">
-            {t('whyinvest')}
-            </h4>
+            <h4 className="crowd-funding">{t("whyinvest")}</h4>
           </div>
           <img
             className="bitcoin-people"
@@ -187,18 +169,14 @@ const Home = () => {
           <div className="box">
             <div className="ill-text-info-box-1">
               <div className="ill-text-info-box">
-                <h5>{t('decentralization')}</h5>
-                <p>
-                {t('decentralizationsub')}
-                </p>
+                <h5>{t("decentralization")}</h5>
+                <p>{t("decentralizationsub")}</p>
               </div>
             </div>
             <div className="ill-text-info-box-2">
               <div className="ill-text-info-box">
-                <h5>{t('benefits')}</h5>
-                <p>
-                {t('benefitssub')}
-                </p>
+                <h5>{t("benefits")}</h5>
+                <p>{t("benefitssub")}</p>
               </div>
             </div>
           </div>
@@ -207,34 +185,26 @@ const Home = () => {
         <section className="scelgono-section">
           <div className="box">
             <h3 id="faq" className="section-heading">
-            {t('whydopot')}
+              {t("whydopot")}
             </h3>
             <div className="scelgono-grid-box">
               <div className="scelgono-grid-text-box">
-                <h5>
-                {t('lessbureaucracy')}
-                </h5>
-                <p>
-                {t('lessbureaucracysub')}
-                </p>
+                <h5>{t("lessbureaucracy")}</h5>
+                <p>{t("lessbureaucracysub")}</p>
               </div>
               <img src={ScelgonoImg1} alt="ScelgonoImg1" />
             </div>
             <div className="scelgono-grid-box">
               <img src={ScelgonoImg2} alt="ScelgonoImg2" />
               <div className="scelgono-grid-text-box">
-                <h5>{t('fasttransaction')}</h5>
-                <p>
-                {t('fasttransactionsub')}
-                </p>
+                <h5>{t("fasttransaction")}</h5>
+                <p>{t("fasttransactionsub")}</p>
               </div>
             </div>
             <div className="scelgono-grid-box">
               <div className="scelgono-grid-text-box">
-                <h5>{t('intermediary')}</h5>
-                <p>
-                {t('intermediarysub')}
-                </p>
+                <h5>{t("intermediary")}</h5>
+                <p>{t("intermediarysub")}</p>
               </div>
               <img src={ScelgonoImg3} alt="ScelgonoImg3" />
             </div>
@@ -253,9 +223,7 @@ const Home = () => {
                     <h4>01</h4>
                     <div>
                       <h6>Fase Mercurio</h6>
-                      <p>
-                      DAO Launch & DopotShare Token (DST) private sale
-                      </p>
+                      <p>DAO Launch & DopotShare Token (DST) private sale</p>
                     </div>
                   </div>
                 </div>
@@ -312,10 +280,10 @@ const Home = () => {
           </div>
         </section>
         {/* Big Image */}
-        <section className="hand-to-hand-section">
-          <h4>{t('dst')}</h4>
+        {/* <section className="hand-to-hand-section">
+          <h4>{t("dst")}</h4>
           <img src={HandToHand} alt="HandToHand" />
-        </section>
+        </section> */}
         <section className="supply-section">
           {/* <div className="left-wave-heading">
             <img src={LeftWave} alt="LeftWave" />
@@ -335,8 +303,7 @@ const Home = () => {
           <div className="della-msg">
             <div className="box">
               <div className="della-msg-box">
-                <img src={RoboImg} alt="RoboImg" />{" "}
-                <h5>{t('dai')}</h5>
+                <img src={RoboImg} alt="RoboImg" /> <h5>{t("dai")}</h5>
               </div>
             </div>
           </div>
@@ -347,50 +314,48 @@ const Home = () => {
           <div className="box">
             <div className="dai-right-text-box">
               <div>
-                <h4>{t('whatsdai')}</h4>
-                <p>
-                {t('daisub')}
-                </p>
+                <h4>{t("whatsdai")}</h4>
+                <p>{t("daisub")}</p>
               </div>
             </div>
             <div className="dai-grid-box">
               <img src={ProfitIcon} alt="ProfitIcon" />
               <p>
-              {t('profit')}
+                {t("profit")}
                 <br />
-                {t('profitsub')}
+                {t("profitsub")}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={BlockChainIcon} alt="BlockChainIcon" />
               <p>
-              {t('multibc')}
+                {t("multibc")}
                 <br />
-                {t('multibcsub')}
+                {t("multibcsub")}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={ValoreIcon} alt="ValoreIcon" />
               <p>
-              {t('value')}
+                {t("value")}
                 <br />
-                {t('valuesub')}
+                {t("valuesub")}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={StableIcon} alt="StableIcon" />
               <p>
-              {t('stablecoin')}
+                {t("stablecoin")}
                 <br />
-                {t('stablecoinsub')}
+                {t("stablecoinsub")}
               </p>
             </div>
             <div className="dai-grid-box">
               <img src={HoldingIcon} alt="HoldingIcon" />
               <p>
-              {t('holding')}
+                {t("holding")}
                 <br />
-                {t('holdingsub')}
+                {t("holdingsub")}
               </p>
             </div>
           </div>

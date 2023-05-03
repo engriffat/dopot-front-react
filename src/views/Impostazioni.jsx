@@ -74,11 +74,7 @@ const Profile = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/myprojects"}>
-                      <img
-                        className="myprojects-img"
-                        src={ProfileIcon4}
-                        alt="ProfileIcon"
-                      />
+                      <img className="" src={ProfileIcon4} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/myprojects"}>
                       <p>I Miei Progetti</p>
@@ -94,7 +90,11 @@ const Profile = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/impostazioni"}>
-                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                      <img
+                        className="myprojects-img"
+                        src={ProfileIcon4}
+                        alt="ProfileIcon"
+                      />
                     </a>
                     <a href={"/#/impostazioni"}>
                       <p>Impostazioni</p>

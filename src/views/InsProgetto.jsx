@@ -11,6 +11,7 @@ import {
 import { Progetto, ProgettoHeader } from "../components/forms/Progetto";
 import { Prodotto, ProdottoHeader } from "../components/forms/Prodotto";
 import { Faq, FaqHeader } from "../components/forms/Faq";
+import { NftMint, NftMintHeader } from "../components/forms/NftMint";
 
 import { addproj } from "../utils/firebase/writeInfos";
 import Footer from "../components/Footer";
@@ -48,7 +49,7 @@ const InsProgetto = () => {
     event.preventDefault();
     try {
       addproj(inputs);
-      navigate("/loading", { replace: true });
+      // navigate("/loading", { replace: true });
     } catch (error) {}
   };
 
@@ -116,6 +117,7 @@ const InsProgetto = () => {
           ></Prodotto>
         );
         return step;
+
       case 4:
         step[0] = (
           <InfBase inputs={inputs} handleChange={handleChange}></InfBase>
@@ -132,7 +134,36 @@ const InsProgetto = () => {
         step[3] = (
           <Prodotto inputs={inputs} handleChange={handleChange}></Prodotto>
         );
-        step[4] = <Faq inputs={inputs} handleChange={handleChange}></Faq>;
+        step[4] = (
+          <NftMint
+            inputs={inputs}
+            handleChange={handleChange}
+            setState={incrementStep}
+          ></NftMint>
+        );
+
+        return step;
+
+      case 5:
+        step[0] = (
+          <InfBase inputs={inputs} handleChange={handleChange}></InfBase>
+        );
+        step[1] = (
+          <Questionario
+            inputs={inputs}
+            handleChange={handleChange}
+          ></Questionario>
+        );
+        step[2] = (
+          <Progetto inputs={inputs} handleChange={handleChange}></Progetto>
+        );
+        step[3] = (
+          <Prodotto inputs={inputs} handleChange={handleChange}></Prodotto>
+        );
+        step[4] = (
+          <NftMint inputs={inputs} handleChange={handleChange}></NftMint>
+        );
+        step[5] = <Faq inputs={inputs} handleChange={handleChange}></Faq>;
 
         return step;
 
@@ -154,6 +185,8 @@ const InsProgetto = () => {
         return <ProdottoHeader></ProdottoHeader>;
 
       case 4:
+        return <NftMintHeader></NftMintHeader>;
+      case 5:
         return <FaqHeader></FaqHeader>;
       default:
         return null;
@@ -229,6 +262,22 @@ const InsProgetto = () => {
                       <p>I Miei Progetti</p>
                     </a>
                   </div>
+                  <div className="pts-right-grid-card">
+                    <a href={"/#/xdao"}>
+                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/xdao"}>
+                      <p>xDao Widget</p>
+                    </a>
+                  </div>
+                  <div className="pts-right-grid-card">
+                    <a href={"/#/impostazioni"}>
+                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/impostazioni"}>
+                      <p>Impostazioni</p>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -238,9 +287,9 @@ const InsProgetto = () => {
         <section className="ins-progetto-content">
           <div className="box">
             <div className="ins-head">
-              <a href="#">
+              {/* <a href="#">
                 <img src={ProfileIconArrowLeft} alt="ProfileIconArrowLeft" />
-              </a>
+              </a> */}
               <h2>Inserisci il tuo progetto </h2>
             </div>
             {renderCurrentSelectionHeader()}

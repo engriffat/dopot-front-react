@@ -23,10 +23,13 @@ import {
   retriveFavorites,
   retriveInvestment,
 } from "../utils/firebase/retriveInfo";
+import IconDown from "../assets/img/arr-menu.svg";
 
 const Profile = () => {
   const [investedCard, setinvestedCard] = useState([]);
   const [favoriteCard, setfavoriteCard] = useState([]);
+  const [isActive, setActive] = useState(true);
+  const [isActive2, setActive2] = useState(false);
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -62,6 +65,15 @@ const Profile = () => {
   }, []);
 
   const percentage = 65;
+
+  const ToggleSec = () => {
+    setActive(!isActive);
+    setActive2(false);
+  };
+  const ToggleSec2 = () => {
+    setActive2(!isActive2);
+    setActive(false);
+  };
   return (
     <div className="app">
       <main className="profile-page">
@@ -122,19 +134,58 @@ const Profile = () => {
                       <p>I Miei Progetti</p>
                     </a>
                   </div>
+                  <div className="pts-right-grid-card">
+                    <a href={"/#/xdao"}>
+                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/xdao"}>
+                      <p>xDao Widget</p>
+                    </a>
+                  </div>
+                  <div className="pts-right-grid-card">
+                    <a href={"/#/impostazioni"}>
+                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/impostazioni"}>
+                      <p>Impostazioni</p>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <div className="pts-icons-box">
-          <div className="pts-icons-card">
+        <div className="box0">
+          <div className="sec-inv-desk-flex">
             <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
             <p>I miei Investimenti</p>
           </div>
-          <div className="pts-icons-card-1">
+          <div className="sec-pref-desk-flex">
             <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
             <p>I miei preferiti</p>
+          </div>
+        </div>
+
+        <div className="box1">
+          <div className="sec-inv-mob">
+            <button onClick={ToggleSec2}>
+              <img
+                className={isActive2 ? "shadow-inv" : null}
+                src={ProfileIconGrd1}
+                alt="ProfileIconGrd"
+              />
+              <p>I miei Investimenti</p>
+            </button>
+          </div>
+          <div className="sec-pref-mob">
+            <button onClick={ToggleSec}>
+              <img
+                className={isActive ? "shadow-inv" : null}
+                src={ProfileIconGrd2}
+                alt="ProfileIconGrd"
+              />
+              <p>I miei preferiti</p>
+            </button>
           </div>
         </div>
 
@@ -143,7 +194,10 @@ const Profile = () => {
             <div className="profile-main-grid">
               {/* <div className="pmg-left">{investedCard}</div> */}
               {/* provvisorio */}
-              <div className="pmg-right">
+              <div
+                style={{ height: "fit-content" }}
+                className={isActive2 ? "pmg-right" : "sec-display-none-inv"}
+              >
                 <div className="pmg-right-card">
                   <div className="pmg-rc-left-invest">
                     <h3>Mentadent</h3>
@@ -178,17 +232,9 @@ const Profile = () => {
               </div>
               {/* provvisorio */}
 
-              <div className="pts-icons-box-1">
-                <div className="pts-icons-card-1">
-                  <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
-                  <p>I miei Investimenti</p>
-                </div>
-                <div className="pts-icons-card">
-                  <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
-                  <p>I miei preferiti</p>
-                </div>
+              <div className={isActive ? "pmg-right" : "sec-display-none-pref"}>
+                {favoriteCard}
               </div>
-              <div className="pmg-right">{favoriteCard}</div>
             </div>
           </div>
         </section>

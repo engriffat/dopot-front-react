@@ -9,6 +9,7 @@ import PC70 from "../assets/img/pc-70.png";
 import IconPlane from "../assets/img/icon-plane.svg";
 import IconHeart from "../assets/img/pc-heart-icon-02.svg";
 import ImageIcon from "../assets/img/pc-img-icon.png";
+import ImageBackLogo from "../assets/img/logo_Mentadent-2.png";
 import IconInfoCard from "../components/PaginaCard/IconInfoCard";
 import InvestiCard from "../components/PaginaCard/InvestiCard";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -21,6 +22,8 @@ import TabCampagna from "../components/TabCampagna";
 import TabRoadmap from "../components/TabRoadmap";
 import TabFaq from "../components/TabFaq";
 import TabSocial from "../components/TabSocial";
+import TabQuestionario from "../components/TabQuestionario";
+import TabDocumenti from "../components/TabDocumenti";
 import { addFavorites } from "../utils/firebase/writeInfos";
 
 const PaginaCard = () => {
@@ -60,33 +63,40 @@ const PaginaCard = () => {
         <section className="pc-hero-section">
           <img
             className="pagina-card-hero-img"
-            src={PaginaCardHero}
+            src={ImageBackLogo}
             alt="PaginaCardHero"
           />
-          <div className="box">
-            <img className="image-icon" src={ImageIcon} alt="ImageIcon" />
+          <div className="box-main-header">
+            {/* <img className="image-icon" src={ImageIcon} alt="ImageIcon" /> */}
             <div className="pc-hero-grid">
               <div className="pc-hero-grid-left">
-                <h1>{progetto.nomeAzienda}</h1>
-
-                <p>
-                  {progetto.descProgetto}
-                  <br />
-                </p>
-                <div className="pc-hero-icon-grid">
-                  <IconInfoCard
-                    img={PCDollarIcon}
-                    text="324.211 su 200.00 Draccolti"
-                  />
-                  <IconInfoCard
-                    img={PCUserIcon}
-                    text="2304 persone hanno investito"
-                  />
-                  <IconInfoCard
-                    img={PCDollarIcon}
-                    text="21 giorni al termine"
-                  />
+                <div className="settore box-bk-over-logo">
+                  <span>{progetto.settore}</span>
                 </div>
+
+                <h1 className="box-bk-over-logo">{progetto.nomeAzienda}</h1>
+                <h3
+                  style={{ marginBottom: "2rem" }}
+                  className="box-bk-over-logo"
+                >
+                  <span>
+                    <a
+                      className="link-social-new "
+                      href={progetto.sito}
+                      target="_blank"
+                    >
+                      {progetto.sito}
+                    </a>
+                  </span>
+                </h3>
+
+                <p
+                  style={{ lineBreak: "anywhere" }}
+                  className="box-bk-over-logo"
+                >
+                  {progetto.descProgetto}
+                </p>
+
                 <div className="pc-btn-box">
                   <button
                     // onClick={() => addFavorites(progetto.address)}
@@ -104,7 +114,26 @@ const PaginaCard = () => {
                 </div>
               </div>
               <div className="pc-hero-grid-right">
-                <div className="pc-70-box">
+                <div className="box-bk-over-logo settore right ">
+                  <span>{progetto.tipoCampagna}</span>
+                </div>
+
+                <div className="pc-hero-icon-grid ">
+                  <IconInfoCard
+                    img={PCDollarIcon}
+                    text="324.211 su 200.00 Draccolti"
+                  />
+
+                  <IconInfoCard
+                    img={PCUserIcon}
+                    text="2304 persone hanno investito"
+                  />
+                  <IconInfoCard
+                    img={PCDollarIcon}
+                    text="21 giorni al termine"
+                  />
+                </div>
+                <div className="pc-70-box box-bk-over-logo">
                   <p>
                     Investimento <br /> completo al
                   </p>
@@ -115,6 +144,18 @@ const PaginaCard = () => {
                       strokeWidth={5}
                     />
                     ;
+                  </div>
+                </div>
+                <div className="grid-info">
+                  <div className="span-card">
+                    <span>
+                      <strong> Team Member:</strong> {progetto.team}
+                    </span>
+                  </div>
+                  <div className="span-card">
+                    <span>
+                      <strong>P.iva:</strong> {progetto.pIva}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -154,6 +195,18 @@ const PaginaCard = () => {
               >
                 FAQ
               </a>
+              <a
+                onClick={() => setTab(5)}
+                className={isCurrentState(5) ? "pc-active-link" : ""}
+              >
+                Questionario
+              </a>
+              <a
+                onClick={() => setTab(6)}
+                className={isCurrentState(6) ? "pc-active-link" : ""}
+              >
+                Documenti
+              </a>
             </div>
           </div>
         </section>
@@ -190,6 +243,10 @@ const PaginaCard = () => {
                     );
                   case 4:
                     return <TabFaq progetto={progetto} />;
+                  case 5:
+                    return <TabQuestionario progetto={progetto} />;
+                  case 6:
+                    return <TabDocumenti progetto={progetto} />;
 
                   default:
                     break;
@@ -197,25 +254,60 @@ const PaginaCard = () => {
               })()}
               <div className="pc-content-grid-right">
                 <div className="basic-info-box">
-                  <img
-                    src={(() => {
-                      if (progetto.logoAzienda != null) {
-                        return (
-                          "data:image/jpg;base64," +
-                          progetto.logoAziendaListFiles.base64
-                        );
-                      } else return ImageIcon;
-                    })()}
-                    alt="ImageIcon"
-                  />
-                  <h3>{progetto.nomeAzienda}</h3>
-                  <p>
+                  <div className="pmg-btn-box-nft">
+                    <input type="checkbox" id="click" />
+                    <label for="click" style={{ cursor: "pointer" }}>
+                      <img
+                        src={(() => {
+                          if (progetto.logoAzienda != null) {
+                            return (
+                              "data:image/jpg;base64," +
+                              progetto.logoAziendaListFiles.base64
+                            );
+                          } else return ImageIcon;
+                        })()}
+                        alt="ImageIcon"
+                      />
+                    </label>
+                    <div class="content logo-center">
+                      <img
+                        src={(() => {
+                          if (progetto.logoAzienda != null) {
+                            return (
+                              "data:image/jpg;base64," +
+                              progetto.logoAziendaListFiles.base64
+                            );
+                          } else return ImageIcon;
+                        })()}
+                        alt="ImageIcon"
+                      />
+                      <div class="text"></div>
+                      <label for="click" id="temp">
+                        x
+                      </label>
+                    </div>
+                  </div>
+                  <h3 className="box-bk-over-logo">{progetto.nomeAzienda}</h3>
+                  <h4 className="box-bk-over-logo">
+                    Sito Web:{" "}
+                    <span>
+                      {" "}
+                      <a
+                        className="link-social-new "
+                        href={progetto.sito}
+                        target="_blank"
+                      >
+                        {progetto.sito}
+                      </a>{" "}
+                    </span>{" "}
+                  </h4>
+                  {/* <p>
                     Campagna di {progetto.tipoCampagna}. <br />
                     Team composta da {progetto.team}.<br />
                     Nel settore della {progetto.settore}.<br />
                     Sito Web {progetto.sito}
                     P.iva {progetto.pIva}
-                  </p>
+                  </p> */}
                 </div>
                 <h5>Investi</h5>
 

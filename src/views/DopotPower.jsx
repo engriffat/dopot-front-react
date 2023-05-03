@@ -39,41 +39,61 @@ const DopotPower = () => {
         </div>
         <div className="box">
           <div className="dopot-power">
-            <h2>il token di governance della piattaforma</h2>
+            <h1>SCOPRI I DUE TOKEN DI DOPOT</h1>
+
             <div className="p-btn-box">
               <button
+                style={{
+                  borderRadius: "10px 10px 0 0",
+                  padding: "8px 15px",
+                  border: "2px solid rgb(186, 178, 178)",
+                }}
+                className="grd-btn dopot-btn-lg"
+              >
+                Dopotpower
+              </button>
+
+              <button
+                style={{
+                  border: "2px solid rgb(186, 178, 178)",
+                  borderRadius: "10px 10px 0 0",
+                  padding: "8px 15px",
+                  boxShadow: "none",
+                }}
                 onClick={(e) => navigate("/dopotshare")}
                 className="purple-border-btn dopot-btn-lg"
               >
                 Dopotshare
               </button>
-              <button className="grd-btn dopot-btn-lg">Dopotpower</button>
             </div>
+            <h2>DOPOTPOWER TOKEN: IL TOKEN DI GOVERNANCE DELLA PIATTAFORMA</h2>
             <h3>
               DopotPower Token, è il token di governance non scambiabile di
-              XDAO, con questo è possibile creare proposal per la
-              community e votare
+              XDAO, con questo è possibile creare proposal per la community e
+              votare
             </h3>
-            <img className="p-hand-img" src={PHand1} alt="PHand1" />
+            {/* <img className="p-hand-img" src={PHand1} alt="PHand1" /> */}
             <div className="p-cards-grid">
               <div className="p-card">
                 <img src={DImg1} alt="dopot votazioni" />
-                <p>sicurezza sulle votazioni</p>
+                <p>Sicurezza sulle votazioni</p>
               </div>
               <div className="p-card">
                 <img src={DImg2} alt="dopot dex" />
-                <p>decentramento</p>
+                <p>Decentramento</p>
               </div>
               <div className="p-card">
                 <img src={DImg3} alt="dopot facilita" />
-                <p>facilità d’utilizzo</p>
+                <p>Facilità d’utilizzo</p>
               </div>
               <div className="p-card">
                 <img src={DImg4} alt="dopot sostenibilità" />
-                <p>sostenibilità</p>
+                <p>Sostenibilità</p>
               </div>
             </div>
-            <h3>Caratteristiche</h3>
+            <h3>
+              <strong>Caratteristiche</strong>
+            </h3>
             <ul>
               <li>
                 I dopotpower token non sono scambiabili, pertanto impossibili da
@@ -91,7 +111,7 @@ const DopotPower = () => {
             </ul>
           </div>
         </div>
-        <img className="dopot-power-img" src={PBottom} alt="PBottom" />
+        {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />
       </main>
     </div>
