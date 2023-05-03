@@ -60,6 +60,13 @@ footer {
   float: left;
 }
 
+.link-social-new:hover {
+  color: #ff43a0 !important;
+}
+.link-social-new {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 650px) {
   .footer-grid {
     grid-template-columns: 1fr;
