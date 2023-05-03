@@ -75,8 +75,8 @@ async function getAllProject() {
     while (element["fotoProdotto"+i+"ipfs"] != null) { 
         progettiImage[element.address]["fotoProdotto"+i+"ipfs" ] = {}
         let n=0;
-        for await (const elementipfs of  element["fotoProdotto"+i+"ipfs" ]) {
-          progettiImage[element.address]["fotoProdotto"+i+"ipfs" ][n] = await ipfs.getImage(elementipfs.path); 
+        for await (const elementipfs of element["fotoProdotto"+i+"ipfs" ]) {
+          progettiImage[element.address]["fotoProdotto"+i+"ipfs" ][n] = await ipfs.getImage(elementipfs); 
           n++;
         }
         
@@ -85,7 +85,8 @@ async function getAllProject() {
     }
 
     if (element["logoAzienda"] != null ) {
-      progettiImage[element.address]["logoAzienda" ] = await getRecoil(IpfsState).getImage(element["logoAzienda"][0].path ); 
+      progettiImage[element.address]["logoAzienda" ] = element["logoAzienda"]; 
     }
+    console.dir(progettiImage);
     return progettiImage;
   }

@@ -2,9 +2,9 @@ import { IpfsState, progettiAddressState , providerState, progettiState} from ".
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import {GetAccount} from "./ethersUtils"
 import addressProjectFactory from '../abi/projectFactory/address';
+import { fileToBase64 } from "./base64utils";
 const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
-
 const { ethers, Contract } = require("ethers");
 
 async function readFile(file){
@@ -27,7 +27,7 @@ async function readFile(file){
 
 export async function genproj(params) {  
 
-    var IPFS = getRecoil(IpfsState); 
+    let IPFS = getRecoil(IpfsState); 
     setRecoil(providerState, new ethers.providers.Web3Provider(window.ethereum));
     
     if (IPFS==null) {
@@ -37,19 +37,19 @@ export async function genproj(params) {
     console.log(params);
 
     // Carico prima i file ipfs
-    params.logoAziendaipfs=(await addFilesIpfs(params.logoAziendaListFiles)[0]);
-    params.documentazioneipfs=(await addFilesIpfs(params.documentazioneListFiles))[0];
-    params.fotoIntroipfs=(await addFilesIpfs(params.fotoIntroListFiles))[0];
-    params.fotoVisionipfs=(await addFilesIpfs(params.fotoVisionListFiles))[0];
-    params.fotoStoriaipfs=(await addFilesIpfs(params.fotoStoriaListFiles)[0]);
+    params.logoAziendaipfs=fileToBase64(params.logoAziendaListFiles);
+    params.documentazioneipfs=fileToBase64(params.documentazioneListFiles);
+    params.fotoIntroipfs=fileToBase64(params.fotoIntroListFiles);
+    params.fotoVisionipfs=fileToBase64(params.fotoVisionListFiles);
+    params.fotoStoriaipfs=fileToBase64(params.fotoStoriaListFiles);
     params["fotoProdotto1ipfs"]=(await addFilesIpfs(params["fotoProdotto1ListFiles"]))[0];
-    params["fotoProdotto2ListFiles"] && (params["fotoProdotto2ipfs"]=(params["fotoProdotto2ListFiles"])[0]);
-    params["fotoProdotto3ListFiles"] && (params["fotoProdotto3ipfs"]=(params["fotoProdotto3ListFiles"])[0]);
-    params["fotoProdotto4ListFiles"] && (params["fotoProdotto4ipfs"]=(params["fotoProdotto4ListFiles"])[0]);
+    params["fotoProdotto2ListFiles"] && (params["fotoProdotto2ipfs"]=(await addFilesIpfs(params["fotoProdotto2ListFiles"]))[0]);
+    params["fotoProdotto3ListFiles"] && (params["fotoProdotto3ipfs"]=(await addFilesIpfs(params["fotoProdotto3ListFiles"]))[0]);
+    params["fotoProdotto4ListFiles"] && (params["fotoProdotto4ipfs"]=(await addFilesIpfs(params["fotoProdotto4ListFiles"]))[0]);
 
-    var i = 1;
-    var Tier = [];   
-    var TierCompleto = [];   
+    let i = 1;
+    let Tier = [];   
+    let TierCompleto = [];   
     while (params["nomeProdotto"+i] != null) {
         
         console.log(i)
@@ -66,7 +66,7 @@ export async function genproj(params) {
         i++;
     }
 
-    var progetto=params;
+    let progetto=params;
     delete progetto.fotoProdotto1;
     delete progetto.fotoProdotto1ListFiles;
     delete progetto.fotoProdotto2;
@@ -127,7 +127,7 @@ export async function genproj(params) {
     console.dir(params);
     const hash= await IPFS.add( JSON.stringify(params) );
 
-     //getAllProject();
+    //getAllProject();
     //getIPFSprojectAddr(getRecoil(progettiAddressState)[0][0]);
     contrattoprojectFactory(45 * 86400, hash, Tier);
 }
@@ -157,9 +157,9 @@ async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
     const daiWithSigner = Contract.connect(signer);
   
     // Each DAI has 18 decimal places
-    const dai = ethers.utils.parseUnits("1", 18);
+    //const dai = ethers.utils.parseUnits("1", 18);
   
-    var tx = await daiWithSigner.createProject(fundRaisingDeadline, infoIpfs);
+    let tx = await daiWithSigner.createProject(fundRaisingDeadline, infoIpfs);
   
     let receipt = await tx.wait(1);
     let projectCreatedEvent = receipt.events.pop();
@@ -186,40 +186,14 @@ async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
   }
 
   
-
-
   async function contrattoProjectAddTier(Address,provider,tier) {
     const Contract = new ethers.Contract(Address, abiProject, provider);
   
     const signer = provider.getSigner()
     const daiWithSigner = Contract.connect(signer);
     
-    var tx = await daiWithSigner.addRewardTier(tier.ipfshash, tier.investment, tier.supply);
+    let tx = await daiWithSigner.addRewardTier(tier.ipfshash, tier.investment, tier.supply);
   }
-
-
-  async function getAllProject() {
-   
-    const Address = addressProjectFactory;
-    var contract = new Contract(Address, abiProjectFactory, getRecoil(providerState));
-   
-    var progetti=[];
-    try {  
-      var i = 0;
-      while (true) {
-        progetti.push( await contract.projectsVersions(i));
-        i++;
-      }
-      } 
-      catch (e) {    
-        console.log(progetti);
-          // handle exception  
-      } 
-      setRecoil(progettiAddressState, progetti);
-
-  }
-
-
 
     /** Uses `URL.createObjectURL` free returned ObjectURL with `URL.RevokeObjectURL` when done with it.
      * 

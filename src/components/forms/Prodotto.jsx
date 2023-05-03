@@ -95,7 +95,7 @@ onChange={props.handleChange} type="text" placeholder="inserisci il nome"  />
     <input
         name={"prezzo" + props.nProdotto} value={props.inputs["prezzo" + props.nProdotto]}
         onChange={props.handleChange}
-        type="text"
+        type="number"
         placeholder="Il costo del prodotto" />
 </div>
 <div className="ins-input-box">
@@ -103,7 +103,7 @@ onChange={props.handleChange} type="text" placeholder="inserisci il nome"  />
     <input
         name={"supply" + props.nProdotto} value={props.inputs["supply" + props.nProdotto]}
         onChange={props.handleChange}
-        type="text"
+        type="number"
         placeholder="quanti esemplari saranno disponibili"  />
 </div>
 

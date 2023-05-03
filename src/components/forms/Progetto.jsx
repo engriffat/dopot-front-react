@@ -35,7 +35,7 @@ const Progetto = (props) => {
         </div><div className="ins-input-box">
             <h4>Che quota vuoi raggiungere?</h4>
             <input  name="quota" value={props.inputs.quota || ""} 
-        onChange={props.handleChange} type="text" placeholder="inserisci la cifra" />
+        onChange={props.handleChange} type="number" placeholder="inserisci la cifra" />
         </div><div className="ins-input-box">
             <h4>Che tipo di campagna vuoi realizzare?</h4>
             <div className="ins-btn-box">
