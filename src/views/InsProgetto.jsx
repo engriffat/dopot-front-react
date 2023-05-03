@@ -9,7 +9,7 @@ import { Progetto, ProgettoHeader } from "../components/forms/Progetto";
 import { Prodotto, ProdottoHeader } from "../components/forms/Prodotto";
 import { Faq, FaqHeader } from "../components/forms/Faq";
 
-import { addproj } from "../utils/firebase/writeInfos";
+import { genproj } from "../utils/genproj";
 
 const InsProgetto = () => {
   var step = [];
@@ -36,7 +36,7 @@ const InsProgetto = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      addproj(inputs);
+      genproj(inputs);
       navigate('/loading', { replace: true });
     } catch (error) {
       

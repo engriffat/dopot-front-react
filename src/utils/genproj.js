@@ -2,17 +2,32 @@ import { IpfsState, progettiAddressState , providerState, progettiState} from ".
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import {GetAccount} from "./ethersUtils"
 import addressProjectFactory from '../abi/projectFactory/address';
-
 const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
 
 const { ethers, Contract } = require("ethers");
 
+async function readFile(file){
+  if (!file) return;
 
+  if(file instanceof FileList) file = file[0];
+  const reader = new FileReader();
+  let fileContent;
 
-async function genproj(params) {  
+  await new Promise((resolve, reject) => {
+    reader.onload = function(event) {
+      fileContent = event.target.result;
+      resolve();
+    };
+    reader.readAsText(file);
+  });
 
-    const IPFS = getRecoil(IpfsState); 
+  return fileContent;
+}
+
+export async function genproj(params) {  
+
+    var IPFS = getRecoil(IpfsState); 
     setRecoil(providerState, new ethers.providers.Web3Provider(window.ethereum));
     
     if (IPFS==null) {
@@ -22,20 +37,15 @@ async function genproj(params) {
     console.log(params);
 
     // Carico prima i file ipfs
-    params.logoAziendaipfs=await addFilesIpfs(params.logoAziendaListFiles);
-    params.documentazioneipfs=await addFilesIpfs(params.documentazioneListFiles);
-    params.fotoIntroipfs=await addFilesIpfs(params.fotoIntroListFiles);
-    params.fotoVisionipfs=await addFilesIpfs(params.fotoVisionListFiles);
-    params.fotoStoriaipfs=await addFilesIpfs(params.fotoStoriaListFiles);
-    params["fotoProdotto1ipfs"]=await addFilesIpfs(params["fotoProdotto1ListFiles"]);
-    params["fotoProdotto2ipfs"]=await addFilesIpfs(params["fotoProdotto2ListFiles"]);
-    params["fotoProdotto3ipfs"]=await addFilesIpfs(params["fotoProdotto3ListFiles"]);
-    params["fotoProdotto4ipfs"]=await addFilesIpfs(params["fotoProdotto4ListFiles"]);
-    
-    
-    // const hash= await IPFS.add( JSON.stringify(params) );
-    // console.log(hash);
-    //var ipfsLogo=addImageIpfs(params.fotoProdottoListFiles);
+    params.logoAziendaipfs=(await addFilesIpfs(params.logoAziendaListFiles)[0]);
+    params.documentazioneipfs=(await addFilesIpfs(params.documentazioneListFiles))[0];
+    params.fotoIntroipfs=(await addFilesIpfs(params.fotoIntroListFiles))[0];
+    params.fotoVisionipfs=(await addFilesIpfs(params.fotoVisionListFiles))[0];
+    params.fotoStoriaipfs=(await addFilesIpfs(params.fotoStoriaListFiles)[0]);
+    params["fotoProdotto1ipfs"]=(await addFilesIpfs(params["fotoProdotto1ListFiles"]))[0];
+    params["fotoProdotto2ListFiles"] && (params["fotoProdotto2ipfs"]=(params["fotoProdotto2ListFiles"])[0]);
+    params["fotoProdotto3ListFiles"] && (params["fotoProdotto3ipfs"]=(params["fotoProdotto3ListFiles"])[0]);
+    params["fotoProdotto4ListFiles"] && (params["fotoProdotto4ipfs"]=(params["fotoProdotto4ListFiles"])[0]);
 
     var i = 1;
     var Tier = [];   
@@ -43,7 +53,7 @@ async function genproj(params) {
     while (params["nomeProdotto"+i] != null) {
         
         console.log(i)
-        Tier.push({ipfshash:params["fotoProdotto"+i+"ipfs"][0].path,
+        Tier.push({ipfshash:params["fotoProdotto"+i+"ipfs"][0],
         investment: ethers.utils.parseUnits(params["prezzo"+i].toString(), 18),
         supply:parseInt( params["supply"+i]) });
         
@@ -56,7 +66,6 @@ async function genproj(params) {
         i++;
     }
 
-    
     var progetto=params;
     delete progetto.fotoProdotto1;
     delete progetto.fotoProdotto1ListFiles;
@@ -112,24 +121,23 @@ async function genproj(params) {
     delete progetto.prezzo3;
     delete progetto.prezzo4;
 
-
-
     progetto.tier = TierCompleto;
     console.log(progetto);
+    console.dir("FINAL");
+    console.dir(params);
     const hash= await IPFS.add( JSON.stringify(params) );
 
      //getAllProject();
     //getIPFSprojectAddr(getRecoil(progettiAddressState)[0][0]);
-    contrattoprojectFactory(45 * 86400, hash.path, Tier);
+    contrattoprojectFactory(45 * 86400, hash, Tier);
 }
 
 async function addFilesIpfs(files) {
     const IPFS = getRecoil(IpfsState);
-    console.log(await IPFS.getAddress());
+    //console.log(await IPFS.getAddress());
     console.log(files);
-    console.log("Image IPFS hash: ");
 
-    return await IPFS.addAll(files, {cidVersion: 1});
+    return await IPFS.addAll(await readFile(files), {cidVersion: 1});
 }
 
 async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
@@ -138,19 +146,10 @@ async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
        console.log(Tier[0]);
     }
 
-    console.log(fundRaisingDeadline);
+    //console.log(fundRaisingDeadline);
     console.log(infoIpfs);
-    console.log(abiProjectFactory);
   
     const Address = addressProjectFactory;
-  
-    // The ERC-20 Contract ABI, which is a common contract interface
-    // for tokens (this is the Human-Readable ABI format)
-    // const Abi = abiproject
-    // console.log(JSON.parse(Abi))
-    // console.log(abiproject)
-    // The Contract object
-  
   
     const Contract = new ethers.Contract(Address, abiProjectFactory,getRecoil(providerState));
   
@@ -160,7 +159,7 @@ async function contrattoprojectFactory(fundRaisingDeadline, infoIpfs, Tier){
     // Each DAI has 18 decimal places
     const dai = ethers.utils.parseUnits("1", 18);
   
-    var tx = await daiWithSigner.createProject(fundRaisingDeadline, infoIpfs.toString());
+    var tx = await daiWithSigner.createProject(fundRaisingDeadline, infoIpfs);
   
     let receipt = await tx.wait(1);
     let projectCreatedEvent = receipt.events.pop();

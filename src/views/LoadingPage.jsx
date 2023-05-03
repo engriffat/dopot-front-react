@@ -1,8 +1,7 @@
 import React, {useEffect} from "react";
 import gifLoading from "../assets/img/gifLoading.gif"
 import "../styles/loading.css";
-// import {DownloadProj} from "../utils/downloadProj";
-import { downloadProj } from "../utils/firebase/retriveInfo";
+import { downloadProj } from "../utils/downloadProj";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 

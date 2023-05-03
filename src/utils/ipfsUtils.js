@@ -1,50 +1,82 @@
-import { concat } from "uint8arrays";
-import {create} from "ipfs"
-import { blobToBase64 } from "./base64utils";
+import { createHelia } from 'helia'
+import { unixfs } from '@helia/unixfs'
+import { createLibp2p } from 'libp2p'
+import { MemoryBlockstore } from 'blockstore-core'
+import { MemoryDatastore } from 'datastore-core'
+import { noise } from '@chainsafe/libp2p-noise'
+import { yamux } from '@chainsafe/libp2p-yamux'
+import { webSockets } from '@libp2p/websockets'
+import { bootstrap } from '@libp2p/bootstrap'
 
+import { blobToBase64 } from "./base64utils";
+import all from 'it-all';
+import { concat } from 'uint8arrays/concat'
 const { ethers } = require("ethers");
 const { ethereum } = window;
 
-
-var provider, account, address, ipfs;
+let provider, account, address, ipfs, fs;
 async function initIPFS() {
     provider = new ethers.providers.Web3Provider(ethereum);
     await provider.send("eth_requestAccounts", []);
     account = provider.getSigner();
     address=await account.getAddress();
 
-  
-  
-    // Create IPFS instance
-    const ipfsOptions = {
-      repo: 'ipfs-' + Math.random(),
-      preload: {
-        enabled: true,
-        addresses: [ 
-      '/dns4/node0.preload.ipfs.io/https',
-      '/dns4/node1.preload.ipfs.io/https',
-      '/dns4/node2.preload.ipfs.io/https',
-      '/dns4/node3.preload.ipfs.io/https'
-       ],
-      },
-      relay: {
-        enabled: true,  // This line means your node is dialable over a Relay, but doesn't make it a relay itself
-        hop: {
-          enabled: true,  // `true` means your node is a relay. So if two nodes are connected to it, it should relay their dials to one another
-          active: false  // `true` means your node will attempt to actively dial the requested peer. This is likely not going to work in your situation, since your nodes aren't dialable.
+    try {
+      await ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x13881' }],
+      });
+    } catch (switchError) {
+      // This error code indicates that the chain has not been added to MetaMask.
+      if (switchError.code === 4902) {
+        try {
+          await ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId: "0x13881",
+              rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+              chainName: "Mumbai Testnet",
+              nativeCurrency: {
+                  name: "MATIC",
+                  symbol: "MATIC",
+                  decimals: 18
+              },
+              blockExplorerUrls: ["https://mumbai.polygonscan.com"]
+          }]
+          });
+        } catch (addError) {
+          // handle "add" error
         }
-      },
-      libp2p: {
-          config: {
-            dht: {
-              enabled: true,
-              clientMode: true,
-            }
-          }
       }
+      // handle other "switch" errors
     }
-
-    ipfs = await create(ipfsOptions);
+  
+    const blockstore = new MemoryBlockstore()
+    const datastore = new MemoryDatastore()
+    const libp2p = await createLibp2p({
+      datastore,
+      transports: [
+        webSockets()
+      ],
+      connectionEncryption: [
+        noise()
+      ],
+      streamMuxers: [
+        yamux()
+      ],
+      peerDiscovery: [
+        bootstrap({
+          list: [
+            '/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN',
+            '/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa',
+            '/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb',
+            '/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt'
+          ]
+        })
+      ]
+    })
+    ipfs = await createHelia({datastore, blockstore, libp2p});
+    fs = unixfs(ipfs)
 }
 
 async function getAddress() {
@@ -55,30 +87,47 @@ function getIPFS() {
 }
 
 async function getJSON(param) {
-  
-  const chunks = [];
- console.log("ahhh");
-  for await (const chunk of ipfs.cat( param )) {
-   
-    chunks.push(chunk);
+  console.log(param);
+  try {
+    let data;
+    const stream = fs.cat(param, { cidVersion: 1 });
+    const decoder = new TextDecoder();
+    const dataPromise = (async () => {
+      for await(const chunk of stream) {
+        const tempdata = decoder.decode(chunk, { stream: true });
+        if(tempdata !== null) data += tempdata;
+      }
+      return data;
+    })();
+    const timeoutPromise = new Promise((resolve, reject) => {
+      const time = .5 * 1000;
+      setTimeout(() => {
+        reject(new Error(`getJSON()\n${param}\n timed out after ${time}ms`));
+      }, time);
+    });
+    let result = await Promise.race([dataPromise, timeoutPromise]);
+    result = result.replace("undefined","");
+    console.dir(result);
+    return JSON.parse(result) || null;
+  } catch (err) {
+    console.warn(err);
+    return null;
   }
-
-  return JSON.parse(new TextDecoder().decode(concat(chunks)).toString());
 }
 
 
 async function getImage(param) {
-  
-  
   let url;
   let b64;
-  for await (const file of ipfs.cat( param )) {
+  for await (const file of ipfs.cat(param, { cidVersion: 1 })) {
     let blob = new Blob([file], {type:"image/png"})
     url = URL.createObjectURL(blob)
     b64 = await blobToBase64(blob);
     
   }
-  return {url: url, base64: b64}
+  const r =  {url: url, base64: b64};
+  console.dir(r);
+  return r;
 }
 
 
@@ -90,7 +139,15 @@ function GetAccount() {
 
 async function add(param) {
   if (param != null) {
-    return await ipfs.add(param, {cidVersion: 1});
+    const encoder = new TextEncoder();
+    const result = await fs.addBytes(encoder.encode(param), {
+      cidVersion: 1,
+      onProgress: (evt) => {
+        console.info('add event', evt.type, evt.detail)
+      }
+    });
+    console.dir(result);
+    return await result.toString();
   }
     return null
 }
@@ -99,10 +156,17 @@ async function add(param) {
 async function addAll(params) {
 
   if (params != null) {
-    var hash=[];
-    for await (const result of ipfs.addAll(params, {cidVersion: 1})) {
-      hash.push(result);
+    let hash=[];
+    const encoder = new TextEncoder()
+    const fileToAdd = {
+      path: `${params.name}`,
+      content: encoder.encode(params)
     }
+    let result = await fs.addFile(fileToAdd);
+    if(Array.isArray(result)) result = result[0];
+    console.dir(result.toString());
+    hash.push(await result.toString());
+    
     console.log(hash);
     return hash;
   }
