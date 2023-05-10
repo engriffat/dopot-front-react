@@ -6,9 +6,11 @@ import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
 import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
-import ProfileIcon2 from "../assets/img/profile-icon-2.png";
+import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
+import ProfileIcon5 from "../assets/img/widget.png";
+import ProfileIcon6 from "../assets/img/impostazioni.png";
 import SwapImg from "../assets/img/swap-img.png";
 import SwapDownArrow from "../assets/img/swap-down-arrow.png";
 import SwapBtn from "../assets/img/swap-btn.png";
@@ -20,7 +22,6 @@ const Swap = () => {
     <div className="app">
       <main className="profile-page">
         <section className="profile-top-section">
-          <img className="profile-hero" src={ProfileHero} alt="ProfileHero" />
           <div className="box">
             <div className="pts-content">
               <div className="pts-left">
@@ -35,20 +36,52 @@ const Swap = () => {
               <div className="pts-right">
                 <div className="pts-right-grid">
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon1} alt="ProfileIcon" />
-                    <p>Panoramica</p>
+                    <a href={"/#/profile"}>
+                      <img src={ProfileIcon1} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/profile"}>
+                      <p>Panoramica</p>
+                    </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon2} alt="ProfileIcon" />
-                    <p>Crea Campagna</p>
+                    <a href={"/#/insprogetto"}>
+                      <img src={ProfileIcon2} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/insprogetto"}>
+                      <p>Crea Campagna</p>
+                    </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon3} alt="ProfileIcon" />
-                    <p>I Miei NFT</p>
+                    <a href={"/#/mynft"}>
+                      <img src={ProfileIcon3} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/mynft"}>
+                      <p>I Miei NFT</p>
+                    </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <img src={ProfileIcon4} alt="ProfileIcon" />
-                    <p>I Miei Progetti</p>
+                    <a href={"/#/myprojects"}>
+                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/myprojects"}>
+                      <p>I Miei Progetti</p>
+                    </a>
+                  </div>
+                  <div className="pts-right-grid-card">
+                    <a href={"/#/xdao"}>
+                      <img src={ProfileIcon5} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/xdao"}>
+                      <p>xDao Widget</p>
+                    </a>
+                  </div>
+                  <div className="pts-right-grid-card">
+                    <a href={"/#/impostazioni"}>
+                      <img src={ProfileIcon6} alt="ProfileIcon" />
+                    </a>
+                    <a href={"/#/impostazioni"}>
+                      <p>Impostazioni</p>
+                    </a>
                   </div>
                 </div>
               </div>

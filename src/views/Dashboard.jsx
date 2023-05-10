@@ -40,7 +40,7 @@ const Home = () => {
               <div className="dash-sel-opt-content">
                 <label for="sel1">Seleziona il tipo di progetto</label>
                 <select name="sel1" id="sel1">
-                  <option value="live">Live Crowdfounding</option>
+                  <option value="live"> Live Crowdfounding</option>
                   <option value="closed">Closed Crowdfunding</option>
                 </select>
               </div>
@@ -151,9 +151,9 @@ const Home = () => {
                 <label for="sel4">Range di investimento</label>
                 <select name="sel4" id="sel4">
                   <option value="volvo">10$ - 1000$</option>
-                  <option value="saab">Saab</option>
+                  {/*  <option value="saab">Saab</option>
                   <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                  <option value="audi">Audi</option>*/}
                 </select>
               </div>
               <div className="das-search-btn">
@@ -161,7 +161,7 @@ const Home = () => {
               </div>
             </div>
             <div className="dashboard-btn">
-              <button>
+              <button style={{ backgroundColor: "white" }}>
                 <MdFilterList /> Filter
               </button>
             </div>

@@ -21,9 +21,11 @@ import { addressState } from "../recoilState";
 import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
-import ProfileIcon2 from "../assets/img/profile-icon-camp.png";
+import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
+import ProfileIcon5 from "../assets/img/widget.png";
+import ProfileIcon6 from "../assets/img/impostazioni.png";
 
 const InsProgetto = () => {
   var step = [];
@@ -200,13 +202,7 @@ const InsProgetto = () => {
   return (
     <div className="app">
       <main className="ins-progetto-page">
-        <section className="profile-top-section">
-          <img
-            style={{ backgroundColor: "lightgoldenrodyellow" }}
-            className="profile-hero"
-            src={ProfileHero}
-            alt="ProfileHero"
-          />
+        <section style={{ zIndex: 100000 }} className="profile-top-section">
           <div className="box">
             <div className="pts-content">
               <div className="pts-left">
@@ -264,7 +260,7 @@ const InsProgetto = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/xdao"}>
-                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                      <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/xdao"}>
                       <p>xDao Widget</p>
@@ -272,7 +268,7 @@ const InsProgetto = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/impostazioni"}>
-                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                      <img src={ProfileIcon6} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/impostazioni"}>
                       <p>Impostazioni</p>

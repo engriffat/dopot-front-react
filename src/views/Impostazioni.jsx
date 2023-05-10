@@ -5,9 +5,11 @@ import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
 import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
-import ProfileIcon2 from "../assets/img/profile-icon-camp.png";
+import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
+import ProfileIcon5 from "../assets/img/widget.png";
+import ProfileIcon6 from "../assets/img/impostazioni.png";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import BlogImg from "../assets/img/void.jpg";
@@ -29,7 +31,6 @@ const Profile = () => {
     <div className="app">
       <main className="profile-page">
         <section className="profile-top-section">
-          <img className="profile-hero" src={ProfileHero} alt="ProfileHero" />
           <div className="box">
             <div className="pts-content">
               <div className="pts-left">
@@ -82,7 +83,7 @@ const Profile = () => {
                   </div>
                   <div className="pts-right-grid-card">
                     <a href={"/#/xdao"}>
-                      <img src={ProfileIcon4} alt="ProfileIcon" />
+                      <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/xdao"}>
                       <p>xDao Widget</p>
@@ -92,7 +93,7 @@ const Profile = () => {
                     <a href={"/#/impostazioni"}>
                       <img
                         className="myprojects-img"
-                        src={ProfileIcon4}
+                        src={ProfileIcon6}
                         alt="ProfileIcon"
                       />
                     </a>

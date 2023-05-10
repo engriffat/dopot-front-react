@@ -7,7 +7,7 @@ import IconArrowGrd from "../assets/img/icon-arrow-02-02.svg";
 import IconDollarGrd from "../assets/img/icon-dollar-02.svg";
 import IconPersonGrd from "../assets/img/icon-person-02.svg";
 import IconCommentsGrd from "../assets/img/icon-comments-02.svg";
-import PlaneLaptopPlanet from "../assets/img/plane-laptop-planet-full.png";
+import PlaneLaptopPlanet from "../assets/img/plane-laptop-planet-full-2.png";
 import BitcoinPeople from "../assets/img/bitcoin-people.png";
 import ScelgonoImg1 from "../assets/img/scelgono-img-1.png";
 import ScelgonoImg2 from "../assets/img/scelgono-img-2.png";
@@ -159,7 +159,6 @@ const Home = () => {
                 <p>{t("web3sub")}</p>
               </div>
             </div>
-            <h4 className="crowd-funding">{t("whyinvest")}</h4>
           </div>
           <img
             className="bitcoin-people"
@@ -167,6 +166,7 @@ const Home = () => {
             alt="BitcoinPeople"
           />
           <div className="box">
+            <h4 className="crowd-funding">{t("whyinvest")}</h4>
             <div className="ill-text-info-box-1">
               <div className="ill-text-info-box">
                 <h5>{t("decentralization")}</h5>
@@ -214,7 +214,12 @@ const Home = () => {
         <section className="roadmap-section">
           <img className="roadmap-bg" src={RoadmapBg} alt="RoadmapBg" />
           <div className="box">
-            <h3 className="section-heading">Roadmap</h3>
+            <h3
+              style={{ textTransform: "uppercase" }}
+              className="section-heading"
+            >
+              Roadmap
+            </h3>
             <div className="roadmap-grid">
               <div className="roadmap-con">
                 <div className="roadmap-step-box">

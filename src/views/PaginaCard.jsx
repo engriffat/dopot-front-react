@@ -162,159 +162,161 @@ const PaginaCard = () => {
             </div>
           </div>
         </section>
-        <section className="anchor-links-box">
-          <div className="box">
-            <div className="alb-content">
-              <a
-                onClick={() => setTab(0)}
-                className={isCurrentState(0) ? "pc-active-link" : ""}
-              >
-                Campagna
-              </a>
-              <a
-                onClick={() => setTab(1)}
-                className={isCurrentState(1) ? "pc-active-link" : ""}
-              >
-                Roadmap
-              </a>
-              <a
-                onClick={() => setTab(2)}
-                className={isCurrentState(2) ? "pc-active-link" : ""}
-              >
-                Reward
-              </a>
-              <a
-                onClick={() => setTab(3)}
-                className={isCurrentState(3) ? "pc-active-link" : ""}
-              >
-                Community
-              </a>
-              <a
-                onClick={() => setTab(4)}
-                className={isCurrentState(4) ? "pc-active-link" : ""}
-              >
-                FAQ
-              </a>
-              <a
-                onClick={() => setTab(5)}
-                className={isCurrentState(5) ? "pc-active-link" : ""}
-              >
-                Questionario
-              </a>
-              <a
-                onClick={() => setTab(6)}
-                className={isCurrentState(6) ? "pc-active-link" : ""}
-              >
-                Documenti
-              </a>
+        <section style={{ background: "rgba(57, 57, 66, 255)" }}>
+          <section className="anchor-links-box">
+            <div className="box">
+              <div className="alb-content">
+                <a
+                  onClick={() => setTab(0)}
+                  className={isCurrentState(0) ? "pc-active-link" : ""}
+                >
+                  Campagna
+                </a>
+                <a
+                  onClick={() => setTab(1)}
+                  className={isCurrentState(1) ? "pc-active-link" : ""}
+                >
+                  Roadmap
+                </a>
+                <a
+                  onClick={() => setTab(2)}
+                  className={isCurrentState(2) ? "pc-active-link" : ""}
+                >
+                  Reward
+                </a>
+                <a
+                  onClick={() => setTab(3)}
+                  className={isCurrentState(3) ? "pc-active-link" : ""}
+                >
+                  Community
+                </a>
+                <a
+                  onClick={() => setTab(4)}
+                  className={isCurrentState(4) ? "pc-active-link" : ""}
+                >
+                  FAQ
+                </a>
+                <a
+                  onClick={() => setTab(5)}
+                  className={isCurrentState(5) ? "pc-active-link" : ""}
+                >
+                  Questionario
+                </a>
+                <a
+                  onClick={() => setTab(6)}
+                  className={isCurrentState(6) ? "pc-active-link" : ""}
+                >
+                  Documenti
+                </a>
+              </div>
             </div>
-          </div>
-        </section>
-        <section className="pc-main-content">
-          <div className="box">
-            <div className="pc-content-grid">
-              {(() => {
-                switch (tab) {
-                  case 0:
-                    return (
-                      <TabCampagna
-                        introduzione={progetto.introduzione}
-                        fotoIntroListFiles={progetto.fotoStoriaListFiles}
-                        vision={progetto.vision}
-                        fotoVisionListFiles={progetto.fotoVisionListFiles}
-                        storia={progetto.storia}
-                        fotoStoriaListFiles={progetto.fotoStoriaListFiles}
-                      />
-                    );
-                  case 1:
-                    return (
-                      <TabRoadmap
-                        titoloRoadStep1={progetto.titoloRoadStep1}
-                        titoloRoadStep2={progetto.titoloRoadStep2}
-                        descrRoadStep1={progetto.descrRoadStep1}
-                        descrRoadStep2={progetto.descrRoadStep2}
-                      />
-                    );
-                  case 3:
-                    return (
-                      <TabSocial
-                        socialMedia={progetto.socialMedia.split(",")}
-                      ></TabSocial>
-                    );
-                  case 4:
-                    return <TabFaq progetto={progetto} />;
-                  case 5:
-                    return <TabQuestionario progetto={progetto} />;
-                  case 6:
-                    return <TabDocumenti progetto={progetto} />;
+          </section>
+          <section className="pc-main-content">
+            <div className="box">
+              <div className="pc-content-grid">
+                {(() => {
+                  switch (tab) {
+                    case 0:
+                      return (
+                        <TabCampagna
+                          introduzione={progetto.introduzione}
+                          fotoIntroListFiles={progetto.fotoStoriaListFiles}
+                          vision={progetto.vision}
+                          fotoVisionListFiles={progetto.fotoVisionListFiles}
+                          storia={progetto.storia}
+                          fotoStoriaListFiles={progetto.fotoStoriaListFiles}
+                        />
+                      );
+                    case 1:
+                      return (
+                        <TabRoadmap
+                          titoloRoadStep1={progetto.titoloRoadStep1}
+                          titoloRoadStep2={progetto.titoloRoadStep2}
+                          descrRoadStep1={progetto.descrRoadStep1}
+                          descrRoadStep2={progetto.descrRoadStep2}
+                        />
+                      );
+                    case 3:
+                      return (
+                        <TabSocial
+                          socialMedia={progetto.socialMedia.split(",")}
+                        ></TabSocial>
+                      );
+                    case 4:
+                      return <TabFaq progetto={progetto} />;
+                    case 5:
+                      return <TabQuestionario progetto={progetto} />;
+                    case 6:
+                      return <TabDocumenti progetto={progetto} />;
 
-                  default:
-                    break;
-                }
-              })()}
-              <div className="pc-content-grid-right">
-                <div className="basic-info-box">
-                  <div className="pmg-btn-box-nft">
-                    <input type="checkbox" id="click" />
-                    <label for="click" style={{ cursor: "pointer" }}>
-                      <img
-                        src={(() => {
-                          if (progetto.logoAzienda != null) {
-                            return (
-                              "data:image/jpg;base64," +
-                              progetto.logoAziendaListFiles.base64
-                            );
-                          } else return ImageIcon;
-                        })()}
-                        alt="ImageIcon"
-                      />
-                    </label>
-                    <div class="content logo-center">
-                      <img
-                        src={(() => {
-                          if (progetto.logoAzienda != null) {
-                            return (
-                              "data:image/jpg;base64," +
-                              progetto.logoAziendaListFiles.base64
-                            );
-                          } else return ImageIcon;
-                        })()}
-                        alt="ImageIcon"
-                      />
-                      <div class="text"></div>
-                      <label for="click" id="temp">
-                        x
+                    default:
+                      break;
+                  }
+                })()}
+                <div className="pc-content-grid-right">
+                  <div className="basic-info-box">
+                    <div className="pmg-btn-box-nft">
+                      <input type="checkbox" id="click" />
+                      <label for="click" style={{ cursor: "pointer" }}>
+                        <img
+                          src={(() => {
+                            if (progetto.logoAzienda != null) {
+                              return (
+                                "data:image/jpg;base64," +
+                                progetto.logoAziendaListFiles.base64
+                              );
+                            } else return ImageIcon;
+                          })()}
+                          alt="ImageIcon"
+                        />
                       </label>
+                      <div class="content logo-center">
+                        <img
+                          src={(() => {
+                            if (progetto.logoAzienda != null) {
+                              return (
+                                "data:image/jpg;base64," +
+                                progetto.logoAziendaListFiles.base64
+                              );
+                            } else return ImageIcon;
+                          })()}
+                          alt="ImageIcon"
+                        />
+                        <div class="text"></div>
+                        <label for="click" id="temp">
+                          x
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="box-bk-over-logo">{progetto.nomeAzienda}</h3>
-                  <h4 className="box-bk-over-logo">
-                    Sito Web:{" "}
-                    <span>
-                      {" "}
-                      <a
-                        className="link-social-new "
-                        href={progetto.sito}
-                        target="_blank"
-                      >
-                        {progetto.sito}
-                      </a>{" "}
-                    </span>{" "}
-                  </h4>
-                  {/* <p>
+                    <h3 className="box-bk-over-logo">{progetto.nomeAzienda}</h3>
+                    <h4 className="box-bk-over-logo">
+                      Sito Web:{" "}
+                      <span>
+                        {" "}
+                        <a
+                          className="link-social-new "
+                          href={progetto.sito}
+                          target="_blank"
+                        >
+                          {progetto.sito}
+                        </a>{" "}
+                      </span>{" "}
+                    </h4>
+                    {/* <p>
                     Campagna di {progetto.tipoCampagna}. <br />
                     Team composta da {progetto.team}.<br />
                     Nel settore della {progetto.settore}.<br />
                     Sito Web {progetto.sito}
                     P.iva {progetto.pIva}
                   </p> */}
-                </div>
-                <h5>Investi</h5>
+                  </div>
+                  <h5>Investi</h5>
 
-                {cards}
+                  {cards}
+                </div>
               </div>
             </div>
-          </div>
+          </section>
         </section>
       </main>
     </div>
