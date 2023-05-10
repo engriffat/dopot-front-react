@@ -23,6 +23,10 @@
   margin: 0 auto;
   padding: 0 5rem;
 }
+.dashboard {
+  background: rgba(57, 57, 66, 255);
+}
+
 html,
 body {
   width: 100%;

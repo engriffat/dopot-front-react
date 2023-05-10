@@ -3,7 +3,9 @@
   display: flex;
   margin-top: 1rem;
 }
-
+.react-tabs__tab {
+  color: white;
+}
 .btn-plus-minus {
   color: var(--white);
   background: linear-gradient(30deg, #fca040, #c22e80);
@@ -27,7 +29,7 @@
 
 .camp-img {
   box-sizing: content-box;
-  box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.8);
+  box-shadow: 0 0 15px 5px rgb(255 255 255 / 52%);
   border-radius: 10%;
 }
 
@@ -35,7 +37,8 @@
   width: 100%;
   position: relative;
   padding: 5rem 0;
-  background: url(../assets/img/Ins-progetto-bg.png);
+  /* background: url(../assets/img/Ins-progetto-bg.png); */
+  background: rgba(57, 57, 66, 255);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -57,6 +60,7 @@
   margin: 2.5rem 0 0 0;
   width: 100%;
   text-align: center;
+  color: white;
 }
 .ins-progress {
   width: 100%;
@@ -88,6 +92,7 @@
   transform: translate(-50%, -5rem);
   text-align: center;
   width: fit-content;
+  color: white;
 }
 .ins-line {
   width: 100%;
@@ -117,6 +122,7 @@
   font-size: 2rem;
   font-weight: 400;
   margin: 0 0 1.5rem 0;
+  color: white;
 }
 .ins-btn-box {
   width: 100%;
@@ -168,6 +174,7 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.5);
   margin: 3.5rem 0 0 0;
+  color: white;
 }
 .add-btn-box {
   width: 100%;

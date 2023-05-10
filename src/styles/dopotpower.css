@@ -17,6 +17,7 @@
 .dopot-power h1 {
   font-size: 5rem;
   text-align: center;
+  color: var(--white);
 }
 .dopot-power h2 {
   color: rgba(227, 62, 144, 0.8);
@@ -27,6 +28,7 @@
 .dopot-power h3 {
   font-size: 2.25rem;
   font-weight: 400;
+  color: var(--white);
 }
 .p-cards-grid {
   width: 100%;
@@ -50,6 +52,7 @@
 .p-card p {
   font-size: 1.85rem;
   text-align: center;
+  color: var(--white);
 }
 .dopot-power ul {
   padding: 2.5rem 0 2.5rem 5rem;
@@ -58,6 +61,7 @@
   font-size: 1.85rem;
   margin: 0 0 3rem 0;
   list-style-image: url("../assets/img/d-circle.jpg");
+  color: var(--white);
 }
 .dopot-power-img {
   width: 100%;
