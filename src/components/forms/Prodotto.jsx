@@ -151,7 +151,7 @@ const SchedaProdotto = (props) => {
         />
       </div>
       <div className="ins-input-box">
-        <h4>Specigiche tecniche </h4>
+        <h4>Specifiche tecniche </h4>
         <input
           name={"specTecnica" + props.nProdotto}
           value={props.inputs["specTecnica" + props.nProdotto]}

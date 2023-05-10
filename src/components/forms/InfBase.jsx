@@ -48,7 +48,7 @@ const InfBase = (props) => {
         />
       </div>
       <div className="ins-input-box">
-        <h4>Settote aziendale </h4>
+        <h4>Settore aziendale </h4>
         <select name="settore" onChange={props.handleChange}>
           <option disabled selected value>
             Seleziona una categoria
@@ -212,7 +212,7 @@ const InfBase = (props) => {
       </div>
       <div className="ins-input-box">
         <h4>
-          documentazione aziendale (pitch, business plan, relazioni coi partner)
+          Documentazione Aziendale (pitch, business plan, relazioni coi partner)
         </h4>
         <div className="container-plus">
           <input
