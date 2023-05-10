@@ -1,5 +1,6 @@
 import React from "react";
 import IconInfoCard from "./PaginaCard/IconInfoCard";
+import IconInfoDai from "./PaginaCard/IconInfoDai";
 import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
 import PCUserIcon from "../assets/img/pc-person-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -64,7 +65,7 @@ const SmallProject = (props) => {
 
       <div className="pmg-rc-right">
         <div className="pc-hero-icon-grid">
-          <IconInfoCard img={PCDollarIcon} text="324.211 su 200.00 Draccolti" />
+          <IconInfoDai img={PCDollarIcon} text="324.211 " text2="su 200.00" />
           <IconInfoCard img={PCUserIcon} text="2304 persone hanno investito" />
           <IconInfoCard img={PCDollarIcon} text="21 giorni al termine" />
         </div>
