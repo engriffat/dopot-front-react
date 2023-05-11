@@ -15,4 +15,17 @@ function fileToBase64(file) {
   });
 }
 
-export  {blobToBase64, fileToBase64};
+async function filelistToBase64(fileList) {
+  const base64Array = [];
+  for (const file of fileList) {
+    try {
+      const base64 = await fileToBase64(file);
+      base64Array.push(base64.split(',')[1]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  return base64Array;
+}
+
+export  {blobToBase64, fileToBase64, filelistToBase64};

@@ -13,7 +13,7 @@ const InvestiCard = (props) => {
                   <br />
                   <p>- supply {props.supply}</p>
                   
-                  <h5>{props.prezzo}€</h5>
+                  <h5>{props.price}€</h5>
         <button onClick={() => addInvestment(props.address, props.numTier)} className="grd-btn dopot-btn-sm">Investi</button>
       </div>
     </div>

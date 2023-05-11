@@ -2,7 +2,7 @@ import { getRecoil, setRecoil } from 'recoil-nexus';
 import {  progettiAddressState , progettiState, providerState, IpfsState, progettiImageState } from "../recoilState";
 import {GetAccount} from "./ethersUtils"
 import addressProjectFactory from '../abi/projectFactory/address';
-
+const addressUtilsLib = require('../abi/utils/address.js');
 
 const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
@@ -26,7 +26,6 @@ export async function downloadProj() {
       console.log(error);
     }finally{
       setRecoil(progettiState, progettiIpfs);
-      console.log(progettiIpfs);
       return true;
     }
 }
@@ -36,7 +35,7 @@ async function getAllProject() {
    
   const Address = addressProjectFactory;
   let contract = new Contract(Address, abiProjectFactory, getRecoil(providerState));
- 
+
   let progetti=[];
   try {
     const projectsLength = await contract.getProjectsLength();
@@ -79,8 +78,6 @@ async function getAllProject() {
           progettiImage[element.address]["fotoProdotto"+i+"ipfs" ][n] = await ipfs.getImage(elementipfs); 
           n++;
         }
-        
-        
         i++;
     }
 

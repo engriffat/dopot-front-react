@@ -73,19 +73,19 @@ const Prodotto= (props) => {
 const SchedaProdotto = (props) => {
     return(<><div className="ins-input-box">
     <h4>Nome prodotto n {props.nProdotto}</h4>
-    <input name={"nomeProdotto" + props.nProdotto} value={props.inputs["nomeProdotto" + props.nProdotto]   || ""} 
+    <input name={"name" + props.nProdotto} value={props.inputs["name" + props.nProdotto]   || ""} 
 onChange={props.handleChange} type="text" placeholder="inserisci il nome"  />
 </div><div className="ins-input-box">
     <h4>Descrizione</h4>
     <input
-        name={"descProdotto" + props.nProdotto} value={props.inputs["descProdotto" + props.nProdotto]}
+        name={"description" + props.nProdotto} value={props.inputs["description" + props.nProdotto]}
         onChange={props.handleChange}
         type="text"
         placeholder="descrivi il tuo prodotto" />
 </div><div className="ins-input-box">
     <h4>Specigiche tecniche </h4>
     <input
-        name={"specTecnica" + props.nProdotto} value={props.inputs["specTecnica" + props.nProdotto]}
+        name={"specs" + props.nProdotto} value={props.inputs["specs" + props.nProdotto]}
         onChange={props.handleChange}
         type="text"
         placeholder="caratteristiche" />
@@ -93,7 +93,7 @@ onChange={props.handleChange} type="text" placeholder="inserisci il nome"  />
 <div className="ins-input-box">
     <h4>Prezzo </h4>
     <input
-        name={"prezzo" + props.nProdotto} value={props.inputs["prezzo" + props.nProdotto]}
+        name={"price" + props.nProdotto} value={props.inputs["prezzo" + props.nProdotto]}
         onChange={props.handleChange}
         type="number"
         placeholder="Il costo del prodotto" />

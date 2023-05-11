@@ -6,7 +6,7 @@ import { RecoilRoot } from 'recoil';
 import RecoilNexus from "recoil-nexus";
 // import i18n (needs to be bundled ;)) 
 import './i18n';
-
+localStorage.setItem('debug', 'libp2p:*')
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 

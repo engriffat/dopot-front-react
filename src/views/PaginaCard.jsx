@@ -30,7 +30,7 @@ const PaginaCard =  () => {
   var i = 1;
   
   for (var i=1; i< parseInt(progetto.numeroProdotti)+1; i++) { 
-       cards.push(<InvestiCard address={progetto.address} numTier={i} spec={progetto["specTecnica"+i]} supply={progetto["supply"+i]} prezzo={progetto["prezzo"+i]} img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} titolo={progetto["nomeProdotto"+i]}> 
+       cards.push(<InvestiCard address={progetto.address} numTier={i} spec={progetto["specs"+i]} supply={progetto["supply"+i]} price={progetto["price"+i]} img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} titolo={progetto["name"+i]}> 
         </InvestiCard>);
   }
  
