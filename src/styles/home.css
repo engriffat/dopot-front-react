@@ -7,6 +7,7 @@
   background-repeat: repeat;
   background-size: cover;
   position: relative;
+  overflow: hidden;
 }
 /* Hero Section */
 .hero-section {
