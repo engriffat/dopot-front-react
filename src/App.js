@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 
 function App() {
+  
   return (
     <HashRouter>
       <Routes>
