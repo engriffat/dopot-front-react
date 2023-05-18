@@ -20,18 +20,22 @@ const InsProgetto = () => {
 
 
   const handleChange = (event) => {
+  const name = event.target.name;
+  const value = event.target.value;
 
-    const name = event.target.name;
-    const value = event.target.value;
-
-    if (event.target.files != null) {
-      setInputs(values => ({...values, [name+"ListFiles"]: event.target.files}))
-    }
-    
-    setInputs(values => ({...values, [name]: value}))
-    
-
+  if (event.target.files != null) {
+    setInputs(values => ({
+      ...values,
+      [name]: value,
+      [name+"ListFiles"]: event.target.files
+    }));
+  } else {
+    setInputs(values => ({
+      ...values,
+      [name]: value
+    }));
   }
+}
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -2,6 +2,8 @@ import { createHelia } from 'helia'
 import { unixfs } from '@helia/unixfs'
 import { MemoryBlockstore } from 'blockstore-core'
 import { MemoryDatastore } from 'datastore-core'
+import { IDBBlockstore } from 'blockstore-idb'
+import { IDBDatastore } from 'datastore-idb'
 import { noise } from '@chainsafe/libp2p-noise'
 import { yamux } from '@chainsafe/libp2p-yamux'
 import { createLibp2p } from 'libp2p'
@@ -17,6 +19,7 @@ import { dht } from "@helia/ipns/routing";
 import { json } from '@helia/json'
 import { blobToBase64 } from "./base64utils";
 import { CID } from 'multiformats/cid'
+import { mplex } from '@libp2p/mplex'
 import all from 'it-all';
 import { concat } from 'uint8arrays/concat'
 import { useLayoutEffect } from 'react'
@@ -59,8 +62,10 @@ async function initIPFS() {
       }
       // handle other "switch" errors
     }
-    const blockstore = new MemoryBlockstore()
-    const datastore = new MemoryDatastore()
+    const blockstore = new IDBBlockstore();
+    await blockstore.open();
+    const datastore = new IDBDatastore();
+    await datastore.open();
     const dagPbWalker = {
       codec: dagPb.code,
       async * walk (block) {
@@ -73,7 +78,14 @@ async function initIPFS() {
       transports: [ webTransport(), webRTCDirect(), webRTC(), webSockets() ],
       contentRouters: [ ipniContentRouting("https://cid.contact") ],
       connectionEncryption: [ noise() ],
-      streamMuxers: [ yamux() ],
+      streamMuxers: [ yamux(), mplex() ],
+      peerRouting: { // Peer routing configuration
+        refreshManager: { // Refresh known and connected closest peers
+          enabled: true, // Should find the closest peers.
+          interval: 6e5, // Interval for getting the new for closest peers of 10min
+          bootDelay: 10e3 // Delay for the initial query for closest peers
+        }
+      },
       peerDiscovery: [
         bootstrap({
           list: [
@@ -82,6 +94,7 @@ async function initIPFS() {
             "/dnsaddr/bootstrap.libp2p.io/p2p/QmZa1sAxajnQjVM8WjWXoMbmPd7NsWhfKsPkErzpm9wGkp",
             "/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
             "/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt",
+            "/dns4/elastic.dag.house/tcp/443/wss/p2p/bafzbeibhqavlasjc7dvbiopygwncnrtvjd2xmryk5laib7zyjor6kf3avm"
           ]
         })
       ],
