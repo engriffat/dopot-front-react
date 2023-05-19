@@ -199,6 +199,7 @@ const InsProgetto = () => {
     setprogressionStep(progressionStep + 1);
   };
 
+
   return (
     <div className="app">
       <main className="ins-progetto-page">

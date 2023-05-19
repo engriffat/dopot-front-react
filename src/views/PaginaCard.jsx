@@ -37,11 +37,11 @@ const PaginaCard = () => {
       <InvestiCard
         address={progetto.address}
         numTier={i}
-        spec={progetto["specTecnica" + i]}
+        spec={progetto["specs" + i]}
         supply={progetto["supply" + i]}
-        prezzo={progetto["prezzo" + i]}
+        prezzo={progetto["price" + i]}
         img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]}
-        titolo={progetto["nomeProdotto" + i]}
+        titolo={progetto["name" + i]}
       ></InvestiCard>
     );
   }

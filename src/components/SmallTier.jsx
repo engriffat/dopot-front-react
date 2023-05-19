@@ -10,10 +10,10 @@ const SmallTier = (props) => {
 
   var progetto=getRecoil(progettiState).find(x => x.address === props.address);
   return (
-    <ProfileCardLeft img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} price={progetto["prezzo"+props.tier]+"€"}>
-    <h4> {progetto["nomeProdotto"+props.tier]}</h4>
+    <ProfileCardLeft img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} price={progetto["price"+props.tier]+"€"}>
+    <h4> {progetto["name"+props.tier]}</h4>
       <p>
-       {progetto["specTecnica"+props.tier]}
+       {progetto["specs"+props.tier]}
       </p>
       <br />
       <p>- Supply: {progetto["supply"+props.tier]}</p>

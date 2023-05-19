@@ -128,58 +128,58 @@ const Prodotto = (props) => {
 };
 
 const SchedaProdotto = (props) => {
-  return (
+  return(
     <>
-      <div className="ins-input-box">
-        <h4>Nome prodotto n {props.nProdotto}</h4>
-        <input
-          name={"nomeProdotto" + props.nProdotto}
-          value={props.inputs["nomeProdotto" + props.nProdotto] || ""}
-          onChange={props.handleChange}
-          type="text"
-          placeholder="inserisci il nome"
-        />
-      </div>
-      <div className="ins-input-box">
-        <h4>Descrizione</h4>
-        <input
-          name={"descProdotto" + props.nProdotto}
-          value={props.inputs["descProdotto" + props.nProdotto]}
-          onChange={props.handleChange}
-          type="text"
-          placeholder="descrivi il tuo prodotto"
-        />
-      </div>
-      <div className="ins-input-box">
-        <h4>Specifiche tecniche </h4>
-        <input
-          name={"specTecnica" + props.nProdotto}
-          value={props.inputs["specTecnica" + props.nProdotto]}
-          onChange={props.handleChange}
-          type="text"
-          placeholder="caratteristiche"
-        />
-      </div>
-      <div className="ins-input-box">
-        <h4>Prezzo </h4>
-        <input
-          name={"prezzo" + props.nProdotto}
-          value={props.inputs["prezzo" + props.nProdotto]}
-          onChange={props.handleChange}
-          type="text"
-          placeholder="Il costo del prodotto"
-        />
-      </div>
-      <div className="ins-input-box">
-        <h4>Supply </h4>
-        <input
-          name={"supply" + props.nProdotto}
-          value={props.inputs["supply" + props.nProdotto]}
-          onChange={props.handleChange}
-          type="text"
-          placeholder="quanti esemplari saranno disponibili"
-        />
-      </div>
+    <div className="ins-input-box">
+      <h4>Nome prodotto n {props.nProdotto}</h4>
+      <input 
+        name={"name" + props.nProdotto}
+        value={props.inputs["name" + props.nProdotto] || ""}
+        onChange={props.handleChange}
+        type="text" 
+        placeholder="inserisci il nome"
+      />
+  </div>
+  <div className="ins-input-box">
+    <h4>Descrizione</h4>
+    <input
+      name={"description" + props.nProdotto}
+      value={props.inputs["description" + props.nProdotto]}
+      onChange={props.handleChange}
+      type="text"
+      placeholder="descrivi il tuo prodotto"
+    />
+  </div>
+  <div className="ins-input-box">
+    <h4>Specifiche tecniche </h4>
+    <input
+      name={"specs" + props.nProdotto}
+      value={props.inputs["specs" + props.nProdotto]}
+      onChange={props.handleChange}
+      type="text"
+      placeholder="caratteristiche"
+    />
+  </div>
+  <div className="ins-input-box">
+      <h4>Prezzo </h4>
+      <input
+        name={"price" + props.nProdotto}
+        value={props.inputs["price" + props.nProdotto]}
+        onChange={props.handleChange}
+        type="number"
+        placeholder="Il costo del prodotto"
+      />
+  </div>
+  <div className="ins-input-box">
+    <h4>Supply </h4>
+    <input
+      name={"supply" + props.nProdotto}
+      value={props.inputs["supply" + props.nProdotto]}
+      onChange={props.handleChange}
+      type="number"
+      placeholder="quanti esemplari saranno disponibili"
+    />
+</div>
 
       <div className="ins-input-box">
         <h4>Foto del prodotto</h4>

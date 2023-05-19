@@ -75,7 +75,7 @@ const Progetto = (props) => {
           name="quota"
           value={props.inputs.quota || ""}
           onChange={props.handleChange}
-          type="text"
+          type="number"
           placeholder="inserisci la cifra"
         />
       </div>
