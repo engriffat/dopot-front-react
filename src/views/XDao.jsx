@@ -90,7 +90,7 @@ const Profile = () => {
                       />
                     </a>
                     <a href={"/#/xdao"}>
-                      <p>xDao Widget</p>
+                      <p>xDao Widgets</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
