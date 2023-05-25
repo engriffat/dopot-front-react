@@ -9,7 +9,7 @@ const TabCampagna = (props) => {
     <div className="pc-content-grid-left">
       <BlogPost heading="Introduzione" text={props.introduzione} />
       <BlogPost heading="Storia" text={props.storia} />
-      <BlogPost heading="Vison" text={props.vision} />
+      <BlogPost heading="Vision" text={props.vision} />
     </div>
   );
 };

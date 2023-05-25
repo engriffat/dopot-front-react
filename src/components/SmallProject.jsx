@@ -3,6 +3,7 @@ import IconInfoCard from "./PaginaCard/IconInfoCard";
 import IconInfoDai from "./PaginaCard/IconInfoDai";
 import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
 import PCUserIcon from "../assets/img/pc-person-icon.png";
+import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
@@ -67,14 +68,14 @@ const SmallProject = (props) => {
         <div className="pc-hero-icon-grid">
           <IconInfoDai img={PCDollarIcon} text="324.211 " text2="su 200.00" />
           <IconInfoCard img={PCUserIcon} text="2304 persone hanno investito" />
-          <IconInfoCard img={PCDollarIcon} text="21 giorni al termine" />
+          <IconInfoCard img={PCCalendarIcon} text="21 giorni al termine" />
         </div>
         <div className="pc-70-box box-bk-over-logo">
           <div className="graph-box">
             <CircularProgressbar
               value={percentage}
               text={`${percentage}%`}
-              strokeWidth={5}
+              strokeWidth={15}
             />
           </div>
         </div>
