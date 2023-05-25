@@ -108,7 +108,7 @@ const FaqHeader = (props) => {
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Nft Mint</p>
+          <p>NFTs Mint</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-active">
