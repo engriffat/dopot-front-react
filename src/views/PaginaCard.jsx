@@ -19,7 +19,6 @@ import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router-dom";
 import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
-import { getIPFSimage } from "../utils/downloadProj";
 import TabCampagna from "../components/TabCampagna";
 import TabRoadmap from "../components/TabRoadmap";
 import TabFaq from "../components/TabFaq";

@@ -7,7 +7,7 @@ import Pdf from "../assets/dopot.pdf";
 import { SocialIcon } from "react-social-icons";
 import IconDown from "../assets/img/arr-menu.svg";
 
-import GetAccount from "../utils/ethersUtils.js";
+//import GetAccount from "../utils/ethersUtils.js";
 import { getAddr } from "../utils/firebase/retriveInfo";
 
 const Header = (props) => {
@@ -201,7 +201,6 @@ const Header = (props) => {
               <button className="grd-btn dopot-btn-lg">Account</button>
               <button
                 className="purple-border-btn dopot-btn-lg"
-                onClick={GetAccount}
               >
                 Wallet
               </button>
