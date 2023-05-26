@@ -4,6 +4,8 @@ import "../styles/paginacard.css";
 import PaginaCardHero from "../assets/img/pc-hero-img.png";
 import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
 import PCUserIcon from "../assets/img/pc-person-icon.png";
+import IconInfoDai from "../components/PaginaCard/IconInfoDai";
+
 import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
 import PC70 from "../assets/img/pc-70.png";
 import IconPlane from "../assets/img/icon-plane.svg";
@@ -119,9 +121,10 @@ const PaginaCard = () => {
                 </div>
 
                 <div className="pc-hero-icon-grid ">
-                  <IconInfoCard
+                  <IconInfoDai
                     img={PCDollarIcon}
-                    text="324.211 su 200.00 Draccolti"
+                    text="324.211 "
+                    text2="su 200.00"
                   />
 
                   <IconInfoCard
@@ -129,7 +132,7 @@ const PaginaCard = () => {
                     text="2304 persone hanno investito"
                   />
                   <IconInfoCard
-                    img={PCDollarIcon}
+                    img={PCCalendarIcon}
                     text="21 giorni al termine"
                   />
                 </div>
@@ -141,7 +144,7 @@ const PaginaCard = () => {
                     <CircularProgressbar
                       value={percentage}
                       text={`${percentage}%`}
-                      strokeWidth={5}
+                      strokeWidth={15}
                     />
                     ;
                   </div>

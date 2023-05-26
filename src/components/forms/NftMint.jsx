@@ -20,7 +20,7 @@ const NftMint = (props) => {
   return (
     <>
       <div className="ins-input-box">
-        <h1>Carica le immagini del tuo NFT</h1>
+        <h1 style={{ textTransform: "none" }}>CARICA I TUOI NFTs</h1>
         <div>
           <div className="container-plus">
             <input
@@ -98,7 +98,7 @@ const NftMintHeader = (props) => {
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-active">
-          <p>Nft Mint</p>
+          <p>NFTs Mint</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">

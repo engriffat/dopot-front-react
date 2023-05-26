@@ -7,14 +7,10 @@ const IconInfoDai = (props) => {
       <img src={props.img} alt="Icon Info" />
       <p style={{ margin: 0 }}>
         {props.text}
-        <span>
-          <img style={{ width: "20%", margin: 0 }} src={IconDai} alt="" />
-        </span>
+        <img style={{ margin: 0, height: "20px" }} src={IconDai} alt="" />
         {props.text2}
-        <span>
-          <img style={{ width: "20%", margin: 0 }} src={IconDai} alt="" />
-        </span>
-        <span>Raccolti</span>
+        <img style={{ height: "20px", margin: 0 }} src={IconDai} alt="" />
+        Raccolti
       </p>
     </div>
   );

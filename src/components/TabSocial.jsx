@@ -33,7 +33,7 @@ const TabSocial = (props) => {
             marginBottom: "3rem",
           }}
         >
-          <h2>INSTAGRAM Link</h2>
+          <h2 className="h2-social">INSTAGRAM Link</h2>
           <a target="_blank" href={element} className="link-social-new">
             {element}
           </a>
@@ -58,7 +58,7 @@ const TabSocial = (props) => {
             marginBottom: "3rem",
           }}
         >
-          <h2>TWITTER Link</h2>
+          <h2 className="h2-social">TWITTER Link</h2>
           <a target="_blank" href={element} className="link-social-new">
             {element}
           </a>
@@ -83,7 +83,7 @@ const TabSocial = (props) => {
             marginBottom: "3rem",
           }}
         >
-          <h2>FACEBOOK Link</h2>
+          <h2 className="h2-social">FACEBOOK Link</h2>
           <a target="_blank" href={element} className="link-social-new">
             {element}
           </a>
@@ -108,7 +108,7 @@ const TabSocial = (props) => {
             marginBottom: "3rem",
           }}
         >
-          <h2>TIKTOK Link</h2>
+          <h2 className="h2-social">TIKTOK Link</h2>
           <a target="_blank" href={element} className="link-social-new">
             {element}
           </a>
@@ -133,7 +133,7 @@ const TabSocial = (props) => {
             marginBottom: "3rem",
           }}
         >
-          <h2>LINKEDIN Link</h2>
+          <h2 className="h2-social">LINKEDIN Link</h2>
           <a target="_blank" href={element} className="link-social-new">
             {element}
           </a>
@@ -158,7 +158,7 @@ const TabSocial = (props) => {
             marginBottom: "3rem",
           }}
         >
-          <h2>YOUTUBE Link</h2>
+          <h2 className="h2-social">YOUTUBE Link</h2>
           <a target="_blank" href={element} className="link-social-new">
             {element}
           </a>

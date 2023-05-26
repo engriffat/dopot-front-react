@@ -224,7 +224,7 @@ const ProdottoHeader = (props) => {
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Nft Mint</p>
+          <p>NFTs Mint</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
