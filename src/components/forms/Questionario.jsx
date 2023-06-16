@@ -11,7 +11,7 @@ const Questionario = (props) => {
           strutturato?
         </h4>
         <textarea
-          value={props.inputs.domanda1 || ""}
+          value={props.inputs.domanda1}
           onChange={props.handleChange}
           name="domanda1"
           placeholder="inserisci la risposta"
@@ -19,7 +19,7 @@ const Questionario = (props) => {
 
         <h4>Avete il team giusto? Che competenze avete ?</h4>
         <textarea
-          value={props.inputs.domanda2 || ""}
+          value={props.inputs.domanda2}
           onChange={props.handleChange}
           name="domanda2"
           placeholder="inserisci la risposta"
@@ -30,7 +30,7 @@ const Questionario = (props) => {
           perché ?
         </h4>
         <textarea
-          value={props.inputs.domanda3 || ""}
+          value={props.inputs.domanda3}
           onChange={props.handleChange}
           name="domanda3"
           placeholder="inserisci la risposta"
@@ -41,7 +41,7 @@ const Questionario = (props) => {
           principali ti sei posto?
         </h4>
         <textarea
-          value={props.inputs.domanda4 || ""}
+          value={props.inputs.domanda4}
           onChange={props.handleChange}
           name="domanda4"
           placeholder="inserisci la risposta"
@@ -49,7 +49,7 @@ const Questionario = (props) => {
 
         <h4>Che target di clienti fate riferimento?</h4>
         <textarea
-          value={props.inputs.domanda5 || ""}
+          value={props.inputs.domanda5}
           onChange={props.handleChange}
           name="domanda5"
           placeholder="inserisci la risposta"
@@ -57,7 +57,7 @@ const Questionario = (props) => {
 
         <h4>Cosa rende unico il tuo progetto?</h4>
         <textarea
-          value={props.inputs.domanda6 || ""}
+          value={props.inputs.domanda6}
           onChange={props.handleChange}
           name="domanda6"
           placeholder="inserisci la risposta"
@@ -65,7 +65,7 @@ const Questionario = (props) => {
 
         <h4>Quali sono i principali rischi per la startup?</h4>
         <textarea
-          value={props.inputs.domanda7 || ""}
+          value={props.inputs.domanda7}
           onChange={props.handleChange}
           name="domanda7"
           placeholder="inserisci la risposta"
@@ -73,7 +73,7 @@ const Questionario = (props) => {
 
         <h4>Quali sono le proiezioni triennali della startup?</h4>
         <textarea
-          value={props.inputs.domanda8 || ""}
+          value={props.inputs.domanda8}
           onChange={props.handleChange}
           name="domanda8"
           placeholder="inserisci la risposta"
@@ -81,7 +81,7 @@ const Questionario = (props) => {
 
         <h4>Il team presenta tutti i ruoli chiave per lo sviluppo?</h4>
         <textarea
-          value={props.inputs.domanda9 || ""}
+          value={props.inputs.domanda9}
           onChange={props.handleChange}
           name="domanda9"
           placeholder="inserisci la risposta"
@@ -89,7 +89,7 @@ const Questionario = (props) => {
 
         <h4>Come pensate di superare i vari rischi della startup?</h4>
         <textarea
-          value={props.inputs.domanda10 || ""}
+          value={props.inputs.domanda10}
           onChange={props.handleChange}
           name="domanda10"
           placeholder="inserisci la risposta"
@@ -128,10 +128,6 @@ const QuestionarioHeader = (props) => {
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
           <p>Prodotto</p>
-        </div>
-        <div className="ins-line ins-line-pending"></div>
-        <div className="ins-circle ins-circle-pending">
-          <p>NFTs Mint</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">

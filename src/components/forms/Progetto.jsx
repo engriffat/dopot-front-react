@@ -5,7 +5,8 @@ const Progetto = (props) => {
   const [campagna, setcampagna] = useState("reward");
   const [giorniCampagna, setgiorniCampagna] = useState(45);
   const [val, setVal] = useState([]);
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     const abc = [...val, []];
     setVal(abc);
   };
@@ -14,7 +15,8 @@ const Progetto = (props) => {
     inputdata[i] = onChangeValue.target.value;
     setVal(inputdata);
   };
-  const handleDelete = (i) => {
+  const handleDelete = (e, i) => {
+    e.preventDefault();
     const deletVal = [...val];
     deletVal.splice(i, 1);
     setVal(deletVal);
@@ -73,7 +75,7 @@ const Progetto = (props) => {
         <h4>Che quota vuoi raggiungere?</h4>
         <input
           name="quota"
-          value={props.inputs.quota || ""}
+          value={props.inputs.quota}
           onChange={props.handleChange}
           type="number"
           placeholder="inserisci la cifra"
@@ -124,7 +126,7 @@ const Progetto = (props) => {
         <h4>Raccontaci del tuo progetto...</h4>
         <input
           name="descProgetto"
-          value={props.inputs.descProgetto || ""}
+          value={props.inputs.descProgetto}
           onChange={props.handleChange}
           type="text"
           placeholder="Com’è nata l’idea, quanti anni fa, aneddoti, etc..."
@@ -134,7 +136,7 @@ const Progetto = (props) => {
         <h4>Obiettivo del progetto</h4>
         <input
           name="obbProgetto"
-          value={props.inputs.obbProgetto || ""}
+          value={props.inputs.obbProgetto}
           onChange={props.handleChange}
           type="text"
           placeholder="Perchè le persone dovrebbero aiutarti? Quale scopo raggiungi?"
@@ -144,7 +146,7 @@ const Progetto = (props) => {
         <h4>Il team</h4>
         <input
           name="team"
-          value={props.inputs.team || ""}
+          value={props.inputs.team}
           onChange={props.handleChange}
           type="text"
           placeholder="Presenta le persone che lavorano al progetto e il loro background"
@@ -161,7 +163,7 @@ const Progetto = (props) => {
               placeholder="inserisci titolo step"
             />
 
-            <button className="btn-plus-minus" onClick={() => handleAdd()}>
+            <button key="titoloRoadStepAdd" className="btn-plus-minus" onClick={handleAdd}>
               +
             </button>
           </div>
@@ -174,9 +176,10 @@ const Progetto = (props) => {
 
         {val.map((data, i) => {
           return (
-            <div>
+            <div key={"road" + i}>
               <div className="container-plus">
                 <input
+                  key={"titoloRoadStep" + i}
                   name={"titoloRoadStep" + i}
                   type="text"
                   value={data}
@@ -184,13 +187,15 @@ const Progetto = (props) => {
                   placeholder="inserisci titolo step"
                 />
                 <button
+                  key={"titoloRoadStepDel" + i}
                   className="btn-plus-minus"
-                  onClick={() => handleDelete(i)}
+                  onClick={(e) => handleDelete(e, i)}
                 >
                   x
                 </button>
               </div>
               <textarea
+                key={"descrRoadStep" + i}
                 name={"descrRoadStep" + i}
                 placeholder="descrivi lo step della roadmap"
               />
@@ -198,9 +203,9 @@ const Progetto = (props) => {
           );
         })}
 
-        {/* <input name="titoloRoadStep2" value={props.inputs.titoloRoadStep2 || ""} 
+        {/* <input name="titoloRoadStep2" value={props.inputs.titoloRoadStep2} 
                 onChange={props.handleChange} type="text" placeholder="inserisci titolo step" />
-            <textarea name="descrRoadStep2" value={props.inputs.descrRoadStep2 || ""} 
+            <textarea name="descrRoadStep2" value={props.inputs.descrRoadStep2} 
                 onChange={props.handleChange} placeholder="descrivi lo step della roadmap" /> */}
       </div>
 

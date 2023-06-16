@@ -17,6 +17,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   
+
   return (
     <HashRouter>
       <Routes>
@@ -29,7 +30,7 @@ function App() {
         <Route path="myprojects" element={<MyProjects />} />
         <Route path="profile" element={<Profile />} />
         <Route path="swap" element={<Swap />} />
-        <Route path="xdao" element={<XDao />} />
+        <Route path="dao" element={<XDao />} />
         <Route path="impostazioni" element={<Impostazioni />} />
         <Route path="loading" element={<LoadingPage />} />
         <Route path="dopotpower" element={<DopotPower />} />

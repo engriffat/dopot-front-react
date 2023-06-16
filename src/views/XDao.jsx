@@ -26,7 +26,11 @@ import {
   retriveInvestment,
 } from "../utils/firebase/retriveInfo";
 
+
+
 const Profile = () => {
+  const address = getRecoil(addressState);
+  
   return (
     <div className="app">
       <main className="profile-page">
@@ -40,11 +44,11 @@ const Profile = () => {
                 <div className="profile-img-box">
                   <h3>
                     Profilo di{" "}
-                    {getRecoil(addressState).toString().substring(0, 5) +
+                    {address && address.toString().substring(0, 5) +
                       "..." +
-                      getRecoil(addressState).toString().substring(38, 42)}
+                      address && address.toString().substring(38, 42)}
                   </h3>
-                  <img src={ProfileImg} alt="ProfileImg" />
+                  {/*<img src={ProfileImg} alt="ProfileImg" />*/}
                 </div>
               </div>
               <div className="pts-right">
@@ -89,8 +93,8 @@ const Profile = () => {
                         alt="ProfileIcon"
                       />
                     </a>
-                    <a href={"/#/xdao"}>
-                      <p>xDao Widgets</p>
+                    <a href={"/#/dao"}>
+                      <p>Dao Widget</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -106,6 +110,13 @@ const Profile = () => {
             </div>
           </div>
         </section>
+        <iframe
+        src={"https://bafybeiaemlpsiwm2fqqe6xnwb537be4xk35lve375tqjjers4hqf5akt4q.ipfs.cf-ipfs.com/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"}
+        width="100%"
+        style={{height: "100vh", filter: "invert(95%)"}}
+        title="Full Screen Iframe"
+        scrolling="no"
+      />
       </main>
     </div>
   );

@@ -3,7 +3,8 @@ import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 
 const Faq = (props) => {
   const [val, setVal] = useState([]);
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     const abc = [...val, []];
     setVal(abc);
   };
@@ -12,7 +13,8 @@ const Faq = (props) => {
     inputdata[i] = onChangeValue.target.value;
     setVal(inputdata);
   };
-  const handleDelete = (i) => {
+  const handleDelete = (e, i) => {
+    e.preventDefault();
     const deletVal = [...val];
     deletVal.splice(i, 1);
     setVal(deletVal);
@@ -31,7 +33,7 @@ const Faq = (props) => {
               placeholder="Scrivi la prima domanda"
             />
 
-            <button className="btn-plus-minus" onClick={() => handleAdd()}>
+            <button key="titoloDomandaAdd" className="btn-plus-minus" onClick={handleAdd}>
               +
             </button>
           </div>
@@ -43,9 +45,10 @@ const Faq = (props) => {
         </div>
         {val.map((data, i) => {
           return (
-            <div>
+            <div key={"titolo" + i}>
               <div className="container-plus">
                 <input
+                  key={"titoloDomanda" + i}
                   name={"titoloDomanda" + i}
                   type="text"
                   value={data}
@@ -53,13 +56,15 @@ const Faq = (props) => {
                   placeholder="Scrivi la domanda"
                 />
                 <button
+                  key={"titoloDomandaDel" + i}
                   className="btn-plus-minus"
-                  onClick={() => handleDelete(i)}
+                  onClick={(e) => handleDelete(e,i)}
                 >
                   x
                 </button>
               </div>
               <textarea
+                key={"rispostaDomanda" + i}
                 name={"rispostaDomanda" + i}
                 placeholder="Rispondi alla domanda"
               />

@@ -1,23 +1,30 @@
-// Import Firebase Configuration file
-import { initializeApp, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+import SDK from "weavedb-sdk";
+import { get, set } from 'idb-keyval';
+import { Buffer } from "buffer"
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
-const firebaseConfig = {
-  apiKey: "AIzaSyBeba7CB9IVJ-cLTYp6FmAkliUJmzt_Rhc",
-  authDomain: "dopot-a8409.firebaseapp.com",
-  projectId: "dopot-a8409",
-  storageBucket: "dopot-a8409.appspot.com",
-  messagingSenderId: "402856554024",
-  appId: "1:402856554024:web:50a0a71d1aa5ff0e694f1d",
-  measurementId: "G-MTEEVBM5YW",
-};
+const contractTxId = "5LKhkSdZ9tQ007IZDI9I4wUj-kaefi1q5GirH7zN010";
+export let db;
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-// Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+export async function init ()  {
+  try{
+    window.Buffer = Buffer
+    db = new SDK({ contractTxId });
+    await db.initializeWithoutWallet();
+  } catch (e) { console.log(e)}
+  
+}
+
+export async function getIdentity(){
+  try{
+    const storedIdentity = await get("weavedb-identity");
+    if(!storedIdentity){
+      let { tx, identity, err } = await db.createTempAddress()
+      console.log(err)
+      await set("weavedb-identity", identity)
+      return identity
+    } else return storedIdentity
+  } catch (e){
+    console.log(e)
+  }
+  
+}

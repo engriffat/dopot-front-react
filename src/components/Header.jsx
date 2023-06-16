@@ -25,7 +25,7 @@ const Header = (props) => {
           <div className="header-right">
             <a href="#">Home</a>
             <a href="#">FAQ</a>
-            <a href={props.demo ? "/#/dopotpower" : ""}>DS Token</a>
+            <a href={"/#/dopotpower"}>DS Token</a>
 
             <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
               <button class="dropbtn">
@@ -92,7 +92,7 @@ const Header = (props) => {
                 <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
               </div>
             </div>
-            <a href={props.demo ? "/#/profile" : ""}>
+            <a href={"/#/profile"}>
               <button className="grd-btn dopot-btn-sm">Account</button>
             </a>
 
@@ -131,7 +131,7 @@ const Header = (props) => {
             <div className="header-mob-box">
               <a href="#">Home</a>
               <a href="#">FAQ</a>
-              <a href={props.demo ? "/#/dopotpower" : ""}>DS Token</a>
+              <a href={"/#/dopotpower"}>DS Token</a>
               <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
                 <button class="dropbtn">
                   Community{" "}

@@ -26,33 +26,72 @@ import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/impostazioni.png";
+const { ethers } = require("ethers");
 
 const InsProgetto = () => {
   var step = [];
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({ logoAziendaListFiles: [], documentazioneDefListFiles: [], imageNftDefListFiles: [], giorniCampagna: "45", numeroProdotti: "1" });
   const [progressionStep, setprogressionStep] = useState(0);
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-    if (event.target.files != null) {
-      setInputs((values) => ({
-        ...values,
-        [name + "ListFiles"]: event.target.files,
+    if (e.target.files != null) {
+      setInputs((prevState) => ({
+        ...prevState,   
+        [propName]: []  
       }));
+      const selectedFiles = [...e.target.files];
+      const propName = name + "ListFiles";
+      selectedFiles.forEach((file, i) => {
+        const reader = new FileReader();
+        reader.readAsArrayBuffer(file); 
+        reader.onload = () => {
+          setInputs((prevState) => ({
+            ...prevState,   
+            [propName]: [
+              ...prevState[propName], 
+              Buffer.from(reader.result)
+            ]  
+          }));
+          //console.dir(inputs);
+        };
+        reader.onerror = () => {
+          console.log('Error reading file!');
+        }
+      }); 
+    } else {
+      setInputs((values) => ({ ...values, [name]: value }));
+      console.dir(inputs);
     }
-
-    setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    try {
-      addproj(inputs);
-      // navigate("/loading", { replace: true });
-    } catch (error) {}
+  const handleChangeNft = (e, nProdotto) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64 = reader.result;
+      setInputs(prevState => {
+        const updatedInputs = [...prevState.imageNftDefListFiles];
+        updatedInputs[nProdotto] = base64;
+        return { ...prevState, imageNftDefListFiles: updatedInputs };
+      });
+    };
+  }
+
+  const handleSubmit = async (event) => {
+    if(event.target.id === "submit"){
+      event.preventDefault();
+      try {
+        await addproj(inputs);
+        await navigate("/loading", { replace: true });
+      } catch (error) {
+        console.log(error);
+      }
+  }
   };
 
   const renderCurrentSelection = () => {
@@ -115,10 +154,12 @@ const InsProgetto = () => {
           <Prodotto
             inputs={inputs}
             handleChange={handleChange}
+            handleChangeNft={handleChangeNft}
             setState={incrementStep}
           ></Prodotto>
         );
         return step;
+
 
       case 4:
         step[0] = (
@@ -134,38 +175,12 @@ const InsProgetto = () => {
           <Progetto inputs={inputs} handleChange={handleChange}></Progetto>
         );
         step[3] = (
-          <Prodotto inputs={inputs} handleChange={handleChange}></Prodotto>
+          <Prodotto inputs={inputs} handleChange={handleChange} handleChangeNft={handleChangeNft}></Prodotto>
         );
-        step[4] = (
-          <NftMint
-            inputs={inputs}
-            handleChange={handleChange}
-            setState={incrementStep}
-          ></NftMint>
-        );
-
-        return step;
-
-      case 5:
-        step[0] = (
-          <InfBase inputs={inputs} handleChange={handleChange}></InfBase>
-        );
-        step[1] = (
-          <Questionario
-            inputs={inputs}
-            handleChange={handleChange}
-          ></Questionario>
-        );
-        step[2] = (
-          <Progetto inputs={inputs} handleChange={handleChange}></Progetto>
-        );
-        step[3] = (
-          <Prodotto inputs={inputs} handleChange={handleChange}></Prodotto>
-        );
-        step[4] = (
+        /*step[4] = (
           <NftMint inputs={inputs} handleChange={handleChange}></NftMint>
-        );
-        step[5] = <Faq inputs={inputs} handleChange={handleChange}></Faq>;
+        );*/
+        step[4] = <Faq inputs={inputs} handleChange={handleChange}></Faq>;
 
         return step;
 
@@ -186,9 +201,9 @@ const InsProgetto = () => {
       case 3:
         return <ProdottoHeader></ProdottoHeader>;
 
+      /*case 4:
+        return <NftMintHeader></NftMintHeader>;*/
       case 4:
-        return <NftMintHeader></NftMintHeader>;
-      case 5:
         return <FaqHeader></FaqHeader>;
       default:
         return null;
@@ -198,7 +213,7 @@ const InsProgetto = () => {
   const incrementStep = () => {
     setprogressionStep(progressionStep + 1);
   };
-
+  const address = getRecoil(addressState);
 
   return (
     <div className="app">
@@ -213,9 +228,9 @@ const InsProgetto = () => {
                 <div className="profile-img-box">
                   <h3>
                     Profilo di{" "}
-                    {getRecoil(addressState).toString().substring(0, 5) +
+                    {address && address.toString().substring(0, 5) +
                       "..." +
-                      getRecoil(addressState).toString().substring(38, 42)}
+                      address && address.toString().substring(38, 42)}
                   </h3>
 
                   <img src={ProfileImg} alt="" />
@@ -260,11 +275,11 @@ const InsProgetto = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/xdao"}>
+                    <a href={"/#/dao"}>
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/xdao"}>
-                      <p>xDao Widgets</p>
+                    <a href={"/#/dao"}>
+                      <p>Dao Widget</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -290,7 +305,7 @@ const InsProgetto = () => {
               <h2>Inserisci il tuo progetto </h2>
             </div>
             {renderCurrentSelectionHeader()}
-            <form onSubmit={handleSubmit}>{renderCurrentSelection()}</form>
+            <form id="submit" onSubmit={handleSubmit}>{renderCurrentSelection()}</form>
           </div>
         </section>
         <Footer />

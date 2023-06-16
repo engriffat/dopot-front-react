@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 const Card = (props) => {
   const navigate = useNavigate();
-  const percentage = 65;
+  const percentage = props.progetto.funds / props.progetto.quota * 100
 
   function handleRedirect(e) {
     navigate(`/card/${props.progetto.address}`);
@@ -66,12 +66,12 @@ const Card = (props) => {
 
         <div className="pmg-rc-right">
           <div className="pc-hero-icon-grid">
-            <IconInfoDai img={PCDollarIcon} text="324.211 " text2="su 200.00" />
+            <IconInfoDai img={PCDollarIcon} text={props.progetto.funds} text2={`of ${props.progetto.quota}`} />
             <IconInfoCard
               img={PCUserIcon}
-              text="2304 persone hanno investito"
+              text={`${props.progetto.investorsNumber} investors`}
             />
-            <IconInfoCard img={PCCalendarIcon} text="21 giorni al termine" />
+            <IconInfoCard img={PCDollarIcon} text={`${props.progetto.fundRaisingDeadline} days remaining`} />
           </div>
           <div className="pc-70-box box-bk-over-logo">
             <p>
@@ -80,8 +80,8 @@ const Card = (props) => {
             <div className="graph-box">
               <CircularProgressbar
                 value={percentage}
-                text={`${percentage}%`}
-                strokeWidth={15}
+                text={`${Math.round(percentage)}%`}
+                strokeWidth={5}
               />
             </div>
           </div>

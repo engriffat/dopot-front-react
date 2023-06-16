@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import PaginaCardHero from "../assets/img/pc-hero-img.png";
@@ -26,28 +26,51 @@ import TabSocial from "../components/TabSocial";
 import TabQuestionario from "../components/TabQuestionario";
 import TabDocumenti from "../components/TabDocumenti";
 import { addFavorites } from "../utils/firebase/writeInfos";
+import { downloadProjects } from "../utils/firebase/retriveInfo";
 
 const PaginaCard = () => {
   let { address } = useParams();
-  var progetto = getRecoil(progettiState).find((x) => x.address === address);
-  const cards = [];
-  var i = 1;
+  useEffect(() => {( async () => { await downloadProjects(); })(); });
+  let progetto = getRecoil(progettiState).find((x) => x.address === address);
+  console.dir(progetto)
+  const [base64Data, setBase64Data] = useState([]);
 
-  for (var i = 1; i < parseInt(progetto.numeroProdotti) + 1; i++) {
+  useEffect(() => {
+    // Fetch the base64 data asynchronously
+    const fetchBase64Data = async () => {
+      // Make an API call or any other asynchronous operation to get the base64 data
+      for(const tier of progetto.imageNftDefListFiles){
+        const response = await fetch(tier["image"].replace("ar://", "https://arweave.net/"));
+        console.log(response)
+        const data = await response.text();
+        setBase64Data((prevData) => [...prevData, data]);
+
+      }
+      
+    };
+
+    fetchBase64Data();
+  }, []);
+
+  const cards = [];
+  let i = 1;
+
+  for (; i < parseInt(progetto.numeroProdotti) + 1; i++) {
     cards.push(
       <InvestiCard
         address={progetto.address}
         numTier={i}
         spec={progetto["specs" + i]}
         supply={progetto["supply" + i]}
-        prezzo={progetto["price" + i]}
-        img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]}
+        price={progetto["price" + i]}
+        img={base64Data[i-1] }
         titolo={progetto["name" + i]}
+        currentSupply={progetto.imageNftDefListFiles[i-1]["currentSupply"]}
       ></InvestiCard>
     );
   }
 
-  const percentage = 90;
+  const percentage = progetto.funds / progetto.quota * 100
 
   const [tab, setTab] = useState(0);
 
@@ -100,7 +123,7 @@ const PaginaCard = () => {
 
                 <div className="pc-btn-box">
                   <button
-                    // onClick={() => addFavorites(progetto.address)}
+                    onClick={() => addFavorites(progetto.address)}
                     className="grd-btn dopot-btn-lg"
                   >
                     <img
@@ -122,17 +145,16 @@ const PaginaCard = () => {
                 <div className="pc-hero-icon-grid ">
                   <IconInfoDai
                     img={PCDollarIcon}
-                    text="324.211 "
-                    text2="su 200.00"
+                    text={`DAI ${progetto.funds} of DAI ${progetto.quota}`}
                   />
 
                   <IconInfoCard
                     img={PCUserIcon}
-                    text="2304 persone hanno investito"
+                    text={`${progetto.investorsNumber} investors`}
                   />
                   <IconInfoCard
                     img={PCCalendarIcon}
-                    text="21 giorni al termine"
+                    text={`${progetto.fundRaisingDeadline} days remaining`}
                   />
                 </div>
                 <div className="pc-70-box box-bk-over-logo">
@@ -142,7 +164,7 @@ const PaginaCard = () => {
                   <div className="graph-box">
                     <CircularProgressbar
                       value={percentage}
-                      text={`${percentage}%`}
+                      text={`${Math.round(percentage)}%`}
                       strokeWidth={15}
                     />
                     ;
@@ -262,10 +284,9 @@ const PaginaCard = () => {
                       <label for="click" style={{ cursor: "pointer" }}>
                         <img
                           src={(() => {
-                            if (progetto.logoAzienda != null) {
+                            if (progetto.logoAziendaListFiles[0] != null) {
                               return (
-                                "data:image/jpg;base64," +
-                                progetto.logoAziendaListFiles.base64
+                                "https://arweave.net/"+progetto.logoAziendaListFiles[0]
                               );
                             } else return ImageIcon;
                           })()}
@@ -275,10 +296,9 @@ const PaginaCard = () => {
                       <div class="content logo-center">
                         <img
                           src={(() => {
-                            if (progetto.logoAzienda != null) {
+                            if (progetto.logoAziendaListFiles[0] != null) {
                               return (
-                                "data:image/jpg;base64," +
-                                progetto.logoAziendaListFiles.base64
+                                "https://arweave.net/"+progetto.logoAziendaListFiles[0]
                               );
                             } else return ImageIcon;
                           })()}

@@ -9,14 +9,15 @@ import { getRecoil, setRecoil } from 'recoil-nexus';
 const SmallTier = (props) => {
 
   var progetto=getRecoil(progettiState).find(x => x.address === props.address);
+  console.dir(props.tier)
   return (
-    <ProfileCardLeft img={"data:image/jpg;base64," + progetto.logoAziendaListFiles["base64"]} price={progetto["price"+props.tier]+"€"}>
+    <ProfileCardLeft img={"https://arweave.net/"+progetto.logoAziendaListFiles[0]} price={"DAI " + progetto["price"+props.tier]}>
     <h4> {progetto["name"+props.tier]}</h4>
       <p>
        {progetto["specs"+props.tier]}
       </p>
       <br />
-      <p>- Supply: {progetto["supply"+props.tier]}</p>
+      <p>{progetto.imageNftDefListFiles[props.tier-1]["currentSupply"]}/{progetto["supply" + props.tier]} supply</p>
 
     </ProfileCardLeft>
   );

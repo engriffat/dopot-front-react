@@ -17,7 +17,7 @@ const SmallProject = (props) => {
     (x) => x.address === props.address
   );
 
-  const percentage = 65;
+  const percentage = progetto.funds / progetto.quota * 100;
   const navigate = useNavigate();
 
   function handleRedirect(e) {
@@ -43,7 +43,7 @@ const SmallProject = (props) => {
             <a
               className="link-social-new box-bk-over-logo"
               href={progetto.sito}
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               {progetto.sito}
             </a>

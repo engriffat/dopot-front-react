@@ -423,7 +423,6 @@ a {
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
-  background: linear-gradient(30deg, #fca040, #c22e80);
 }
 .pmg-left {
   width: 100%;

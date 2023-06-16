@@ -3,7 +3,8 @@ import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 
 const InfBase = (props) => {
   const [val, setVal] = useState([]);
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     const abc = [...val, []];
     setVal(abc);
   };
@@ -12,23 +13,26 @@ const InfBase = (props) => {
     inputdata[i] = onChangeValue.target.value;
     setVal(inputdata);
   };
-  const handleDelete = (i) => {
+  const handleDelete = (e, i) => {
+    e.preventDefault();
     const deletVal = [...val];
     deletVal.splice(i, 1);
     setVal(deletVal);
   };
   //val 2
   const [val2, setVal2] = useState([]);
-  const handleAdd2 = () => {
+  const handleAdd2 = (e) => {
+    e.preventDefault();
     const abc2 = [...val2, []];
     setVal2(abc2);
   };
   const handleChange2 = (onChangeValue, i) => {
-    const inputdata2 = [...val];
+    const inputdata2 = [...val2];
     inputdata2[i] = onChangeValue.target.value;
     setVal2(inputdata2);
   };
-  const handleDelete2 = (i) => {
+  const handleDelete2 = (e, i) => {
+    e.preventDefault();
     const deletVal2 = [...val2];
     deletVal2.splice(i, 1);
     setVal2(deletVal2);
@@ -42,7 +46,7 @@ const InfBase = (props) => {
         <input
           type="text"
           name="nomeAzienda"
-          value={props.inputs.nomeAzienda || ""}
+          value={props.inputs.nomeAzienda}
           onChange={props.handleChange}
           placeholder="inserisci il nome"
         />
@@ -141,17 +145,19 @@ const InfBase = (props) => {
       <div className="ins-input-box">
         <h4>Logo</h4>
         <input
+          key="logoAzienda"
           name="logoAzienda"
-          value={props.inputs.logoAzienda || ""}
+          value={props.inputs.logoAzienda}
           onChange={props.handleChange}
           type="file"
+          accept=".png,.jpg,.jpeg"
         />
       </div>
       <div className="ins-input-box">
         <h4>Descrizione Progetto</h4>
         <textarea
           name="descrizione"
-          value={props.inputs.descrizione || ""}
+          value={props.inputs.descrizione}
           onChange={props.handleChange}
           type="textarea"
           placeholder="Inserisci una breve Descrizione"
@@ -161,7 +167,7 @@ const InfBase = (props) => {
         <h4>Numero P.IVA (favoltativo)</h4>
         <input
           name="pIva"
-          value={props.inputs.pIva || ""}
+          value={props.inputs.pIva}
           onChange={props.handleChange}
           type="text"
           placeholder="Inserisci numero partita IVA"
@@ -181,12 +187,13 @@ const InfBase = (props) => {
         <h4>Social Media </h4>
         <div className="container-plus">
           <input
-            name="socialMediaDef"
+            name="socialMediaDef0"
             type="text"
+            onChange={props.handleChange}
             placeholder="Inserisci link eventuali Social Media"
           />
 
-          <button className="btn-plus-minus" onClick={() => handleAdd()}>
+          <button className="btn-plus-minus" onClick={(e) => handleAdd(e)}>
             +
           </button>
         </div>
@@ -194,15 +201,15 @@ const InfBase = (props) => {
           return (
             <div className="container-plus">
               <input
-                name={"socialMedia" + i}
+                name={"socialMediaDef" + (i+1)}
                 type="text"
                 placeholder="Inserisci link eventuali Social Media"
                 value={data}
-                onChange={(e) => handleChange(e, i)}
+                onChange={(e, i) => handleChange(e, i)}
               />
               <button
                 className="btn-plus-minus"
-                onClick={() => handleDelete(i)}
+                onClick={(e, i) => handleDelete(e, i)}
               >
                 x
               </button>
@@ -217,48 +224,21 @@ const InfBase = (props) => {
         <div className="container-plus">
           <input
             name="documentazioneDef"
+            accept=".pdf"
             type="file"
+            onChange={props.handleChange}
+            multiple
             placeholder="trascina il o
                 clicca per inserirlo
                 (.pdf)"
           />
-
-          <button
-            style={{ marginTop: "0.9%", marginBottom: "0.9%" }}
-            className="btn-plus-minus"
-            onClick={() => handleAdd2()}
-          >
-            +
-          </button>
         </div>
-        {val2.map((data, i) => {
-          return (
-            <div className="container-plus">
-              <input
-                name={"documentazione" + i}
-                type="file"
-                placeholder="trascina il o
-                clicca per inserirlo
-                (.pdf)"
-                value={data}
-                onChange={(e) => handleChange2(e, i)}
-              />
-              <button
-                style={{ marginTop: "0.9%", marginBottom: "0.9%" }}
-                className="btn-plus-minus"
-                onClick={() => handleDelete2(i)}
-              >
-                x
-              </button>
-            </div>
-          );
-        })}
       </div>
 
       <div className="ins-input-box">
         <h4>Introduzione</h4>
         <textarea
-          value={props.inputs.introduzione || ""}
+          value={props.inputs.introduzione}
           onChange={props.handleChange}
           name="introduzione"
           placeholder="inserisci un introduzione"
@@ -267,7 +247,7 @@ const InfBase = (props) => {
           <h4>Immagine Introduzione </h4>
           <input
             name="fotoIntro"
-            value={props.inputs.fotoIntro || ""}
+            value={props.inputs.fotoIntro}
             onChange={props.handleChange}
             type="file"
           />
@@ -275,7 +255,7 @@ const InfBase = (props) => {
 
         <h4>Storia</h4>
         <textarea
-          value={props.inputs.storia || ""}
+          value={props.inputs.storia}
           onChange={props.handleChange}
           name="storia"
           placeholder="inserisci la storia della tua azienda"
@@ -284,7 +264,7 @@ const InfBase = (props) => {
           <h4>Immagine Introduzione </h4>
           <input
             name="fotoStoria"
-            value={props.inputs.fotoStoria || ""}
+            value={props.inputs.fotoStoria}
             onChange={props.handleChange}
             type="file"
           />
@@ -292,7 +272,7 @@ const InfBase = (props) => {
 
         <h4>Vision</h4>
         <textarea
-          value={props.inputs.vision || ""}
+          value={props.inputs.vision}
           onChange={props.handleChange}
           name="vision"
           placeholder="inserisci la vision della vostra azienda"
@@ -301,7 +281,7 @@ const InfBase = (props) => {
           <h4>Immagine Introduzione </h4>
           <input
             name="fotoVision"
-            value={props.inputs.fotoVision || ""}
+            value={props.inputs.fotoVision}
             onChange={props.handleChange}
             type="file"
           />

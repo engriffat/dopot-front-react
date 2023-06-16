@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/dashboard.css";
 import "../styles/globals.css";
 import Header from "../components/Header";
@@ -13,10 +13,14 @@ import "../styles/profile.css";
 import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import Footer from "../components/Footer";
+import { downloadProjects } from "../utils/firebase/retriveInfo";
 
 const Home = () => {
   const cards = [];
-  getRecoil(progettiState).forEach((element) => {
+  const progetti = getRecoil(progettiState);
+  useEffect(() => {( async () => { await downloadProjects(); })(); });
+
+  progetti.forEach((element) => {
     cards.push(
       <Card
         progetto={element}
