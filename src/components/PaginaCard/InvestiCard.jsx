@@ -12,11 +12,11 @@ const InvestiCard = (props) => {
           <h3 className="box-bk-over-logo">{props.titolo}</h3>
           <p className="box-bk-over-logo">{props.spec}</p>
           <br />
-          <p className="box-bk-over-logo">- supply {props.supply}</p>
+          <p className="box-bk-over-logo">{props.currentSupply}/{props.supply} supply</p>
 
-          <h5>{props.price}€</h5>
+          <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => addInvestment(props.address, props.numTier)}
+            onClick={() => addInvestment(props.address, props.numTier, props.price)}
             className="grd-btn dopot-btn-sm"
           >
             Investi
@@ -30,11 +30,11 @@ const InvestiCard = (props) => {
           <h3 className="box-bk-over-logo">{props.titolo}</h3>
           <p className="box-bk-over-logo">{props.spec}</p>
           <br />
-          <p className="box-bk-over-logo">- supply {props.supply}</p>
+          <p className="box-bk-over-logo">{props.currentSupply}/{props.supply} supply</p>
 
-          <h5>{props.price}€</h5>
+          <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => addInvestment(props.address, props.numTier)}
+            onClick={() => addInvestment(props.address, props.numTier, props.price)}
             className="grd-btn dopot-btn-sm"
           >
             Investi

@@ -4,22 +4,23 @@ import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 const Intro = (props) => {
     return(<><div className="ins-input-box">
     <h4>Introduzione</h4>
-    <textarea  value={props.inputs.domanda1 || ""} 
+    <textarea  value={props.inputs.domanda1} 
         onChange={props.handleChange} name="domanda1" placeholder="inserisci un introduzione" />
 
         <h4>Logo</h4>
         <input
-        name="logoAzienda" value={props.inputs.logoAzienda || ""} 
-        onChange={props.handleChange}
-            type="file" 
-            />
+            name="logoAzienda" value={props.inputs.logoAzienda} 
+            onChange={props.handleChange}
+            type="file"
+            accept=".png,.jpg,.jpeg"
+        />
 
     <h4>Storia</h4>
-    <textarea value={props.inputs.domanda2 || ""} 
+    <textarea value={props.inputs.domanda2} 
         onChange={props.handleChange} name="domanda2" placeholder="inserisci la storia della tua azienda" />
     
     <h4>Vision</h4>
-    <textarea value={props.inputs.domanda3 || ""} 
+    <textarea value={props.inputs.domanda3} 
         onChange={props.handleChange} name="domanda3" placeholder="inserisci la vision della vostra azienda" />
 
     

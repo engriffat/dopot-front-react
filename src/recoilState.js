@@ -10,17 +10,21 @@ const addressState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+const weaveState = atom({
+  key: "identity",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+})
+
 const IpfsState = atom({
   key: "IPFS",
   default: null
 });
 
-
 const providerState = atom({
   key: 'provider',
   default: null,
 })
-
 
 const progettiAddressState = atom({
   key: 'progettiAddress',
@@ -31,7 +35,12 @@ const progettiAddressState = atom({
 const progettiState = atom({
   key: 'progetti',
   default: [],
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom,
+    ({ setSelf }) => {
+      setTimeout(() => {
+        setSelf([]);
+      }, 12 * 60 * 60 * 1000); // 12h
+    },],
 })
 
 const progettiImageState = atom({
@@ -41,4 +50,4 @@ const progettiImageState = atom({
 })
 
 
-export {IpfsState, progettiAddressState,progettiState, providerState, progettiImageState, addressState}
+export {IpfsState, progettiAddressState,progettiState, providerState, progettiImageState, addressState, weaveState}

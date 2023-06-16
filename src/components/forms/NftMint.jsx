@@ -3,7 +3,8 @@ import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 
 const NftMint = (props) => {
   const [val, setVal] = useState([]);
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     const abc = [...val, []];
     setVal(abc);
   };
@@ -12,7 +13,8 @@ const NftMint = (props) => {
     inputdata[i] = onChangeValue.target.value;
     setVal(inputdata);
   };
-  const handleDelete = (i) => {
+  const handleDelete = (e, i) => {
+    e.preventDefault();
     const deletVal = [...val];
     deletVal.splice(i, 1);
     setVal(deletVal);
@@ -20,59 +22,19 @@ const NftMint = (props) => {
   return (
     <>
       <div className="ins-input-box">
-        <h1>Carica le immagini del tuo NFT</h1>
+        <h1>Carica l'immagine per NFT del prodotto</h1>
         <div>
           <div className="container-plus">
             <input
               name="imageNftDef"
-              onChange={props.handleChange}
+              onChange={(e) => props.handleChangeNft(e, props.nProdotto-1)}
               type="file"
               placeholder="Scrivi la prima domanda"
+              accept=".png,.jpg,.jpeg"
             />
-
-            <button
-              style={{ marginTop: "0.9%", marginBottom: "0.9%" }}
-              className="btn-plus-minus"
-              onClick={() => handleAdd()}
-            >
-              +
-            </button>
           </div>
         </div>
-        {val.map((data, i) => {
-          return (
-            <div>
-              <div className="container-plus">
-                <input
-                  name={"imageNftDef" + i}
-                  type="file"
-                  value={data}
-                  onChange={(e) => handleChange(e, i)}
-                />
-                <button
-                  style={{ marginTop: "0.9%", marginBottom: "0.9%" }}
-                  className="btn-plus-minus"
-                  onClick={() => handleDelete(i)}
-                >
-                  x
-                </button>
-              </div>
-            </div>
-          );
-        })}
       </div>
-
-      {(() => {
-        if (props.setState != null) {
-          return (
-            <div className="add-btn-box">
-              <a onClick={props.setState}>
-                <img src={PlusGrdIcon} alt="PlusGrdIcon" />
-              </a>
-            </div>
-          );
-        }
-      })()}
     </>
   );
 };

@@ -68,11 +68,11 @@ const Swap = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/xdao"}>
+                    <a href={"/#/dao"}>
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/xdao"}>
-                      <p>xDao Widget</p>
+                    <a href={"/#/dao"}>
+                      <p>Dao Widget</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">

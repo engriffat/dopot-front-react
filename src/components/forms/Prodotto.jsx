@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { NftMint, NftMintHeader } from "./NftMint";
 
 const Prodotto = (props) => {
   const [numeroProdotti, setnumeroProdotti] = useState(1);
@@ -20,96 +21,51 @@ const Prodotto = (props) => {
         <h1>Informazioni sui Prodotti che offri</h1>
         <h4>Quanti prodotti offri?</h4>
         <div className="ins-btn-box">
-          <button
-            value={1}
-            onClick={toggleNumeroProdotti}
-            className={
-              numeroProdotti == 1
-                ? "grd-btn dopot-btn-lg"
-                : "purple-border-btn dopot-btn-lg"
-            }
-            type="button"
-          >
-            1
-          </button>
-          <button
-            value={2}
-            onClick={toggleNumeroProdotti}
-            className={
-              numeroProdotti == 2
-                ? "grd-btn dopot-btn-lg"
-                : "purple-border-btn dopot-btn-lg"
-            }
-            type="button"
-          >
-            2
-          </button>
-          <button
-            value={3}
-            onClick={toggleNumeroProdotti}
-            className={
-              numeroProdotti == 3
-                ? "grd-btn dopot-btn-lg"
-                : "purple-border-btn dopot-btn-lg"
-            }
-            type="button"
-          >
-            3
-          </button>
-          <button
-            value={4}
-            onClick={toggleNumeroProdotti}
-            className={
-              numeroProdotti == 4
-                ? "grd-btn dopot-btn-lg"
-                : "purple-border-btn dopot-btn-lg"
-            }
-            type="button"
-          >
-            4
-          </button>
+          {[1, 2, 3, 4].map((value) => (
+            <button
+              key={value}
+              value={value}
+              onClick={toggleNumeroProdotti}
+              className={
+                numeroProdotti === value
+                  ? "grd-btn dopot-btn-lg"
+                  : "purple-border-btn dopot-btn-lg"
+              }
+              type="button"
+            >
+              {value}
+            </button>
+          ))}
         </div>
         <br />
         <br />
         <Tabs>
-          <TabList>
-            {numeroProdotti >= 1 && <Tab>Prodotto 1</Tab>}
-            {numeroProdotti >= 2 && <Tab>Prodotto 2</Tab>}
-            {numeroProdotti >= 3 && <Tab>Prodotto 3</Tab>}
-            {numeroProdotti >= 4 && <Tab>Prodotto 4</Tab>}
-          </TabList>
-          <TabPanel>
-            <SchedaProdotto
-              nProdotto={1}
-              inputs={props.inputs}
-              handleChange={props.handleChange}
-              setState={props.incrementStep}
-            ></SchedaProdotto>
-          </TabPanel>
-          <TabPanel>
-            <SchedaProdotto
-              nProdotto={2}
-              inputs={props.inputs}
-              handleChange={props.handleChange}
-              setState={props.incrementStep}
-            ></SchedaProdotto>
-          </TabPanel>
-          <TabPanel>
-            <SchedaProdotto
-              nProdotto={3}
-              inputs={props.inputs}
-              handleChange={props.handleChange}
-              setState={props.incrementStep}
-            ></SchedaProdotto>
-          </TabPanel>
-          <TabPanel>
-            <SchedaProdotto
-              nProdotto={4}
-              inputs={props.inputs}
-              handleChange={props.handleChange}
-              setState={props.incrementStep}
-            ></SchedaProdotto>
-          </TabPanel>
+        <TabList>
+          {(() => {
+            const tabs = [];
+            for (let i = 0; i < numeroProdotti; i++) {
+              tabs.push(<Tab key={i}>Prodotto {i + 1}</Tab>);
+            }
+            return tabs;
+          })()}
+        </TabList> 
+          {(() => {
+            const tabPanels = [];
+            for (let i = 0; i < numeroProdotti; i++) {
+              tabPanels.push(
+                <TabPanel key={i} index={i} keepMounted>
+                  <SchedaProdotto
+                    nProdotto={i + 1}
+                    inputs={props.inputs}
+                    handleChange={props.handleChange}
+                    handleChangeNft={props.handleChangeNft}
+                    setState={props.incrementStep}
+                  />
+                </TabPanel>
+              );
+            }
+            return tabPanels;
+          })()}
         </Tabs>
       </div>
       {(() => {
@@ -134,7 +90,7 @@ const SchedaProdotto = (props) => {
       <h4>Nome prodotto n {props.nProdotto}</h4>
       <input 
         name={"name" + props.nProdotto}
-        value={props.inputs["name" + props.nProdotto] || ""}
+        value={props.inputs["name" + props.nProdotto]}
         onChange={props.handleChange}
         type="text" 
         placeholder="inserisci il nome"
@@ -188,13 +144,17 @@ const SchedaProdotto = (props) => {
           value={props.inputs["fotoProdotto" + props.nProdotto]}
           onChange={props.handleChange}
           type="file"
-          placeholder="trascina il o
-        trascina il filele o
-        clicca per inserirlo
-        (.jpeg .png))"
+          placeholder="trascina il file o
+        clicca per inserirlo"
           multiple
+          accept=".png,.jpg,.jpeg"
         />
       </div>
+      <NftMint
+        nProdotto={props.nProdotto}
+        inputs={props.inputs}
+        handleChangeNft={props.handleChangeNft}
+      ></NftMint>
     </>
   );
 };

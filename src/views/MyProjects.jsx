@@ -16,17 +16,31 @@ import BlogImg from "../assets/img/void.jpg";
 import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
 import React, { useState, useEffect } from "react";
 import { getRecoil, setRecoil } from "recoil-nexus";
-import { addressState } from "../recoilState";
-
+import { addressState, progettiState } from "../recoilState";
 import "react-circular-progressbar/dist/styles.css";
-import SmallProject from "../components/SmallProject";
-import SmallTier from "../components/SmallTier";
-import {
-  retriveFavorites,
-  retriveInvestment,
-} from "../utils/firebase/retriveInfo";
+import { withdraw } from "../utils/firebase/writeInfos";
 
 const Profile = () => {
+  const [projectsCard, setProjectsCard] = useState([]);
+  const address = getRecoil(addressState);
+  let projects = getRecoil(progettiState)
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    async function fetchData() {
+      const myProjects = projects.filter(project => project.addressCreator === address);
+      console.log(myProjects)
+      setProjectsCard(myProjects);
+    }
+    fetchData();
+  }, []);
+
+  async function handleWithdraw(projectAddress){
+    const response = window.confirm("Do you want to pay fees with the Dopot token for a discount?");
+    await withdraw(projectAddress, response);
+    console.log(response)
+  }
+
   return (
     <div className="app">
       <main className="profile-page">
@@ -86,11 +100,11 @@ const Profile = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/xdao"}>
+                    <a href={"/#/dao"}>
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/xdao"}>
-                      <p>xDao Widget</p>
+                    <a href={"/#/dao"}>
+                      <p>Dao Widget</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -103,6 +117,46 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+                    
+        <div className="box0">
+          <div className="sec-inv-desk-flex">
+            <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
+            <p>My projects</p>
+          </div>
+        </div>
+
+        <section className="profile-bottom">
+          <div className="box">
+            <div className="profile-main-grid">
+              {projectsCard && projectsCard.map((card, index) => (
+                <div
+                    key={index}
+                    style={{ height: "fit-content" }}
+                    className={"pmg-right"}
+                  >
+                    <div className="pmg-right-card">
+                      <div className="pmg-rc-left-invest">
+                        <h3>{card.introduzione}</h3>
+                      </div>
+
+                      <div className="pmg-rc-right">
+                        <div className="pc-hero-icon-grid"></div>
+                        <div className="pc-70-box"></div>
+                      </div>
+                      <div className="pmg-btn-box">
+                        <button className="grd-btn dopot-btn-lg" onClick={async () => await handleWithdraw(card.address)}>
+                          Withdraw
+                        </button>
+                        <button className="grd-btn dopot-btn-lg" onClick={() => { window.location.href = '/#/card/' + card.address }}>
+                          Discover more
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </section>

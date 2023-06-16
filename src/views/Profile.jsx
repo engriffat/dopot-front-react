@@ -17,7 +17,7 @@ import BlogImg from "../assets/img/void.jpg";
 import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
 import React, { useState, useEffect } from "react";
 import { getRecoil, setRecoil } from "recoil-nexus";
-import { addressState } from "../recoilState";
+import { addressState, progettiState } from "../recoilState";
 
 import "react-circular-progressbar/dist/styles.css";
 import SmallProject from "../components/SmallProject";
@@ -33,41 +33,36 @@ const Profile = () => {
   const [favoriteCard, setfavoriteCard] = useState([]);
   const [isActive, setActive] = useState(true);
   const [isActive2, setActive2] = useState(false);
+  const address = getRecoil(addressState);
+  let projects = getRecoil(progettiState)
 
   useEffect(() => {
     // Update the document title using the browser API
     async function fetchData() {
-      var invested = await retriveInvestment();
-      var tempCard = [];
-      for (let index = 0; index < invested.length; index++) {
-        const element = invested[index];
-        tempCard.push(
-          <SmallTier
-            address={element.addressContract}
-            tier={element.tier}
-          ></SmallTier>
-        );
+      let tempCard = [];
+      //console.dir(projects);
+      for (const project of projects){
+        let tiers = project.investors[address]
+        console.log(tiers)
+        for (const tierId in tiers) {
+          if (tiers.hasOwnProperty(tierId)/* && tiers[tierId] !== 0*/) { console.log("a")
+            tempCard.push({address: project.address, title: project.nomeAzienda});
+          }
+        }
       }
       setinvestedCard(tempCard);
-
-      var favorites = await retriveFavorites();
-      var tempCard = [];
-      for (let index = 0; index < favorites.length; index++) {
-        const element = favorites[index];
-        tempCard.push(
-          <SmallProject
-            address={element.addressContract}
-            tier={element.tier}
-          ></SmallProject>
+      
+      const favorites = await retriveFavorites();
+      let tempCard2 = [];
+      for (const element of favorites) {
+        tempCard2.push({address: element, title: projects.find(project => project.address === element)?.nomeAzienda}
         );
       }
-      setfavoriteCard(tempCard);
+      setfavoriteCard(tempCard2);
     }
 
     fetchData();
   }, []);
-
-  const percentage = 65;
 
   const ToggleSec = () => {
     setActive(!isActive);
@@ -77,6 +72,7 @@ const Profile = () => {
     setActive2(!isActive2);
     setActive(false);
   };
+
   return (
     <div className="app">
       <main className="profile-page">
@@ -92,9 +88,9 @@ const Profile = () => {
                 <div className="profile-img-box">
                   <h3>
                     Profilo di{" "}
-                    {getRecoil(addressState).toString().substring(0, 5) +
+                    {address && address.toString().substring(0, 5) +
                       "..." +
-                      getRecoil(addressState).toString().substring(38, 42)}
+                      address && address.toString().substring(38, 42)}
                   </h3>
 
                   <img src={ProfileImg} alt="" />
@@ -139,11 +135,11 @@ const Profile = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/xdao"}>
+                    <a href={"/#/dao"}>
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/xdao"}>
-                      <p>xDao Widget</p>
+                    <a href={"/#/dao"}>
+                      <p>Dao Widget</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -197,47 +193,55 @@ const Profile = () => {
           <div className="box">
             <div className="profile-main-grid">
               {/* <div className="pmg-left">{investedCard}</div> */}
-              {/* provvisorio */}
-              <div
-                style={{ height: "fit-content" }}
-                className={isActive2 ? "pmg-right" : "sec-display-none-inv"}
-              >
-                <div className="pmg-right-card">
-                  <div className="pmg-rc-left-invest">
-                    <h3>Mentadent</h3>
-                    <div class="menu-nav">
-                      <div class="dropdown-container" tabindex="-1">
-                        <div class="three-dots"></div>
-                        <div class="dropdown">
-                          <a href="/#/swap">
-                            <div>Swap</div>
-                          </a>
-                          <a href="#">
-                            <div>Dati Spedizione</div>
-                          </a>
-                          <a href="#">
-                            <div>Rimborso</div>
-                          </a>
-                        </div>
+              {investedCard && investedCard.map((card, index) => (
+                <div
+                    key={index}
+                    style={{ height: "fit-content" }}
+                    className={isActive2 ? "pmg-right" : "sec-display-none-inv"}
+                  >
+                    <div className="pmg-right-card">
+                      <div className="pmg-rc-left-invest">
+                        <h3>{card.title}</h3>
+                      </div>
+
+                      <div className="pmg-rc-right">
+                        <div className="pc-hero-icon-grid"></div>
+                        <div className="pc-70-box"></div>
+                      </div>
+                      <div className="pmg-btn-box">
+                        <button className="grd-btn dopot-btn-lg" onClick={() => { window.location.href = '/#/card/' + card.address }}>
+                          Scopri di più
+                        </button>
                       </div>
                     </div>
                   </div>
-
-                  <div className="pmg-rc-right">
-                    <div className="pc-hero-icon-grid"></div>
-                    <div className="pc-70-box"></div>
-                  </div>
-                  <div className="pmg-btn-box">
-                    <button className="grd-btn dopot-btn-lg">
-                      Scopri di più
-                    </button>
-                  </div>
-                </div>
-              </div>
-              {/* provvisorio */}
+                ))}
+       
 
               <div className={isActive ? "pmg-right" : "sec-display-none-pref"}>
-                {favoriteCard}
+                {favoriteCard && favoriteCard.map((card, index) => (
+                <div
+                    key={index}
+                    style={{ height: "fit-content" }}
+                    className={isActive2 ? "pmg-right" : "sec-display-none-inv"}
+                  >
+                    <div className="pmg-right-card">
+                      <div className="pmg-rc-left-invest">
+                        <h3>{card.title}</h3>
+                      </div>
+
+                      <div className="pmg-rc-right">
+                        <div className="pc-hero-icon-grid"></div>
+                        <div className="pc-70-box"></div>
+                      </div>
+                      <div className="pmg-btn-box">
+                        <button className="grd-btn dopot-btn-lg" onClick={() => { window.location.href = '/#/card/' + card.address }}>
+                          Scopri di più
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

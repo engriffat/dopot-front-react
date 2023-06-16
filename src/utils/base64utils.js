@@ -6,10 +6,16 @@ function blobToBase64(blob) {
     });
   }
 
-function fileToBase64(file) {
+function fileToBase64(data) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    if (data instanceof File)
+      reader.readAsDataURL(data);  
+    else {
+      const utf8 = new TextEncoder().encode(data);  
+      resolve(window.btoa(utf8));
+      return;
+    }
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });

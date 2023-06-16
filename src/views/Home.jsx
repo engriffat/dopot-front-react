@@ -42,13 +42,7 @@ import Pdf from "../assets/dopot.pdf";
 const Home = () => {
   const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
-  const [isDemoEnable, setisDemoEnable] = useState(false);
 
-  function handleDemoButton() {
-    if (isDemoEnable) {
-      setisDemoEnable(false);
-    } else setisDemoEnable(true);
-  }
   return (
     <div className="app">
       <main className="home">
@@ -68,7 +62,7 @@ const Home = () => {
 
         {/* Hero Section */}
         <section className="hero-section" id="hero-section">
-          <Header demo={isDemoEnable} />
+          <Header />
           <img className="hero-bg" src={HeroImg} alt="HeroImg" />
           <div className="box">
             <div className="hero-content">
@@ -78,14 +72,7 @@ const Home = () => {
               <div className="main-btns-box">
                 <div style={{ padding: 0 }} className="box">
                   <div className="mbb-content">
-                    <button
-                      onClick={handleDemoButton}
-                      className="grd-btn dopot-btn-lg"
-                      style={{ margin: 0 }}
-                    >
-                      {isDemoEnable ? "Disable demo" : "Enable demo"}
-                    </button>
-                    <a href={isDemoEnable ? "/#/loading" : ""}>
+                    <a href={"/#/loading"}>
                       <button className="grd-btn dopot-btn-lg">
                         <img src={IconPlane} alt="IconPlane" /> {t("discovery")}
                       </button>
