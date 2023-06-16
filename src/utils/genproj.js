@@ -1,6 +1,5 @@
 import { IpfsState, progettiAddressState , providerState, progettiState} from "../recoilState";
 import { getRecoil, setRecoil } from 'recoil-nexus';
-import {GetAccount} from "./ethersUtils"
 import addressProjectFactory from '../abi/projectFactory/address';
 import { fileToBase64, filelistToBase64 } from "./base64utils";
 import { WebBundlr } from "@bundlr-network/client";
