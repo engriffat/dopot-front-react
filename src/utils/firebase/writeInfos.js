@@ -5,26 +5,36 @@ import { genproj, bundlrAdd, contrattoProjectAddTier } from "../genproj"
 import { fileToBase64, filelistToBase64 } from "../base64utils";
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
-import { encrypt } from '@metamask/eth-sig-util';
 import { downloadProjects } from "./retriveInfo";
 import { hexlify } from 'ethers/lib/utils'
+import * as PushAPI from '@pushprotocol/restapi';
 const abiProject = require('../../abi/project/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
 const { ethers, Contract } = require("ethers");
 const ascii85 = require('ascii85');
+const pushMainnetAddress = "0xd52b78d9ba494e5bdcc874dc3c369f2735e24fb3"; //should be the same as polygon, lowercase
+const pushPolygonAddress = "0x340cb0AA007F2ECbF6fCe3cd8929a22429893213";
 
-function encryptData(publicKey, data) {
-  const enc = encrypt({
-    publicKey: publicKey.toString('base64'),
-    data: ascii85.encode(data).toString(),
-    version: 'x25519-xsalsa20-poly1305',
+async function optInNotifications() {
+  const signer = getRecoil(providerState).getSigner();
+  const address = await signer.getAddress(); console.log(address)
+  const subscriptions = await PushAPI.user.getSubscriptions({
+    user: 'eip155:80001:' + address, // user address in CAIP
+    env: 'staging'
   });
-  const buf = Buffer.concat([
-    Buffer.from(enc.ephemPublicKey, 'base64'),
-    Buffer.from(enc.nonce, 'base64'),
-    Buffer.from(enc.ciphertext, 'base64'),
-  ]);
-  return buf;
+  if(!subscriptions.some(r => r.channel === pushMainnetAddress))
+  await PushAPI.channels.subscribe({
+    signer,
+    channelAddress: 'eip155:80001:' + pushPolygonAddress, // channel address in CAIP
+    userAddress: 'eip155:80001:' + address, // user address in CAIP
+    onSuccess: () => {
+      console.log('opt in success');
+    },
+    onError: (e) => {
+      console.error(e);
+    },
+    env: 'staging'
+  })
 }
 
 export async function addproj(inputs) {
@@ -67,7 +77,8 @@ export async function addproj(inputs) {
       wallet: address,
       privateKey: identity.privateKey,
     });
-    console.log(result)
+    console.log(result);
+    await optInNotifications();
     await downloadProjects();
   } catch (e) {
     console.log(e)
@@ -140,7 +151,7 @@ export async function addShippingDetailsNft(project, tokenId, shippingDetails) {
   const provider = getRecoil(providerState);
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const creatorPublicEncryptionKey = await projectContract.creatorPublicEncryptionKey()
-  const encryptedData = encryptData(Buffer.from(creatorPublicEncryptionKey.slice(2), "hex"), shippingDetails).toString('hex');
+  const encryptedData = shippingDetails; //encryptData(Buffer.from(creatorPublicEncryptionKey.slice(2), "hex"), shippingDetails).toString('hex');
   try {
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", addressLogged.toLowerCase()]);
     //await db.delete("users", result[0].id, identityObj); return;
@@ -185,7 +196,7 @@ export async function addInvestment(pAddress, numTier, price) {
   numTier--;
   let addressLogged=getRecoil(addressState)
   try {
-    const address = await getProvider();
+    /*const address = await getProvider();
     const provider = getRecoil(providerState);
     const signer = provider.getSigner();
     const projectContract = new ethers.Contract(pAddress, abiProject, signer);
@@ -200,8 +211,9 @@ export async function addInvestment(pAddress, numTier, price) {
     const tx = await pWithSigner.invest(numTier);
     await tx.wait(1);
     const shippingDetails = window.prompt("Enter your shipping details:");
-    await addShippingDetailsNft(pAddress, numTier, shippingDetails);
-    await downloadProjects();
+    await addShippingDetailsNft(pAddress, numTier, shippingDetails);*/
+    await optInNotifications();
+    //await downloadProjects();
   } catch (e) {
     console.error(e);
   }
