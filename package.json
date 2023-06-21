@@ -39,7 +39,6 @@
     "datastore-idb": "^2.1.1",
     "datastore-level": "^10.1.1",
     "ethers": "^5.7.2",
-    "firebase": "^9.17.2",
     "fs": "^0.0.1-security",
     "helia": "^1.0.4",
     "i18next": "^22.0.5",
@@ -93,6 +92,8 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie <= 99",
+      "not android <= 4.4.4",
       "not op_mini all",
       "chrome >= 67",
       "edge >= 79",
