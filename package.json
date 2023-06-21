@@ -73,7 +73,7 @@
     "tls": "^0.0.1",
     "uint8arrays": "^4.0.3",
     "util": "^0.12.4",
-    "weavedb-sdk": "^0.27.13",
+    "weavedb-sdk": "^0.27.21",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
