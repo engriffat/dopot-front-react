@@ -16,7 +16,7 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => addInvestment(props.address, props.numTier, props.price)}
+            onClick={() => addInvestment(props.address, props.numTier, props.price, props.titolo)}
             className="grd-btn dopot-btn-sm"
           >
             Investi
@@ -34,7 +34,7 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => addInvestment(props.address, props.numTier, props.price)}
+            onClick={() => addInvestment(props.address, props.numTier, props.price, props.titolo)}
             className="grd-btn dopot-btn-sm"
           >
             Investi

@@ -162,7 +162,7 @@ const Profile = () => {
           </div>
           <div className="sec-pref-desk-flex">
             <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
-            <p>I miei preferiti</p>
+            <p>My Favorites</p>
           </div>
         </div>
 

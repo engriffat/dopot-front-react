@@ -126,6 +126,12 @@ const Profile = () => {
             <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
             <p>My projects</p>
           </div>
+          <a href="https://staging.push.org/chat" target="_blank" rel="noreferrer"> 
+            <div className="sec-pref-desk-flex">
+              <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
+              <p style={{ "color": "lightskyblue", "text-decoration-line": "underline"}}>Shipping Details</p>
+            </div>
+          </a>
         </div>
 
         <section className="profile-bottom">

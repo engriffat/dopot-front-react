@@ -14,13 +14,14 @@ const { ethers, Contract } = require("ethers");
 const ascii85 = require('ascii85');
 const pushMainnetAddress = "0xd52b78d9ba494e5bdcc874dc3c369f2735e24fb3"; //should be the same as polygon, lowercase
 const pushPolygonAddress = "0x340cb0AA007F2ECbF6fCe3cd8929a22429893213";
+const env = "staging"; // prod/staging
 
 async function optInNotifications() {
   const signer = getRecoil(providerState).getSigner();
-  const address = await signer.getAddress(); console.log(address)
+  const address = await signer.getAddress();
   const subscriptions = await PushAPI.user.getSubscriptions({
-    user: 'eip155:80001:' + address, // user address in CAIP
-    env: 'staging'
+    user: `eip155:80001:${address}`, // user address in CAIP
+    env
   });
   if(!subscriptions.some(r => r.channel === pushMainnetAddress))
   await PushAPI.channels.subscribe({
@@ -35,6 +36,41 @@ async function optInNotifications() {
     },
     env: 'staging'
   })
+}
+
+async function getPushChatUser() {
+  const signer = getRecoil(providerState).getSigner();
+  const address = await signer.getAddress();
+  let user = await PushAPI.user.get({
+    account: `eip155:${address}`,
+    env,
+  });
+  ;
+  return user ? user : await PushAPI.user.create({
+    signer,
+    env
+  });
+}
+
+async function pushChatSend(pushUser, projectCreatorAddress, messageContent) {
+  const signer = getRecoil(providerState).getSigner();
+  const address = await signer.getAddress();
+
+  const pgpDecryptedPvtKey = await PushAPI.chat.decryptPGPKey({
+    encryptedPGPPrivateKey: pushUser.encryptedPrivateKey, 
+    signer
+  });
+  const params = {
+    messageContent,
+    messageType: 'Text',
+    receiverAddress: `eip155:${projectCreatorAddress}`,
+    signer,
+    pgpPrivateKey: pgpDecryptedPvtKey,
+    env
+  }
+  console.dir(params)
+  const response = await PushAPI.chat.send(params);
+  console.dir(response);
 }
 
 export async function addproj(inputs) {
@@ -144,27 +180,10 @@ export async function addFavorites(addressProject) {
   }
 }
 
-export async function addShippingDetailsNft(project, tokenId, shippingDetails) {
-  let addressLogged=getRecoil(addressState).toString()
-  const identity = await getIdentity(addressLogged)
-  const identityObj = { wallet: addressLogged, privateKey: identity.privateKey };
-  const provider = getRecoil(providerState);
-  const projectContract = new ethers.Contract(project, abiProject, provider);
-  const creatorPublicEncryptionKey = await projectContract.creatorPublicEncryptionKey()
-  const encryptedData = shippingDetails; //encryptData(Buffer.from(creatorPublicEncryptionKey.slice(2), "hex"), shippingDetails).toString('hex');
-  try {
-    let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", addressLogged.toLowerCase()]);
-    //await db.delete("users", result[0].id, identityObj); return;
-    if(!result[0] || !result[0].data)
-      await db.add({addressUser: addressLogged.toLowerCase(), addressProjects: [], shippingNft: {[tokenId]: encryptedData}}, "users", identityObj)
-    else{
-      console.dir(result[0])
-      result[0].data.shippingNft[tokenId] = encryptedData;
-      await db.update(result[0].data, "users", result[0].id, identityObj)
-    }
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
+export async function addShippingDetailsNft(projectAddress, tokenId, shippingDetails, title) {
+  const result =  await db.get("projects", ["address"], ["address", "==", projectAddress]);
+  const pushChatUser = await getPushChatUser();
+  await pushChatSend(pushChatUser, result[0].addressCreator, `${title}: ${shippingDetails}` )
 }
 
 export async function refundNft(project, tokenId) {
@@ -191,12 +210,12 @@ export async function withdraw(project, discountDPT) {
   }
 }
 
-export async function addInvestment(pAddress, numTier, price) {
+export async function addInvestment(pAddress, numTier, price, title) {
   const amount = ethers.utils.parseEther(price);
   numTier--;
   let addressLogged=getRecoil(addressState)
   try {
-    /*const address = await getProvider();
+    const address = await getProvider();
     const provider = getRecoil(providerState);
     const signer = provider.getSigner();
     const projectContract = new ethers.Contract(pAddress, abiProject, signer);
@@ -211,9 +230,9 @@ export async function addInvestment(pAddress, numTier, price) {
     const tx = await pWithSigner.invest(numTier);
     await tx.wait(1);
     const shippingDetails = window.prompt("Enter your shipping details:");
-    await addShippingDetailsNft(pAddress, numTier, shippingDetails);*/
+    await addShippingDetailsNft(pAddress, title, shippingDetails, title);
     await optInNotifications();
-    //await downloadProjects();
+    await downloadProjects();
   } catch (e) {
     console.error(e);
   }

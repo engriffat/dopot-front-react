@@ -48,7 +48,7 @@ const Profile = () => {
             let obj = await getNftImage(tierId);
             const response = await fetch(obj.image.replace("ar://", "https://arweave.net/"));
             const data = await response.text();
-            tempCard.push({tierId: tierId, image: data, project: project.address, addressDopotReward: obj.addressDopotReward});
+            tempCard.push({tierId, image: data, project: project.address, addressDopotReward: obj.addressDopotReward, title: project.imageNftDefListFiles[tierId] && project.imageNftDefListFiles[tierId].name});
           }
         }
       }
@@ -58,12 +58,10 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  async function setShippingDetails(project, tokenId) {
+  async function setShippingDetails(project, tokenId, title) {
     const shippingDetails = window.prompt("Enter your shipping details:");
-    await addShippingDetailsNft(project, tokenId, shippingDetails)
+    await addShippingDetailsNft(project, tokenId, shippingDetails, title)
   }
-
-  const percentage = 65;
 
   const ToggleSec3 = () => {
     setActive(!isActive);
@@ -163,10 +161,6 @@ const Profile = () => {
             <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
             <p>I miei Investimenti</p>
           </div>
-          <div className="sec-pref-desk-flex">
-            <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
-            <p>NFT in Vendita</p>
-          </div>
         </div>
 
         <div className="box1">
@@ -178,16 +172,6 @@ const Profile = () => {
                 alt="ProfileIconGrd"
               />
               <p>I miei Investimenti</p>
-            </button>
-          </div>
-          <div className="sec-pref-mob">
-            <button onClick={ToggleSec3}>
-              <img
-                className={isActive ? "shadow-inv" : null}
-                src={ProfileIconGrd1}
-                alt="ProfileIconGrd"
-              />
-              <p>NFT in Vendita</p>
             </button>
           </div>
         </div>
@@ -207,7 +191,7 @@ const Profile = () => {
                     <div className="dropdown-container" tabindex="-1">
                       <div className="three-dots"></div>
                       <div className="dropdown">
-                        <a onClick={() => setShippingDetails(card.project, card.tierId)}>
+                        <a onClick={() => setShippingDetails(card.project, card.tierId, card.title)}>
                           <div>Dati Spedizione</div>
                         </a>
                         <a onClick={() => refundNft(card.project, card.tierId)}>
