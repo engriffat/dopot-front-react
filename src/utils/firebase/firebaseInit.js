@@ -2,7 +2,7 @@ import SDK from "weavedb-sdk";
 import { get, set } from 'idb-keyval';
 import { Buffer } from "buffer"
 
-const contractTxId = "5LKhkSdZ9tQ007IZDI9I4wUj-kaefi1q5GirH7zN010";
+const contractTxId = "e8SnbuQCtHUTzsKPJcFLnngR_d1xq97IU6mSNpB3m8s";
 export let db;
 
 export async function init ()  {

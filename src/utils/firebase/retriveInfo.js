@@ -101,13 +101,16 @@ async function getProjectFunds(addressProject){
 }
 
 export async function downloadProjects() {
-    setRecoil(addressState, await getProvider())
+    const address = await getProvider()
+    setRecoil(addressState, address)
     await init()
+    const identity = await getIdentity(address)
+    const identityObj = { wallet: address, privateKey: identity.privateKey };
     try{
         let projects = getRecoil(progettiState)
         const dopotReward = new Contract(addressDopotReward, abiDopotReward, getRecoil(providerState));
         if(!projects || projects.length === 0){
-            projects = await db.get("projects")
+            projects = await db.get("projects", identityObj)
             for(let projdb of projects){
                 let oneApprovedTier = false;
                 const project = new Contract(projdb.address, abiProject, getRecoil(providerState));
