@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeroImg from "../assets/img/hero.png";
 import LogoWhite from "../assets/img/logo-white.svg";
 import IconWhitePaper from "../assets/img/icon-whitepaper.svg";
@@ -40,19 +40,29 @@ import { useTranslation } from "react-i18next";
 import Pdf from "../assets/dopot.pdf";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
+
   const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
   AOS.init();
 
+  useEffect(() => {
+    if (typeof window.ethereum === 'undefined') {
+      toast.info('Dopot needs a Web3 wallet to work');
+    }
+  }, []);
+
   return (
     <div className="app">
       <main className="home">
+      <ToastContainer />
         {/* Temporary Message */}
         {isTempMsgHidden ? null : (
           <div className="temp-msg">
-            <p>🔨 Work in Progress - Piattaforma in sviluppo 🔜</p>
+            <p>Currently in testing phase 🔨</p>
             <div
               onClick={() => {
                 setIsTempMsgHidden(true);
@@ -62,7 +72,6 @@ const Home = () => {
             </div>
           </div>
         )}
-
         {/* Hero Section */}
         <section className="hero-section" id="hero-section">
           <Header />

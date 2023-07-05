@@ -39,7 +39,7 @@ const progettiState = atom({
     ({ setSelf }) => {
       setTimeout(() => {
         setSelf([]);
-      }, 12 * 60 * 60 * 1000); // 12h
+      }, 6 * 60 * 60 * 1000); // 6 hours cookie expire
     },],
 })
 

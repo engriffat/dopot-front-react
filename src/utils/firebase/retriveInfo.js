@@ -58,21 +58,6 @@ export async function getAddr(setState) {
     setState(address.toString().substring(0, 7) + "...")
 }
 
-// USE FOR PROJECT OWNER DECRYPT SHIPPING DETAILS
-async function decryptData(data) {
-    const provider = getRecoil(providerState);
-    const accounts = await provider.listAccounts();
-    const structuredData = {
-        version: 'x25519-xsalsa20-poly1305',
-        ephemPublicKey: data.slice(0, 32).toString('base64'),
-        nonce: data.slice(32, 56).toString('base64'),
-        ciphertext: data.slice(56).toString('base64'),
-    };
-    const ct = `0x${Buffer.from(JSON.stringify(structuredData), 'utf8').toString('hex')}`;
-    const decrypt = await provider.send('eth_decrypt', [ct, accounts[0]]);
-    return ascii85.decode(decrypt);
-}
-
 async function getInvestors(projdb, dopotReward){
     const provider = getRecoil(providerState);
     const contract = new ethers.Contract(addressProjectFactory, abiProjectFactory, provider);
@@ -118,8 +103,14 @@ export async function downloadProjects() {
                 for(let t = 0; t < tiersLenghts; t++){
                     projdb.imageNftDefListFiles[t].currentSupply = (await dopotReward.currentSupplyByProjectAndURI(projdb.address, projdb.imageNftDefListFiles[t].uri)).toNumber()
                     const tierState = (await project.rewardTiers(t)).projectTierState;
-                    if(tierState === 2 || tierState === 3) //Ongoing, Successful
+                    if(tierState === 2){
+                        projdb.state = "ongoing";
                         oneApprovedTier = true;
+                    }
+                    if(tierState === 3){
+                        projdb.state = "successful";
+                        oneApprovedTier = true;
+                    }  
                 }
                 if(!oneApprovedTier) projdb.delete = true;
                 else{
@@ -135,6 +126,7 @@ export async function downloadProjects() {
                     const hours = Math.floor(minutes / 60);
                     const days = Math.floor(hours / 24);
                     projdb.fundRaisingDeadline = days;
+                    projdb.minInvestment = Math.min(...projdb.imageNftDefListFiles.map(item => parseInt(item.price)));
                 }
             }
             const approvedProjects = projects.filter(e => !e.delete);

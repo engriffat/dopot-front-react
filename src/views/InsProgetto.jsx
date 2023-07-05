@@ -30,7 +30,7 @@ const { ethers } = require("ethers");
 
 const InsProgetto = () => {
   var step = [];
-  const [inputs, setInputs] = useState({ logoAziendaListFiles: [], documentazioneDefListFiles: [], imageNftDefListFiles: [], giorniCampagna: "45", numeroProdotti: "1" });
+  const [inputs, setInputs] = useState({ logoAziendaListFiles: [], documentazioneDefListFiles: [], imageNftDefListFiles: [], giorniCampagna: "45", numeroProdotti: "1", tipoCampagna: "reward" });
   const [progressionStep, setprogressionStep] = useState(0);
   const navigate = useNavigate();
 
@@ -68,6 +68,12 @@ const InsProgetto = () => {
     }
   };
 
+  const handleCountryChange = (e) => {
+    const name = "nazioneAzienda";
+    const value = e;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
   const handleChangeNft = (e, nProdotto) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -101,6 +107,7 @@ const InsProgetto = () => {
           <InfBase
             inputs={inputs}
             handleChange={handleChange}
+            handleCountryChange={handleCountryChange}
             setState={incrementStep}
           ></InfBase>
         );

@@ -7,6 +7,9 @@ import PCUserIcon from "../../assets/img/pc-person-icon.png";
 import PCCalendarIcon from "../../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom";
+import Flag from 'react-world-flags'
+import { addFavorites } from "../../utils/firebase/writeInfos";
+import IconHeart from "../../assets/img/pc-heart-icon-02.svg";
 
 const Card = (props) => {
   const navigate = useNavigate();
@@ -87,9 +90,22 @@ const Card = (props) => {
           </div>
         </div>
         <div className="pmg-btn-box">
+            <button
+              onClick={() => addFavorites(props.progetto.address)}
+              className="grd-btn dopot-btn-lg"
+            >
+              <img
+                className="img-heart"
+                src={IconHeart}
+                alt="IconPlane"
+              />
+            </button>
           <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
             Scopri di più
           </button>
+          <div style={{ bottom: 0, right: 0 }}>
+          <Flag code={ props.progetto.nazioneAzienda }  height="16"/>
+        </div>
         </div>
       </div>
     </div>

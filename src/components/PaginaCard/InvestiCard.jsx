@@ -1,7 +1,10 @@
 import React from "react";
 import { addInvestment } from "../../utils/firebase/writeInfos";
+import addressDopotReward from '../../abi/dopotReward/address.js';
 
 const InvestiCard = (props) => {
+  const { state } = props;
+
   return (
     <div className="investi-card">
       <input type="checkbox" id="click-invest" />
@@ -16,10 +19,10 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => addInvestment(props.address, props.numTier, props.price, props.titolo)}
+            onClick={() => (state === "ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
-            Investi
+            {state === "ongoing" ? "Invest" : "Buy NFT"}
           </button>
         </div>
       </label>
@@ -34,10 +37,10 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => addInvestment(props.address, props.numTier, props.price, props.titolo)}
+            onClick={() => (state === "ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) :  window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
-            Investi
+            {state === "ongoing" ? "Invest" : "Buy NFT"}
           </button>
         </div>
         <label for="click-invest" id="temp-invest">

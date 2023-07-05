@@ -48,7 +48,7 @@ const Profile = () => {
             let obj = await getNftImage(tierId);
             const response = await fetch(obj.image.replace("ar://", "https://arweave.net/"));
             const data = await response.text();
-            tempCard.push({tierId, image: data, project: project.address, addressDopotReward: obj.addressDopotReward, title: project.imageNftDefListFiles[tierId] && project.imageNftDefListFiles[tierId].name});
+            tempCard.push({tierId, addressCreator: project.addressCreator, image: data, project: project.address, addressDopotReward: obj.addressDopotReward, title: project.imageNftDefListFiles[tierId] && project.imageNftDefListFiles[tierId].name});
           }
         }
       }
@@ -59,8 +59,8 @@ const Profile = () => {
   }, []);
 
   async function setShippingDetails(project, tokenId, title) {
-    const shippingDetails = window.prompt("Enter your shipping details:");
-    await addShippingDetailsNft(project, tokenId, shippingDetails, title)
+    const shippingDetails = window.prompt("Enter your physical or digital shipping details:");
+    if(shippingDetails) await addShippingDetailsNft(project, tokenId, shippingDetails, title)
   }
 
   const ToggleSec3 = () => {
@@ -192,10 +192,13 @@ const Profile = () => {
                       <div className="three-dots"></div>
                       <div className="dropdown">
                         <a onClick={() => setShippingDetails(card.project, card.tierId, card.title)}>
-                          <div>Dati Spedizione</div>
+                          <div>Set Shipping Details</div>
+                        </a>
+                        <a href={`https://staging.push.org/chat/${card.addressCreator}`} target="_blank" rel="noreferrer">
+                          <div>Chat</div>
                         </a>
                         <a onClick={() => refundNft(card.project, card.tierId)}>
-                          <div>Rimborso</div>
+                          <div>Refund</div>
                         </a>
                       </div>
                     </div>

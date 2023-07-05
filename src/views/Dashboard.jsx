@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+
 import "../styles/dashboard.css";
 import "../styles/globals.css";
 import Header from "../components/Header";
@@ -14,11 +16,23 @@ import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import Footer from "../components/Footer";
 import { downloadProjects } from "../utils/firebase/retriveInfo";
+import useSearchForm from './useSearchForm';
 
-const Home = () => {
+const Home = () => {  const handleSearch = useSearchForm();
   const cards = [];
-  const progetti = getRecoil(progettiState);
   useEffect(() => {( async () => { await downloadProjects(); })(); });
+  let progetti = getRecoil(progettiState);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const state = query.get("s") || "ongoing";
+  const campaign = query.get("c") || "reward";
+  const type = query.get("t") || "any";
+  let value = query.get("v") || "any";
+  progetti = progetti.filter((progetto) => 
+  progetto.state === state && 
+  progetto.tipoCampagna === campaign && 
+  (type !== "any" ? progetto.settore === type : true) && 
+  (value !== "any" ? (progetto.minInvestment >= parseInt(value.split("-")[0]) && progetto.minInvestment <= parseInt(value.split("-")[1])) : true));
 
   progetti.forEach((element) => {
     cards.push(
@@ -42,10 +56,10 @@ const Home = () => {
           <div className="dashboard-select-btn">
             <div className="dashboard-select-opt">
               <div className="dash-sel-opt-content">
-                <label for="sel1">Seleziona il tipo di progetto</label>
+                <label for="sel1">Seleziona lo stato del progetto</label>
                 <select name="sel1" id="sel1">
-                  <option value="live"> Live Crowdfounding</option>
-                  <option value="closed">Closed Crowdfunding</option>
+                  <option value="ongoing">Live Crowdfounding</option>
+                  <option value="successful">Closed Crowdfunding</option>
                 </select>
               </div>
               <div className="dash-sel-opt-content">
@@ -58,10 +72,13 @@ const Home = () => {
               <div className="dash-sel-opt-content">
                 <label for="sel3">Seleziona la categoria</label>
                 <select name="sel3" id="sel3">
+                  <option selected value="any">
+                    Any category
+                  </option>
                   <option disabled value>
                     SOCIALE
                   </option>
-                  <option selected value="tipo1">
+                  <option value="tipo1">
                     Assistenza sociale
                   </option>
                   <option value="tipo2">Assistenza sanitaria</option>
@@ -154,13 +171,15 @@ const Home = () => {
               <div className="dash-sel-opt-content">
                 <label for="sel4">Range di investimento</label>
                 <select name="sel4" id="sel4">
-                  <option value="volvo">10$ - 1000$</option>
+                  <option value="any">Any value</option>
+                  <option value="0-100">0$ - 100$</option>
+                  <option value="100-1000">100$ - 1000$</option>
                   {/*  <option value="saab">Saab</option>
                   <option value="mercedes">Mercedes</option>
                   <option value="audi">Audi</option>*/}
                 </select>
               </div>
-              <div className="das-search-btn">
+              <div onClick={handleSearch} className="das-search-btn">
                 <MdSearch />
               </div>
             </div>

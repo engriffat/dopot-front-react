@@ -56,7 +56,7 @@ const Progetto = (props) => {
           >
             Campagna Reward
           </button>
-          <button
+          {/*<button
             name="equity"
             onClick={toggleCampagna}
             className={
@@ -67,7 +67,7 @@ const Progetto = (props) => {
             type="button"
           >
             Campagna Equity
-          </button>
+          </button>*/}
         </div>
         <h6>Non sai quale scegliere?</h6>
       </div>

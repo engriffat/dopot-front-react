@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
+import ReactFlagsSelect from "react-flags-select";
 
 const InfBase = (props) => {
   const [val, setVal] = useState([]);
@@ -50,6 +51,15 @@ const InfBase = (props) => {
           onChange={props.handleChange}
           placeholder="inserisci il nome"
         />
+      </div>
+      <div className="ins-input-box">
+        <h4>Nazione dell'azienda</h4>
+        <ReactFlagsSelect
+          className="nazioneAziendaSelect"
+          selected={props.inputs.nazioneAzienda}
+          onSelect={props.handleCountryChange}
+          searchable
+        />;
       </div>
       <div className="ins-input-box">
         <h4>Settore aziendale </h4>

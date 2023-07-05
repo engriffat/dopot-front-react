@@ -250,3 +250,14 @@
     padding: 1rem;
   }
 }
+.nazioneAziendaSelect {
+  width: 100%;
+  border: 1px solid #ff43a0;
+  background-color: #fffafa;
+  border-radius: 0.5rem;
+  font-size: 1.75rem;
+  outline: 0;
+  color: #000;
+  transition: 0.5s;
+  font-weight: 400;
+}

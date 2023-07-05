@@ -122,46 +122,6 @@ export async function addproj(inputs) {
   
 }
 
-async function convertToBase64(input) {
-  var tInput=input
-  // Funzione per la conversione in base64
-  function  convertFileToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = (error) => reject(error);
-    });
-  }
-
-  const promises = [];
-
-  // Itera l'input e converte i file in base64
-  for (const key in input) {
-    if (key.endsWith("ListFiles")) {
-      const fileList = input[key];
-      const newFileList = {};
-      for (const fileKey in fileList) {
-        const file = fileList[fileKey];
-        if (file instanceof File) {
-          promises.push(
-          convertFileToBase64(file).then((base64) => {
-            tInput[key] = {base64};
-            console.log(tInput)
-          }));
-        }
-      }
-
-      input[key] = newFileList;
-    }
-  }
-
-  await Promise.all(promises);
-
-  // Ritorna l'input con i file convertiti
-  return tInput;
-}
-
 export async function addFavorites(addressProject) {
   let addressLogged=getRecoil(addressState).toString()
   const identity = await getIdentity(addressLogged)
@@ -183,7 +143,7 @@ export async function addFavorites(addressProject) {
 export async function addShippingDetailsNft(projectAddress, tokenId, shippingDetails, title) {
   const result =  await db.get("projects", ["address"], ["address", "==", projectAddress]);
   const pushChatUser = await getPushChatUser();
-  await pushChatSend(pushChatUser, result[0].addressCreator, `${title}: ${shippingDetails}` )
+  await pushChatSend(pushChatUser, result[0].addressCreator, `$Project {title}, Token Id ${tokenId}, Shipping Details ${shippingDetails}` )
 }
 
 export async function refundNft(project, tokenId) {

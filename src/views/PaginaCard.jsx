@@ -66,6 +66,7 @@ const PaginaCard = () => {
         img={base64Data[i-1] }
         titolo={progetto["name" + i]}
         currentSupply={progetto.imageNftDefListFiles[i-1]["currentSupply"]}
+        state={progetto.state}
       ></InvestiCard>
     );
   }
@@ -332,7 +333,7 @@ const PaginaCard = () => {
                     P.iva {progetto.pIva}
                   </p> */}
                   </div>
-                  <h5>Investi</h5>
+                  <h5>Invest</h5>
 
                   {cards}
                 </div>
