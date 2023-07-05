@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/components/header.css";
 import { MdMenu, MdClear } from "react-icons/md";
 import LogoWhite from "../assets/img/logo-white.svg";
@@ -9,11 +9,18 @@ import IconDown from "../assets/img/arr-menu.svg";
 
 //import GetAccount from "../utils/ethersUtils.js";
 import { getAddr } from "../utils/firebase/retriveInfo";
+import { ethers } from "ethers";
+
+async function isWalletConnected() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  return (provider && (await provider.send("eth_accounts", [])).length > 0);
+}
 
 const Header = (props) => {
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
-  const [walletText, setwalletText] = useState("Wallet");
-
+  const [walletText, setwalletText] = useState("Connect Wallet");
+  const [walletState, setWalletState] = useState(false);
+  useEffect(() => {( async () => { setWalletState(await isWalletConnected()); getAddr(setwalletText, true); })(); });
   return (
     <header>
       <div className="box">
@@ -92,9 +99,10 @@ const Header = (props) => {
                 <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
               </div>
             </div>
-            <a href={"/#/profile"}>
+            {walletState && <a href={"/#/profile"}>
               <button className="grd-btn dopot-btn-sm">Account</button>
-            </a>
+            </a>}
+            
 
             <button
               className="purple-border-btn dopot-btn-sm"
@@ -198,11 +206,11 @@ const Header = (props) => {
                 </div>
               </div>
 
-              <button className="grd-btn dopot-btn-lg">Account</button>
+              {walletState && <button className="grd-btn dopot-btn-lg">Account</button>}
               <button
                 className="purple-border-btn dopot-btn-lg"
               >
-                Wallet
+                {walletState ? "Wallet" : "Connect Wallet"}
               </button>
             </div>
           ) : null}

@@ -49,13 +49,25 @@ export async function getProvider(){ let signer;
     return await signer.getAddress();
 }
 
-export async function getAddr(setState) {
-    provider = getRecoil(providerState);
-    await provider.send("eth_requestAccounts", [])
-    let address = await provider.getSigner().getAddress()
-    
-    setRecoil(addressState, address)
-    setState(address.toString().substring(0, 7) + "...")
+export async function getAddr(setState, dontAutoConnect) {
+    let address;
+    if(dontAutoConnect){
+        provider = getRecoil(providerState);
+        if(provider){
+            let signer = await provider.getSigner();
+            address = await signer.getAddress();
+            setRecoil(addressState, address)
+            setState(address.toString().substring(0, 7) + "...")
+        }else{
+            setState("Connect Wallet")
+        }
+       
+    } else{
+        address = await getProvider();
+        provider = getRecoil(providerState);
+        setRecoil(addressState, address)
+        setState(address.toString().substring(0, 7) + "...")
+    }
 }
 
 async function getInvestors(projdb, dopotReward){
