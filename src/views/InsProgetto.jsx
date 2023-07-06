@@ -26,6 +26,8 @@ import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/impostazioni.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const { ethers } = require("ethers");
 
 const InsProgetto = () => {
@@ -92,8 +94,14 @@ const InsProgetto = () => {
     if(event.target.id === "submit"){
       event.preventDefault();
       try {
-        await addproj(inputs);
-        await navigate("/loading", { replace: true });
+        await toast.promise(
+          addproj(inputs),
+          {
+            pending: 'Confirm the transactions',
+            success: 'Project created!',
+            error: 'An error occurred',
+          }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -282,19 +290,19 @@ const InsProgetto = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/dao"}>
+                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/dao"}>
-                      <p>Dao Widget</p>
+                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                      <p>DAO</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/impostazioni"}>
+                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
                       <img src={ProfileIcon6} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/impostazioni"}>
-                      <p>Impostazioni</p>
+                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                      <p>Verify Identity</p>
                     </a>
                   </div>
                 </div>
@@ -316,6 +324,7 @@ const InsProgetto = () => {
           </div>
         </section>
         <Footer />
+        <ToastContainer />
       </main>
     </div>
   );

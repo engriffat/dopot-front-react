@@ -109,41 +109,48 @@ export async function downloadProjects() {
         if(!projects || projects.length === 0){
             projects = await db.get("projects", identityObj)
             for(let projdb of projects){
-                let oneApprovedTier = false;
                 const project = new Contract(projdb.address, abiProject, getRecoil(providerState));
                 const tiersLenghts = await project.getTiersLength();
                 for(let t = 0; t < tiersLenghts; t++){
-                    projdb.imageNftDefListFiles[t].currentSupply = (await dopotReward.currentSupplyByProjectAndURI(projdb.address, projdb.imageNftDefListFiles[t].uri)).toNumber()
-                    const tierState = (await project.rewardTiers(t)).projectTierState;
-                    if(tierState === 2){
-                        projdb.state = "ongoing";
-                        oneApprovedTier = true;
-                    }
-                    if(tierState === 3){
-                        projdb.state = "successful";
-                        oneApprovedTier = true;
-                    }  
+                    projdb.imageNftDefListFiles[t].currentSupply = (await dopotReward.currentSupplyByProjectAndURI(projdb.address, projdb.imageNftDefListFiles[t].uri)).toNumber()                    
                 }
-                if(!oneApprovedTier) projdb.delete = true;
-                else{
-                    projdb.investors = {};
-                    await getInvestors(projdb, dopotReward);
-                    projdb.investorsNumber = Object.keys(projdb.investors).length;
-                    projdb.funds = Math.round(ethers.utils.formatEther(await getProjectFunds(projdb.address)));
-                    const deadline = await project.fundRaisingDeadline();
-                    const now = new Date();
-                    const difference = deadline * 1000 - now;
-                    const seconds = Math.floor(difference / 1000);
-                    const minutes = Math.floor(seconds / 60);
-                    const hours = Math.floor(minutes / 60);
-                    const days = Math.floor(hours / 24);
-                    projdb.fundRaisingDeadline = days;
-                    projdb.minInvestment = Math.min(...projdb.imageNftDefListFiles.map(item => parseInt(item.price)));
-                }
+                projdb.investors = {};
+                await getInvestors(projdb, dopotReward);
+                projdb.investorsNumber = Object.keys(projdb.investors).length;
+                projdb.funds = Math.round(ethers.utils.formatEther(await getProjectFunds(projdb.address)));
+                const deadline = await project.fundRaisingDeadline();
+                const now = new Date();
+                const difference = deadline * 1000 - now;
+                const seconds = Math.floor(difference / 1000);
+                const minutes = Math.floor(seconds / 60);
+                const hours = Math.floor(minutes / 60);
+                const days = Math.floor(hours / 24);
+                projdb.fundRaisingDeadline = days;
+                projdb.minInvestment = Math.min(...projdb.imageNftDefListFiles.map(item => parseInt(item.price)));
+                projdb.state = await project.state();
+                switch(projdb.state){
+                    case 0:
+                        projdb.stateText = "Pending Approval";
+                        break;
+                    case 1:
+                        projdb.stateText = "Rejected";
+                        break;
+                    case 2:
+                        projdb.stateText = "Ongoing";
+                        break;
+                    case 3:
+                        projdb.stateText = "Successful";
+                        break;
+                    case 4:
+                        projdb.stateText = "Expired";
+                        break;
+                    case 5:
+                        projdb.stateText = "Cancelled";
+                        break;
+                    default: break;
+                  }
             }
-            const approvedProjects = projects.filter(e => !e.delete);
-            console.dir(approvedProjects)
-            setRecoil(progettiState, approvedProjects)
+            setRecoil(progettiState, projects)
         }
     }   catch(e){console.log(e)}
     return true

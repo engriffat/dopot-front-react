@@ -27,9 +27,9 @@ const Home = () => {  const handleSearch = useSearchForm();
   const state = query.get("s") || "ongoing";
   const campaign = query.get("c") || "reward";
   const type = query.get("t") || "any";
-  let value = query.get("v") || "any";
+  let value = query.get("v") || "any";console.log(progetti)
   progetti = progetti.filter((progetto) => 
-  progetto.state === state && 
+  progetto.stateText.toLowerCase().replace(" ","") === state && 
   progetto.tipoCampagna === campaign && 
   (type !== "any" ? progetto.settore === type : true) && 
   (value !== "any" ? (progetto.minInvestment >= parseInt(value.split("-")[0]) && progetto.minInvestment <= parseInt(value.split("-")[1])) : true));

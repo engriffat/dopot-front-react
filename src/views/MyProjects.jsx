@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
-import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
 import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
@@ -12,34 +11,45 @@ import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/impostazioni.png";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
-import BlogImg from "../assets/img/void.jpg";
-import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
 import React, { useState, useEffect } from "react";
-import { getRecoil, setRecoil } from "recoil-nexus";
-import { addressState, progettiState } from "../recoilState";
+import { getRecoil } from "recoil-nexus";
+import { addressState, progettiState, progettiImageState } from "../recoilState";
 import "react-circular-progressbar/dist/styles.css";
 import { withdraw } from "../utils/firebase/writeInfos";
+import Card from "../components/PaginaCard/Card";
 
 const Profile = () => {
   const [projectsCard, setProjectsCard] = useState([]);
   const address = getRecoil(addressState);
   let projects = getRecoil(progettiState)
 
-  useEffect(() => {
-    // Update the document title using the browser API
-    async function fetchData() {
-      const myProjects = projects.filter(project => project.addressCreator === address);
-      console.log(myProjects)
-      setProjectsCard(myProjects);
-    }
-    fetchData();
-  }, []);
-
   async function handleWithdraw(projectAddress){
     const response = window.confirm("Do you want to pay fees with the Dopot token for a discount?");
     await withdraw(projectAddress, response);
     console.log(response)
   }
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    async function fetchData() {
+      let myProjects = [];
+      projects.filter(p => p.addressCreator === address).forEach(project => {
+        myProjects.push(
+          <Card
+            progetto={project}
+            immagini={getRecoil(progettiImageState)[project.address]}
+            address={project.addressContract}
+            tier={project.tier}
+            state={project.stateText}
+            withdraw={handleWithdraw}
+          ></Card>
+        );
+      });
+      
+      setProjectsCard(myProjects);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="app">
@@ -100,19 +110,19 @@ const Profile = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/dao"}>
+                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/dao"}>
-                      <p>Dao Widget</p>
+                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                      <p>DAO</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/impostazioni"}>
+                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
                       <img src={ProfileIcon6} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/impostazioni"}>
-                      <p>Impostazioni</p>
+                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                      <p>Verify Identity</p>
                     </a>
                   </div>
                 </div>
@@ -137,32 +147,7 @@ const Profile = () => {
         <section className="profile-bottom">
           <div className="box">
             <div className="profile-main-grid">
-              {projectsCard && projectsCard.map((card, index) => (
-                <div
-                    key={index}
-                    style={{ height: "fit-content" }}
-                    className={"pmg-right"}
-                  >
-                    <div className="pmg-right-card">
-                      <div className="pmg-rc-left-invest">
-                        <h3>{card.introduzione}</h3>
-                      </div>
-
-                      <div className="pmg-rc-right">
-                        <div className="pc-hero-icon-grid"></div>
-                        <div className="pc-70-box"></div>
-                      </div>
-                      <div className="pmg-btn-box">
-                        <button className="grd-btn dopot-btn-lg" onClick={async () => await handleWithdraw(card.address)}>
-                          Withdraw
-                        </button>
-                        <button className="grd-btn dopot-btn-lg" onClick={() => { window.location.href = '/#/card/' + card.address }}>
-                          Discover more
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              {projectsCard}
             </div>
           </div>
         </section>

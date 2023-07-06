@@ -30,12 +30,18 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "string",
-        "name": "frontendHash",
-        "type": "string"
+        "internalType": "enum Utils.State",
+        "name": "newState",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "project",
+        "type": "address"
       }
     ],
-    "name": "FrontendUpdated",
+    "name": "ChangedState",
     "type": "event"
   },
   {
@@ -138,7 +144,7 @@
       {
         "indexed": false,
         "internalType": "string",
-        "name": "ipfshash",
+        "name": "hash",
         "type": "string"
       }
     ],
@@ -185,6 +191,19 @@
   {
     "inputs": [
       {
+        "internalType": "enum Utils.State",
+        "name": "newState",
+        "type": "uint8"
+      }
+    ],
+    "name": "emitChangedState",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "investor",
         "type": "address"
@@ -222,7 +241,7 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "_ipfshash",
+        "name": "_hash",
         "type": "string"
       }
     ],
@@ -374,19 +393,6 @@
       }
     ],
     "name": "setEpnsAddresses",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "_frontendHash",
-        "type": "string"
-      }
-    ],
-    "name": "setFrontendHash",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -59,16 +59,6 @@ async function contrattoprojectFactory(quota, giorniCampagna){
     return projectaddr;
   }
 
-  async function getIPFSprojectAddr(Address) {
-    
-    const Contract = new ethers.Contract(Address, abiProject, getRecoil(providerState));
-    setRecoil(progettiState, await getRecoil(IpfsState).getJSON(await Contract.projectMedia()));
-    var img =await getRecoil(IpfsState).getImage(getRecoil(progettiState).fotoProdotto1ipfs[0]);
-    setRecoil(progettiState, {...getRecoil(progettiState)[0], fotoProdotto1: img} )
-    console.log()
-    
-  }
-
   export async function bundlrAdd(obj, contentType){ 
     !bundlr && await initialiseBundlr(getRecoil(providerState));
     const bundlrtx = await bundlr.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
@@ -101,9 +91,6 @@ async function contrattoprojectFactory(quota, giorniCampagna){
       objs[objs.length-1].uri = bundlrtx.id;
       i++;
     }
-    const accounts = await provider.listAccounts();
-    const keyB64 = await provider.send('eth_getEncryptionPublicKey', [accounts[0]]);
-    await pWithSigner.setPublicEncryptionKey(Buffer.from(keyB64, 'base64'));
     return objs;
   }
 

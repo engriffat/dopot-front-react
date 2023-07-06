@@ -92,7 +92,7 @@
         "components": [
           {
             "internalType": "string",
-            "name": "ipfshash",
+            "name": "hash",
             "type": "string"
           },
           {
@@ -114,11 +114,6 @@
             "internalType": "address",
             "name": "projectaddress",
             "type": "address"
-          },
-          {
-            "internalType": "enum Utils.State",
-            "name": "projectTierState",
-            "type": "uint8"
           }
         ],
         "indexed": false,
@@ -469,7 +464,7 @@
     "outputs": [
       {
         "internalType": "string",
-        "name": "ipfshash",
+        "name": "hash",
         "type": "string"
       },
       {
@@ -491,11 +486,6 @@
         "internalType": "address",
         "name": "projectaddress",
         "type": "address"
-      },
-      {
-        "internalType": "enum Utils.State",
-        "name": "projectTierState",
-        "type": "uint8"
       }
     ],
     "stateMutability": "view",

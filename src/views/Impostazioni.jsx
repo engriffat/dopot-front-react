@@ -82,23 +82,23 @@ const Profile = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/dao"}>
+                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"/#/dao"}>
-                      <p>Dao Widget</p>
+                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                      <p>DAO</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"/#/impostazioni"}>
+                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
                       <img
                         className="myprojects-img"
                         src={ProfileIcon6}
                         alt="ProfileIcon"
                       />
                     </a>
-                    <a href={"/#/impostazioni"}>
-                      <p>Impostazioni</p>
+                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                      <p>Verify Identity</p>
                     </a>
                   </div>
                 </div>

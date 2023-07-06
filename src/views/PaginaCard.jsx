@@ -153,10 +153,10 @@ const PaginaCard = () => {
                     img={PCUserIcon}
                     text={`${progetto.investorsNumber} investors`}
                   />
-                  <IconInfoCard
+                  {progetto.fundRaisingDeadline > 0 && <IconInfoCard
                     img={PCCalendarIcon}
                     text={`${progetto.fundRaisingDeadline} days remaining`}
-                  />
+                  />}
                 </div>
                 <div className="pc-70-box box-bk-over-logo">
                   <p>

@@ -2,16 +2,13 @@ import { db, getIdentity, init } from "./firebaseInit"
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import { addressState, providerState } from '../../recoilState';
 import { genproj, bundlrAdd, contrattoProjectAddTier } from "../genproj"
-import { fileToBase64, filelistToBase64 } from "../base64utils";
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
 import { downloadProjects } from "./retriveInfo";
-import { hexlify } from 'ethers/lib/utils'
 import * as PushAPI from '@pushprotocol/restapi';
 const abiProject = require('../../abi/project/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
-const { ethers, Contract } = require("ethers");
-const ascii85 = require('ascii85');
+const { ethers } = require("ethers");
 const pushMainnetAddress = "0xd52b78d9ba494e5bdcc874dc3c369f2735e24fb3"; //should be the same as polygon, lowercase
 const pushPolygonAddress = "0x340cb0AA007F2ECbF6fCe3cd8929a22429893213";
 const env = "staging"; // prod/staging
@@ -115,6 +112,7 @@ export async function addproj(inputs) {
     });
     console.log(result);
     await optInNotifications();
+
     await downloadProjects();
   } catch (e) {
     console.log(e)
@@ -165,6 +163,18 @@ export async function withdraw(project, discountDPT) {
   const pWithSigner = projectContract.connect(signer);
   try {
     await pWithSigner.withdraw(discountDPT);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function postpone(project) {
+  const provider = getRecoil(providerState);
+  const projectContract = new ethers.Contract(project, abiProject, provider);
+  const signer = provider.getSigner()
+  const pWithSigner = projectContract.connect(signer);
+  try {
+    await pWithSigner.postponeDeadline();
   } catch (e) {
     console.error(e);
   }

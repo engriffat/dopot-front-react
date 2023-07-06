@@ -8,15 +8,18 @@ import PCCalendarIcon from "../../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom";
 import Flag from 'react-world-flags'
-import { addFavorites } from "../../utils/firebase/writeInfos";
+import { addFavorites, postpone } from "../../utils/firebase/writeInfos";
 import IconHeart from "../../assets/img/pc-heart-icon-02.svg";
 
 const Card = (props) => {
   const navigate = useNavigate();
   const percentage = props.progetto.funds / props.progetto.quota * 100
+  const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
+  const isMyProject = fundRaisingDeadline < 0;
+  const address = props.progetto.address;
 
   function handleRedirect(e) {
-    navigate(`/card/${props.progetto.address}`);
+    navigate(`/card/${address}`);
     window.scrollTo(0, -1000000);
   }
   let desc = String(props.progetto.descProgetto);
@@ -74,7 +77,7 @@ const Card = (props) => {
               img={PCUserIcon}
               text={`${props.progetto.investorsNumber} investors`}
             />
-            <IconInfoCard img={PCDollarIcon} text={`${props.progetto.fundRaisingDeadline} days remaining`} />
+            {<IconInfoCard img={PCDollarIcon} text={isMyProject ? props.progetto.stateText : `${fundRaisingDeadline} days remaining`} />}
           </div>
           <div className="pc-70-box box-bk-over-logo">
             <p>
@@ -90,8 +93,21 @@ const Card = (props) => {
           </div>
         </div>
         <div className="pmg-btn-box">
-            <button
-              onClick={() => addFavorites(props.progetto.address)}
+        {isMyProject ? <div className="menu-nav">
+          <div className="dropdown-container" tabindex="-1">
+            <div className="three-dots"></div>
+            <div className="dropdown">
+              <a onClick={() => props.withdraw(address)}>
+                <div>Withdraw funds</div>
+              </a>
+              <a onClick={() => postpone(address)}>
+                <div>Postpone deadline</div>
+              </a>
+            </div>
+          </div>
+        </div> : 
+        <button
+              onClick={() => addFavorites(address)}
               className="grd-btn dopot-btn-lg"
             >
               <img
@@ -99,7 +115,8 @@ const Card = (props) => {
                 src={IconHeart}
                 alt="IconPlane"
               />
-            </button>
+            </button>}
+            
           <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
             Scopri di più
           </button>
