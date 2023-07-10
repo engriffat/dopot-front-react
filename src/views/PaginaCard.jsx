@@ -66,7 +66,7 @@ const PaginaCard = () => {
         img={base64Data[i-1] }
         titolo={progetto["name" + i]}
         currentSupply={progetto.imageNftDefListFiles[i-1]["currentSupply"]}
-        state={progetto.state}
+        state={progetto.stateText}
       ></InvestiCard>
     );
   }
