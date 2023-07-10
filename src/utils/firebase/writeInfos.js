@@ -4,10 +4,12 @@ import { addressState, providerState } from '../../recoilState';
 import { genproj, bundlrAdd, contrattoProjectAddTier } from "../genproj"
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
+import addressDpt from '../../abi/dpt/address.js';
 import { downloadProjects } from "./retriveInfo";
 import * as PushAPI from '@pushprotocol/restapi';
 const abiProject = require('../../abi/project/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
+const abiDpt = require('../../abi/dpt/1.json');
 const { ethers } = require("ethers");
 const pushMainnetAddress = "0xd52b78d9ba494e5bdcc874dc3c369f2735e24fb3"; //should be the same as polygon, lowercase
 const pushPolygonAddress = "0x340cb0AA007F2ECbF6fCe3cd8929a22429893213";
@@ -161,6 +163,27 @@ export async function withdraw(project, discountDPT) {
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
+  
+
+  const infinite = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
+  if(discountDPT){
+    const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
+    const fWithSigner = dptContract.connect(signer);
+    const allowance = await dptContract.allowance(provider, project);
+    if (!allowance.eq(infinite)){
+      const tx = await fWithSigner.approve(project, infinite);
+      await tx.wait(1);
+    }
+  }
+  else {
+    const fundingTokenContract = new ethers.Contract(addressFundingToken, abiFundingToken, signer);
+    const fWithSigner = fundingTokenContract.connect(signer);
+    const allowance = await fundingTokenContract.allowance(provider, project);
+    if (!allowance.eq(infinite)){
+      const tx = await fWithSigner.approve(project, infinite);
+      await tx.wait(1);
+    }
+  }
   try {
     await pWithSigner.withdraw(discountDPT);
   } catch (e) {

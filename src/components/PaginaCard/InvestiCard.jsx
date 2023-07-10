@@ -19,7 +19,7 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => (state === "ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
+            onClick={() => (state === "Ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
             {state === "Ongoing" ? "Invest" : "Buy NFT"}
@@ -37,7 +37,7 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + props.price}</h5>
           <button
-            onClick={() => (state === "ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
+            onClick={() => (state === "Ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
             {state === "Ongoing" ? "Invest" : "Buy NFT"}
