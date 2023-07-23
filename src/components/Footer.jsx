@@ -65,7 +65,7 @@ const Footer = () => {
           <div className="footer-grid-box">
             <h4>{t("services")}</h4>
             <a href="#">{t("createcampaign")}</a>
-            <a href="#">DS Token</a>
+            <a href="#">Dopot Token</a>
             {/* <a href="#">{t('learn')}</a> */}
             <a href="#">FAQ</a>
           </div>
@@ -76,18 +76,18 @@ const Footer = () => {
                 fgColor="white"
                 url="https://www.instagram.com/dopotfi"
               />
-              <SocialIcon
+              {/* <SocialIcon
                 fgColor="white"
                 url="https://www.facebook.com/dopot.fi"
-              />
+              /> */}
               <SocialIcon fgColor="white" url="https://twitter.com/Dopot_fi" />
             </div>
             <div className="footer-social-div">
-              <SocialIcon
+              {/* <SocialIcon
                 fgColor="white"
                 bgColor="#EE1D52"
                 url="https://www.tiktok.com/@dopotfi"
-              />
+              /> */}
               <SocialIcon
                 fgColor="white"
                 url="https://www.reddit.com/user/Dopotfi/"

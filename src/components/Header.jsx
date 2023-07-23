@@ -13,26 +13,33 @@ import { ethers } from "ethers";
 
 async function isWalletConnected() {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  return (provider && (await provider.send("eth_accounts", [])).length > 0);
+  return provider && (await provider.send("eth_accounts", [])).length > 0;
 }
 
 const Header = (props) => {
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
   const [walletText, setwalletText] = useState("Connect Wallet");
   const [walletState, setWalletState] = useState(false);
-  useEffect(() => {( async () => { setWalletState(await isWalletConnected()); getAddr(setwalletText, true); })(); });
+  useEffect(() => {
+    (async () => {
+      setWalletState(await isWalletConnected());
+      getAddr(setwalletText, true);
+    })();
+  });
   return (
     <header>
       <div className="box">
         {/* Header for PC */}
         <div className="header-content">
           <div className="header-left">
-            <img src={LogoWhite} alt="LogoWhite" />
+            <a href="#">
+              <img src={LogoWhite} alt="LogoWhite" />
+            </a>
           </div>
           <div className="header-right">
             <a href="#">Home</a>
-            <a href="#">FAQ</a>
-            <a href={"/#/dopotpower"}>DS Token</a>
+            <a href="/#/FaqIta">FAQ</a>
+            <a href={"/#/dopotpower"}>Dopot Token</a>
 
             <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
               <button class="dropbtn">
@@ -49,25 +56,25 @@ const Header = (props) => {
                     url="https://www.instagram.com/dopotfi"
                   />
                 </a>
-                <a>
+                {/* <a>
                   <SocialIcon
                     fgColor="white"
                     url="https://www.facebook.com/dopot.fi"
                   />
-                </a>
+                </a> */}
                 <a>
                   <SocialIcon
                     fgColor="white"
                     url="https://twitter.com/Dopot_fi"
                   />
                 </a>
-                <a>
+                {/* <a>
                   <SocialIcon
                     fgColor="white"
                     bgColor="#EE1D52"
                     url="https://www.tiktok.com/@dopotfi"
                   />
-                </a>
+                </a> */}
                 <a>
                   <SocialIcon
                     fgColor="white"
@@ -99,10 +106,11 @@ const Header = (props) => {
                 <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
               </div>
             </div>
-            {walletState && <a href={"/#/profile"}>
-              <button className="grd-btn dopot-btn-sm">Account</button>
-            </a>}
-            
+            {walletState && (
+              <a href={"/#/profile"}>
+                <button className="grd-btn dopot-btn-sm">Account</button>
+              </a>
+            )}
 
             <button
               className="purple-border-btn dopot-btn-sm"
@@ -114,7 +122,10 @@ const Header = (props) => {
         </div>
         {/* Header for Mobile Devices */}
         <div className="header-mob">
-          <img src={LogoWhite} alt="LogoWhite" />
+          <a href="#">
+            <img src={LogoWhite} alt="LogoWhite" />
+          </a>
+
           {isHeaderOpen ? (
             <div
               className="header-icon"
@@ -139,7 +150,7 @@ const Header = (props) => {
             <div className="header-mob-box">
               <a href="#">Home</a>
               <a href="#">FAQ</a>
-              <a href={"/#/dopotpower"}>DS Token</a>
+              <a href={"/#/dopotpower"}>Dopot Token</a>
               <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
                 <button class="dropbtn">
                   Community{" "}
@@ -155,25 +166,25 @@ const Header = (props) => {
                       url="https://www.instagram.com/dopotfi"
                     />
                   </a>
-                  <a>
+                  {/* <a>
                     <SocialIcon
                       fgColor="white"
                       url="https://www.facebook.com/dopot.fi"
                     />
-                  </a>
+                  </a> */}
                   <a>
                     <SocialIcon
                       fgColor="white"
                       url="https://twitter.com/Dopot_fi"
                     />
                   </a>
-                  <a>
-                    <SocialIcon
+                  {/* <a>
+                     <SocialIcon
                       fgColor="white"
                       bgColor="#EE1D52"
                       url="https://www.tiktok.com/@dopotfi"
-                    />
-                  </a>
+                    /> 
+                  </a>*/}
                   <a>
                     <SocialIcon
                       fgColor="white"
@@ -206,10 +217,10 @@ const Header = (props) => {
                 </div>
               </div>
 
-              {walletState && <button className="grd-btn dopot-btn-lg">Account</button>}
-              <button
-                className="purple-border-btn dopot-btn-lg"
-              >
+              {walletState && (
+                <button className="grd-btn dopot-btn-lg">Account</button>
+              )}
+              <button className="purple-border-btn dopot-btn-lg">
                 {walletState ? "Wallet" : "Connect Wallet"}
               </button>
             </div>
