@@ -81,7 +81,7 @@
 .scorpi-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   grid-gap: 5rem;
   margin: 10rem 0 0 0;
@@ -609,7 +609,7 @@
 @media screen and (max-width: 650px) {
   .hero-content h1 {
     font-size: 4rem;
-    margin: 0 0 0 0;
+    margin: -40% 0 0 0;
   }
   .hero-content h2 {
     margin: 2.5rem 0 5rem 0;
@@ -621,7 +621,7 @@
   .main-btns-box {
     flex-direction: column;
     justify-content: center;
-    margin: 0;
+    margin: 0 0 0 -15%;
   }
   .main-btns-box button {
     width: 100%;
@@ -707,9 +707,6 @@
     width: 100%;
   }
 
-  /* .hero-content {
-    padding: 2.5rem 0;
-  } */
   .hero-content img {
     width: 5.5rem;
   }
