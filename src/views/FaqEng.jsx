@@ -18,7 +18,6 @@ import DImg5 from "../assets/img/img-5.png";
 import DImg6 from "../assets/img/img-6.png";
 import DImg7 from "../assets/img/img-7.png";
 import DImg8 from "../assets/img/img-8.png";
-import PHand1 from "../assets/img/p-img-1.png";
 import PHand2 from "../assets/img/p-img-2.png";
 import PBottom from "../assets/img/pc-hero-img.png";
 import "react-circular-progressbar/dist/styles.css";
@@ -28,7 +27,7 @@ import "../styles/dopotpower.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
-const DopotPower = () => {
+const DopotShare = () => {
   let navigate = useNavigate();
 
   return (
@@ -39,20 +38,9 @@ const DopotPower = () => {
         </div>
         <div className="box">
           <div className="dopot-power">
-            <h1 className="mb-5">SCOPRI IL TOKEN DI DOPOT</h1>
+            <h1>FAQ</h1>
 
-            {/* <div className="p-btn-box">
-              <button
-                style={{
-                  borderRadius: "10px 10px 0 0",
-                  padding: "8px 15px",
-                  border: "2px solid rgb(186, 178, 178)",
-                }}
-                className="grd-btn dopot-btn-lg"
-              >
-                Dopotpower
-              </button>
-
+            <div className="p-btn-box">
               <button
                 style={{
                   border: "2px solid rgb(186, 178, 178)",
@@ -60,49 +48,22 @@ const DopotPower = () => {
                   padding: "8px 15px",
                   boxShadow: "none",
                 }}
-                onClick={(e) => navigate("/dopotshare")}
+                onClick={(e) => navigate("/FaqIta")}
                 className="purple-border-btn dopot-btn-lg"
               >
-                Dopotshare
+                Ita
               </button>
-            </div> */}
-            <h2>DOPOT TOKEN (DPT): L’UTILITY TOKEN DELLA PIATTAFORMA</h2>
-            <h3>Grazie a “DPT” sarà possibile ottenere diversi vantaggi:</h3>
-            {/* <img className="p-hand-img" src={PHand1} alt="PHand1" /> */}
-            <div className="p-cards-grid">
-              <div className="p-card">
-                <img src={DImg1} alt="dopot votazioni" />
-                <p>Sicurezza sulle votazioni</p>
-              </div>
-              <div className="p-card">
-                <img src={DImg2} alt="dopot dex" />
-                <p>Decentramento</p>
-              </div>
-              <div className="p-card">
-                <img src={DImg3} alt="dopot facilita" />
-                <p>Facilità d’utilizzo</p>
-              </div>
-              <div className="p-card">
-                <img src={DImg4} alt="dopot sostenibilità" />
-                <p>Sostenibilità</p>
-              </div>
+              <button
+                style={{
+                  border: "2px solid rgb(186, 178, 178)",
+                  borderRadius: "10px 10px 0 0",
+                  padding: "8px 15px",
+                }}
+                className="grd-btn dopot-btn-lg"
+              >
+                Eng
+              </button>
             </div>
-            <h3>
-              <strong>Caratteristiche</strong>
-            </h3>
-            <ul>
-              <li>
-                Se si pagano le commissioni con Dopot Token anziché con la
-                stablecoin DAI, si avrà lo sconto del 50% dall'ammontare
-                iniziale delle commissioni, ovvero anzichè pagare il 6%, si
-                andrà a pagare il 3%.
-              </li>
-              <li>
-                Se si raggiunge il minimo di goal del 51%, si potrà richiedere
-                l'allungamento di 30 giorni del crowdfunding pagando il 4% della
-                somma richiesta in Dopot Token.
-              </li>
-            </ul>
           </div>
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
@@ -112,4 +73,4 @@ const DopotPower = () => {
   );
 };
 
-export default DopotPower;
+export default DopotShare;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import gifLoading from "../assets/img/gifLoading.gif";
+import gifLoading from "../assets/img/3yZR-unscreen.gif";
 import "../styles/loading.css";
 // import {DownloadProj} from "../utils/downloadProj";
 import { downloadProjects } from "../utils/firebase/retriveInfo";
@@ -19,9 +19,9 @@ function LoadingPage(props) {
   }, []);
 
   console.log("i fire once");
-  
+
   return (
-    <div>
+    <div style={{ background: "black" }}>
       <img src={gifLoading} alt="" srcset="" class="center" />
     </div>
   );

@@ -40,25 +40,24 @@ import { useTranslation } from "react-i18next";
 import Pdf from "../assets/dopot.pdf";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
-
   const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
   AOS.init();
 
   useEffect(() => {
-    if (typeof window.ethereum === 'undefined') {
-      toast.info('Dopot needs a Web3 wallet to work');
+    if (typeof window.ethereum === "undefined") {
+      toast.info("Dopot needs a Web3 wallet to work");
     }
   }, []);
 
   return (
     <div className="app">
       <main className="home">
-      <ToastContainer />
+        <ToastContainer />
         {/* Temporary Message */}
         {isTempMsgHidden ? null : (
           <div className="temp-msg">
@@ -149,7 +148,7 @@ const Home = () => {
                   <h4>{t("invest")}</h4>
                   <p>{t("investsub")}</p>
                 </div>
-                <div
+                {/* <div
                   data-aos="fade-up"
                   data-aos-delay="750"
                   data-aos-duration="1000"
@@ -158,10 +157,10 @@ const Home = () => {
                   <img src={IconDollarGrd} alt="IconDollarGrd" />
                   <h4>{t("earn")}</h4>
                   <p>{t("earnsub")}</p>
-                </div>
+                </div> */}
                 <div
                   data-aos="fade-up"
-                  data-aos-delay="1000"
+                  data-aos-delay="750"
                   data-aos-duration="1000"
                   className="scorpi-grid-card"
                 >
@@ -226,7 +225,15 @@ const Home = () => {
                 data-aos-delay="800"
               >
                 <h5>{t("decentralization")}</h5>
-                <p>{t("decentralizationsub")}</p>
+                <p>
+                  La piattaforma Dopot è al 100% decentralizzata, questo
+                  significa che nessun individuo può manomettere i dati o
+                  compiere azioni fraudolente con i fondi raccolti grazie alla
+                  sicurezza fornita dalla blockchain. Ciò che le persone
+                  investono viene trasferito su un contratto intelligente senza
+                  intermediari e in maniera totalmente sicura grazie alla
+                  crittografia.
+                </p>
               </div>
             </div>
             <div className="ill-text-info-box-2">
@@ -236,7 +243,14 @@ const Home = () => {
                 data-aos-delay="500"
               >
                 <h5>{t("benefits")}</h5>
-                <p>{t("benefitssub")}</p>
+                <p>
+                  Tramite il multi-sig presente nello smart contract si ha la
+                  totale sicurezza sulla raccolta fondi senza richiedere
+                  collaterali ai richiedenti denaro. Questo sistema estende la
+                  possibilità a chiunque voglia, indipendentemente dalle
+                  possibilità economiche, di effettuare un crowdfunding; e allo
+                  stesso tempo mettere in sicurezza i soldi degli investitori.
+                </p>
               </div>
             </div>
           </div>
@@ -334,7 +348,7 @@ const Home = () => {
                     <h4>01</h4>
                     <div>
                       <h6>Fase Mercurio</h6>
-                      <p>DAO Launch & DopotShare Token (DST) private sale</p>
+                      <p>DAO Launch & Dopot Token (DPT) private sale</p>
                     </div>
                   </div>
                 </div>
@@ -357,7 +371,7 @@ const Home = () => {
                     <h4>02</h4>
                     <div>
                       <h6>Fase Venere</h6>
-                      <p>DST Public sale</p>
+                      <p>DPT public sale</p>
                     </div>
                   </div>
                 </div>

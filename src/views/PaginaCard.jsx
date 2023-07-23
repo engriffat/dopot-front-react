@@ -9,7 +9,7 @@ import IconInfoDai from "../components/PaginaCard/IconInfoDai";
 import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
 import PC70 from "../assets/img/pc-70.png";
 import IconPlane from "../assets/img/icon-plane.svg";
-import IconHeart from "../assets/img/pc-heart-icon-02.svg";
+
 import ImageIcon from "../assets/img/pc-img-icon.png";
 import ImageBackLogo from "../assets/img/logo_Mentadent-2.png";
 import IconInfoCard from "../components/PaginaCard/IconInfoCard";
@@ -27,26 +27,34 @@ import TabQuestionario from "../components/TabQuestionario";
 import TabDocumenti from "../components/TabDocumenti";
 import { addFavorites } from "../utils/firebase/writeInfos";
 import { downloadProjects } from "../utils/firebase/retriveInfo";
+import IconHeart from "../assets/img/heart-fav.svg";
+import IconHeartActive from "../assets/img/heart-fav-active.svg";
 
 const PaginaCard = () => {
+  const [toggleHeart, setToggleHeart] = useState(true);
+
   let { address } = useParams();
-  useEffect(() => {( async () => { await downloadProjects(); })(); });
+  useEffect(() => {
+    (async () => {
+      await downloadProjects();
+    })();
+  });
   let progetto = getRecoil(progettiState).find((x) => x.address === address);
-  console.dir(progetto)
+  console.dir(progetto);
   const [base64Data, setBase64Data] = useState([]);
 
   useEffect(() => {
     // Fetch the base64 data asynchronously
     const fetchBase64Data = async () => {
       // Make an API call or any other asynchronous operation to get the base64 data
-      for(const tier of progetto.imageNftDefListFiles){
-        const response = await fetch(tier["image"].replace("ar://", "https://arweave.net/"));
-        console.log(response)
+      for (const tier of progetto.imageNftDefListFiles) {
+        const response = await fetch(
+          tier["image"].replace("ar://", "https://arweave.net/")
+        );
+        console.log(response);
         const data = await response.text();
         setBase64Data((prevData) => [...prevData, data]);
-
       }
-      
     };
 
     fetchBase64Data();
@@ -63,15 +71,15 @@ const PaginaCard = () => {
         spec={progetto["specs" + i]}
         supply={progetto["supply" + i]}
         price={progetto["price" + i]}
-        img={base64Data[i-1] }
+        img={base64Data[i - 1]}
         titolo={progetto["name" + i]}
-        currentSupply={progetto.imageNftDefListFiles[i-1]["currentSupply"]}
+        currentSupply={progetto.imageNftDefListFiles[i - 1]["currentSupply"]}
         state={progetto.stateText}
       ></InvestiCard>
     );
   }
 
-  const percentage = progetto.funds / progetto.quota * 100
+  const percentage = (progetto.funds / progetto.quota) * 100;
 
   const [tab, setTab] = useState(0);
 
@@ -124,14 +132,18 @@ const PaginaCard = () => {
 
                 <div className="pc-btn-box">
                   <button
-                    onClick={() => addFavorites(progetto.address)}
-                    className="grd-btn dopot-btn-lg"
+                    onClick={() => {
+                      addFavorites(address);
+                      setToggleHeart(!toggleHeart);
+                    }}
+                    // className="grd-btn dopot-btn-lg"
+                    style={{ background: "none", width: "10%" }}
                   >
-                    <img
-                      className="img-heart"
-                      src={IconHeart}
-                      alt="IconPlane"
-                    />
+                    {toggleHeart ? (
+                      <img src={IconHeart} />
+                    ) : (
+                      <img src={IconHeartActive} />
+                    )}
                   </button>
                   {/* <button className="grd-btn dopot-btn-lg">
                     <img src={IconPlane} alt="IconPlane" /> Scopri di più
@@ -146,17 +158,20 @@ const PaginaCard = () => {
                 <div className="pc-hero-icon-grid ">
                   <IconInfoDai
                     img={PCDollarIcon}
-                    text={`DAI ${progetto.funds} of DAI ${progetto.quota}`}
+                    text={`DAI ${progetto.funds}`}
+                    text2={`of DAI ${progetto.quota}`}
                   />
 
                   <IconInfoCard
                     img={PCUserIcon}
                     text={`${progetto.investorsNumber} investors`}
                   />
-                  {progetto.fundRaisingDeadline > 0 && <IconInfoCard
-                    img={PCCalendarIcon}
-                    text={`${progetto.fundRaisingDeadline} days remaining`}
-                  />}
+                  {progetto.fundRaisingDeadline > 0 && (
+                    <IconInfoCard
+                      img={PCCalendarIcon}
+                      text={`${progetto.fundRaisingDeadline} days remaining`}
+                    />
+                  )}
                 </div>
                 <div className="pc-70-box box-bk-over-logo">
                   <p>
@@ -287,7 +302,8 @@ const PaginaCard = () => {
                           src={(() => {
                             if (progetto.logoAziendaListFiles[0] != null) {
                               return (
-                                "https://arweave.net/"+progetto.logoAziendaListFiles[0]
+                                "https://arweave.net/" +
+                                progetto.logoAziendaListFiles[0]
                               );
                             } else return ImageIcon;
                           })()}
@@ -299,7 +315,8 @@ const PaginaCard = () => {
                           src={(() => {
                             if (progetto.logoAziendaListFiles[0] != null) {
                               return (
-                                "https://arweave.net/"+progetto.logoAziendaListFiles[0]
+                                "https://arweave.net/" +
+                                progetto.logoAziendaListFiles[0]
                               );
                             } else return ImageIcon;
                           })()}

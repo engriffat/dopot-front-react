@@ -25,14 +25,21 @@ import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIcon5 from "../assets/img/widget.png";
-import ProfileIcon6 from "../assets/img/impostazioni.png";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import ProfileIcon6 from "../assets/img/identity.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const { ethers } = require("ethers");
 
 const InsProgetto = () => {
   var step = [];
-  const [inputs, setInputs] = useState({ logoAziendaListFiles: [], documentazioneDefListFiles: [], imageNftDefListFiles: [], giorniCampagna: "45", numeroProdotti: "1", tipoCampagna: "reward" });
+  const [inputs, setInputs] = useState({
+    logoAziendaListFiles: [],
+    documentazioneDefListFiles: [],
+    imageNftDefListFiles: [],
+    giorniCampagna: "45",
+    numeroProdotti: "1",
+    tipoCampagna: "reward",
+  });
   const [progressionStep, setprogressionStep] = useState(0);
   const navigate = useNavigate();
 
@@ -42,28 +49,25 @@ const InsProgetto = () => {
 
     if (e.target.files != null) {
       setInputs((prevState) => ({
-        ...prevState,   
-        [propName]: []  
+        ...prevState,
+        [propName]: [],
       }));
       const selectedFiles = [...e.target.files];
       const propName = name + "ListFiles";
       selectedFiles.forEach((file, i) => {
         const reader = new FileReader();
-        reader.readAsArrayBuffer(file); 
+        reader.readAsArrayBuffer(file);
         reader.onload = () => {
           setInputs((prevState) => ({
-            ...prevState,   
-            [propName]: [
-              ...prevState[propName], 
-              Buffer.from(reader.result)
-            ]  
+            ...prevState,
+            [propName]: [...prevState[propName], Buffer.from(reader.result)],
           }));
           //console.dir(inputs);
         };
         reader.onerror = () => {
-          console.log('Error reading file!');
-        }
-      }); 
+          console.log("Error reading file!");
+        };
+      });
     } else {
       setInputs((values) => ({ ...values, [name]: value }));
       console.dir(inputs);
@@ -82,30 +86,27 @@ const InsProgetto = () => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       const base64 = reader.result;
-      setInputs(prevState => {
+      setInputs((prevState) => {
         const updatedInputs = [...prevState.imageNftDefListFiles];
         updatedInputs[nProdotto] = base64;
         return { ...prevState, imageNftDefListFiles: updatedInputs };
       });
     };
-  }
+  };
 
   const handleSubmit = async (event) => {
-    if(event.target.id === "submit"){
+    if (event.target.id === "submit") {
       event.preventDefault();
       try {
-        await toast.promise(
-          addproj(inputs),
-          {
-            pending: 'Confirm the transactions',
-            success: 'Project created!',
-            error: 'An error occurred',
-          }
-        );
+        await toast.promise(addproj(inputs), {
+          pending: "Confirm the transactions",
+          success: "Project created!",
+          error: "An error occurred",
+        });
       } catch (error) {
         console.log(error);
       }
-  }
+    }
   };
 
   const renderCurrentSelection = () => {
@@ -175,7 +176,6 @@ const InsProgetto = () => {
         );
         return step;
 
-
       case 4:
         step[0] = (
           <InfBase inputs={inputs} handleChange={handleChange}></InfBase>
@@ -190,7 +190,11 @@ const InsProgetto = () => {
           <Progetto inputs={inputs} handleChange={handleChange}></Progetto>
         );
         step[3] = (
-          <Prodotto inputs={inputs} handleChange={handleChange} handleChangeNft={handleChangeNft}></Prodotto>
+          <Prodotto
+            inputs={inputs}
+            handleChange={handleChange}
+            handleChangeNft={handleChangeNft}
+          ></Prodotto>
         );
         /*step[4] = (
           <NftMint inputs={inputs} handleChange={handleChange}></NftMint>
@@ -243,12 +247,10 @@ const InsProgetto = () => {
                 <div className="profile-img-box">
                   <h3>
                     Profilo di{" "}
-                    {address && address.toString().substring(0, 5) +
-                      "..." +
-                      address && address.toString().substring(38, 42)}
+                    {address &&
+                      address.toString().substring(0, 5) + "..." + address &&
+                      address.toString().substring(38, 42)}
                   </h3>
-
-                  <img src={ProfileImg} alt="" />
                 </div>
               </div>
               <div className="pts-right">
@@ -290,18 +292,38 @@ const InsProgetto = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                    <a
+                      href={
+                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                    <a
+                      href={
+                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <p>DAO</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                    <a
+                      href={"https://app.proofofhumanity.id"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img src={ProfileIcon6} alt="ProfileIcon" />
                     </a>
-                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                    <a
+                      href={"https://app.proofofhumanity.id"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <p>Verify Identity</p>
                     </a>
                   </div>
@@ -320,7 +342,9 @@ const InsProgetto = () => {
               <h2>Inserisci il tuo progetto </h2>
             </div>
             {renderCurrentSelectionHeader()}
-            <form id="submit" onSubmit={handleSubmit}>{renderCurrentSelection()}</form>
+            <form id="submit" onSubmit={handleSubmit}>
+              {renderCurrentSelection()}
+            </form>
           </div>
         </section>
         <Footer />

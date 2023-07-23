@@ -16,23 +16,50 @@ import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import Footer from "../components/Footer";
 import { downloadProjects } from "../utils/firebase/retriveInfo";
-import useSearchForm from './useSearchForm';
+import useSearchForm from "./useSearchForm";
 
-const Home = () => {  const handleSearch = useSearchForm();
+const Home = () => {
+  const handleSearch = useSearchForm();
   const cards = [];
-  useEffect(() => {( async () => { await downloadProjects(); })(); });
+  useEffect(() => {
+    (async () => {
+      await downloadProjects();
+    })();
+  });
   let progetti = getRecoil(progettiState);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const state = query.get("s") || "ongoing";
   const campaign = query.get("c") || "reward";
   const type = query.get("t") || "any";
-  let value = query.get("v") || "any";console.log(progetti)
-  progetti = progetti.filter((progetto) => 
-  progetto.stateText.toLowerCase().replace(" ","") === state && 
-  progetto.tipoCampagna === campaign && 
-  (type !== "any" ? progetto.settore === type : true) && 
-  (value !== "any" ? (progetto.minInvestment >= parseInt(value.split("-")[0]) && progetto.minInvestment <= parseInt(value.split("-")[1])) : true));
+  let value = query.get("v") || "any";
+
+  //test
+  let expanded = false;
+
+  function showCheckboxes() {
+    let checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+      checkboxes.style.display = "block";
+      expanded = true;
+    } else {
+      checkboxes.style.display = "none";
+      expanded = false;
+    }
+  }
+  //test
+
+  console.log(progetti);
+  progetti = progetti.filter(
+    (progetto) =>
+      progetto.stateText.toLowerCase().replace(" ", "") === state &&
+      progetto.tipoCampagna === campaign &&
+      (type !== "any" ? progetto.settore === type : true) &&
+      (value !== "any"
+        ? progetto.minInvestment >= parseInt(value.split("-")[0]) &&
+          progetto.minInvestment <= parseInt(value.split("-")[1])
+        : true)
+  );
 
   progetti.forEach((element) => {
     cards.push(
@@ -78,9 +105,7 @@ const Home = () => {  const handleSearch = useSearchForm();
                   <option disabled value>
                     SOCIALE
                   </option>
-                  <option value="tipo1">
-                    Assistenza sociale
-                  </option>
+                  <option value="tipo1">Assistenza sociale</option>
                   <option value="tipo2">Assistenza sanitaria</option>
                   <option value="tipo3">Assistenza socio-sanitaria</option>
                   <option value="tipo4">
@@ -171,9 +196,14 @@ const Home = () => {  const handleSearch = useSearchForm();
               <div className="dash-sel-opt-content">
                 <label for="sel4">Range di investimento</label>
                 <select name="sel4" id="sel4">
-                  <option value="any">Any value</option>
-                  <option value="0-100">0$ - 100$</option>
-                  <option value="100-1000">100$ - 1000$</option>
+                  <option value="0-25">0$ - 25$</option>
+                  <option value="25-50">25$ - 50$</option>
+                  <option value="50-100">50$ - 100$</option>
+                  <option value="100-250">100$ - 250$</option>
+
+                  <option value="250-500">250$ - 500$</option>
+                  <option value="500-1000">500$ - 1000$</option>
+                  <option value="1000>">1000$ &gt;</option>
                   {/*  <option value="saab">Saab</option>
                   <option value="mercedes">Mercedes</option>
                   <option value="audi">Audi</option>*/}
@@ -183,15 +213,42 @@ const Home = () => {  const handleSearch = useSearchForm();
                 <MdSearch />
               </div>
             </div>
-            <div className="dashboard-btn">
-              <button style={{ backgroundColor: "white" }}>
-                <MdFilterList /> Filter
-              </button>
-            </div>
+
+            <form className="dash-sel-opt-content" style={{ margin: 0 }}>
+              <label style={{ borderRadius: "2rem" }}>Ordina</label>
+              <div class="multiselect">
+                <div class="selectBox" onClick={showCheckboxes}>
+                  <select>
+                    <option>Ordina</option>
+                  </select>
+                  <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
+                  <label for="standard">
+                    <input type="checkbox" id="standard" /> Standard
+                  </label>
+                  <label for="in-chiusura-di-tempo">
+                    <input type="checkbox" id="in-chiusura-di-tempo" />
+                    In chiusura di tempo
+                  </label>
+                  <label for="in-chiusura-d’investimento">
+                    <input type="checkbox" id="in-chiusura-d’investimento" />
+                    In chiusura d’investimento
+                  </label>
+                  <label for="crescente">
+                    <input type="checkbox" id="crescente" />
+                    Crescente
+                  </label>
+                  <label for="decrescente">
+                    <input type="checkbox" id="decrescente" />
+                    Decrescente
+                  </label>
+                </div>
+              </div>
+            </form>
           </div>
           <div className="risul-ordino-box">
             <h2>{cards.length} Risultati</h2>
-            <h6>ordina</h6>
           </div>
           <div class="profile-dash-cards">{cards}</div>
         </div>

@@ -9,15 +9,19 @@ import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIcon5 from "../assets/img/widget.png";
-import ProfileIcon6 from "../assets/img/impostazioni.png";
+import ProfileIcon6 from "../assets/img/identity.png";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import React, { useState, useEffect } from "react";
 import { getRecoil, setRecoil } from "recoil-nexus";
-import { addressState, progettiState, progettiImageState } from "../recoilState";
+import {
+  addressState,
+  progettiState,
+  progettiImageState,
+} from "../recoilState";
 
 import "react-circular-progressbar/dist/styles.css";
-import Card from "../components/PaginaCard/Card";
+import CardPref from "../components/PaginaCard/CardPref";
 
 import {
   retriveFavorites,
@@ -31,39 +35,43 @@ const Profile = () => {
   const [isActive, setActive] = useState(true);
   const [isActive2, setActive2] = useState(false);
   const address = getRecoil(addressState);
-  let projects = getRecoil(progettiState)
+  let projects = getRecoil(progettiState);
 
   useEffect(() => {
     // Update the document title using the browser API
     async function fetchData() {
       let tempCard = [];
       //console.dir(projects);
-      for (const project of projects){
-        let tiers = project.investors[address]
-        console.log(tiers)
+      for (const project of projects) {
+        let tiers = project.investors[address];
+        console.log(tiers);
         for (const tierId in tiers) {
-          if (tiers.hasOwnProperty(tierId)/* && tiers[tierId] !== 0*/) {
-            tempCard.push(<Card
-              progetto={project}
-              immagini={getRecoil(progettiImageState)[project.address]}
-              address={project.address}
-              tier={project.tier}
-            ></Card>);
+          if (tiers.hasOwnProperty(tierId) /* && tiers[tierId] !== 0*/) {
+            tempCard.push(
+              <CardPref
+                progetto={project}
+                immagini={getRecoil(progettiImageState)[project.address]}
+                address={project.address}
+                tier={project.tier}
+              ></CardPref>
+            );
           }
         }
       }
       setinvestedCard(tempCard);
-      
+
       const favorites = await retriveFavorites();
       let tempCard2 = [];
       for (const element of favorites) {
-        let project = projects.find(project => project.address === element);
-        tempCard2.push(<Card
-          progetto={project}
-          immagini={getRecoil(progettiImageState)[project.address]}
-          address={project.address}
-          tier={project.tier}
-        ></Card>);
+        let project = projects.find((project) => project.address === element);
+        tempCard2.push(
+          <CardPref
+            progetto={project}
+            immagini={getRecoil(progettiImageState)[project.address]}
+            address={project.address}
+            tier={project.tier}
+          ></CardPref>
+        );
       }
       setfavoriteCard(tempCard2);
     }
@@ -95,12 +103,10 @@ const Profile = () => {
                 <div className="profile-img-box">
                   <h3>
                     Profilo di{" "}
-                    {address && address.toString().substring(0, 5) +
-                      "..." +
-                      address && address.toString().substring(38, 42)}
+                    {address &&
+                      address.toString().substring(0, 5) + "..." + address &&
+                      address.toString().substring(38, 42)}
                   </h3>
-
-                  <img src={ProfileImg} alt="" />
                 </div>
               </div>
               <div className="pts-right">
@@ -142,18 +148,38 @@ const Profile = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                    <a
+                      href={
+                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                    <a
+                      href={
+                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <p>DAO</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                    <a
+                      href={"https://app.proofofhumanity.id"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img src={ProfileIcon6} alt="ProfileIcon" />
                     </a>
-                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                    <a
+                      href={"https://app.proofofhumanity.id"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <p>Verify Identity</p>
                     </a>
                   </div>
@@ -199,9 +225,7 @@ const Profile = () => {
         <section className="profile-bottom">
           <div className="box">
             <div className="profile-main-grid">
-              {/* <div className="pmg-left">{investedCard}</div> */}
-              {investedCard}
-       
+              <div className="pmg-left">{investedCard}</div>
 
               <div className={isActive ? "pmg-right" : "sec-display-none-pref"}>
                 {favoriteCard}

@@ -8,12 +8,17 @@ import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIcon5 from "../assets/img/widget.png";
-import ProfileIcon6 from "../assets/img/impostazioni.png";
+import ProfileIcon6 from "../assets/img/identity.png";
+import IconPlane from "../assets/img/icon-plane.svg";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import React, { useState, useEffect } from "react";
 import { getRecoil } from "recoil-nexus";
-import { addressState, progettiState, progettiImageState } from "../recoilState";
+import {
+  addressState,
+  progettiState,
+  progettiImageState,
+} from "../recoilState";
 import "react-circular-progressbar/dist/styles.css";
 import { withdraw } from "../utils/firebase/writeInfos";
 import Card from "../components/PaginaCard/Card";
@@ -21,31 +26,35 @@ import Card from "../components/PaginaCard/Card";
 const Profile = () => {
   const [projectsCard, setProjectsCard] = useState([]);
   const address = getRecoil(addressState);
-  let projects = getRecoil(progettiState)
+  let projects = getRecoil(progettiState);
 
-  async function handleWithdraw(projectAddress){
-    const response = window.confirm("Do you want to pay fees with the Dopot token for a discount?");
+  async function handleWithdraw(projectAddress) {
+    const response = window.confirm(
+      "Do you want to pay fees with the Dopot token for a discount?"
+    );
     await withdraw(projectAddress, response);
-    console.log(response)
+    console.log(response);
   }
 
   useEffect(() => {
     // Update the document title using the browser API
     async function fetchData() {
       let myProjects = [];
-      projects.filter(p => p.addressCreator === address).forEach(project => {
-        myProjects.push(
-          <Card
-            progetto={project}
-            immagini={getRecoil(progettiImageState)[project.address]}
-            address={project.addressContract}
-            tier={project.tier}
-            state={project.stateText}
-            withdraw={handleWithdraw}
-          ></Card>
-        );
-      });
-      
+      projects
+        .filter((p) => p.addressCreator === address)
+        .forEach((project) => {
+          myProjects.push(
+            <Card
+              progetto={project}
+              immagini={getRecoil(progettiImageState)[project.address]}
+              address={project.addressContract}
+              tier={project.tier}
+              state={project.stateText}
+              withdraw={handleWithdraw}
+            ></Card>
+          );
+        });
+
       setProjectsCard(myProjects);
     }
     fetchData();
@@ -64,11 +73,10 @@ const Profile = () => {
                 <div className="profile-img-box">
                   <h3>
                     Profilo di{" "}
-                    {getRecoil(addressState).toString().substring(0, 5) +
-                      "..." +
-                      getRecoil(addressState).toString().substring(38, 42)}
+                    {address &&
+                      address.toString().substring(0, 5) + "..." + address &&
+                      address.toString().substring(38, 42)}
                   </h3>
-                  <img src={ProfileImg} alt="ProfileImg" />
                 </div>
               </div>
               <div className="pts-right">
@@ -110,18 +118,38 @@ const Profile = () => {
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                    <a
+                      href={
+                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img src={ProfileIcon5} alt="ProfileIcon" />
                     </a>
-                    <a href={"https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"} target="_blank" rel="noreferrer">
+                    <a
+                      href={
+                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <p>DAO</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
-                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                    <a
+                      href={"https://app.proofofhumanity.id"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img src={ProfileIcon6} alt="ProfileIcon" />
                     </a>
-                    <a href={"https://app.proofofhumanity.id"} target="_blank" rel="noreferrer">
+                    <a
+                      href={"https://app.proofofhumanity.id"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <p>Verify Identity</p>
                     </a>
                   </div>
@@ -130,25 +158,41 @@ const Profile = () => {
             </div>
           </div>
         </section>
-                    
+        <div className="box">
+          <a
+            href="https://staging.push.org/chat"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <button
+              className="grd-btn"
+              style={{ marginTop: "1rem", padding: "1rem" }}
+            >
+              <div className="shipping">
+                <img src={IconPlane} alt="ProfileIcon" />
+                <p
+                  style={{
+                    margin: "0 0 0 1rem",
+                    fontSize: "1.75rem",
+                  }}
+                >
+                  Shipping Details
+                </p>
+              </div>
+            </button>
+          </a>
+        </div>
+
         <div className="box0">
-          <div className="sec-inv-desk-flex">
+          <div style={{ display: "flex", margin: "8rem 0" }}>
             <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
             <p>My projects</p>
           </div>
-          <a href="https://staging.push.org/chat" target="_blank" rel="noreferrer"> 
-            <div className="sec-pref-desk-flex">
-              <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
-              <p style={{ "color": "lightskyblue", "text-decoration-line": "underline"}}>Shipping Details</p>
-            </div>
-          </a>
         </div>
 
         <section className="profile-bottom">
           <div className="box">
-            <div className="profile-main-grid">
-              {projectsCard}
-            </div>
+            <div className="profile-main-grid">{projectsCard}</div>
           </div>
         </section>
       </main>
