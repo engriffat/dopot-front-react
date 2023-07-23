@@ -10,7 +10,7 @@ const IconInfoDai = (props) => {
         <img style={{ margin: 0, height: "20px" }} src={IconDai} alt="" />
         {props.text2}
         <span>
-          <img style={{ width: "20%", margin: 0 }} src={IconDai} alt="" />
+          <img style={{ margin: 0, height: "20px" }} src={IconDai} alt="" />
         </span>
         <span>raised</span>
       </p>

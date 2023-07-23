@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useCallback } from "react";
-import IconInfoCard from "../../components/PaginaCard/IconInfoCard";
-import IconInfoDai from "../../components/PaginaCard/IconInfoDai";
+import IconInfoCard from "./IconInfoCard";
+import IconInfoDai from "./IconInfoDai";
 import PCDollarIcon from "../../assets/img/pc-dollar-icon.png";
 import PCUserIcon from "../../assets/img/pc-person-icon.png";
 import PCCalendarIcon from "../../assets/img/pc-calendar-icon.png";
@@ -128,14 +128,17 @@ const Card = (props) => {
               onClick={() => {
                 addFavorites(address);
                 setToggleHeart(!toggleHeart);
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1000);
               }}
               // className="grd-btn dopot-btn-lg"
               style={{ background: "none", width: "10%" }}
             >
               {toggleHeart ? (
-                <img src={IconHeart} />
-              ) : (
                 <img src={IconHeartActive} />
+              ) : (
+                <img src={IconHeart} />
               )}
             </button>
           )}
