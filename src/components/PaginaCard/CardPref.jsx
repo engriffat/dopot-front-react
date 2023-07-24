@@ -86,7 +86,7 @@ const Card = (props) => {
             />
             {
               <IconInfoCard
-                img={PCDollarIcon}
+                img={PCCalendarIcon}
                 text={
                   isMyProject
                     ? props.progetto.stateText
