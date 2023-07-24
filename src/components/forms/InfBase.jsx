@@ -59,7 +59,8 @@ const InfBase = (props) => {
           selected={props.inputs.nazioneAzienda}
           onSelect={props.handleCountryChange}
           searchable
-        />;
+        />
+        ;
       </div>
       <div className="ins-input-box">
         <h4>Settore aziendale </h4>
@@ -211,7 +212,7 @@ const InfBase = (props) => {
           return (
             <div className="container-plus">
               <input
-                name={"socialMediaDef" + (i+1)}
+                name={"socialMediaDef" + (i + 1)}
                 type="text"
                 placeholder="Inserisci link eventuali Social Media"
                 value={data}
@@ -242,7 +243,32 @@ const InfBase = (props) => {
                 clicca per inserirlo
                 (.pdf)"
           />
+          <button className="btn-plus-minus" onClick={(e) => handleAdd2(e)}>
+            +
+          </button>
         </div>
+        {val2.map((data, i) => {
+          return (
+            <div className="container-plus">
+              <input
+                name={"documentazioneDef" + (i + 1)}
+                accept=".pdf"
+                type="file"
+                placeholder="trascina il o
+                clicca per inserirlo
+                (.pdf)"
+                value={data}
+                onChange={(e, i) => handleChange2(e, i)}
+              />
+              <button
+                className="btn-plus-minus"
+                onClick={(e, i) => handleDelete2(e, i)}
+              >
+                x
+              </button>
+            </div>
+          );
+        })}
       </div>
 
       <div className="ins-input-box">
