@@ -17,7 +17,7 @@ const Card = (props) => {
   const navigate = useNavigate();
   const percentage = (props.progetto.funds / props.progetto.quota) * 100;
   const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
-  const isMyProject = fundRaisingDeadline < 0;
+  const isMyProject = props.progetto.isMyProject;
   const address = props.progetto.address;
   const [toggleHeart, setToggleHeart] = useState(true);
 

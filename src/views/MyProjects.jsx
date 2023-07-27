@@ -51,6 +51,7 @@ const Profile = () => {
               tier={project.tier}
               state={project.stateText}
               withdraw={handleWithdraw}
+              isMyProject={true}
             ></Card>
           );
         });
