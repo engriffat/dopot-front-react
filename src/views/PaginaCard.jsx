@@ -31,18 +31,18 @@ import IconHeart from "../assets/img/heart-fav.svg";
 import IconHeartActive from "../assets/img/heart-fav-active.svg";
 
 const PaginaCard = () => {
-  const [toggleHeart, setToggleHeart] = useState(true);
+  const [toggleHeart, setToggleHeart] = useState(false);
 
   let { address } = useParams();
   useEffect(() => {
     (async () => {
       await downloadProjects();
       const fav = await retriveFavorites();
-      setToggleHeart(fav.includes(address));
+      setToggleHeart(fav ? fav.includes(address) : false);
+
     })();
   });
   let progetto = getRecoil(progettiState).find((x) => x.address === address);
-  console.dir(progetto);
   const [base64Data, setBase64Data] = useState([]);
 
   useEffect(() => {
@@ -51,7 +51,6 @@ const PaginaCard = () => {
         const response = await fetch(
           tier["image"].replace("ar://", "https://arweave.net/")
         );
-        console.log(response);
         const data = await response.text();
         setBase64Data((prevData) => [...prevData, data]);
       }
@@ -139,7 +138,7 @@ const PaginaCard = () => {
                     // className="grd-btn dopot-btn-lg"
                     style={{ background: "none", width: "10%" }}
                   >
-                    {toggleHeart ? (
+                    {!toggleHeart ? (
                       <img src={IconHeart} />
                     ) : (
                       <img src={IconHeartActive} />
