@@ -16,7 +16,10 @@ const Faq = (props) => {
   const handleDelete = (e, i) => {
     e.preventDefault();
     const deletVal = [...val];
-    deletVal.splice(i, 1);
+    deletVal.splice(i-1, 1);
+    const result = e.target.name.match(/^([^.]+)[.]+([^.]+)$/); 
+    props.inputs[result[1]].splice(i,1);
+    props.inputs[result[2]].splice(i,1);
     setVal(deletVal);
   };
   return (
@@ -27,8 +30,8 @@ const Faq = (props) => {
         <div>
           <div className="container-plus">
             <input
-              name="titoloDomandaDef"
-              onChange={props.handleChange}
+              name="titoloDomanda"
+              onChange={(e) => props.handleChangeArray(e, 0)}
               type="text"
               placeholder="Scrivi la prima domanda"
             />
@@ -38,8 +41,8 @@ const Faq = (props) => {
             </button>
           </div>
           <textarea
-            name="rispostaDomandaDef"
-            onChange={props.handleChange}
+            name="rispostaDomanda"
+            onChange={(e) => props.handleChangeArray(e, 0)}
             placeholder="Rispondi alla domanda"
           />
         </div>
@@ -49,24 +52,25 @@ const Faq = (props) => {
               <div className="container-plus">
                 <input
                   key={"titoloDomanda" + i}
-                  name={"titoloDomanda" + i}
+                  name={"titoloDomanda"}
                   type="text"
-                  value={data}
-                  onChange={(e) => handleChange(e, i)}
+                  onChange={(e) => props.handleChangeArray(e, i+1)}
                   placeholder="Scrivi la domanda"
                 />
                 <button
                   key={"titoloDomandaDel" + i}
+                  name={"titoloDomanda.rispostaDomanda"}
                   className="btn-plus-minus"
-                  onClick={(e) => handleDelete(e,i)}
+                  onClick={(e) => handleDelete(e, i+1)}
                 >
                   x
                 </button>
               </div>
               <textarea
                 key={"rispostaDomanda" + i}
-                name={"rispostaDomanda" + i}
+                name={"rispostaDomanda"}
                 placeholder="Rispondi alla domanda"
+                onChange={(e) => props.handleChangeArray(e, i+1)}
               />
             </div>
           );

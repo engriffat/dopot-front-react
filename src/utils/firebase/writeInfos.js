@@ -1,7 +1,7 @@
 import { db, getIdentity, init } from "./firebaseInit"
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import { addressState, providerState } from '../../recoilState';
-import { genproj, bundlrAdd, contrattoProjectAddTier } from "../genproj"
+import { genproj, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, bundlr } from "../genproj"
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
 import addressDpt from '../../abi/dpt/address.js';
@@ -67,7 +67,6 @@ async function pushChatSend(pushUser, projectCreatorAddress, messageContent) {
     pgpPrivateKey: pgpDecryptedPvtKey,
     env
   }
-  console.dir(params)
   const response = await PushAPI.chat.send(params);
   console.dir(response);
 }
@@ -77,22 +76,36 @@ export async function addproj(inputs) {
   await init();
   setRecoil(providerState, provider);
   setRecoil(addressState, address);
+  !bundlr && await initialiseBundlr(getRecoil(providerState));
+  let domanda = [];
+  Object.keys(inputs).forEach(key => {
+    if (key.startsWith("domanda")) {
+      domanda.push(inputs[key]);
+      delete inputs[key]; 
+    }
+  });
+  
+  inputs.domanda = domanda;
+
   console.log("Adding project")
   inputs.addressCreator = address
   const identity = await getIdentity(address)
   inputs.address = await genproj(inputs);
-  //console.dir(inputs)
   async function updateListFiles(listFiles, contentType) {
-    return await Promise.all(
+    const updatedElements = await Promise.all(
       listFiles.map(async (element) => {
-        const updatedElement = (await bundlrAdd(element, { name: "Content-Type", value: contentType })).id;
-        return updatedElement;
+        const { id } = await bundlrAdd(element, { 
+          name: "Content-Type", 
+          value: contentType 
+        });
+        return id;
       })
     );
+    return updatedElements;
   }
   
   let inputKeys = [
-    { key: 'documentazioneDefListFiles', contentType: 'application/pdf' },
+    { key: 'documentazioneListFiles', contentType: 'application/pdf' },
     { key: 'fotoProdotto1ListFiles', contentType: 'image/png' },
     { key: 'logoAziendaListFiles', contentType: 'image/png' },
   ];

@@ -34,17 +34,22 @@ const InsProgetto = () => {
   var step = [];
   const [inputs, setInputs] = useState({
     logoAziendaListFiles: [],
-    documentazioneDefListFiles: [],
+    documentazioneListFiles: [],
     imageNftDefListFiles: [],
-    giorniCampagna: "45",
+    giorniCampagna: 45,
     numeroProdotti: "1",
     tipoCampagna: "reward",
+    socialMedia: [],
+    titoloRoadStep: [],
+    descrRoadStep: [],
+    titoloDomanda: [],
+    rispostaDomanda: []
   });
   const [progressionStep, setprogressionStep] = useState(0);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const name = e.target.name;
+    let name = e.target.name;
     const value = e.target.value;
 
     if (e.target.files != null) {
@@ -54,6 +59,7 @@ const InsProgetto = () => {
       }));
       const selectedFiles = [...e.target.files];
       const propName = name + "ListFiles";
+      console.dir(selectedFiles)
       selectedFiles.forEach((file, i) => {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
@@ -62,7 +68,7 @@ const InsProgetto = () => {
             ...prevState,
             [propName]: [...prevState[propName], Buffer.from(reader.result)],
           }));
-          //console.dir(inputs);
+          console.dir(inputs);
         };
         reader.onerror = () => {
           console.log("Error reading file!");
@@ -73,6 +79,24 @@ const InsProgetto = () => {
       console.dir(inputs);
     }
   };
+
+const handleChangeArray  = (e, i) => {
+    const { name, value } = e.target;
+    let array = [...inputs[name]];
+    
+    if(array[i]) {
+      array[i] = value;
+    }
+    else {
+      array = [ ...array,
+         value 
+      ];
+    }
+    console.dir(inputs);
+    setInputs((prevState) => {
+      return { ...prevState, [name]: array };
+    });
+  }
 
   const handleCountryChange = (e) => {
     const name = "nazioneAzienda";
@@ -118,6 +142,7 @@ const InsProgetto = () => {
             handleChange={handleChange}
             handleCountryChange={handleCountryChange}
             setState={incrementStep}
+            handleChangeArray={handleChangeArray}
           ></InfBase>
         );
         return step;
@@ -149,6 +174,7 @@ const InsProgetto = () => {
             inputs={inputs}
             handleChange={handleChange}
             setState={incrementStep}
+            handleChangeArray={handleChangeArray}
           ></Progetto>
         );
         return step;
@@ -164,7 +190,7 @@ const InsProgetto = () => {
           ></Questionario>
         );
         step[2] = (
-          <Progetto inputs={inputs} handleChange={handleChange}></Progetto>
+          <Progetto inputs={inputs} handleChange={handleChange} handleChangeArray={handleChangeArray}></Progetto>
         );
         step[3] = (
           <Prodotto
@@ -187,7 +213,7 @@ const InsProgetto = () => {
           ></Questionario>
         );
         step[2] = (
-          <Progetto inputs={inputs} handleChange={handleChange}></Progetto>
+          <Progetto inputs={inputs} handleChange={handleChange} handleChangeArray={handleChangeArray}></Progetto>
         );
         step[3] = (
           <Prodotto
@@ -199,7 +225,7 @@ const InsProgetto = () => {
         /*step[4] = (
           <NftMint inputs={inputs} handleChange={handleChange}></NftMint>
         );*/
-        step[4] = <Faq inputs={inputs} handleChange={handleChange}></Faq>;
+        step[4] = <Faq inputs={inputs} handleChange={handleChange} handleChangeArray={handleChangeArray}></Faq>;
 
         return step;
 

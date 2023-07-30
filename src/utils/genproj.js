@@ -1,46 +1,19 @@
-import { IpfsState, progettiAddressState , providerState, progettiState} from "../recoilState";
-import { getRecoil, setRecoil } from 'recoil-nexus';
+import { providerState } from "../recoilState";
+import { getRecoil  } from 'recoil-nexus';
 import addressProjectFactory from '../abi/projectFactory/address';
-import { fileToBase64, filelistToBase64 } from "./base64utils";
 import { WebBundlr } from "@bundlr-network/client";
 const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
-const { ethers, Contract } = require("ethers");
-let bundlr;
+const { ethers } = require("ethers");
+export let bundlr;
 
-const initialiseBundlr = async (provider) => { 
+export const initialiseBundlr = async (provider) => { 
   bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
   await bundlr.ready();
 };
 
-async function readFile(file){
-  if (!file) return file;
-
-  if(file instanceof FileList) file = file[0];
-  const reader = new FileReader();
-  let fileContent;
-
-  await new Promise((resolve, reject) => {
-    reader.onload = function(event) {
-      fileContent = event.target.result;
-      resolve();
-    };
-    reader.readAsText(file);
-  });
-
-  return fileContent;
-}
-
 export async function genproj(params) {  
     return await contrattoprojectFactory(params.quota, params.giorniCampagna * 86400);
-}
-
-async function addFilesIpfs(files) {
-    const IPFS = getRecoil(IpfsState);
-    //console.log(await IPFS.getAddress());
-    console.log(files);
-
-    return await IPFS.addAll(await readFile(files));
 }
 
 async function contrattoprojectFactory(quota, giorniCampagna){
@@ -60,10 +33,14 @@ async function contrattoprojectFactory(quota, giorniCampagna){
   }
 
   export async function bundlrAdd(obj, contentType){ 
-    !bundlr && await initialiseBundlr(getRecoil(providerState));
-    const bundlrtx = await bundlr.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
-    console.log(`Data uploaded ==> https://arweave.net/${bundlrtx.id}`);
-    return bundlrtx;
+    try{
+      const bundlrtx = await bundlr.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
+      console.log(`Data uploaded ==> https://arweave.net/${bundlrtx.id}`);
+      return bundlrtx;
+    }
+    catch (e){
+      console.log(e, contentType);
+    }
   }
   
   export async function contrattoProjectAddTier(inputs) {
@@ -89,36 +66,11 @@ async function contrattoprojectFactory(quota, giorniCampagna){
       const bundlrtx = await bundlrAdd(objs[i-1], { name: "Content-Type", value: "application/json" });
       await pWithSigner.addRewardTier(bundlrtx.id,  ethers.utils.parseUnits(inputs["price"+i].toString(), 18), parseInt( inputs["supply"+i]))
       objs[objs.length-1].uri = bundlrtx.id;
+      delete objs[objs.length-1].external_url;
+      delete objs[objs.length-1].project;
       i++;
     }
     return objs;
-  }
-
-  /** Uses `URL.createObjectURL` free returned ObjectURL with `URL.RevokeObjectURL` when done with it.
-   * 
-   * @param {string} cid CID you want to retrieve
-   * @param {string} mime mimetype of image (optional, but useful)
-   * @param {number} limit size limit of image in bytes
-   * @returns ObjectURL
-   */
-  async function loadImgURL(cid, mime, limit) {
-    const IPFS = getRecoil(IpfsState);
-
-    if (cid == "" || cid == null || cid == undefined) {
-        return;
-    }
-    for await (const file of IPFS.getIPFS().get(cid)) {
-        if (file.size > limit) {
-            return;
-        }
-        const content = [];
-        if (file.content) {
-            for await(const chunk of file.content) {
-                content.push(chunk);
-            }
-            return URL.createObjectURL(new Blob(content, {type: mime}));
-        }
-    }
   }
 
 

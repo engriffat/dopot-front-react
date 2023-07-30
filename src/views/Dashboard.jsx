@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 
 import "../styles/dashboard.css";
@@ -15,17 +15,22 @@ import "../styles/profile.css";
 import { progettiState, progettiImageState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import Footer from "../components/Footer";
-import { downloadProjects } from "../utils/firebase/retriveInfo";
+import { downloadProjects, retriveFavorites } from "../utils/firebase/retriveInfo";
 import useSearchForm from "./useSearchForm";
 
 const Home = () => {
   const handleSearch = useSearchForm();
+  const [progettiFavourites, setProgettiFavourites] = useState([]);
+
   const cards = [];
-  useEffect(() => {
-    (async () => {
-      await downloadProjects();
-    })();
-  });
+
+  useEffect(() => {(async () => {
+    await downloadProjects();
+    const newData = await retriveFavorites();
+    setProgettiFavourites(newData);
+  })();
+}, []);
+
   let progetti = getRecoil(progettiState);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -49,7 +54,6 @@ const Home = () => {
   }
   //test
 
-  console.log(progetti);
   progetti = progetti.filter(
     (progetto) =>
       progetto.stateText.toLowerCase().replace(" ", "") === state &&
@@ -65,8 +69,9 @@ const Home = () => {
     cards.push(
       <Card
         progetto={element}
+        progettiFavourites={progettiFavourites}
         immagini={getRecoil(progettiImageState)[element.address]}
-        address={element.addressContract}
+        address={element.address}
         tier={element.tier}
       ></Card>
     );

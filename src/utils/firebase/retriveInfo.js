@@ -1,5 +1,5 @@
 import { getRecoil, setRecoil } from 'recoil-nexus';
-import { addressState , progettiState, providerState } from '../../recoilState';
+import { addressState , progettiState, providerState, favouritesState } from '../../recoilState';
 import { db, getIdentity, init } from './firebaseInit';
 import addressProjectFactory from '../../abi/projectFactory/address.js';
 import addressFundingToken from '../../abi/fundingToken/address.js';
@@ -157,7 +157,7 @@ export async function downloadProjects() {
 }
 
 export async function downloadProject(address) {
-    getProvider()
+    await getProvider()
     const progetto = await db.get("projects", ["address"], [ "address", "==", address ])
     console.dir(progetto)
     return progetto
@@ -190,8 +190,9 @@ export async function retriveInvestment() {
 }
 
 export async function retriveFavorites() {
-    await init()
-    var addressLogged=getRecoil(addressState)    
+    await getProvider()
+    //await init()
+    let addressLogged=getRecoil(addressState)    
     const progettiFavourites =  await db.get("users", ["addressUser"], ["addressUser", "==", addressLogged.toString().toLowerCase()]);
-    return (progettiFavourites && progettiFavourites.length > 0) ? progettiFavourites[0].addressProjects : []
+    return (progettiFavourites && progettiFavourites.length > 0) ? progettiFavourites[0].addressProjects : [];
 }

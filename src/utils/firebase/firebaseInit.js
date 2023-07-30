@@ -2,14 +2,16 @@ import SDK from "weavedb-sdk";
 import { get, set } from 'idb-keyval';
 import { Buffer } from "buffer"
 
-const contractTxId = "e8SnbuQCtHUTzsKPJcFLnngR_d1xq97IU6mSNpB3m8s";
+const contractTxId = "edJuxtr016r6TQDv1iwzCrKeeg6RDxKrMYFJ5BekOPw";
 export let db;
 
 export async function init ()  {
   try{
     window.Buffer = Buffer
-    db = new SDK({ contractTxId });
-    await db.initializeWithoutWallet();
+    if(!db){
+      db = new SDK({ contractTxId });
+      await db.initializeWithoutWallet();
+    }
   } catch (e) { console.log(e)}
   
 }

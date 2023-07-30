@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useCallback } from "react";
 import IconInfoCard from "../../components/PaginaCard/IconInfoCard";
 import IconInfoDai from "../../components/PaginaCard/IconInfoDai";
@@ -19,7 +19,8 @@ const Card = (props) => {
   const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
   const isMyProject = props.isMyProject;
   const address = props.progetto.address;
-  const [toggleHeart, setToggleHeart] = useState(true);
+  const { progettiFavourites } = props;
+  const [toggleHeart, setToggleHeart] = useState(progettiFavourites ? progettiFavourites.includes(props.address) : false);
 
   function handleRedirect(e) {
     navigate(`/card/${address}`);
@@ -127,12 +128,13 @@ const Card = (props) => {
             <button
               onClick={() => {
                 addFavorites(address);
+                toggleHeart ? progettiFavourites.splice(progettiFavourites.indexOf(address), 1) : progettiFavourites.push(address);
                 setToggleHeart(!toggleHeart);
               }}
               // className="grd-btn dopot-btn-lg"
               style={{ background: "none", width: "10%" }}
             >
-              {toggleHeart ? (
+              {!toggleHeart ? (
                 <img src={IconHeart} />
               ) : (
                 <img src={IconHeartActive} />

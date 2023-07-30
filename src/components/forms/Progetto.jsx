@@ -18,7 +18,10 @@ const Progetto = (props) => {
   const handleDelete = (e, i) => {
     e.preventDefault();
     const deletVal = [...val];
-    deletVal.splice(i, 1);
+    deletVal.splice(i-1, 1);
+    const result = e.target.name.match(/^([^.]+)[.]+([^.]+)$/); 
+    props.inputs[result[1]].splice(i,1);
+    props.inputs[result[2]].splice(i,1);
     setVal(deletVal);
   };
 
@@ -157,8 +160,8 @@ const Progetto = (props) => {
         <div>
           <div className="container-plus">
             <input
-              name="titoloRoadStepDef"
-              onChange={props.handleChange}
+              name="titoloRoadStep"
+              onChange={(e) => props.handleChangeArray(e, 0)}
               type="text"
               placeholder="inserisci titolo step"
             />
@@ -168,8 +171,8 @@ const Progetto = (props) => {
             </button>
           </div>
           <textarea
-            name="descrRoadStepDef"
-            onChange={props.handleChange}
+            name="descrRoadStep"
+            onChange={(e) => props.handleChangeArray(e, 0)}
             placeholder="descrivi lo step della roadmap"
           />
         </div>
@@ -180,23 +183,24 @@ const Progetto = (props) => {
               <div className="container-plus">
                 <input
                   key={"titoloRoadStep" + i}
-                  name={"titoloRoadStep" + i}
+                  name={"titoloRoadStep"}
                   type="text"
-                  value={data}
-                  onChange={(e) => handleChange(e, i)}
+                  onChange={(e) => props.handleChangeArray(e, i+1)}
                   placeholder="inserisci titolo step"
                 />
                 <button
                   key={"titoloRoadStepDel" + i}
+                  name={"titoloRoadStep.descrRoadStep"}
                   className="btn-plus-minus"
-                  onClick={(e) => handleDelete(e, i)}
+                  onClick={(e) => handleDelete(e, i+1)}
                 >
                   x
                 </button>
               </div>
               <textarea
                 key={"descrRoadStep" + i}
-                name={"descrRoadStep" + i}
+                name={"descrRoadStep"}
+                onChange={(e) => props.handleChangeArray(e, i+1)}
                 placeholder="descrivi lo step della roadmap"
               />
             </div>

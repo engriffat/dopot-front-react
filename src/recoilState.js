@@ -16,11 +16,6 @@ const weaveState = atom({
   effects_UNSTABLE: [persistAtom],
 })
 
-const IpfsState = atom({
-  key: "IPFS",
-  default: null
-});
-
 const providerState = atom({
   key: 'provider',
   default: null,
@@ -37,9 +32,13 @@ const progettiState = atom({
   default: [],
   effects_UNSTABLE: [persistAtom,
     ({ setSelf }) => {
+      window.addEventListener('beforeunload', () => {
+        setSelf([]);
+      });
+    },({ setSelf }) => {
       setTimeout(() => {
         setSelf([]);
-      }, 6 * 60 * 60 * 1000); // 6 hours cookie expire
+      }, 10 * 60 * 1000); // 10 minutes cookie expire
     },],
 })
 
@@ -50,4 +49,4 @@ const progettiImageState = atom({
 })
 
 
-export {IpfsState, progettiAddressState,progettiState, providerState, progettiImageState, addressState, weaveState}
+export {progettiAddressState, progettiState, providerState, progettiImageState, addressState, weaveState}

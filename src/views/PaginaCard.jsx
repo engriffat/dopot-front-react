@@ -270,10 +270,8 @@ const PaginaCard = () => {
                     case 1:
                       return (
                         <TabRoadmap
-                          titoloRoadStep1={progetto.titoloRoadStep1}
-                          titoloRoadStep2={progetto.titoloRoadStep2}
-                          descrRoadStep1={progetto.descrRoadStep1}
-                          descrRoadStep2={progetto.descrRoadStep2}
+                          titoloRoadStep={progetto.titoloRoadStep}
+                          descrRoadStep={progetto.descrRoadStep}
                         />
                       );
                     case 3:

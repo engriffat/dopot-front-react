@@ -9,15 +9,12 @@ const InfBase = (props) => {
     const abc = [...val, []];
     setVal(abc);
   };
-  const handleChange = (onChangeValue, i) => {
-    const inputdata = [...val];
-    inputdata[i] = onChangeValue.target.value;
-    setVal(inputdata);
-  };
+
   const handleDelete = (e, i) => {
     e.preventDefault();
     const deletVal = [...val];
-    deletVal.splice(i, 1);
+    deletVal.splice(i-1, 1);
+    props.inputs[e.target.name].splice(i,1);
     setVal(deletVal);
   };
   //val 2
@@ -198,9 +195,9 @@ const InfBase = (props) => {
         <h4>Social Media </h4>
         <div className="container-plus">
           <input
-            name="socialMediaDef0"
+            name="socialMedia"
             type="text"
-            onChange={props.handleChange}
+            onChange={(e) => props.handleChangeArray(e, 0)}
             placeholder="Inserisci link eventuali Social Media"
           />
 
@@ -212,15 +209,15 @@ const InfBase = (props) => {
           return (
             <div className="container-plus">
               <input
-                name={"socialMediaDef" + (i + 1)}
+                name={"socialMedia"}
                 type="text"
                 placeholder="Inserisci link eventuali Social Media"
-                value={data}
-                onChange={(e, i) => handleChange(e, i)}
+                onChange={(e) => props.handleChangeArray(e, i+1)}
               />
               <button
                 className="btn-plus-minus"
-                onClick={(e, i) => handleDelete(e, i)}
+                name={"socialMedia"}
+                onClick={(e) => handleDelete(e, i+1)}
               >
                 x
               </button>
@@ -234,7 +231,7 @@ const InfBase = (props) => {
         </h4>
         <div className="container-plus">
           <input
-            name="documentazioneDef"
+            name="documentazione"
             accept=".pdf"
             type="file"
             onChange={props.handleChange}
@@ -243,32 +240,7 @@ const InfBase = (props) => {
                 clicca per inserirlo
                 (.pdf)"
           />
-          <button className="btn-plus-minus" onClick={(e) => handleAdd2(e)}>
-            +
-          </button>
         </div>
-        {val2.map((data, i) => {
-          return (
-            <div className="container-plus">
-              <input
-                name={"documentazioneDef" + (i + 1)}
-                accept=".pdf"
-                type="file"
-                placeholder="trascina il o
-                clicca per inserirlo
-                (.pdf)"
-                value={data}
-                onChange={(e, i) => handleChange2(e, i)}
-              />
-              <button
-                className="btn-plus-minus"
-                onClick={(e, i) => handleDelete2(e, i)}
-              >
-                x
-              </button>
-            </div>
-          );
-        })}
       </div>
 
       <div className="ins-input-box">
