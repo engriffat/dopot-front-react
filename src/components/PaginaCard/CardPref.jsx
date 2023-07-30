@@ -19,7 +19,6 @@ const Card = (props) => {
   const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
   const isMyProject = fundRaisingDeadline < 0;
   const address = props.progetto.address;
-  const [toggleHeart, setToggleHeart] = useState(true);
 
   function handleRedirect(e) {
     navigate(`/card/${address}`);
@@ -109,40 +108,6 @@ const Card = (props) => {
           </div>
         </div>
         <div className="pmg-btn-box">
-          {isMyProject ? (
-            <div className="menu-nav">
-              <div className="dropdown-container" tabindex="-1">
-                <div className="three-dots"></div>
-                <div className="dropdown">
-                  <a onClick={() => props.withdraw(address)}>
-                    <div>Withdraw funds</div>
-                  </a>
-                  <a onClick={() => postpone(address)}>
-                    <div>Postpone deadline</div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                addFavorites(address);
-                setToggleHeart(!toggleHeart);
-                setTimeout(function () {
-                  window.location.reload();
-                }, 1000);
-              }}
-              // className="grd-btn dopot-btn-lg"
-              style={{ background: "none", width: "10%" }}
-            >
-              {toggleHeart ? (
-                <img src={IconHeartActive} />
-              ) : (
-                <img src={IconHeart} />
-              )}
-            </button>
-          )}
-
           <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
             Scopri di più
           </button>

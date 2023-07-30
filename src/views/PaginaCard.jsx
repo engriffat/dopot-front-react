@@ -26,7 +26,7 @@ import TabSocial from "../components/TabSocial";
 import TabQuestionario from "../components/TabQuestionario";
 import TabDocumenti from "../components/TabDocumenti";
 import { addFavorites } from "../utils/firebase/writeInfos";
-import { downloadProjects } from "../utils/firebase/retriveInfo";
+import { downloadProjects, retriveFavorites } from "../utils/firebase/retriveInfo";
 import IconHeart from "../assets/img/heart-fav.svg";
 import IconHeartActive from "../assets/img/heart-fav-active.svg";
 
@@ -37,6 +37,8 @@ const PaginaCard = () => {
   useEffect(() => {
     (async () => {
       await downloadProjects();
+      const fav = await retriveFavorites();
+      setToggleHeart(fav.includes(address));
     })();
   });
   let progetto = getRecoil(progettiState).find((x) => x.address === address);
@@ -44,9 +46,7 @@ const PaginaCard = () => {
   const [base64Data, setBase64Data] = useState([]);
 
   useEffect(() => {
-    // Fetch the base64 data asynchronously
     const fetchBase64Data = async () => {
-      // Make an API call or any other asynchronous operation to get the base64 data
       for (const tier of progetto.imageNftDefListFiles) {
         const response = await fetch(
           tier["image"].replace("ar://", "https://arweave.net/")
