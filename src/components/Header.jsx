@@ -6,6 +6,7 @@ import { Outlet, Link } from "react-router-dom";
 import Pdf from "../assets/dopot.pdf";
 import { SocialIcon } from "react-social-icons";
 import IconDown from "../assets/img/arr-menu.svg";
+import { useTranslation } from "react-i18next";
 
 //import GetAccount from "../utils/ethersUtils.js";
 import { getAddr } from "../utils/firebase/retriveInfo";
@@ -17,6 +18,7 @@ async function isWalletConnected() {
 }
 
 const Header = (props) => {
+  const { t, i18n } = useTranslation();
   const [isHeaderOpen, setIsHeaderOpen] = useState(false);
   const [walletText, setwalletText] = useState("Connect Wallet");
   const [walletState, setWalletState] = useState(false);
@@ -91,7 +93,7 @@ const Header = (props) => {
             </div>
             <div style={{ marginRight: "3.5rem" }} class="dropdown_menu">
               <button class="dropbtn">
-                Documenti Aziendali{" "}
+                {t("document")}{" "}
                 <span>
                   <img
                     style={{ width: "7%" }}
@@ -149,7 +151,7 @@ const Header = (props) => {
           {isHeaderOpen ? (
             <div className="header-mob-box">
               <a href="#">Home</a>
-              <a href="#">FAQ</a>
+              <a href="/#/FaqIta">FAQ</a>
               <a href={"/#/dopotpower"}>Dopot Token</a>
               <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
                 <button class="dropbtn">
@@ -201,7 +203,7 @@ const Header = (props) => {
               </div>
               <div style={{ marginRight: "3.5rem" }} class="dropdown_menu">
                 <button class="dropbtn">
-                  Documenti Aziendali{" "}
+                  {t("document")}{" "}
                   <span>
                     <img
                       style={{ width: "7%" }}

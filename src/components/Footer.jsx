@@ -96,7 +96,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer-grid-box">
-            <h4>Documenti Aziendali</h4>
+            <h4>{t("document")}</h4>
             <a href={Pdf}>Whitepaper </a>
             <a href="https://dopot.gitbook.io/dopot/">GitBook </a>
           </div>
