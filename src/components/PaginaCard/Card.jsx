@@ -12,15 +12,19 @@ import { addFavorites, postpone } from "../../utils/firebase/writeInfos";
 // import IconHeart from "../../assets/img/pc-heart-icon-02.svg";
 import IconHeart from "../../assets/img/heart-fav.svg";
 import IconHeartActive from "../../assets/img/heart-fav-active.svg";
+import { useTranslation } from "react-i18next";
 
 const Card = (props) => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const percentage = (props.progetto.funds / props.progetto.quota) * 100;
   const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
   const isMyProject = props.isMyProject;
   const address = props.progetto.address;
   const { progettiFavourites } = props;
-  const [toggleHeart, setToggleHeart] = useState(progettiFavourites ? progettiFavourites.includes(props.address) : false);
+  const [toggleHeart, setToggleHeart] = useState(
+    progettiFavourites ? progettiFavourites.includes(props.address) : false
+  );
 
   function handleRedirect(e) {
     navigate(`/card/${address}`);
@@ -38,7 +42,7 @@ const Card = (props) => {
             }}
           >
             <div className="settore">
-              <span className="box-bk-over-logo">{props.progetto.settore}</span>
+              {/* <span className="box-bk-over-logo">{props.progetto.settore}</span> */}
             </div>
             <div style={{ marginBottom: "1rem" }} className="settore">
               <span className="box-bk-over-logo">
@@ -79,11 +83,11 @@ const Card = (props) => {
             <IconInfoDai
               img={PCDollarIcon}
               text={props.progetto.funds}
-              text2={`of ${props.progetto.quota}`}
+              text2={`${t("of")} ${props.progetto.quota}`}
             />
             <IconInfoCard
               img={PCUserIcon}
-              text={`${props.progetto.investorsNumber} investors`}
+              text={`${props.progetto.investorsNumber} ${t("investors")}`}
             />
             {
               <IconInfoCard
@@ -91,14 +95,14 @@ const Card = (props) => {
                 text={
                   isMyProject
                     ? props.progetto.stateText
-                    : `${fundRaisingDeadline} days remaining`
+                    : `${fundRaisingDeadline} ${t("daysremaining")}`
                 }
               />
             }
           </div>
           <div className="pc-70-box box-bk-over-logo">
             <p>
-              Investimento <br /> completo al
+              {t("investmentcard")} <br /> {t("completedat")}
             </p>
             <div className="graph-box">
               <CircularProgressbar
@@ -116,10 +120,10 @@ const Card = (props) => {
                 <div className="three-dots"></div>
                 <div className="dropdown">
                   <a onClick={() => props.withdraw(address)}>
-                    <div>Withdraw funds</div>
+                    <div>{t("withdrawfunds")}</div>
                   </a>
                   <a onClick={() => postpone(address)}>
-                    <div>Postpone deadline</div>
+                    <div>{t("postponedeadline")}</div>
                   </a>
                 </div>
               </div>
@@ -128,7 +132,12 @@ const Card = (props) => {
             <button
               onClick={() => {
                 addFavorites(address);
-                toggleHeart ? progettiFavourites.splice(progettiFavourites.indexOf(address), 1) : progettiFavourites.push(address);
+                toggleHeart
+                  ? progettiFavourites.splice(
+                      progettiFavourites.indexOf(address),
+                      1
+                    )
+                  : progettiFavourites.push(address);
                 setToggleHeart(!toggleHeart);
               }}
               // className="grd-btn dopot-btn-lg"
@@ -143,7 +152,7 @@ const Card = (props) => {
           )}
 
           <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
-            Scopri di più
+            {t("findoutmore")}
           </button>
           <div style={{ bottom: 0, right: 0 }}>
             <Flag code={props.progetto.nazioneAzienda} height="16" />
