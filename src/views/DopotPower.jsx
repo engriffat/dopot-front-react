@@ -27,8 +27,10 @@ import "../styles/profile.css";
 import "../styles/dopotpower.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import { useTranslation } from "react-i18next";
 
 const DopotPower = () => {
+  const { t, i18n } = useTranslation();
   let navigate = useNavigate();
 
   return (
@@ -39,7 +41,7 @@ const DopotPower = () => {
         </div>
         <div className="box">
           <div className="dopot-power">
-            <h1 className="mb-5">SCOPRI IL TOKEN DI DOPOT</h1>
+            <h1 className="mb-5">{t("dpttitle")}</h1>
 
             {/* <div className="p-btn-box">
               <button
@@ -66,42 +68,33 @@ const DopotPower = () => {
                 Dopotshare
               </button>
             </div> */}
-            <h2>DOPOT TOKEN (DPT): L’UTILITY TOKEN DELLA PIATTAFORMA</h2>
-            <h3>Grazie a “DPT” sarà possibile ottenere diversi vantaggi:</h3>
+            <h2>{t("dpth2")}</h2>
+            <h3>{t("dpth3")}</h3>
             {/* <img className="p-hand-img" src={PHand1} alt="PHand1" /> */}
             <div className="p-cards-grid">
               <div className="p-card">
                 <img src={DImg1} alt="dopot votazioni" />
-                <p>Sicurezza sulle votazioni</p>
+                <p>{t("dptsecure")}</p>
               </div>
               <div className="p-card">
                 <img src={DImg2} alt="dopot dex" />
-                <p>Decentramento</p>
+                <p>{t("dptdece")}</p>
               </div>
               <div className="p-card">
                 <img src={DImg3} alt="dopot facilita" />
-                <p>Facilità d’utilizzo</p>
+                <p>{t("dptuti")}</p>
               </div>
               <div className="p-card">
                 <img src={DImg4} alt="dopot sostenibilità" />
-                <p>Sostenibilità</p>
+                <p>{t("dptsos")}</p>
               </div>
             </div>
             <h3>
-              <strong>Caratteristiche</strong>
+              <strong>{t("dptlisttitle")}</strong>
             </h3>
             <ul>
-              <li>
-                Se si pagano le commissioni con Dopot Token anziché con la
-                stablecoin DAI, si avrà lo sconto del 50% dall'ammontare
-                iniziale delle commissioni, ovvero anzichè pagare il 6%, si
-                andrà a pagare il 3%.
-              </li>
-              <li>
-                Se si raggiunge il minimo di goal del 51%, si potrà richiedere
-                l'allungamento di 30 giorni del crowdfunding pagando il 4% della
-                somma richiesta in Dopot Token.
-              </li>
+              <li>{t("dptlist01")}</li>
+              <li>{t("dptlist02")}</li>
             </ul>
           </div>
         </div>

@@ -22,6 +22,7 @@ import { addressState, progettiState } from "../recoilState";
 import "react-circular-progressbar/dist/styles.css";
 import SmallProject from "../components/SmallProject";
 import SmallTier from "../components/SmallTier";
+import { useTranslation } from "react-i18next";
 import {
   retriveFavorites,
   retriveInvestment,
@@ -30,6 +31,7 @@ import {
 import { addShippingDetailsNft, refundNft } from "../utils/firebase/writeInfos";
 
 const Profile = () => {
+  const { t, i18n } = useTranslation();
   const [investedCard, setinvestedCard] = useState([]);
   let projects = getRecoil(progettiState);
   const address = getRecoil(addressState);
@@ -89,7 +91,7 @@ const Profile = () => {
                 </a>
                 <div className="profile-img-box">
                   <h3>
-                    Profilo di{" "}
+                    {t("profileof")}{" "}
                     {address &&
                       address.toString().substring(0, 5) + "..." + address &&
                       address.toString().substring(38, 42)}
@@ -103,7 +105,7 @@ const Profile = () => {
                       <img src={ProfileIcon1} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/profile"}>
-                      <p>Panoramica</p>
+                      <p>{t("overview")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -111,7 +113,7 @@ const Profile = () => {
                       <img src={ProfileIcon2} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/insprogetto"}>
-                      <p>Crea Campagna</p>
+                      <p>{t("createcampaign")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -123,7 +125,7 @@ const Profile = () => {
                       />
                     </a>
                     <a href={"/#/mynft"}>
-                      <p>I Miei NFT</p>
+                      <p>{t("mynft")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -131,7 +133,7 @@ const Profile = () => {
                       <img src={ProfileIcon4} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/myprojects"}>
-                      <p>I Miei Progetti</p>
+                      <p>{t("myprojects")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -167,7 +169,7 @@ const Profile = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <p>Verify Identity</p>
+                      <p>{t("identity")}</p>
                     </a>
                   </div>
                 </div>
@@ -184,7 +186,7 @@ const Profile = () => {
         <div className="box0">
           <div className="sec-inv-desk-flex">
             <img src={ProfileIconGrd2} alt="ProfileIconGrd" />
-            <p>I miei Investimenti</p>
+            <p>{t("myinvestments")}</p>
           </div>
         </div>
 

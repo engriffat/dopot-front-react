@@ -225,15 +225,7 @@ const Home = () => {
                 data-aos-delay="800"
               >
                 <h5>{t("decentralization")}</h5>
-                <p>
-                  La piattaforma Dopot è al 100% decentralizzata, questo
-                  significa che nessun individuo può manomettere i dati o
-                  compiere azioni fraudolente con i fondi raccolti grazie alla
-                  sicurezza fornita dalla blockchain. Ciò che le persone
-                  investono viene trasferito su un contratto intelligente senza
-                  intermediari e in maniera totalmente sicura grazie alla
-                  crittografia.
-                </p>
+                <p>{t("decentralizationsub")}</p>
               </div>
             </div>
             <div className="ill-text-info-box-2">
@@ -243,14 +235,7 @@ const Home = () => {
                 data-aos-delay="500"
               >
                 <h5>{t("benefits")}</h5>
-                <p>
-                  Tramite il multi-sig presente nello smart contract si ha la
-                  totale sicurezza sulla raccolta fondi senza richiedere
-                  collaterali ai richiedenti denaro. Questo sistema estende la
-                  possibilità a chiunque voglia, indipendentemente dalle
-                  possibilità economiche, di effettuare un crowdfunding; e allo
-                  stesso tempo mettere in sicurezza i soldi degli investitori.
-                </p>
+                <p>{t("benefitssub")}</p>
               </div>
             </div>
           </div>
@@ -347,7 +332,7 @@ const Home = () => {
                   >
                     <h4>01</h4>
                     <div>
-                      <h6>Fase Mercurio</h6>
+                      <h6>{t("01title")}</h6>
                       <p>DAO Launch & Dopot Token (DPT) private sale</p>
                     </div>
                   </div>
@@ -370,7 +355,7 @@ const Home = () => {
                   >
                     <h4>02</h4>
                     <div>
-                      <h6>Fase Venere</h6>
+                      <h6>{t("02title")}</h6>
                       <p>DPT public sale</p>
                     </div>
                   </div>
@@ -393,7 +378,7 @@ const Home = () => {
                   >
                     <h4>03</h4>
                     <div>
-                      <h6>Fase Terra</h6>
+                      <h6>{t("03title")}</h6>
                       <p>Reward Crowdfunding protocol launch </p>
                     </div>
                   </div>
@@ -416,7 +401,7 @@ const Home = () => {
                   >
                     <h4>04</h4>
                     <div>
-                      <h6>Fase Luna</h6>
+                      <h6>{t("04title")}</h6>
                       <p>Equity protocol launch</p>
                     </div>
                   </div>

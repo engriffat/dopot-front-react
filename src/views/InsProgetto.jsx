@@ -28,9 +28,11 @@ import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/identity.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 const { ethers } = require("ethers");
 
 const InsProgetto = () => {
+  const { t, i18n } = useTranslation();
   var step = [];
   const [inputs, setInputs] = useState({
     logoAziendaListFiles: [],
@@ -43,7 +45,7 @@ const InsProgetto = () => {
     titoloRoadStep: [],
     descrRoadStep: [],
     titoloDomanda: [],
-    rispostaDomanda: []
+    rispostaDomanda: [],
   });
   const [progressionStep, setprogressionStep] = useState(0);
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ const InsProgetto = () => {
       }));
       const selectedFiles = [...e.target.files];
       const propName = name + "ListFiles";
-      console.dir(selectedFiles)
+      console.dir(selectedFiles);
       selectedFiles.forEach((file, i) => {
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
@@ -80,23 +82,20 @@ const InsProgetto = () => {
     }
   };
 
-const handleChangeArray  = (e, i) => {
+  const handleChangeArray = (e, i) => {
     const { name, value } = e.target;
     let array = [...inputs[name]];
-    
-    if(array[i]) {
+
+    if (array[i]) {
       array[i] = value;
-    }
-    else {
-      array = [ ...array,
-         value 
-      ];
+    } else {
+      array = [...array, value];
     }
     console.dir(inputs);
     setInputs((prevState) => {
       return { ...prevState, [name]: array };
     });
-  }
+  };
 
   const handleCountryChange = (e) => {
     const name = "nazioneAzienda";
@@ -190,7 +189,11 @@ const handleChangeArray  = (e, i) => {
           ></Questionario>
         );
         step[2] = (
-          <Progetto inputs={inputs} handleChange={handleChange} handleChangeArray={handleChangeArray}></Progetto>
+          <Progetto
+            inputs={inputs}
+            handleChange={handleChange}
+            handleChangeArray={handleChangeArray}
+          ></Progetto>
         );
         step[3] = (
           <Prodotto
@@ -213,7 +216,11 @@ const handleChangeArray  = (e, i) => {
           ></Questionario>
         );
         step[2] = (
-          <Progetto inputs={inputs} handleChange={handleChange} handleChangeArray={handleChangeArray}></Progetto>
+          <Progetto
+            inputs={inputs}
+            handleChange={handleChange}
+            handleChangeArray={handleChangeArray}
+          ></Progetto>
         );
         step[3] = (
           <Prodotto
@@ -225,7 +232,13 @@ const handleChangeArray  = (e, i) => {
         /*step[4] = (
           <NftMint inputs={inputs} handleChange={handleChange}></NftMint>
         );*/
-        step[4] = <Faq inputs={inputs} handleChange={handleChange} handleChangeArray={handleChangeArray}></Faq>;
+        step[4] = (
+          <Faq
+            inputs={inputs}
+            handleChange={handleChange}
+            handleChangeArray={handleChangeArray}
+          ></Faq>
+        );
 
         return step;
 
@@ -272,7 +285,7 @@ const handleChangeArray  = (e, i) => {
                 </a>
                 <div className="profile-img-box">
                   <h3>
-                    Profilo di{" "}
+                    {t("profileof")}{" "}
                     {address &&
                       address.toString().substring(0, 5) + "..." + address &&
                       address.toString().substring(38, 42)}
@@ -286,7 +299,7 @@ const handleChangeArray  = (e, i) => {
                       <img src={ProfileIcon1} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/profile"}>
-                      <p>Panoramica</p>
+                      <p>{t("overview")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -298,7 +311,7 @@ const handleChangeArray  = (e, i) => {
                       />
                     </a>
                     <a href={"/#/insprogetto"}>
-                      <p>Crea Campagna</p>
+                      <p>{t("createcampaign")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -306,7 +319,7 @@ const handleChangeArray  = (e, i) => {
                       <img src={ProfileIcon3} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/mynft"}>
-                      <p>I Miei NFT</p>
+                      <p>{t("mynft")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -314,7 +327,7 @@ const handleChangeArray  = (e, i) => {
                       <img src={ProfileIcon4} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/myprojects"}>
-                      <p>I Miei Progetti</p>
+                      <p>{t("myprojects")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -350,7 +363,7 @@ const handleChangeArray  = (e, i) => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <p>Verify Identity</p>
+                      <p>{t("identity")}</p>
                     </a>
                   </div>
                 </div>
@@ -365,7 +378,7 @@ const handleChangeArray  = (e, i) => {
               {/* <a href="#">
                 <img src={ProfileIconArrowLeft} alt="ProfileIconArrowLeft" />
               </a> */}
-              <h2>Inserisci il tuo progetto </h2>
+              <h2>{t("enterproject")}</h2>
             </div>
             {renderCurrentSelectionHeader()}
             <form id="submit" onSubmit={handleSubmit}>

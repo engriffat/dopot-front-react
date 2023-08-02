@@ -26,11 +26,15 @@ import TabSocial from "../components/TabSocial";
 import TabQuestionario from "../components/TabQuestionario";
 import TabDocumenti from "../components/TabDocumenti";
 import { addFavorites } from "../utils/firebase/writeInfos";
-import { downloadProjects, retriveFavorites } from "../utils/firebase/retriveInfo";
+import {
+  downloadProjects,
+  retriveFavorites,
+} from "../utils/firebase/retriveInfo";
 import IconHeart from "../assets/img/heart-fav.svg";
 import IconHeartActive from "../assets/img/heart-fav-active.svg";
-
+import { useTranslation } from "react-i18next";
 const PaginaCard = () => {
+  const { t, i18n } = useTranslation();
   const [toggleHeart, setToggleHeart] = useState(false);
 
   let { address } = useParams();
@@ -39,7 +43,6 @@ const PaginaCard = () => {
       await downloadProjects();
       const fav = await retriveFavorites();
       setToggleHeart(fav ? fav.includes(address) : false);
-
     })();
   });
   let progetto = getRecoil(progettiState).find((x) => x.address === address);
@@ -157,24 +160,26 @@ const PaginaCard = () => {
                 <div className="pc-hero-icon-grid ">
                   <IconInfoDai
                     img={PCDollarIcon}
-                    text={`DAI ${progetto.funds}`}
-                    text2={`of DAI ${progetto.quota}`}
+                    text={`${progetto.funds}`}
+                    text2={`${t("of")} ${progetto.quota}`}
                   />
 
                   <IconInfoCard
                     img={PCUserIcon}
-                    text={`${progetto.investorsNumber} investors`}
+                    text={`${progetto.investorsNumber} ${t("investors")}`}
                   />
                   {progetto.fundRaisingDeadline > 0 && (
                     <IconInfoCard
                       img={PCCalendarIcon}
-                      text={`${progetto.fundRaisingDeadline} days remaining`}
+                      text={`${progetto.fundRaisingDeadline} ${t(
+                        "daysremaining"
+                      )}`}
                     />
                   )}
                 </div>
                 <div className="pc-70-box box-bk-over-logo">
                   <p>
-                    Investimento <br /> completo al
+                    {t("investmentcard")} <br /> {t("completedat")}
                   </p>
                   <div className="graph-box">
                     <CircularProgressbar
@@ -188,12 +193,12 @@ const PaginaCard = () => {
                 <div className="grid-info">
                   <div className="span-card">
                     <span>
-                      <strong> Team Member:</strong> {progetto.team}
+                      <strong> {t("teammember")}:</strong> {progetto.team}
                     </span>
                   </div>
                   <div className="span-card">
                     <span>
-                      <strong>P.iva:</strong> {progetto.pIva}
+                      <strong>{t("piva")}:</strong> {progetto.pIva}
                     </span>
                   </div>
                 </div>
@@ -209,7 +214,7 @@ const PaginaCard = () => {
                   onClick={() => setTab(0)}
                   className={isCurrentState(0) ? "pc-active-link" : ""}
                 >
-                  Campagna
+                  {t("campaignpagecard")}
                 </a>
                 <a
                   onClick={() => setTab(1)}
@@ -239,13 +244,13 @@ const PaginaCard = () => {
                   onClick={() => setTab(5)}
                   className={isCurrentState(5) ? "pc-active-link" : ""}
                 >
-                  Questionario
+                  {t("survey")}
                 </a>
                 <a
                   onClick={() => setTab(6)}
                   className={isCurrentState(6) ? "pc-active-link" : ""}
                 >
-                  Documenti
+                  {t("documentpagecard")}
                 </a>
               </div>
             </div>
@@ -327,7 +332,7 @@ const PaginaCard = () => {
                     </div>
                     <h3 className="box-bk-over-logo">{progetto.nomeAzienda}</h3>
                     <h4 className="box-bk-over-logo">
-                      Sito Web:{" "}
+                      {t("website")}:{" "}
                       <span>
                         {" "}
                         <a
@@ -347,7 +352,7 @@ const PaginaCard = () => {
                     P.iva {progetto.pIva}
                   </p> */}
                   </div>
-                  <h5>Invest</h5>
+                  <h5>{t("investpagecard")}</h5>
 
                   {cards}
                 </div>

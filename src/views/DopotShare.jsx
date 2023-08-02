@@ -40,7 +40,7 @@ const DopotShare = () => {
           <div className="dopot-power">
             <h1>SCOPRI I DUE TOKEN DI DOPOT</h1>
 
-            <div className="p-btn-box">
+            {/* <div className="p-btn-box">
               <button
                 style={{
                   border: "2px solid rgb(186, 178, 178)",
@@ -63,7 +63,7 @@ const DopotShare = () => {
               >
                 Dopotshare
               </button>
-            </div>
+            </div> */}
             <h2>DOPOTSHARE TOKEN: L’UTILITY TOKEN DELLA PIATTAFORMA</h2>
             <h3>
               DopotShare è il token della piattaforma, è un LP Token, con cui la

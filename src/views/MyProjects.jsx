@@ -22,8 +22,10 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import { withdraw } from "../utils/firebase/writeInfos";
 import Card from "../components/PaginaCard/Card";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t, i18n } = useTranslation();
   const [projectsCard, setProjectsCard] = useState([]);
   const address = getRecoil(addressState);
   let projects = getRecoil(progettiState);
@@ -51,7 +53,6 @@ const Profile = () => {
               tier={project.tier}
               state={project.stateText}
               withdraw={handleWithdraw}
-              isMyProject={true}
             ></Card>
           );
         });
@@ -73,7 +74,7 @@ const Profile = () => {
                 </a>
                 <div className="profile-img-box">
                   <h3>
-                    Profilo di{" "}
+                    {t("profileof")}{" "}
                     {address &&
                       address.toString().substring(0, 5) + "..." + address &&
                       address.toString().substring(38, 42)}
@@ -87,7 +88,7 @@ const Profile = () => {
                       <img src={ProfileIcon1} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/profile"}>
-                      <p>Panoramica</p>
+                      <p>{t("overview")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -95,7 +96,7 @@ const Profile = () => {
                       <img src={ProfileIcon2} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/insprogetto"}>
-                      <p>Crea Campagna</p>
+                      <p>{t("createcampaign")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -103,7 +104,7 @@ const Profile = () => {
                       <img src={ProfileIcon3} alt="ProfileIcon" />
                     </a>
                     <a href={"/#/mynft"}>
-                      <p>I Miei NFT</p>
+                      <p>{t("mynft")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -115,7 +116,7 @@ const Profile = () => {
                       />
                     </a>
                     <a href={"/#/myprojects"}>
-                      <p>I Miei Progetti</p>
+                      <p>{t("myprojects")}</p>
                     </a>
                   </div>
                   <div className="pts-right-grid-card">
@@ -151,7 +152,7 @@ const Profile = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <p>Verify Identity</p>
+                      <p>{t("identity")}</p>
                     </a>
                   </div>
                 </div>
@@ -177,7 +178,7 @@ const Profile = () => {
                     fontSize: "1.75rem",
                   }}
                 >
-                  Shipping Details
+                  {t("shipping")}
                 </p>
               </div>
             </button>
@@ -187,7 +188,7 @@ const Profile = () => {
         <div className="box0">
           <div style={{ display: "flex", margin: "8rem 0" }}>
             <img src={ProfileIconGrd1} alt="ProfileIconGrd" />
-            <p>My projects</p>
+            <p>{t("myprojects")}</p>
           </div>
         </div>
 
