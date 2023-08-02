@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
+import { useTranslation } from "react-i18next";
 
 const Faq = (props) => {
+  const { t, i18n } = useTranslation();
   const [val, setVal] = useState([]);
   const handleAdd = (e) => {
     e.preventDefault();
@@ -16,34 +18,38 @@ const Faq = (props) => {
   const handleDelete = (e, i) => {
     e.preventDefault();
     const deletVal = [...val];
-    deletVal.splice(i-1, 1);
-    const result = e.target.name.match(/^([^.]+)[.]+([^.]+)$/); 
-    props.inputs[result[1]].splice(i,1);
-    props.inputs[result[2]].splice(i,1);
+    deletVal.splice(i - 1, 1);
+    const result = e.target.name.match(/^([^.]+)[.]+([^.]+)$/);
+    props.inputs[result[1]].splice(i, 1);
+    props.inputs[result[2]].splice(i, 1);
     setVal(deletVal);
   };
   return (
     <>
       <div className="ins-input-box">
-        <h1>Spiega le FAQ della tua campagna</h1>
-        <h4>Quali sono le domande più frequenti che potresti ricevere?</h4>
+        <h1>{t("faqtitle")}</h1>
+        <h4>{t("faqquestions")}</h4>
         <div>
           <div className="container-plus">
             <input
               name="titoloDomanda"
               onChange={(e) => props.handleChangeArray(e, 0)}
               type="text"
-              placeholder="Scrivi la prima domanda"
+              placeholder={t("faq1p")}
             />
 
-            <button key="titoloDomandaAdd" className="btn-plus-minus" onClick={handleAdd}>
+            <button
+              key="titoloDomandaAdd"
+              className="btn-plus-minus"
+              onClick={handleAdd}
+            >
               +
             </button>
           </div>
           <textarea
             name="rispostaDomanda"
             onChange={(e) => props.handleChangeArray(e, 0)}
-            placeholder="Rispondi alla domanda"
+            placeholder={t("faqresponsep")}
           />
         </div>
         {val.map((data, i) => {
@@ -54,14 +60,14 @@ const Faq = (props) => {
                   key={"titoloDomanda" + i}
                   name={"titoloDomanda"}
                   type="text"
-                  onChange={(e) => props.handleChangeArray(e, i+1)}
-                  placeholder="Scrivi la domanda"
+                  onChange={(e) => props.handleChangeArray(e, i + 1)}
+                  placeholder={t("faqp")}
                 />
                 <button
                   key={"titoloDomandaDel" + i}
                   name={"titoloDomanda.rispostaDomanda"}
                   className="btn-plus-minus"
-                  onClick={(e) => handleDelete(e, i+1)}
+                  onClick={(e) => handleDelete(e, i + 1)}
                 >
                   x
                 </button>
@@ -69,8 +75,8 @@ const Faq = (props) => {
               <textarea
                 key={"rispostaDomanda" + i}
                 name={"rispostaDomanda"}
-                placeholder="Rispondi alla domanda"
-                onChange={(e) => props.handleChangeArray(e, i+1)}
+                placeholder={t("faqresponsep")}
+                onChange={(e) => props.handleChangeArray(e, i + 1)}
               />
             </div>
           );
@@ -97,23 +103,24 @@ const Faq = (props) => {
 };
 
 const FaqHeader = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="ins-progress">
         <div className="ins-circle ins-circle-done">
-          <p>Informazioni di base</p>
+          <p>{t("infobase")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Questionario</p>
+          <p>{t("survey")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Progetto</p>
+          <p>{t("project")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Prodotto</p>
+          <p>{t("product")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">

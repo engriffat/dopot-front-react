@@ -1,98 +1,91 @@
 import React from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
+import { useTranslation } from "react-i18next";
 
 const Questionario = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="ins-input-box">
-        <h1>Questionario</h1>
-        <h4>
-          State partendo in un mercato piccolo o in un mercato già ben
-          strutturato?
-        </h4>
+        <h1>{t("titlesurvey")}</h1>
+        <h4>{t("survey1")}</h4>
         <textarea
           value={props.inputs.domanda1}
           onChange={props.handleChange}
           name="domanda1"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Avete il team giusto? Che competenze avete ?</h4>
+        <h4>{t("survey2")}</h4>
         <textarea
           value={props.inputs.domanda2}
           onChange={props.handleChange}
           name="domanda2"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>
-          La vostra posizione di mercato sarà difendibile tra 10/20 anni? Se sí
-          perché ?
-        </h4>
+        <h4>{t("survey3")}</h4>
         <textarea
           value={props.inputs.domanda3}
           onChange={props.handleChange}
           name="domanda3"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>
-          Quale è la mission principale della tua azienda e quali obbiettivi
-          principali ti sei posto?
-        </h4>
+        <h4>{t("survey4")}</h4>
         <textarea
           value={props.inputs.domanda4}
           onChange={props.handleChange}
           name="domanda4"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Che target di clienti fate riferimento?</h4>
+        <h4>{t("survey5")}</h4>
         <textarea
           value={props.inputs.domanda5}
           onChange={props.handleChange}
           name="domanda5"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Cosa rende unico il tuo progetto?</h4>
+        <h4>{t("survey6")}</h4>
         <textarea
           value={props.inputs.domanda6}
           onChange={props.handleChange}
           name="domanda6"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Quali sono i principali rischi per la startup?</h4>
+        <h4>{t("survey7")}</h4>
         <textarea
           value={props.inputs.domanda7}
           onChange={props.handleChange}
           name="domanda7"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Quali sono le proiezioni triennali della startup?</h4>
+        <h4>{t("survey8")}</h4>
         <textarea
           value={props.inputs.domanda8}
           onChange={props.handleChange}
           name="domanda8"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Il team presenta tutti i ruoli chiave per lo sviluppo?</h4>
+        <h4>{t("survey9")}</h4>
         <textarea
           value={props.inputs.domanda9}
           onChange={props.handleChange}
           name="domanda9"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
 
-        <h4>Come pensate di superare i vari rischi della startup?</h4>
+        <h4>{t("survey10")}</h4>
         <textarea
           value={props.inputs.domanda10}
           onChange={props.handleChange}
           name="domanda10"
-          placeholder="inserisci la risposta"
+          placeholder={t("surveyp")}
         />
       </div>
       {(() => {
@@ -111,23 +104,28 @@ const Questionario = (props) => {
 };
 
 const QuestionarioHeader = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="ins-progress">
         <div className="ins-circle ins-circle-done">
-          <p>Informazioni di base</p>
+          <p>{t("infobase")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-active">
-          <p>Questionario</p>
+          <p>{t("survey")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Progetto</p>
+          <p>{t("project")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Prodotto</p>
+          <p>{t("product")}</p>
+        </div>
+        <div className="ins-line ins-line-pending"></div>
+        <div className="ins-circle ins-circle-pending">
+          <p>NFTs Mint</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">

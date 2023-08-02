@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
+import { useTranslation } from "react-i18next";
 
 const NftMint = (props) => {
+  const { t, i18n } = useTranslation();
   const [val, setVal] = useState([]);
   const handleAdd = (e) => {
     e.preventDefault();
@@ -22,12 +24,12 @@ const NftMint = (props) => {
   return (
     <>
       <div className="ins-input-box">
-        <h1>Carica l'immagine per NFT del prodotto</h1>
+        <h1>{t("nftmintimagetitle")}</h1>
         <div>
           <div className="container-plus">
             <input
               name="imageNftDef"
-              onChange={(e) => props.handleChangeNft(e, props.nProdotto-1)}
+              onChange={(e) => props.handleChangeNft(e, props.nProdotto - 1)}
               type="file"
               placeholder="Scrivi la prima domanda"
               accept=".png,.jpg,.jpeg"
@@ -40,23 +42,24 @@ const NftMint = (props) => {
 };
 
 const NftMintHeader = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="ins-progress">
         <div className="ins-circle ins-circle-done">
-          <p>Informazioni di base</p>
+          <p>{t("infobase")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Questionario</p>
+          <p>{t("survey")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Progetto</p>
+          <p>{t("project")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Prodotto</p>
+          <p>{t("product")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-active">

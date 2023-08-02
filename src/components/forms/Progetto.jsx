@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
+import { useTranslation } from "react-i18next";
 
 const Progetto = (props) => {
+  const { t, i18n } = useTranslation();
   const [campagna, setcampagna] = useState("reward");
   const [giorniCampagna, setgiorniCampagna] = useState(45);
   const [val, setVal] = useState([]);
@@ -18,10 +20,10 @@ const Progetto = (props) => {
   const handleDelete = (e, i) => {
     e.preventDefault();
     const deletVal = [...val];
-    deletVal.splice(i-1, 1);
-    const result = e.target.name.match(/^([^.]+)[.]+([^.]+)$/); 
-    props.inputs[result[1]].splice(i,1);
-    props.inputs[result[2]].splice(i,1);
+    deletVal.splice(i - 1, 1);
+    const result = e.target.name.match(/^([^.]+)[.]+([^.]+)$/);
+    props.inputs[result[1]].splice(i, 1);
+    props.inputs[result[2]].splice(i, 1);
     setVal(deletVal);
   };
 
@@ -44,8 +46,8 @@ const Progetto = (props) => {
   return (
     <>
       <div className="ins-input-box">
-        <h1>Spiega il tuo Progetto</h1>
-        <h4>Che tipo di campagna vuoi realizzare?</h4>
+        <h1>{t("projecth1")}</h1>
+        <h4>{t("projecth4")}</h4>
         <div className="ins-btn-box">
           <button
             name="reward"
@@ -57,7 +59,7 @@ const Progetto = (props) => {
             }
             type="button"
           >
-            Campagna Reward
+            {t("reward")}
           </button>
           {/*<button
             name="equity"
@@ -72,20 +74,20 @@ const Progetto = (props) => {
             Campagna Equity
           </button>*/}
         </div>
-        <h6>Non sai quale scegliere?</h6>
+        <h6>{t("projecth6")}</h6>
       </div>
       <div className="ins-input-box">
-        <h4>Che quota vuoi raggiungere?</h4>
+        <h4>{t("projectquote")}</h4>
         <input
           name="quota"
           value={props.inputs.quota}
           onChange={props.handleChange}
           type="number"
-          placeholder="inserisci la cifra"
+          placeholder={t("projectquotep")}
         />
       </div>
       <div className="ins-input-box">
-        <h4>Che tipo di campagna vuoi realizzare?</h4>
+        <h4>{t("projecttype")}</h4>
         <div className="ins-btn-box">
           <button
             value={45}
@@ -97,7 +99,7 @@ const Progetto = (props) => {
             onClick={toggleGiorniCampagna}
             type="button"
           >
-            45 giorni
+            45 {t("days")}
           </button>
           <button
             value={65}
@@ -109,7 +111,7 @@ const Progetto = (props) => {
             onClick={toggleGiorniCampagna}
             type="button"
           >
-            65 giorni
+            65 {t("days")}
           </button>
           <button
             value={90}
@@ -121,38 +123,38 @@ const Progetto = (props) => {
             onClick={toggleGiorniCampagna}
             type="button"
           >
-            90 giorni
+            90 {t("days")}
           </button>
         </div>
       </div>
       <div className="ins-input-box">
-        <h4>Raccontaci del tuo progetto...</h4>
+        <h4>{t("projecttells")}</h4>
         <input
           name="descProgetto"
           value={props.inputs.descProgetto}
           onChange={props.handleChange}
           type="text"
-          placeholder="Com’è nata l’idea, quanti anni fa, aneddoti, etc..."
+          placeholder={t("projecttellsp")}
         />
       </div>
       <div className="ins-input-box">
-        <h4>Obiettivo del progetto</h4>
+        <h4>{t("projectobjective")}</h4>
         <input
           name="obbProgetto"
           value={props.inputs.obbProgetto}
           onChange={props.handleChange}
           type="text"
-          placeholder="Perchè le persone dovrebbero aiutarti? Quale scopo raggiungi?"
+          placeholder={t("projectobjectivep")}
         />
       </div>
       <div className="ins-input-box">
-        <h4>Il team</h4>
+        <h4>{t("projectteam")}</h4>
         <input
           name="team"
           value={props.inputs.team}
           onChange={props.handleChange}
           type="text"
-          placeholder="Presenta le persone che lavorano al progetto e il loro background"
+          placeholder={t("projectteamp")}
         />
       </div>
       <div className="ins-input-box">
@@ -163,17 +165,21 @@ const Progetto = (props) => {
               name="titoloRoadStep"
               onChange={(e) => props.handleChangeArray(e, 0)}
               type="text"
-              placeholder="inserisci titolo step"
+              placeholder={t("projecttitlestep")}
             />
 
-            <button key="titoloRoadStepAdd" className="btn-plus-minus" onClick={handleAdd}>
+            <button
+              key="titoloRoadStepAdd"
+              className="btn-plus-minus"
+              onClick={handleAdd}
+            >
               +
             </button>
           </div>
           <textarea
             name="descrRoadStep"
             onChange={(e) => props.handleChangeArray(e, 0)}
-            placeholder="descrivi lo step della roadmap"
+            placeholder={t("projectdescstep")}
           />
         </div>
 
@@ -185,14 +191,14 @@ const Progetto = (props) => {
                   key={"titoloRoadStep" + i}
                   name={"titoloRoadStep"}
                   type="text"
-                  onChange={(e) => props.handleChangeArray(e, i+1)}
-                  placeholder="inserisci titolo step"
+                  onChange={(e) => props.handleChangeArray(e, i + 1)}
+                  placeholder={t("projecttitlestep")}
                 />
                 <button
                   key={"titoloRoadStepDel" + i}
                   name={"titoloRoadStep.descrRoadStep"}
                   className="btn-plus-minus"
-                  onClick={(e) => handleDelete(e, i+1)}
+                  onClick={(e) => handleDelete(e, i + 1)}
                 >
                   x
                 </button>
@@ -200,8 +206,8 @@ const Progetto = (props) => {
               <textarea
                 key={"descrRoadStep" + i}
                 name={"descrRoadStep"}
-                onChange={(e) => props.handleChangeArray(e, i+1)}
-                placeholder="descrivi lo step della roadmap"
+                onChange={(e) => props.handleChangeArray(e, i + 1)}
+                placeholder={t("projectdescstep")}
               />
             </div>
           );
@@ -229,23 +235,24 @@ const Progetto = (props) => {
 };
 
 const ProgettoHeader = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="ins-progress">
         <div className="ins-circle ins-circle-done">
-          <p>Informazioni di base</p>
+          <p>{t("infobase")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-done">
-          <p>Questionario</p>
+          <p>{t("survey")}</p>
         </div>
         <div className="ins-line ins-line-done"></div>
         <div className="ins-circle ins-circle-active">
-          <p>Progetto</p>
+          <p>{t("project")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Prodotto</p>
+          <p>{t("product")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">

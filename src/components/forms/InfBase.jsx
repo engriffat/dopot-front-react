@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 import ReactFlagsSelect from "react-flags-select";
-
+import { useTranslation } from "react-i18next";
 const InfBase = (props) => {
+  const { t, i18n } = useTranslation();
   const [val, setVal] = useState([]);
   const handleAdd = (e) => {
     e.preventDefault();
@@ -13,8 +14,8 @@ const InfBase = (props) => {
   const handleDelete = (e, i) => {
     e.preventDefault();
     const deletVal = [...val];
-    deletVal.splice(i-1, 1);
-    props.inputs[e.target.name].splice(i,1);
+    deletVal.splice(i - 1, 1);
+    props.inputs[e.target.name].splice(i, 1);
     setVal(deletVal);
   };
   //val 2
@@ -39,18 +40,18 @@ const InfBase = (props) => {
   return (
     <>
       <div className="ins-input-box">
-        <h1>Informazioni di Base</h1>
-        <h4>Nome dell'azienda</h4>
+        <h1>{t("infbaseh1")}</h1>
+        <h4>{t("infbasename")}</h4>
         <input
           type="text"
           name="nomeAzienda"
           value={props.inputs.nomeAzienda}
           onChange={props.handleChange}
-          placeholder="inserisci il nome"
+          placeholder={t("infbasenamep")}
         />
       </div>
       <div className="ins-input-box">
-        <h4>Nazione dell'azienda</h4>
+        <h4>{t("infbasenation")}</h4>
         <ReactFlagsSelect
           className="nazioneAziendaSelect"
           selected={props.inputs.nazioneAzienda}
@@ -60,94 +61,87 @@ const InfBase = (props) => {
         ;
       </div>
       <div className="ins-input-box">
-        <h4>Settore aziendale </h4>
+        <h4>{t("infbasesector")}</h4>
         <select name="settore" onChange={props.handleChange}>
           <option disabled selected value>
-            Seleziona una categoria
+            {t("selectcateg")}
           </option>
           <option disabled value>
-            SOCIALE
+            {t("social")}
           </option>
-          <option value="tipo1">Assistenza sociale</option>
-          <option value="tipo2">Assistenza sanitaria</option>
-          <option value="tipo3">Assistenza socio-sanitaria</option>
-          <option value="tipo4">Educazione-istruzione-formazione</option>
-          <option value="tipo5">Tutela ambiente ed ecosistema</option>
-          <option value="tipo6">Valorizzazione patrimonio culturale</option>
-          <option value="tipo7">Turismo sociale</option>
-          <option value="tipo8">
-            Formazione universitaria-post universitaria
-          </option>
-          <option value="tipo9">formazione extra-scolastica</option>
-          <option value="tipo10">
-            Servizi strumentali alle imprese sociali
-          </option>
+          <option value="tipo1"> {t("socialcare")}</option>
+          <option value="tipo2"> {t("healthcare")}</option>
+          <option value="tipo3"> {t("socialhealthass")}</option>
+          <option value="tipo4"> {t("educationtraining")}</option>
+          <option value="tipo5"> {t("environmental")}</option>
+          <option value="tipo6"> {t("enhancementcultural")}</option>
+          <option value="tipo7"> {t("socialtourism")}</option>
+          <option value="tipo8">{t("universitypost")}</option>
+          <option value="tipo9"> {t("extracurricular")}</option>
+          <option value="tipo10">{t("socialenterprises")}</option>
           <option disabled value>
-            BLOCKCHAIN E INNOVAZIONE WEB3
+            {t("blockchain")}
           </option>
-          <option value="tipo11">Blockchain in finanza e banche</option>
-          <option value="tipo12">Blockchain nelle assicurazioni</option>
-          <option value="tipo13">Blockchain nei pagamenti digitali</option>
-          <option value="tipo14">Blockchain nell'agrifood</option>
-          <option value="tipo15">Blockchain nell'industry 4.0</option>
-          <option value="tipo16">Blockchain nell' IoT</option>
-          <option value="tipo17">Blockchain nella sanità</option>
-          <option value="tipo18">
-            Blockchain nella pubblica amministrazione
-          </option>
-          <option value="tipo19">Blockchain nel retail</option>
-          <option value="tipo20">Blockchain nella musica</option>
-          <option value="tipo21">Blockchain in smart energy</option>
-          <option value="tipo22">Blockchain per unbanked</option>
-          <option value="tipo23">Crypto-Startup</option>
-          <option value="tipo24">Startup Decentralizzata</option>
-          <option value="tipo25">Progetto Decentralizzato</option>
+          <option value="tipo11">{t("blockchainfinance")}</option>
+          <option value="tipo12">{t("blockchaininsurance")}</option>
+          <option value="tipo13">{t("blockchainpaydigital")}</option>
+          <option value="tipo14">{t("blockchainagrifood")}</option>
+          <option value="tipo15">{t("blockchain4.0")}</option>
+          <option value="tipo16">{t("blockchainiot")}</option>
+          <option value="tipo17">{t("blockchainhealthcare")}</option>
+          <option value="tipo18">{t("blockchainadministration")}</option>
+          <option value="tipo19">{t("blockchainretail")}</option>
+          <option value="tipo20">{t("blockchainmusic")}</option>
+          <option value="tipo21">{t("blockchainsmartenergy")}</option>
+          <option value="tipo22">{t("blockchainunbanked")}</option>
+          <option value="tipo23">{t("cryptostartup")}</option>
+          <option value="tipo24">{t("decentralizedstartup")}</option>
+          <option value="tipo25">{t("decentralizedproject")}</option>
           <option disabled value>
-            CATEGORIE TRADIZIONALI
+            {t("traditional")}
           </option>
-          <option value="tipo26">Food startup</option>
-          <option value="tipo27">Fashion startup</option>
-          <option value="tipo28">Wear startup</option>
-          <option value="tipo29">Travel startup</option>
-          <option value="tipo30">Big data e internet app</option>
-          <option value="tipo31">Biotecnologie</option>
-          <option value="tipo32">Ecosostenibilità</option>
-          <option value="tipo33">Ingegneria</option>
-          <option value="tipo34">Mobile e smartphone</option>
-          <option value="tipo35">Modellazione 3D</option>
-          <option value="tipo36">Ricerca e sviluppo</option>
-          <option value="tipo37">Software e internet delle cose</option>
-          <option value="tipo38">Energia</option>
-          <option value="tipo39">Intelligenza artificiale</option>
-          <option value="tipo40">Scienza e trasporti</option>
-          <option value="tipo41">Lavoro</option>
-          <option value="tipo42">Telecomunicazioni</option>
-          <option value="tipo43">Robot</option>
-          <option value="tipo44">Farmaceutica</option>
-          <option value="tipo45">Cibo e acqua</option>
-          <option value="tipo46">Educazione</option>
-          <option value="tipo47">Miglioramento della vita umana</option>
-          <option value="tipo48">Pubblica amministrazione</option>
-          <option value="tipo49">Realtà aumentata</option>
-          <option value="tipo50">Programmazione</option>
-          <option value="tipo51">Show business</option>
-          <option value="tipo52">Automazione</option>
-          <option value="tipo53">Tech per ogni età e popolo</option>
-          <option value="tipo54">Paesi emergenti</option>
-          <option value="tipo55">Software aziendali</option>
-          <option value="tipo56">Telecomunicazioni</option>
-          <option value="tipo57">Manufatturiero</option>
-          <option value="tipo58">Giochi</option>
-          <option value="tipo59">Musica</option>
-          <option value="tipo60">Immobiliare</option>
-          <option value="tipo61">Investimento</option>
-          <option value="tipo62">Tecnologia educativa</option>
-          <option value="tipo63">Innovazione</option>
-          <option value="tipo64">Credito</option>
-          <option value="tipo65">Assicurazione</option>
-          <option value="tipo66">Agricultural technology</option>
-          <option value="tipo67">Aerospaziale</option>
-          <option value="tipo68">Hi-tech</option>
+          <option value="tipo26"> {t("foodstartup")}</option>
+          <option value="tipo27"> {t("fashionstartup")}</option>
+          <option value="tipo28"> {t("wearstartup")}</option>
+          <option value="tipo29"> {t("travelstartup")}</option>
+          <option value="tipo30"> {t("bigdata")}</option>
+          <option value="tipo31"> {t("biotechnology")}</option>
+          <option value="tipo32"> {t("ecosustainability")}</option>
+          <option value="tipo33"> {t("engineering")}</option>
+          <option value="tipo34"> {t("mobile")}</option>
+          <option value="tipo35"> {t("modelling")}</option>
+          <option value="tipo36"> {t("research")}</option>
+          <option value="tipo37"> {t("software")}</option>
+          <option value="tipo38"> {t("power")}</option>
+          <option value="tipo39"> {t("artificialintelligence")}</option>
+          <option value="tipo40"> {t("science")}</option>
+          <option value="tipo41"> {t("work")}</option>
+          <option value="tipo42"> {t("telecommunications")}</option>
+          <option value="tipo43"> {t("robot")}</option>
+          <option value="tipo44"> {t("pharmaceutical")}</option>
+          <option value="tipo45"> {t("foodandwater")}</option>
+          <option value="tipo46"> {t("education")}</option>
+          <option value="tipo47"> {t("humanlife")}</option>
+          <option value="tipo48"> {t("publicadministration")}</option>
+          <option value="tipo49"> {t("augmentedreality")}</option>
+          <option value="tipo50"> {t("programming")}</option>
+          <option value="tipo51"> {t("showbusiness")}</option>
+          <option value="tipo52"> {t("automation")}</option>
+          <option value="tipo53"> {t("tech")}</option>
+          <option value="tipo54"> {t("emergingcountries")}</option>
+          <option value="tipo55"> {t("businesssoftware")}</option>
+          <option value="tipo57"> {t("manufacturing")}</option>
+          <option value="tipo58"> {t("games")}</option>
+          <option value="tipo59"> {t("music")}</option>
+          <option value="tipo60"> {t("realestate")}</option>
+          <option value="tipo61"> {t("investment")}</option>
+          <option value="tipo62"> {t("educationaltechnology")}</option>
+          <option value="tipo63"> {t("ionnovation")}</option>
+          <option value="tipo64"> {t("credit")}</option>
+          <option value="tipo65"> {t("insurance")}</option>
+          <option value="tipo66"> {t("agriculturaltecno")}</option>
+          <option value="tipo67"> {t("aerospace")}</option>
+          <option value="tipo68"> {t("hitech")}</option>
         </select>
       </div>
       <div className="ins-input-box">
@@ -162,33 +156,33 @@ const InfBase = (props) => {
         />
       </div>
       <div className="ins-input-box">
-        <h4>Descrizione Progetto</h4>
+        <h4>{t("projectdesc")}</h4>
         <textarea
           name="descrizione"
           value={props.inputs.descrizione}
           onChange={props.handleChange}
           type="textarea"
-          placeholder="Inserisci una breve Descrizione"
+          placeholder={t("projectdescp")}
         />
       </div>
       <div className="ins-input-box">
-        <h4>Numero P.IVA (favoltativo)</h4>
+        <h4>{t("vatnumber")}</h4>
         <input
           name="pIva"
           value={props.inputs.pIva}
           onChange={props.handleChange}
           type="text"
-          placeholder="Inserisci numero partita IVA"
+          placeholder={t("vatnumberp")}
         />
       </div>
       <div className="ins-input-box">
-        <h4>Sito Web</h4>
+        <h4>{t("website")}</h4>
         <input
           name="sito"
           value={props.inputs.sito || ""}
           onChange={props.handleChange}
           type="text"
-          placeholder="Inserisci link "
+          placeholder={t("websitep")}
         />
       </div>
       <div className="ins-input-box ">
@@ -198,7 +192,7 @@ const InfBase = (props) => {
             name="socialMedia"
             type="text"
             onChange={(e) => props.handleChangeArray(e, 0)}
-            placeholder="Inserisci link eventuali Social Media"
+            placeholder={t("socialmediap")}
           />
 
           <button className="btn-plus-minus" onClick={(e) => handleAdd(e)}>
@@ -211,13 +205,13 @@ const InfBase = (props) => {
               <input
                 name={"socialMedia"}
                 type="text"
-                placeholder="Inserisci link eventuali Social Media"
-                onChange={(e) => props.handleChangeArray(e, i+1)}
+                placeholder={t("socialmediap")}
+                onChange={(e) => props.handleChangeArray(e, i + 1)}
               />
               <button
                 className="btn-plus-minus"
                 name={"socialMedia"}
-                onClick={(e) => handleDelete(e, i+1)}
+                onClick={(e) => handleDelete(e, i + 1)}
               >
                 x
               </button>
@@ -226,9 +220,7 @@ const InfBase = (props) => {
         })}
       </div>
       <div className="ins-input-box">
-        <h4>
-          Documentazione Aziendale (pitch, business plan, relazioni coi partner)
-        </h4>
+        <h4>{t("companydocumentation")}</h4>
         <div className="container-plus">
           <input
             name="documentazione"
@@ -244,12 +236,12 @@ const InfBase = (props) => {
       </div>
 
       <div className="ins-input-box">
-        <h4>Introduzione</h4>
+        <h4>{t("introduction")}</h4>
         <textarea
           value={props.inputs.introduzione}
           onChange={props.handleChange}
           name="introduzione"
-          placeholder="inserisci un introduzione"
+          placeholder={t("introductionp")}
         />
         {/* <div className="ins-input-box">
           <h4>Immagine Introduzione </h4>
@@ -260,13 +252,12 @@ const InfBase = (props) => {
             type="file"
           />
         </div> */}
-
-        <h4>Storia</h4>
+        <h4>{t("story")}</h4>
         <textarea
           value={props.inputs.storia}
           onChange={props.handleChange}
           name="storia"
-          placeholder="inserisci la storia della tua azienda"
+          placeholder={t("storyp")}
         />
         {/* <div className="ins-input-box">
           <h4>Immagine Introduzione </h4>
@@ -278,12 +269,12 @@ const InfBase = (props) => {
           />
         </div> */}
 
-        <h4>Vision</h4>
+        <h4>{t("vision")}</h4>
         <textarea
           value={props.inputs.vision}
           onChange={props.handleChange}
           name="vision"
-          placeholder="inserisci la vision della vostra azienda"
+          placeholder={t("visionp")}
         />
         {/* <div className="ins-input-box">
           <h4>Immagine Introduzione </h4>
@@ -311,23 +302,24 @@ const InfBase = (props) => {
 };
 
 const InfBaseHeader = (props) => {
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div className="ins-progress">
         <div className="ins-circle ins-circle-active">
-          <p>Informazioni di base</p>
+          <p>{t("infobase")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Questionario</p>
+          <p>{t("survey")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Progetto</p>
+          <p>{t("project")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
-          <p>Prodotto</p>
+          <p>{t("product")}</p>
         </div>
         <div className="ins-line ins-line-pending"></div>
         <div className="ins-circle ins-circle-pending">
