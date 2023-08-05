@@ -11,13 +11,13 @@ import DopotPower from "./views/DopotPower";
 import DopotShare from "./views/DopotShare";
 import XDao from "./views/XDao";
 import Impostazioni from "./views/Impostazioni";
+import FaqIta from "./views/FaqIta";
+import FaqEng from "./views/FaqEng";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  
-
   return (
     <HashRouter>
       <Routes>
@@ -34,7 +34,8 @@ function App() {
         <Route path="impostazioni" element={<Impostazioni />} />
         <Route path="loading" element={<LoadingPage />} />
         <Route path="dopotpower" element={<DopotPower />} />
-        <Route path="dopotshare" element={<DopotShare />} />
+        <Route path="FaqEng" element={<FaqEng />} />
+        <Route path="FaqIta" element={<FaqIta />} />
       </Routes>
     </HashRouter>
   );
