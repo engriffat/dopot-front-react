@@ -43,6 +43,7 @@ const Profile = () => {
     // Update the document title using the browser API
     async function fetchData() {
       let tempCard = [];
+      const favorites = await retriveFavorites();
       //console.dir(projects);
       for (const project of projects) {
         let tiers = project.investors[address];
@@ -55,6 +56,7 @@ const Profile = () => {
                 immagini={getRecoil(progettiImageState)[project.address]}
                 address={project.address}
                 tier={project.tier}
+                progettiFavourites={favorites}
               ></CardPref>
             );
           }
@@ -62,7 +64,7 @@ const Profile = () => {
       }
       setinvestedCard(tempCard);
 
-      const favorites = await retriveFavorites();
+      
       let tempCard2 = [];
       for (const element of favorites) {
         let project = projects.find((project) => project.address === element);
@@ -72,6 +74,7 @@ const Profile = () => {
             immagini={getRecoil(progettiImageState)[project.address]}
             address={project.address}
             tier={project.tier}
+            progettiFavourites={favorites}
           ></CardPref>
         );
       }

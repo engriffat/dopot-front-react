@@ -253,5 +253,11 @@
   "tabfaqquestion": "Domanda",
   "tabfaqh1-2": "Domande relativa alla campagna di investimento",
 
-  "tabsurveyh1": "Domande Questionario"
+  "tabsurveyh1": "Domande Questionario",
+
+  "confirm": "Conferma le transazioni",
+  "invested": "Investito con successo!",
+  "error": "Si è verificato un errore",
+
+  "insuranceFunds": "Fondi assicurazione"
 }

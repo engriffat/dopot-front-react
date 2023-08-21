@@ -31,7 +31,7 @@ const progettiState = atom({
   key: 'progetti',
   default: [],
   effects_UNSTABLE: [persistAtom,
-    ({ setSelf }) => {
+    /*({ setSelf }) => {
       window.addEventListener('beforeunload', () => {
         setSelf([]);
       });
@@ -39,14 +39,20 @@ const progettiState = atom({
       setTimeout(() => {
         setSelf([]);
       }, 10 * 60 * 1000); // 10 minutes cookie expire
-    },],
+    },*/],
 })
 
-const progettiImageState = atom({
-  key: 'progettiImage',
+const blockHeightState = atom({
+  key: 'blockHeightState',
   default: {},
   effects_UNSTABLE: [persistAtom],
 })
 
+const progettiImageState = atom({
+  key: 'progettiImage',
+  default: 0,
+  effects_UNSTABLE: [persistAtom],
+})
 
-export {progettiAddressState, progettiState, providerState, progettiImageState, addressState, weaveState}
+
+export {progettiAddressState, progettiState, blockHeightState, providerState, progettiImageState, addressState, weaveState}

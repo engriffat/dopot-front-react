@@ -22,9 +22,10 @@ const Card = (props) => {
   const isMyProject = props.isMyProject;
   const address = props.progetto.address;
   const { progettiFavourites } = props;
-  const [toggleHeart, setToggleHeart] = useState(
-    progettiFavourites ? progettiFavourites.includes(props.address) : false
-  );
+  const [toggleHeart, setToggleHeart] = useState(false);
+  useEffect(() => {
+    setToggleHeart(progettiFavourites && Array.isArray(progettiFavourites) ? progettiFavourites.includes(props.address) : false)
+  }, [progettiFavourites]);
 
   function handleRedirect(e) {
     navigate(`/card/${address}`);
@@ -143,10 +144,10 @@ const Card = (props) => {
               // className="grd-btn dopot-btn-lg"
               style={{ background: "none", width: "10%" }}
             >
-              {!toggleHeart ? (
-                <img src={IconHeart} />
-              ) : (
+              {toggleHeart ? (
                 <img src={IconHeartActive} />
+              ) : (
+                <img src={IconHeart} />
               )}
             </button>
           )}

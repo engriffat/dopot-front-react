@@ -1,25 +1,41 @@
 import React from "react";
 import { addInvestment } from "../../utils/firebase/writeInfos";
 import addressDopotReward from '../../abi/dopotReward/address.js';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 const InvestiCard = (props) => {
-  const { state } = props;
+  const { state, titolo, price, spec, img, currentSupply, supply } = props;
+  const { t, i18n } = useTranslation();
 
+  async function invest(){
+    try {
+      await toast.promise(addInvestment(props.address, props.numTier, price, titolo), {
+        pending: t("confirm"),
+        success: t("invested"),
+        error: t("error"),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
   return (
     <div className="investi-card">
       <input type="checkbox" id="click-invest" />
       <label for="click-invest" style={{ cursor: "pointer", display: "block" }}>
-        <img src={props.img} alt="BlogImg" />
+        <img src={img} alt="BlogImg" />
 
         <div className="investi-card-box">
-          <h3 className="box-bk-over-logo">{props.titolo}</h3>
-          <p className="box-bk-over-logo">{props.spec}</p>
+          <h3 className="box-bk-over-logo">{titolo}</h3>
+          <p className="box-bk-over-logo">{spec}</p>
           <br />
-          <p className="box-bk-over-logo">{props.currentSupply}/{props.supply} supply</p>
+          <p className="box-bk-over-logo">{currentSupply}/{supply} supply</p>
 
-          <h5>{"DAI " + props.price}</h5>
+          <h5>{"DAI " + price}</h5>
           <button
-            onClick={() => (state === "Ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
+            onClick={() => (state === "Ongoing" ? invest() : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
             {state === "Ongoing" ? "Invest" : "Buy NFT"}
@@ -28,16 +44,16 @@ const InvestiCard = (props) => {
       </label>
 
       <div class="content-invest ">
-        <img src={props.img} alt="BlogImg" />
+        <img src={img} alt="BlogImg" />
         <div class="text-invest">
-          <h3 className="box-bk-over-logo">{props.titolo}</h3>
-          <p className="box-bk-over-logo">{props.spec}</p>
+          <h3 className="box-bk-over-logo">{titolo}</h3>
+          <p className="box-bk-over-logo">{spec}</p>
           <br />
-          <p className="box-bk-over-logo">{props.currentSupply}/{props.supply} supply</p>
+          <p className="box-bk-over-logo">{currentSupply}/{supply} supply</p>
 
-          <h5>{"DAI " + props.price}</h5>
+          <h5>{"DAI " + price}</h5>
           <button
-            onClick={() => (state === "Ongoing" ? addInvestment(props.address, props.numTier, props.price, props.titolo) : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
+            onClick={() => (state === "Ongoing" ? invest() : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
             {state === "Ongoing" ? "Invest" : "Buy NFT"}

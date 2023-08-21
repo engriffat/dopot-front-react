@@ -19,20 +19,26 @@ import Footer from "../components/Footer";
 import {
   downloadProjects,
   retriveFavorites,
+  getInsuranceFunds
 } from "../utils/firebase/retriveInfo";
 import useSearchForm from "./useSearchForm";
+const { ethers, parseEther } = require("ethers");
 
 const Home = () => {
   const { t, i18n } = useTranslation();
   const handleSearch = useSearchForm();
   const [progettiFavourites, setProgettiFavourites] = useState([]);
-
+  const [insuranceState, setInsuranceState] = useState(0);
   const cards = [];
 
   useEffect(() => {
     (async () => {
       await downloadProjects();
       const newData = await retriveFavorites();
+      let insuranceFunds = await getInsuranceFunds();
+      insuranceFunds = ethers.utils.formatEther(insuranceFunds.toString());
+      insuranceFunds = insuranceFunds.substring(0, insuranceFunds.indexOf("."));
+      setInsuranceState(insuranceFunds);
       setProgettiFavourites(newData);
     })();
   }, []);
@@ -62,7 +68,7 @@ const Home = () => {
 
   progetti = progetti.filter(
     (progetto) =>
-      progetto.stateText.toLowerCase().replace(" ", "") === state &&
+      progetto.stateText?.toLowerCase().replace(" ", "") === state &&
       progetto.tipoCampagna === campaign &&
       (type !== "any" ? progetto.settore === type : true) &&
       (value !== "any"
@@ -213,7 +219,6 @@ const Home = () => {
                 <MdSearch />
               </div>
             </div>
-
             <form className="dash-sel-opt-content" style={{ margin: 0 }}>
               <label style={{ borderRadius: "2rem" }}>{t("dashorder")}</label>
               <div class="multiselect">
@@ -253,6 +258,7 @@ const Home = () => {
             </h2>
           </div>
           <div class="profile-dash-cards">{cards}</div>
+          <label style={{color: "white"}}>{t("insuranceFunds") + ": " + insuranceState + " DAI"}</label>
         </div>
         <Footer />
       </main>

@@ -3,6 +3,7 @@ import "../styles/components/footer.css";
 import { SocialIcon } from "react-social-icons";
 import Pdf from "../assets/dopot.pdf";
 import { useTranslation } from "react-i18next";
+import openSourceImg from "../assets/img/open-source.png";
 
 const BADGE_ID = "fb48ca1409e7f6fe";
 let ALCHEMY_URL = `https://alchemyapi.io/?r=badge:${BADGE_ID}`;
@@ -64,10 +65,10 @@ const Footer = () => {
           </div>
           <div className="footer-grid-box">
             <h4>{t("services")}</h4>
-            <a href="#">{t("createcampaign")}</a>
-            <a href="#">Dopot Token</a>
+            <a href="/#/insprogetto">{t("createcampaign")}</a>
+            <a href="/#/dopotpower">Dopot Token</a>
             {/* <a href="#">{t('learn')}</a> */}
-            <a href="#">FAQ</a>
+            <a href="/#/FaqIta">FAQ</a>
           </div>
           <div className="footer-grid-box">
             <h4>Community</h4>
@@ -99,6 +100,14 @@ const Footer = () => {
             <h4>{t("document")}</h4>
             <a href={Pdf}>Whitepaper </a>
             <a href="https://dopot.gitbook.io/dopot/">GitBook </a>
+            <a href="https://github.com/Dopot-Labs">
+            <img
+              id="badge-button"
+              style={{ marginBottom: "2rem" }}
+              src={openSourceImg}
+              alt="Open Source"
+            />
+          </a>
           </div>
         </div>
         <div className="footer-bottom">
@@ -111,6 +120,7 @@ const Footer = () => {
               alt="Alchemy Supercharged"
             />
           </a>
+          
           <h6>DOPOT.FI</h6>
           {/* <p>Copyright © 2021 tutti diritti riservati a Dopot.ﬁ</p> */}
         </div>

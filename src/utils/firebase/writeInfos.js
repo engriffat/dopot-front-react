@@ -89,7 +89,8 @@ export async function addproj(inputs) {
 
   console.log("Adding project")
   inputs.addressCreator = address
-  const identity = await getIdentity(address)
+  let identity = await getIdentity(address)
+  identity.linkedAccount = identity.address
   inputs.address = await genproj(inputs);
   async function updateListFiles(listFiles, contentType) {
     const updatedElements = await Promise.all(
@@ -121,10 +122,7 @@ export async function addproj(inputs) {
     const tiers = await contrattoProjectAddTier(inputs);
     inputsNoTiers.imageNftDefListFiles = tiers;
     console.dir(inputsNoTiers);
-    const result = await db.add(inputsNoTiers, "projects", {
-      wallet: address,
-      privateKey: identity.privateKey,
-    });
+    const result = await db.add(inputsNoTiers, "projects", identity );
     console.log(result);
     await optInNotifications();
 
@@ -136,17 +134,17 @@ export async function addproj(inputs) {
 }
 
 export async function addFavorites(addressProject) {
-  let addressLogged=getRecoil(addressState).toString()
-  const identity = await getIdentity(addressLogged)
-  const identityObj = { wallet: addressLogged, privateKey: identity.privateKey };
+  const address = await getProvider();
+  let identity = await getIdentity(address)
+  identity.linkedAccount = identity.address
   try {
-    let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", addressLogged.toLowerCase()]);
+    let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address.toLowerCase()]);
     if(!result[0] || !result[0].data)
-      await db.add({addressUser: addressLogged.toLowerCase(), addressProjects: [ addressProject ], shippingNft: {}}, "users", identityObj)
+      await db.add({addressUser: address.toLowerCase(), addressProjects: [ addressProject ], shippingNft: {}}, "users", identity)
     else{
       let addressProjects = result[0].data.addressProjects;
       addressProjects && addressProjects.includes(addressProject) ? addressProjects.splice(addressProjects.indexOf(addressProject), 1) : addressProjects.push(addressProject);
-      await db.update(result[0].data, "users", result[0].id, identityObj)
+      await db.update(result[0].data, "users", result[0].id, identity)
     }
   } catch (e) {
     console.error("Error adding document: ", e);

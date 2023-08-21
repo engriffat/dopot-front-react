@@ -41,6 +41,7 @@ const InsProgetto = () => {
     giorniCampagna: 45,
     numeroProdotti: "1",
     tipoCampagna: "reward",
+    settore: "tipo1",
     socialMedia: [],
     titoloRoadStep: [],
     descrRoadStep: [],
@@ -122,9 +123,9 @@ const InsProgetto = () => {
       event.preventDefault();
       try {
         await toast.promise(addproj(inputs), {
-          pending: "Confirm the transactions",
-          success: "Project created!",
-          error: "An error occurred",
+          pending: t("confirm"),
+          success: t("invested"),
+          error: t("error"),
         });
       } catch (error) {
         console.log(error);

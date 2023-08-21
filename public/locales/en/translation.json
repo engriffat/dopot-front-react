@@ -241,15 +241,22 @@
   "postponedeadline": "Postpone the deadline",
   "findoutmore": "Find out more",
 
-  "teammember": "Team member",
+  "teammember": "Team members",
   "piva": "VAT number",
+  "creatoraddress": "Creator",
   "campaignpagecard": "Campaign",
-  "documentpagecard": "documents",
+  "documentpagecard": "Documents",
   "investpagecard": "Invest",
 
   "tabfaqh1": "Company related questions",
-  "tabfaqquestion": "Questions",
+  "tabfaqquestion": "Question",
   "tabfaqh1-2": "Questions relating to the investment campaign",
 
-  "tabsurveyh1": "Questionnaire questions"
+  "tabsurveyh1": "Questionnaire questions",
+
+  "confirm": "Confirm the transactions",
+  "invested": "Invested succesfully!",
+  "error": "An error occurred",
+
+  "insuranceFunds": "Insurance funds"
 }

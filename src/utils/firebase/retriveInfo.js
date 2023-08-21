@@ -1,5 +1,5 @@
 import { getRecoil, setRecoil } from 'recoil-nexus';
-import { addressState , progettiState, providerState, favouritesState } from '../../recoilState';
+import { addressState , progettiState, blockHeightState, providerState, favouritesState } from '../../recoilState';
 import { db, getIdentity, init } from './firebaseInit';
 import addressProjectFactory from '../../abi/projectFactory/address.js';
 import addressFundingToken from '../../abi/fundingToken/address.js';
@@ -72,12 +72,15 @@ export async function getAddr(setState, dontAutoConnect) {
 
 async function getInvestors(projdb, dopotReward){
     const provider = getRecoil(providerState);
+    const blockHeight = getRecoil(blockHeightState);
+    
     const contract = new ethers.Contract(addressProjectFactory, abiProjectFactory, provider);
     let currentBlock = await provider.getBlockNumber();
     const endBlock = currentBlock;
-    currentBlock = currentBlock - 1200000; // 30 days
+    currentBlock = currentBlock - (39272 * 120); // Polygon blocks per day * 120 days
     const batchSize = 3500;
-    
+    if (blockHeight > currentBlock) currentBlock = blockHeight;
+
     while (currentBlock <= endBlock) {
         const nextBlock = Math.min(currentBlock + batchSize - 1, endBlock);
         const filterInvest = contract.filters.ProjectInvested(projdb.address);
@@ -89,12 +92,19 @@ async function getInvestors(projdb, dopotReward){
         }
         currentBlock = nextBlock + 1;
     }
+    setRecoil(blockHeightState, endBlock);
 }
 
 async function getProjectFunds(addressProject){
     const provider = getRecoil(providerState);
     const dai = new ethers.Contract(addressFundingToken, abiFundingToken, provider);
     return await dai.balanceOf(addressProject);
+}
+
+export async function getInsuranceFunds(){
+    const provider = getRecoil(providerState);
+    const dai = new ethers.Contract(addressFundingToken, abiFundingToken, provider);
+    return await dai.balanceOf(addressProjectFactory);
 }
 
 export async function downloadProjects() {
@@ -106,7 +116,7 @@ export async function downloadProjects() {
     try{
         let projects = getRecoil(progettiState)
         const dopotReward = new Contract(addressDopotReward, abiDopotReward, getRecoil(providerState));
-        if(!projects || projects.length === 0){
+        //if(!projects || projects.length === 0){
             projects = await db.get("projects", identityObj)
             for(let projdb of projects){
                 const project = new Contract(projdb.address, abiProject, getRecoil(providerState));
@@ -149,7 +159,7 @@ export async function downloadProjects() {
                         break;
                     default: break;
                   }
-            }
+            //}
             setRecoil(progettiState, projects)
         }
     }   catch(e){console.log(e)}

@@ -151,6 +151,11 @@ const PaginaCard = () => {
                     <img src={IconPlane} alt="IconPlane" /> Scopri di più
                   </button> */}
                 </div>
+                <div className="span-card">
+                      <span>
+                        <strong>{t("creatoraddress")}:</strong> <a style={{textDecoration: "underline", cursor: "pointer"}} target="_blank" href={`https://app.proofofhumanity.id/profile/${progetto.addressCreator}`} rel="noreferrer">{progetto.addressCreator}</a>
+                      </span>
+                  </div>
               </div>
               <div className="pc-hero-grid-right">
                 <div className="box-bk-over-logo settore right ">
@@ -167,6 +172,7 @@ const PaginaCard = () => {
                   <IconInfoCard
                     img={PCUserIcon}
                     text={`${progetto.investorsNumber} ${t("investors")}`}
+                    investors={progetto.investors}
                   />
                   {progetto.fundRaisingDeadline > 0 && (
                     <IconInfoCard
@@ -200,10 +206,13 @@ const PaginaCard = () => {
                     <span>
                       <strong>{t("piva")}:</strong> {progetto.pIva}
                     </span>
-                  </div>
+                  </div>          
                 </div>
+                
               </div>
+              
             </div>
+            
           </div>
         </section>
         <section style={{ background: "rgba(57, 57, 66, 255)" }}>
@@ -281,7 +290,7 @@ const PaginaCard = () => {
                     case 3:
                       return (
                         <TabSocial
-                          socialMedia={progetto.socialMedia.split(",")}
+                          socialMedia={progetto.socialMedia}
                         ></TabSocial>
                       );
                     case 4:

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 import IconInfoCard from "./IconInfoCard";
 import IconInfoDai from "./IconInfoDai";
 import PCDollarIcon from "../../assets/img/pc-dollar-icon.png";
@@ -21,7 +21,11 @@ const Card = (props) => {
   const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
   const isMyProject = fundRaisingDeadline < 0;
   const address = props.progetto.address;
-
+  const { progettiFavourites } = props;
+  const [toggleHeart, setToggleHeart] = useState(true);
+  useEffect(() => {
+    setToggleHeart(progettiFavourites && Array.isArray(progettiFavourites) ? progettiFavourites.includes(address) : false)
+  }, [progettiFavourites, address]);
   function handleRedirect(e) {
     navigate(`/card/${address}`);
     window.scrollTo(0, -1000000);
@@ -110,6 +114,28 @@ const Card = (props) => {
           </div>
         </div>
         <div className="pmg-btn-box">
+        
+            <button
+              onClick={() => {
+                addFavorites(address);
+                toggleHeart
+                  ? progettiFavourites.splice(
+                      progettiFavourites.indexOf(address),
+                      1
+                    )
+                  : progettiFavourites.push(address);
+                setToggleHeart(!toggleHeart);
+              }}
+              // className="grd-btn dopot-btn-lg"
+              style={{ background: "none", width: "10%" }}
+            >
+              {toggleHeart ? (
+                <img src={IconHeartActive} />
+              ) : (
+                <img src={IconHeart} />
+              )}
+            </button>
+          
           <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
             {t("findoutmore")}
           </button>
