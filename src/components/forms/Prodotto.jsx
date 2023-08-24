@@ -132,6 +132,7 @@ const SchedaProdotto = (props) => {
           value={props.inputs["price" + props.nProdotto]}
           onChange={props.handleChange}
           type="number"
+          onWheel={(e) => e.target.blur()}
           placeholder={t("priceproductp")}
         />
       </div>
@@ -142,6 +143,7 @@ const SchedaProdotto = (props) => {
           value={props.inputs["supply" + props.nProdotto]}
           onChange={props.handleChange}
           type="number"
+          onWheel={(e) => e.target.blur()}
           placeholder={t("supplyp")}
         />
       </div>

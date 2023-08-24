@@ -17,10 +17,11 @@ import { useTranslation } from "react-i18next";
 const Card = (props) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const percentage = (props.progetto.funds / props.progetto.quota) * 100;
-  const fundRaisingDeadline = props.progetto.fundRaisingDeadline;
+  const { progetto } = props;
+  const percentage = (progetto.funds / progetto.quota) * 100;
+  const fundRaisingDeadline = progetto.fundRaisingDeadline;
   const isMyProject = fundRaisingDeadline < 0;
-  const address = props.progetto.address;
+  const address = progetto.address;
   const { progettiFavourites } = props;
   const [toggleHeart, setToggleHeart] = useState(true);
   useEffect(() => {
@@ -30,10 +31,10 @@ const Card = (props) => {
     navigate(`/card/${address}`);
     window.scrollTo(0, -1000000);
   }
-  let desc = String(props.progetto.descProgetto);
+  let desc = String(progetto.descProgetto);
   return (
     <div className="profile-box-dash">
-      <div className="pmg-right-card">
+      <div className="pmg-right-card" style={{backgroundImage: `url(https://arweave.net/${progetto.logoAziendaListFiles[0]})`}}>
         <div className="pmg-rc-left-card" style={{ width: "100%" }}>
           <div
             style={{
@@ -42,23 +43,23 @@ const Card = (props) => {
             }}
           >
             <div className="settore">
-              {/* <span className="box-bk-over-logo">{props.progetto.settore}</span> */}
+              {/* <span className="box-bk-over-logo">{progetto.settore}</span> */}
             </div>
             <div style={{ marginBottom: "1rem" }} className="settore">
               <span className="box-bk-over-logo">
-                {props.progetto.tipoCampagna}
+                {progetto.tipoCampagna}
               </span>
             </div>
           </div>
-          <h3 className="box-bk-over-logo">{props.progetto.nomeAzienda}</h3>
+          <h3 className="box-bk-over-logo">{progetto.nomeAzienda}</h3>
           <h3 style={{ marginBottom: "2rem" }}>
             <span>
               <a
                 className="link-social-new  box-bk-over-logo"
-                href={props.progetto.sito}
+                href={progetto.sito}
                 target="_blank"
               >
-                {props.progetto.sito}
+                {progetto.sito}
               </a>
             </span>
           </h3>
@@ -66,13 +67,13 @@ const Card = (props) => {
           <input
             type="checkbox"
             class="read-more-state"
-            id="post-{props.progetto.nomeAzienda}"
+            id="post-{progetto.nomeAzienda}"
           />
           <p class="read-more-target box-bk-over-logo">{desc}</p>
 
           {desc.length > 200 ? (
             <label
-              for="post-{props.progetto.nomeAzienda}"
+              for="post-{progetto.nomeAzienda}"
               class="read-more-trigger"
             ></label>
           ) : null}
@@ -82,19 +83,19 @@ const Card = (props) => {
           <div className="pc-hero-icon-grid">
             <IconInfoDai
               img={PCDollarIcon}
-              text={props.progetto.funds}
-              text2={`${t("of")} ${props.progetto.quota}`}
+              text={progetto.funds}
+              text2={`${t("of")} ${progetto.quota}`}
             />
             <IconInfoCard
               img={PCUserIcon}
-              text={`${props.progetto.investorsNumber} ${t("investors")}`}
+              text={`${progetto.investorsNumber} ${t("investors")}`}
             />
             {
               <IconInfoCard
                 img={PCCalendarIcon}
                 text={
                   isMyProject
-                    ? props.progetto.stateText
+                    ? progetto.stateText
                     : `${fundRaisingDeadline} ${t("daysremaining")}`
                 }
               />
@@ -140,7 +141,7 @@ const Card = (props) => {
             {t("findoutmore")}
           </button>
           <div style={{ bottom: 0, right: 0 }}>
-            <Flag code={props.progetto.nazioneAzienda} height="16" />
+            <Flag code={progetto.nazioneAzienda} height="16" />
           </div>
         </div>
       </div>

@@ -258,6 +258,10 @@
   "confirm": "Conferma le transazioni",
   "invested": "Investito con successo!",
   "error": "Si è verificato un errore",
+  "created": "Progetto creato!",
+  "withdrawn": "Fondi prelevati!",
 
+  "feesConfirm": "Vuoi pagare le commissioni con $DPT per ottenere uno sconto?",
+  "shippingDetails": "Inserisci i tuoi dati di spedizione fisici o virtuali:",
   "insuranceFunds": "Fondi assicurazione"
 }

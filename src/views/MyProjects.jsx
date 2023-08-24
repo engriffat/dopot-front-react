@@ -23,6 +23,8 @@ import "react-circular-progressbar/dist/styles.css";
 import { withdraw } from "../utils/firebase/writeInfos";
 import Card from "../components/PaginaCard/Card";
 import { useTranslation } from "react-i18next";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   const { t, i18n } = useTranslation();
@@ -32,10 +34,18 @@ const Profile = () => {
 
   async function handleWithdraw(projectAddress) {
     const response = window.confirm(
-      "Do you want to pay fees with the Dopot token for a discount?"
+      t("feesConfirm")
     );
-    await withdraw(projectAddress, response);
-    console.log(response);
+    try {
+      await toast.promise(withdraw(projectAddress, response),{
+        pending: t("confirm"),
+        success: t("withdrawn"),
+        error: t("error"),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   useEffect(() => {
@@ -53,6 +63,7 @@ const Profile = () => {
               tier={project.tier}
               state={project.stateText}
               withdraw={handleWithdraw}
+              isMyProject={true}
             ></Card>
           );
         });
@@ -197,6 +208,7 @@ const Profile = () => {
             <div className="profile-main-grid">{projectsCard}</div>
           </div>
         </section>
+        <ToastContainer />
       </main>
     </div>
   );

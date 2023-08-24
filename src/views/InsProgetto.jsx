@@ -124,7 +124,7 @@ const InsProgetto = () => {
       try {
         await toast.promise(addproj(inputs), {
           pending: t("confirm"),
-          success: t("invested"),
+          success: t("created"),
           error: t("error"),
         });
       } catch (error) {

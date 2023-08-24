@@ -257,6 +257,10 @@
   "confirm": "Confirm the transactions",
   "invested": "Invested succesfully!",
   "error": "An error occurred",
+  "created": "Project created!",
+  "withdrawn": "Funds withdrawn!",
 
+  "feesConfirm": "Do you want to pay fees with $DPT to get a discount?",
+  "shippingDetails": "Enter your physical or digital shipping details:",
   "insuranceFunds": "Insurance funds"
 }

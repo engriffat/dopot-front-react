@@ -29,6 +29,7 @@ import { addFavorites } from "../utils/firebase/writeInfos";
 import {
   downloadProjects,
   retriveFavorites,
+  RetriveProjectTypes
 } from "../utils/firebase/retriveInfo";
 import IconHeart from "../assets/img/heart-fav.svg";
 import IconHeartActive from "../assets/img/heart-fav-active.svg";
@@ -96,17 +97,17 @@ const PaginaCard = () => {
     <div className="app">
       <main className="pagina-card">
         <section className="pc-hero-section">
-          <img
+          {/*<img
             className="pagina-card-hero-img"
             src={ImageBackLogo}
             alt="PaginaCardHero"
-          />
+          />*/}
           <div className="box-main-header">
             {/* <img className="image-icon" src={ImageIcon} alt="ImageIcon" /> */}
             <div className="pc-hero-grid">
               <div className="pc-hero-grid-left">
                 <div className="settore box-bk-over-logo">
-                  <span>{progetto.settore}</span>
+                  <span>{RetriveProjectTypes(progetto.settore)}</span>
                 </div>
 
                 <h1 className="box-bk-over-logo">{progetto.nomeAzienda}</h1>
@@ -356,7 +357,7 @@ const PaginaCard = () => {
                     {/* <p>
                     Campagna di {progetto.tipoCampagna}. <br />
                     Team composta da {progetto.team}.<br />
-                    Nel settore della {progetto.settore}.<br />
+                    Nel settore della {RetriveProjectTypes(progetto.settore)}.<br />
                     Sito Web {progetto.sito}
                     P.iva {progetto.pIva}
                   </p> */}

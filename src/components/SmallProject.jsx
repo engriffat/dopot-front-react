@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { addFavorites } from "../utils/firebase/writeInfos";
 import IconPlane from "../assets/img/icon-plane.svg";
 import IconHeart from "../assets/img/pc-heart-icon-02.svg";
+import {RetriveProjectTypes} from "../utils/firebase/retriveInfo";
 
 const SmallProject = (props) => {
   var progetto = getRecoil(progettiState).find(
@@ -26,11 +27,11 @@ const SmallProject = (props) => {
   }
 
   return (
-    <div className="pmg-right-card">
+    <div className="pmg-right-card" style={{backgroundImage: `url(https://arweave.net/${progetto.logoAziendaListFiles[0]})`}}>
       <div className="pmg-rc-left">
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div className="settore box-bk-over-logo">
-            <span>{progetto.settore}</span>
+            <span>{RetriveProjectTypes(progetto.settore)}</span>
           </div>
           <div className="settore box-bk-over-logo">
             <span>{progetto.tipoCampagna}</span>

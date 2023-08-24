@@ -83,6 +83,7 @@ const Progetto = (props) => {
           value={props.inputs.quota}
           onChange={props.handleChange}
           type="number"
+          onWheel={(e) => e.target.blur()}
           placeholder={t("projectquotep")}
         />
       </div>

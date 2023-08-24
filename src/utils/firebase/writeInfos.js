@@ -1,19 +1,21 @@
 import { db, getIdentity, init } from "./firebaseInit"
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import { addressState, providerState } from '../../recoilState';
-import { genproj, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, bundlr } from "../genproj"
+import { genproj, bundlrFund, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, bundlr } from "../genproj"
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
 import addressDpt from '../../abi/dpt/address.js';
 import { downloadProjects } from "./retriveInfo";
-import * as PushAPI from '@pushprotocol/restapi';
+import * as PushAPI from '@pushprotocol/restapi'; // prod/staging
+import * as fs from "fs";
 const abiProject = require('../../abi/project/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
 const abiDpt = require('../../abi/dpt/1.json');
 const { ethers } = require("ethers");
 const pushMainnetAddress = "0xd52b78d9ba494e5bdcc874dc3c369f2735e24fb3"; //should be the same as polygon, lowercase
 const pushPolygonAddress = "0x340cb0AA007F2ECbF6fCe3cd8929a22429893213";
-const env = "staging"; // prod/staging
+const env = "staging";
+
 
 async function optInNotifications() {
   const signer = getRecoil(providerState).getSigner();
@@ -113,6 +115,8 @@ export async function addproj(inputs) {
   inputs.fotoProdotto2ListFiles && inputKeys.push({ key: 'fotoProdotto2ListFiles', contentType: 'image/png' });
   inputs.fotoProdotto3ListFiles && inputKeys.push({ key: 'fotoProdotto3ListFiles', contentType: 'image/png' });
   inputs.fotoProdotto4ListFiles && inputKeys.push({ key: 'fotoProdotto4ListFiles', contentType: 'image/png' });
+
+  await bundlrFund();
   for (const input of inputKeys) {
     inputs[input.key] = await updateListFiles(inputs[input.key], input.contentType);
   }
@@ -170,31 +174,23 @@ export async function refundNft(project, tokenId) {
 }
 
 export async function withdraw(project, discountDPT) {
+  const address = await getProvider();
   const provider = getRecoil(providerState);
+  const signer = provider.getSigner();
   const projectContract = new ethers.Contract(project, abiProject, provider);
-  const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
-  
 
   const infinite = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
   if(discountDPT){
     const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
     const fWithSigner = dptContract.connect(signer);
-    const allowance = await dptContract.allowance(provider, project);
-    if (!allowance.eq(infinite)){
+    const allowance = await dptContract.allowance(address, project);
+    if (allowance.lt(ethers.BigNumber.from(infinite))){
       const tx = await fWithSigner.approve(project, infinite);
       await tx.wait(1);
     }
   }
-  else {
-    const fundingTokenContract = new ethers.Contract(addressFundingToken, abiFundingToken, signer);
-    const fWithSigner = fundingTokenContract.connect(signer);
-    const allowance = await fundingTokenContract.allowance(provider, project);
-    if (!allowance.eq(infinite)){
-      const tx = await fWithSigner.approve(project, infinite);
-      await tx.wait(1);
-    }
-  }
+
   try {
     await pWithSigner.withdraw(discountDPT);
   } catch (e) {
@@ -214,7 +210,7 @@ export async function postpone(project) {
   }
 }
 
-export async function addInvestment(pAddress, numTier, price, title) {
+export async function addInvestment(pAddress, numTier, price, title, shippingPrompt) {
   const amount = ethers.utils.parseEther(price);
   numTier--;
   let addressLogged=getRecoil(addressState)
@@ -233,7 +229,7 @@ export async function addInvestment(pAddress, numTier, price, title) {
     }
     const tx = await pWithSigner.invest(numTier);
     await tx.wait(1);
-    const shippingDetails = window.prompt("Enter your shipping details:");
+    const shippingDetails = window.prompt(shippingPrompt);
     await addShippingDetailsNft(pAddress, title, shippingDetails, title);
     await optInNotifications();
     await downloadProjects();

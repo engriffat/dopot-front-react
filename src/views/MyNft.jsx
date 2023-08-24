@@ -73,7 +73,7 @@ const Profile = () => {
 
   async function setShippingDetails(project, tokenId, title) {
     const shippingDetails = window.prompt(
-      "Enter your physical or digital shipping details:"
+      t("shippingDetails")
     );
     if (shippingDetails)
       await addShippingDetailsNft(project, tokenId, shippingDetails, title);

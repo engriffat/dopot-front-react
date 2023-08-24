@@ -4,6 +4,7 @@ import { db, getIdentity, init } from './firebaseInit';
 import addressProjectFactory from '../../abi/projectFactory/address.js';
 import addressFundingToken from '../../abi/fundingToken/address.js';
 import addressDopotReward from '../../abi/dopotReward/address.js';
+import { useTranslation } from "react-i18next";
 const { ethers, Contract } = require("ethers");
 const abiProject = require('../../abi/project/1.json');
 const abiProjectFactory = require('../../abi/projectFactory/1.json');
@@ -150,6 +151,7 @@ export async function downloadProjects() {
                         break;
                     case 3:
                         projdb.stateText = "Successful";
+                        if(projdb.funds === 0) projdb.funds = projdb.quota;
                         break;
                     case 4:
                         projdb.stateText = "Expired";
@@ -205,4 +207,77 @@ export async function retriveFavorites() {
     let addressLogged=getRecoil(addressState)    
     const progettiFavourites =  await db.get("users", ["addressUser"], ["addressUser", "==", addressLogged.toString().toLowerCase()]);
     return (progettiFavourites && progettiFavourites.length > 0) ? progettiFavourites[0].addressProjects : [];
+}
+
+export function RetriveProjectTypes(tipoKey){
+    const { t, i18n } = useTranslation();
+    const types = {
+        tipo1: t("socialcare"),
+        tipo2: t("healthcare"),
+        tipo3: t("socialhealthass"),
+        tipo4: t("educationtraining"),
+        tipo5: t("environmental"),
+        tipo6: t("enhancementcultural"),
+        tipo7: t("socialtourism"),
+        tipo8: t("universitypost"),
+        tipo9: t("extracurricular"),
+        tipo10: t("socialenterprises"),
+        tipo11: t("blockchainfinance"),
+        tipo12: t("blockchaininsurance"),
+        tipo13: t("blockchainpaydigital"),
+        tipo14: t("blockchainagrifood"),
+        tipo15: t("blockchain4.0"),
+        tipo16: t("blockchainiot"),
+        tipo17: t("blockchainhealthcare"),
+        tipo19: t("blockchainretail"),
+        tipo20: t("blockchainmusic"),
+        tipo21: t("blockchainsmartenergy"),
+        tipo22: t("blockchainunbanked"),
+        tipo23: t("cryptostartup"),
+        tipo24: t("decentralizedstartup"),
+        tipo25: t("decentralizedproject"),
+        tipo26: t("foodstartup"),
+        tipo27: t("fashionstartup"),
+        tipo28: t("wearstartup"),
+        tipo29: t("travelstartup"),
+        tipo30: t("bigdata"),
+        tipo31: t("biotechnology"),
+        tipo32: t("ecosustainability"),
+        tipo33: t("engineering"),
+        tipo34: t("mobile"),
+        tipo35: t("modelling"),
+        tipo36: t("research"),
+        tipo37: t("software"),
+        tipo38: t("power"),
+        tipo39: t("artificialintelligence"),
+        tipo40: t("science"),
+        tipo41: t("work"),
+        tipo42: t("telecommunications"),
+        tipo43: t("robot"),
+        tipo44: t("pharmaceutical"),
+        tipo45: t("foodandwater"),
+        tipo46: t("education"),
+        tipo47: t("humanlife"),
+        tipo48: t("publicadministration"),
+        tipo49: t("augmentedreality"),
+        tipo50: t("programming"),
+        tipo51: t("showbusiness"),
+        tipo52: t("automation"),
+        tipo53: t("tech"),
+        tipo54: t("emergingcountries"),
+        tipo55: t("businesssoftware"),
+        tipo57: t("manufacturing"),
+        tipo58: t("games"),
+        tipo59: t("music"),
+        tipo60: t("realestate"),
+        tipo61: t("investment"),
+        tipo62: t("educationaltechnology"),
+        tipo63: t("ionnovation"),
+        tipo64: t("credit"),
+        tipo65: t("insurance"),
+        tipo66: t("agriculturaltecno"),
+        tipo67: t("aerospace"),
+        tipo68: t("hitech"),
+      };
+      return types[tipoKey];
 }

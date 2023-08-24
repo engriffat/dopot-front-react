@@ -1,7 +1,7 @@
 import React from "react";
 import { addInvestment } from "../../utils/firebase/writeInfos";
 import addressDopotReward from '../../abi/dopotReward/address.js';
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +11,7 @@ const InvestiCard = (props) => {
 
   async function invest(){
     try {
-      await toast.promise(addInvestment(props.address, props.numTier, price, titolo), {
+      await toast.promise(addInvestment(props.address, props.numTier, price, titolo, t("shippingDetails")), {
         pending: t("confirm"),
         success: t("invested"),
         error: t("error"),
@@ -63,6 +63,7 @@ const InvestiCard = (props) => {
           x
         </label>
       </div>
+      <ToastContainer />
     </div>
   );
 };

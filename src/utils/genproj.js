@@ -8,7 +8,7 @@ const { ethers } = require("ethers");
 export let bundlr;
 
 export const initialiseBundlr = async (provider) => { 
-  bundlr = new WebBundlr("https://node2.bundlr.network", "matic", provider);
+  bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider); //"https://node2.bundlr.network"
   await bundlr.ready();
 };
 
@@ -30,6 +30,12 @@ async function contrattoprojectFactory(quota, giorniCampagna){
     const projectaddr = event.args.project;
     //console.log(projectaddr);
     return projectaddr;
+  }
+
+  export async function bundlrFund(){
+    const nodeBalance = bundlr.utils.fromAtomic(await bundlr.getLoadedBalance());
+    if(nodeBalance < 0.05)
+      await bundlr.fund(10 ** 18/2/10); //0.05 matic
   }
 
   export async function bundlrAdd(obj, contentType){ 
