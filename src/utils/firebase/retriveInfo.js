@@ -26,7 +26,7 @@ export async function getProvider(){ let signer;
                 method: 'wallet_addEthereumChain',
                 params: [{
                 chainId: "0x13881",
-                rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+                rpcUrls: ["https://polygon-mumbai.gateway.tenderly.co"],
                  chainName: "Mumbai Testnet",
                 nativeCurrency: {
                     name: "MATIC",
