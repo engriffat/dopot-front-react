@@ -64,7 +64,6 @@ const Profile = () => {
       }
       setinvestedCard(tempCard);
 
-      
       let tempCard2 = [];
       for (const element of favorites) {
         let project = projects.find((project) => project.address === element);
@@ -230,7 +229,9 @@ const Profile = () => {
         <section className="profile-bottom">
           <div className="box">
             <div className="profile-main-grid">
-              <div className="pmg-left">{investedCard}</div>
+              <div className={isActive2 ? "pmg-left" : "sec-display-none-inv"}>
+                {investedCard}
+              </div>
 
               <div className={isActive ? "pmg-right" : "sec-display-none-pref"}>
                 {favoriteCard}

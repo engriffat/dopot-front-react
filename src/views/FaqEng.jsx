@@ -65,6 +65,7 @@ const DopotShare = () => {
               </button>
             </div>
           </div>
+          <h1 className="text-center pb-5 mb-5 text-white">COMING SOON...</h1>
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />
