@@ -88,8 +88,11 @@ async function getInvestors(projdb, dopotReward){
         const eventsInvest = await contract.queryFilter(filterInvest, 0);
         for (const event of eventsInvest) {
             const tokenId = event.args.tokenId;
-            if(!projdb.investors[event.args.investor]) projdb.investors[event.args.investor] = {};
-            projdb.investors[event.args.investor][tokenId] = (await dopotReward.balanceOf(event.args.investor, tokenId)).toNumber();
+            const rewardBalance = (await dopotReward.balanceOf(event.args.investor, tokenId)).toNumber();
+            if(rewardBalance > 0) {
+                if(!projdb.investors[event.args.investor]) projdb.investors[event.args.investor] = {};
+                projdb.investors[event.args.investor][tokenId] = rewardBalance;
+            }
         }
         currentBlock = nextBlock + 1;
     }

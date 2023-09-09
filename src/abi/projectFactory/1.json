@@ -383,6 +383,39 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_fundingTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dopotRewardAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dptTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_dptUniPoolAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_reviewer",
+        "type": "address"
+      }
+    ],
+    "name": "setAddrParam",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_epnsContractAddress",
         "type": "address"
       },
