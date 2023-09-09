@@ -21,12 +21,17 @@ const Card = (props) => {
   const percentage = (progetto.funds / progetto.quota) * 100;
   const fundRaisingDeadline = progetto.fundRaisingDeadline;
   const isMyProject = props.isMyProject;
-  const {address} = progetto;
+  const { address } = progetto;
   const { progettiFavourites } = props;
-  const [toggleHeart, setToggleHeart] = useState(false);console.dir(progetto)
+  const [toggleHeart, setToggleHeart] = useState(false);
+  console.dir(progetto);
   //if(progetto?.funds == 0 && )
   useEffect(() => {
-    setToggleHeart(progettiFavourites && Array.isArray(progettiFavourites) ? progettiFavourites.includes(props.address) : false)
+    setToggleHeart(
+      progettiFavourites && Array.isArray(progettiFavourites)
+        ? progettiFavourites.includes(props.address)
+        : false
+    );
   }, [progettiFavourites]);
 
   function handleRedirect(e) {
@@ -36,7 +41,12 @@ const Card = (props) => {
   let desc = String(progetto.descProgetto);
   return (
     <div className="profile-box-dash">
-      <div className="pmg-right-card" style={{backgroundImage: `url(https://arweave.net/${progetto.logoAziendaListFiles[0]})`}}>
+      <div
+        className="pmg-right-card"
+        style={{
+          backgroundImage: `url(https://arweave.net/${progetto.logoAziendaListFiles[0]})`,
+        }}
+      >
         <div className="pmg-rc-left-card" style={{ width: "100%" }}>
           <div
             style={{
@@ -48,9 +58,7 @@ const Card = (props) => {
               {/* <span className="box-bk-over-logo">{props.progetto.settore}</span> */}
             </div>
             <div style={{ marginBottom: "1rem" }} className="settore">
-              <span className="box-bk-over-logo">
-                {progetto.tipoCampagna}
-              </span>
+              <span className="box-bk-over-logo">{progetto.tipoCampagna}</span>
             </div>
           </div>
           <h3 className="box-bk-over-logo">{progetto.nomeAzienda}</h3>
@@ -119,8 +127,8 @@ const Card = (props) => {
         <div className="pmg-btn-box">
           {isMyProject ? (
             <div className="menu-nav">
-              <div className="dropdown-container" tabindex="-1">
-                <div className="three-dots"></div>
+              <div className="dropdown-container d-flex " tabindex="-1">
+                <div className="three-dots box-bk-over-logo"></div>
                 <div className="dropdown">
                   <a onClick={() => props.withdraw(address)}>
                     <div>{t("withdrawfunds")}</div>

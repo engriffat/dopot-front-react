@@ -80,7 +80,7 @@ const Header = (props) => {
                 <a>
                   <SocialIcon
                     fgColor="white"
-                    url="https://www.reddit.com/user/Dopotfi/"
+                    url="https://reddit.com/r/dopotfi/s/qWC4ui9Fl9"
                   />
                 </a>
                 <a>
@@ -88,6 +88,9 @@ const Header = (props) => {
                     fgColor="white"
                     url="https://discord.gg/j8xxZFsyvd"
                   />
+                </a>
+                <a>
+                  <SocialIcon fgColor="white" url="https://t.me/dopotfi" />
                 </a>
               </div>
             </div>
@@ -190,7 +193,7 @@ const Header = (props) => {
                   <a>
                     <SocialIcon
                       fgColor="white"
-                      url="https://www.reddit.com/user/Dopotfi/"
+                      url="https://reddit.com/r/dopotfi/s/qWC4ui9Fl9"
                     />
                   </a>
                   <a>
@@ -198,6 +201,9 @@ const Header = (props) => {
                       fgColor="white"
                       url="https://discord.gg/j8xxZFsyvd"
                     />
+                  </a>
+                  <a>
+                    <SocialIcon fgColor="white" url="https://t.me/dopotfi" />
                   </a>
                 </div>
               </div>

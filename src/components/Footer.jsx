@@ -91,9 +91,12 @@ const Footer = () => {
               /> */}
               <SocialIcon
                 fgColor="white"
-                url="https://www.reddit.com/user/Dopotfi/"
+                url="https://reddit.com/r/dopotfi/s/qWC4ui9Fl9"
               />
               <SocialIcon fgColor="white" url="https://discord.gg/j8xxZFsyvd" />
+            </div>
+            <div className="footer-social-div">
+              <SocialIcon fgColor="white" url="https://t.me/dopotfi" />
             </div>
           </div>
           <div className="footer-grid-box">
@@ -101,13 +104,13 @@ const Footer = () => {
             <a href={Pdf}>Whitepaper </a>
             <a href="https://dopot.gitbook.io/dopot/">GitBook </a>
             <a href="https://github.com/Dopot-Labs">
-            <img
-              id="badge-button"
-              style={{ marginBottom: "2rem" }}
-              src={openSourceImg}
-              alt="Open Source"
-            />
-          </a>
+              <img
+                id="badge-button"
+                style={{ marginBottom: "2rem" }}
+                src={openSourceImg}
+                alt="Open Source"
+              />
+            </a>
           </div>
         </div>
         <div className="footer-bottom">
@@ -120,7 +123,7 @@ const Footer = () => {
               alt="Alchemy Supercharged"
             />
           </a>
-          
+
           <h6>DOPOT.FI</h6>
           {/* <p>Copyright © 2021 tutti diritti riservati a Dopot.ﬁ</p> */}
         </div>
