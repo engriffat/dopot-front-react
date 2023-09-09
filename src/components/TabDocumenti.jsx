@@ -34,6 +34,7 @@ const TabDocumenti = (props) => {
       <div className="div-sep"></div>
       {props.progetto.documentazioneListFiles.map((data, i) => {
         const url = `https://arweave.net/${data}`;
+        console.log(url);
         return (
           <div
             key={"document" + i}

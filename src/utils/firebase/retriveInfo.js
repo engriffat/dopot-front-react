@@ -128,7 +128,8 @@ export async function downloadProjects() {
                 projdb.investors = {};
                 await getInvestors(projdb, dopotReward);
                 projdb.investorsNumber = Object.keys(projdb.investors).length;
-                projdb.funds = Math.round(ethers.utils.formatEther(await getProjectFunds(projdb.address)));
+                const projectFunds = Math.round(ethers.utils.formatEther(await getProjectFunds(projdb.address)));
+                projdb.funds = projectFunds ? projectFunds : 0;
                 const deadline = await project.fundRaisingDeadline();
                 const now = new Date();
                 const difference = deadline * 1000 - now;

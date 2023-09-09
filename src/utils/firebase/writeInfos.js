@@ -158,10 +158,11 @@ export async function addFavorites(addressProject) {
 export async function addShippingDetailsNft(projectAddress, tokenId, shippingDetails, title) {
   const result =  await db.get("projects", ["address"], ["address", "==", projectAddress]);
   const pushChatUser = await getPushChatUser();
-  await pushChatSend(pushChatUser, result[0].addressCreator, `$Project {title}, Token Id ${tokenId}, Shipping Details ${shippingDetails}` )
+  await pushChatSend(pushChatUser, result[0].addressCreator, `Project ${title}, Token Id ${tokenId}, Shipping Details ${shippingDetails}` )
 }
 
 export async function refundNft(project, tokenId) {
+  console.log(project, tokenId);
   const provider = getRecoil(providerState);
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()

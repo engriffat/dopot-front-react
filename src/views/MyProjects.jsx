@@ -59,7 +59,7 @@ const Profile = () => {
             <Card
               progetto={project}
               immagini={getRecoil(progettiImageState)[project.address]}
-              address={project.addressContract}
+              address={project.address}
               tier={project.tier}
               state={project.stateText}
               withdraw={handleWithdraw}
