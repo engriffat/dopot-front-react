@@ -45,9 +45,10 @@ const Profile = () => {
         //console.log(project)
         let tiers = project.investors[address];
         //console.dir(tiers)
-        for (const tierId in tiers) {
-          if (tiers.hasOwnProperty(tierId) /* && tiers[tierId] !== 0*/) {
-            let obj = await getNftImage(tierId);
+        let tierId = 0;
+        for (const tokenId in tiers) {
+          if (tiers.hasOwnProperty(tokenId) /* && tiers[tokenId] !== 0*/) {
+            let obj = await getNftImage(tokenId);
             const response = await fetch(
               obj.image.replace("ar://", "https://arweave.net/")
             );
@@ -59,10 +60,11 @@ const Profile = () => {
               project: project.address,
               addressDopotReward: obj.addressDopotReward,
               title:
-                project.imageNftDefListFiles[tierId] &&
-                project.imageNftDefListFiles[tierId].name,
+                project.imageNftDefListFiles[tokenId] &&
+                project.imageNftDefListFiles[tokenId].name,
             });
           }
+          tierId++;
         }
       }
       setinvestedCard(tempCard);
