@@ -18,7 +18,7 @@ import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
 import React, { useState, useEffect } from "react";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import { addressState, progettiState } from "../recoilState";
-
+import { useNavigate } from "react-router-dom";
 import "react-circular-progressbar/dist/styles.css";
 import SmallProject from "../components/SmallProject";
 import SmallTier from "../components/SmallTier";
@@ -31,6 +31,7 @@ import {
 import { addShippingDetailsNft, refundNft } from "../utils/firebase/writeInfos";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [investedCard, setinvestedCard] = useState([]);
   let projects = getRecoil(progettiState);
@@ -241,7 +242,7 @@ const Profile = () => {
                             <div>Chat</div>
                           </a>
                           <a
-                            onClick={() => refundNft(card.project, card.tierId)}
+                            onClick={() => refundNft(card.project, card.tierId, t, navigate)}
                           >
                             <div>Refund</div>
                           </a>

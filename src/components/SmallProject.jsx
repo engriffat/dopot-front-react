@@ -5,7 +5,7 @@ import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
 import PCUserIcon from "../assets/img/pc-person-icon.png";
 import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { progettiState, progettiImageState } from "../recoilState";
+import { progettiState } from "../recoilState";
 import { getRecoil, setRecoil } from "recoil-nexus";
 import { useNavigate } from "react-router-dom";
 import { addFavorites } from "../utils/firebase/writeInfos";

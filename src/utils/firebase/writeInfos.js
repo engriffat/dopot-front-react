@@ -1,17 +1,19 @@
 import { db, getIdentity, init } from "./firebaseInit"
 import { getRecoil, setRecoil } from 'recoil-nexus';
-import { addressState, providerState } from '../../recoilState';
+import { addressState, providerState, progettiState } from '../../recoilState';
 import { genproj, bundlrFund, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, bundlr } from "../genproj"
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
 import addressDpt from '../../abi/dpt/address.js';
 import { downloadProjects } from "./retriveInfo";
 import * as PushAPI from '@pushprotocol/restapi'; // prod/staging
-import * as fs from "fs";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const abiProject = require('../../abi/project/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
 const abiDpt = require('../../abi/dpt/1.json');
 const { ethers } = require("ethers");
+
 const pushMainnetAddress = "0xd52b78d9ba494e5bdcc874dc3c369f2735e24fb3"; //should be the same as polygon, lowercase
 const pushPolygonAddress = "0x340cb0AA007F2ECbF6fCe3cd8929a22429893213";
 const env = "staging";
@@ -161,14 +163,17 @@ export async function addShippingDetailsNft(projectAddress, tokenId, shippingDet
   await pushChatSend(pushChatUser, result[0].addressCreator, `Project ${title}, Token Id ${tokenId}, Shipping Details ${shippingDetails}` )
 }
 
-export async function refundNft(project, tokenId) {
+export async function refundNft(project, tokenId, t, navigate) {
   console.log(project, tokenId);
   const provider = getRecoil(providerState);
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
   try {
-    await pWithSigner.refund(tokenId);
+    const tx = await pWithSigner.refund(tokenId);
+    await tx.wait(1);
+    setRecoil(progettiState, null);
+    navigate("/loading");
   } catch (e) {
     console.error(e);
   }
