@@ -143,6 +143,7 @@ export async function downloadProjects() {
                 projdb.fundRaisingDeadline = days;
                 projdb.minInvestment = Math.min(...projdb.imageNftDefListFiles.map(item => parseInt(item.price)));
                 projdb.state = await project.state();
+                if(days < 0) projdb.state = 4;
                 switch(projdb.state){
                     case 0:
                         projdb.stateText = "Pending Approval";

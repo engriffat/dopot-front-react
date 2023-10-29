@@ -36,7 +36,7 @@ const DopotShare = () => {
         <div className="dashboard-header">
           <Header></Header>
         </div>
-        <div className="box">
+        <div className="box" style={{textAlign: "center", maxWidth: "750px"}}>
           <div className="dopot-power">
             <h1>FAQ</h1>
 
@@ -65,7 +65,15 @@ const DopotShare = () => {
               </button>
             </div>
           </div>
-          <h1 className="text-center pb-5 mb-5 text-white">COMING SOON...</h1>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/6LJEa0nVHwM?si=Wpb7qapoZJUtU2_z&amp;controls=0" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/-G0NO1gIraY?si=4XnZburzW6FYAOGk&amp;controls=0" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <h1 className="text-center pb-5 mb-5 text-white">MORE COMING SOON...</h1>
+          </p>
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />

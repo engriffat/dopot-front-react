@@ -37,7 +37,7 @@ const DopotPower = () => {
         <div className="dashboard-header">
           <Header></Header>
         </div>
-        <div className="box">
+        <div className="box" style={{textAlign: "center", maxWidth: "750px"}}>
           <div className="dopot-power">
             <h1>FAQ</h1>
 
@@ -69,7 +69,15 @@ const DopotPower = () => {
               </div>
             }
           </div>
-          <h1 className="text-center pb-5 mb-5 text-white">COMING SOON...</h1>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/neIUbrXIFQM?si=dAjEIhSioIqEJmhu&amp;controls=0" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/MUWrB8CSEJ4?si=YpiR75R0tIMLj3bR&amp;controls=0" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <h1 className="text-center pb-5 mb-5 text-white">ALTRI IN ARRIVO...</h1>
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />

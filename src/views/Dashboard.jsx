@@ -219,7 +219,7 @@ const Home = () => {
                 <MdSearch />
               </div>
             </div>
-            <form className="dash-sel-opt-content" style={{ margin: 0 }}>
+            {/*<form className="dash-sel-opt-content" style={{ margin: 0 }}>
               <label style={{ borderRadius: "2rem" }}>{t("dashorder")}</label>
               <div class="multiselect">
                 <div class="selectBox" onClick={showCheckboxes}>
@@ -250,7 +250,7 @@ const Home = () => {
                   </label>
                 </div>
               </div>
-            </form>
+            </form>*/}
           </div>
           <div className="risul-ordino-box">
             <h2>
