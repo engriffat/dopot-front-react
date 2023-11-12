@@ -52,7 +52,7 @@ export async function getProvider(){ let signer;
 
 export async function getAddr(setState, dontAutoConnect) {
     let address;
-    if(dontAutoConnect){
+    if(dontAutoConnect){ //Just get stored address
         provider = getRecoil(providerState);
         if(provider){
             let signer = await provider.getSigner();
@@ -63,11 +63,13 @@ export async function getAddr(setState, dontAutoConnect) {
             setState("Connect Wallet")
         }
        
-    } else{
+    } else{ //Web3 connect
         address = await getProvider();
         provider = getRecoil(providerState);
         setRecoil(addressState, address)
         setState(address.toString().substring(0, 7) + "...")
+        await init()
+        await getIdentity(address);
     }
 }
 
