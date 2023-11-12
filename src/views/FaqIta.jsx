@@ -39,7 +39,7 @@ const DopotPower = () => {
         </div>
         <div className="box" style={{textAlign: "center", maxWidth: "750px"}}>
           <div className="dopot-power">
-            <h1>FAQ</h1>
+            <h1>Tutorials</h1>
 
             {
               <div className="p-btn-box">
@@ -70,14 +70,33 @@ const DopotPower = () => {
             }
           </div>
           <p>
-            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/neIUbrXIFQM?si=dAjEIhSioIqEJmhu&amp;controls=0" title="YouTube video player" frameborder="0" 
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/neIUbrXIFQM?si=dAjEIhSioIqEJmhu" title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </p>
           <p>
-            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/MUWrB8CSEJ4?si=YpiR75R0tIMLj3bR&amp;controls=0" title="YouTube video player" frameborder="0"
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/MUWrB8CSEJ4?si=YpiR75R0tIMLj3bR" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </p>
-          <h1 className="text-center pb-5 mb-5 text-white">ALTRI IN ARRIVO...</h1>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/Mk5sAVforu4?si=mprGSlWUimcC9VGU" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/KxyqSPh8DBc?si=GgPcElNTdRLLsh_0" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/u0-Dgd9Ytac?si=58Z3OJwCjfjz0nW0" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/pJITJigNwzc?si=3EfQaOg4GwtY63fO" title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
+          <p>
+            <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/P2fESTmoG8w?si=7gUBZ9mzJX5ikjJv" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </p>
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />

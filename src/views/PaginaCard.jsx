@@ -248,7 +248,7 @@ const PaginaCard = () => {
                   onClick={() => setTab(4)}
                   className={isCurrentState(4) ? "pc-active-link" : ""}
                 >
-                  FAQ
+                  Tutorials
                 </a>
                 <a
                   onClick={() => setTab(5)}

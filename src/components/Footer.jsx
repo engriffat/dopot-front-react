@@ -68,7 +68,7 @@ const Footer = () => {
             <a href="/#/insprogetto">{t("createcampaign")}</a>
             <a href="/#/dopotpower">Dopot Token</a>
             {/* <a href="#">{t('learn')}</a> */}
-            <a href="/#/FaqIta">FAQ</a>
+            <a href="/#/FaqIta">Tutorials</a>
           </div>
           <div className="footer-grid-box">
             <h4>Community</h4>
