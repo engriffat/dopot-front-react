@@ -68,7 +68,7 @@ export async function getAddr(setState, dontAutoConnect) {
         provider = getRecoil(providerState);
         setRecoil(addressState, address)
         setState(address.toString().substring(0, 7) + "...")
-        await init()
+        await init();
         await getIdentity(address);
     }
 }
@@ -134,7 +134,7 @@ export async function downloadProjects() {
                 await getInvestors(projdb, dopotReward);
                 projdb.investorsNumber = Object.keys(projdb.investors).length;
                 const projectFunds = Math.round(ethers.utils.formatEther(await getProjectFunds(projdb.address)));
-                projdb.funds = projectFunds ? projectFunds : 0;
+                projdb.funds = projectFunds || 0;
                 const deadline = await project.fundRaisingDeadline();
                 const now = new Date();
                 const difference = deadline * 1000 - now;

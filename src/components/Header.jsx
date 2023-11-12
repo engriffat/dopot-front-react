@@ -119,7 +119,7 @@ const Header = (props) => {
 
             <button
               className="purple-border-btn dopot-btn-sm"
-              onClick={() => getAddr(setwalletText)}
+              onClick={() => getAddr(setwalletText, false)}
             >
               {walletText}
             </button>
