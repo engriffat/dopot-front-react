@@ -125,6 +125,7 @@ export async function downloadProjects() {
         //if(!projects || projects.length === 0){
             projects = await db.get("projects", identityObj)
             for(let projdb of projects){
+                if(!projdb.address) continue;
                 const project = new Contract(projdb.address, abiProject, getRecoil(providerState));
                 const tiersLenghts = await project.getTiersLength();
                 for(let t = 0; t < tiersLenghts; t++){

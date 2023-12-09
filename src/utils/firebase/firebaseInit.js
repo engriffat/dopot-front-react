@@ -21,7 +21,7 @@ export async function getIdentity(address){
     const storedIdentity = await get("weavedb-identity");
     if(!storedIdentity){
       let { tx, identity, err } = await db.createTempAddress()
-      console.log(err)
+      if(err) console.log(err)
       await set("weavedb-identity", identity)
       return identity
     } else return storedIdentity

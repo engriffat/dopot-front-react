@@ -38,7 +38,7 @@ const Profile = () => {
   const [isActive2, setActive2] = useState(false);
   const address = getRecoil(addressState);
   let projects = getRecoil(progettiState);
-
+  
   useEffect(() => {
     // Update the document title using the browser API
     async function fetchData() {
@@ -46,6 +46,7 @@ const Profile = () => {
       const favorites = await retriveFavorites();
       //console.dir(projects);
       for (const project of projects) {
+        if(!project.investors) continue;
         let tiers = project.investors[address];
         console.log(tiers);
         for (const tierId in tiers) {
