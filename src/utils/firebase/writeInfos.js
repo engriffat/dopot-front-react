@@ -122,11 +122,12 @@ export async function addproj(inputs) {
   for (const input of inputKeys) {
     inputs[input.key] = await updateListFiles(inputs[input.key], input.contentType);
   }
-  const inputsNoTiers = Object.assign({},inputs);
+  const inputsNoTiers = {...inputs};
   inputsNoTiers.imageNftDefListFiles = []
   try{
     const tiers = await contrattoProjectAddTier(inputs);
     inputsNoTiers.imageNftDefListFiles = tiers;
+    if(typeof inputsNoTiers.giorniCampagna === 'number') inputsNoTiers.giorniCampagna = inputsNoTiers.giorniCampagna.toString();
     console.dir(inputsNoTiers);
     const result = await db.add(inputsNoTiers, "projects", identity );
     console.log(result);

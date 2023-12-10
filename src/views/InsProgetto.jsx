@@ -38,7 +38,7 @@ const InsProgetto = () => {
     logoAziendaListFiles: [],
     documentazioneListFiles: [],
     imageNftDefListFiles: [],
-    giorniCampagna: 45,
+    giorniCampagna: "45",
     numeroProdotti: "1",
     tipoCampagna: "reward",
     settore: "tipo1",

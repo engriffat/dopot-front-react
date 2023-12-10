@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 const Progetto = (props) => {
   const { t, i18n } = useTranslation();
   const [campagna, setcampagna] = useState("reward");
-  const [giorniCampagna, setgiorniCampagna] = useState(45);
+  const [giorniCampagna, setgiorniCampagna] = useState("45");
   const [val, setVal] = useState([]);
   const handleAdd = (e) => {
     e.preventDefault();
@@ -91,9 +91,9 @@ const Progetto = (props) => {
         <h4>{t("projecttype")}</h4>
         <div className="ins-btn-box">
           <button
-            value={45}
+            value={"45"}
             className={
-              giorniCampagna == 45
+              giorniCampagna === "45"
                 ? "grd-btn dopot-btn-lg"
                 : "purple-border-btn dopot-btn-lg"
             }
@@ -103,9 +103,9 @@ const Progetto = (props) => {
             45 {t("days")}
           </button>
           <button
-            value={65}
+            value={"65"}
             className={
-              giorniCampagna == 65
+              giorniCampagna === "65"
                 ? "grd-btn dopot-btn-lg"
                 : "purple-border-btn dopot-btn-lg"
             }
@@ -115,9 +115,9 @@ const Progetto = (props) => {
             65 {t("days")}
           </button>
           <button
-            value={90}
+            value={"90"}
             className={
-              giorniCampagna == 90
+              giorniCampagna === "90"
                 ? "grd-btn dopot-btn-lg"
                 : "purple-border-btn dopot-btn-lg"
             }

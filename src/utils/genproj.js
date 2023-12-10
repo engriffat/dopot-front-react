@@ -13,7 +13,7 @@ export const initialiseBundlr = async (provider) => {
 };
 
 export async function genproj(params) {  
-    return await contrattoprojectFactory(params.quota, params.giorniCampagna * 86400);
+    return await contrattoprojectFactory(params.quota, Number(params.giorniCampagna) * 86400);
 }
 
 async function contrattoprojectFactory(quota, giorniCampagna){

@@ -9,7 +9,7 @@ export async function init ()  {
   try{
     window.Buffer = Buffer
     if(!db){
-      db = new SDK({ contractTxId });
+      db = new SDK({ contractTxId, type: 2 });
       await db.initializeWithoutWallet();
     }
   } catch (e) { console.log(e)}
