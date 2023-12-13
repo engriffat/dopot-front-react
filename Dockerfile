@@ -1,15 +1,23 @@
-# Use the Node.js base image
+# Use a minimal base image for Node.js
 FROM node:20-alpine
 
-# Copy package.json and package-lock.json files
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
 COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 
-# Copy the rest of the application files
+# Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the port and define the command to start the application
+# Expose the port that the app will run on
 EXPOSE 3000
+
+# Define environment variables
+ENV NODE_ENV=production
+
+# Start the application using npm start
 CMD ["npm", "start"]
