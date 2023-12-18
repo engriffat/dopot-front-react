@@ -145,9 +145,9 @@ export async function addFavorites(addressProject) {
   let identity = await getIdentity(address)
   identity.linkedAccount = identity.address
   try {
-    let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address.toLowerCase()]);
+    let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address]);
     if(!result[0] || !result[0].data){
-      const obj = {addressUser: address.toLowerCase(), addressProjects: [ addressProject ], shippingNft: {}}
+      const obj = {addressUser: address, addressProjects: [ addressProject ], shippingNft: {}}
       console.dir(obj, identity)
       await db.add(obj, "users", identity)
     }
