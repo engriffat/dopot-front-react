@@ -1,4 +1,4 @@
-import SDK from "weavedb-sdk";
+import WeaveDB from "weavedb-sdk"
 import { get, set } from 'idb-keyval';
 import { Buffer } from "buffer"
 
@@ -9,8 +9,8 @@ export async function init ()  {
   try{
     window.Buffer = Buffer
     if(!db){
-      db = new SDK({ contractTxId, type: 2 });
-      await db.initializeWithoutWallet();
+      db = new WeaveDB({ contractTxId })
+      await db.init()
     }
   } catch (e) { console.log(e)}
   

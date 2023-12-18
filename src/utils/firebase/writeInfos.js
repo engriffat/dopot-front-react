@@ -129,7 +129,7 @@ export async function addproj(inputs) {
     inputsNoTiers.imageNftDefListFiles = tiers;
     if(typeof inputsNoTiers.giorniCampagna === 'number') inputsNoTiers.giorniCampagna = inputsNoTiers.giorniCampagna.toString();
     console.dir(inputsNoTiers);
-    const result = await db.add(inputsNoTiers, "projects", identity );
+    const result = await db.set(inputsNoTiers, "projects", inputsNoTiers.address, identity );
     console.log(result);
     await optInNotifications();
 
