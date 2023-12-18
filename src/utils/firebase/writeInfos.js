@@ -146,11 +146,14 @@ export async function addFavorites(addressProject) {
   identity.linkedAccount = identity.address
   try {
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address.toLowerCase()]);
-    if(!result[0] || !result[0].data)
+    if(!result[0] || !result[0].data){
+      console.dir(address.toLowerCase())
       await db.add({addressUser: address.toLowerCase(), addressProjects: [ addressProject ], shippingNft: {}}, "users", identity)
+    }
     else{
       let addressProjects = result[0].data.addressProjects;
       addressProjects && addressProjects.includes(addressProject) ? addressProjects.splice(addressProjects.indexOf(addressProject), 1) : addressProjects.push(addressProject);
+      console.dir(result[0].data)
       await db.update(result[0].data, "users", result[0].id, identity)
     }
   } catch (e) {
