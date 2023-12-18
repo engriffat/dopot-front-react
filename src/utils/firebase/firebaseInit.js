@@ -16,7 +16,7 @@ export async function init ()  {
   
 }
 
-export async function getIdentity(address){
+export async function getIdentity(){
   try{
     const storedIdentity = await get("weavedb-identity");
     if(!storedIdentity){

@@ -93,7 +93,7 @@ export async function addproj(inputs) {
 
   console.log("Adding project")
   inputs.addressCreator = address
-  let identity = await getIdentity(address)
+  let identity = await getIdentity()
   identity.linkedAccount = identity.address
   inputs.address = await genproj(inputs);
   async function updateListFiles(listFiles, contentType) {
@@ -143,13 +143,16 @@ export async function addproj(inputs) {
 export async function addFavorites(addressProject) {
   let address = await getProvider();
   address = address.toLowerCase();
-  let identity = await getIdentity(address)
-  identity.linkedAccount = identity.address
+  let identity = await getIdentity()
+  identity.linkedAccount = address
+  identity.signer = address
+  identity.address = address
   try {
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address]);
     if(!result[0] || !result[0].data){
       const obj = {addressUser: address, addressProjects: [ addressProject ], shippingNft: {}}
-      console.dir(obj, identity)
+      console.dir(obj)
+      console.dir(identity)
       await db.set(obj, "users", address, identity)
     }
     else{

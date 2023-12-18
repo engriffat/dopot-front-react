@@ -69,7 +69,7 @@ export async function getAddr(setState, dontAutoConnect) {
         setRecoil(addressState, address)
         setState(address.toString().substring(0, 7) + "...")
         await init();
-        await getIdentity(address);
+        await getIdentity();
     }
 }
 
@@ -117,7 +117,7 @@ export async function downloadProjects() {
     const address = await getProvider()
     setRecoil(addressState, address)
     await init()
-    const identity = await getIdentity(address)
+    const identity = await getIdentity()
     const identityObj = { wallet: address, privateKey: identity.privateKey };
     try{
         let projects = getRecoil(progettiState)
