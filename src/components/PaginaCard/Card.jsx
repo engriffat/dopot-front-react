@@ -24,7 +24,7 @@ const Card = (props) => {
   const { address } = progetto;
   const { progettiFavourites } = props;
   const [toggleHeart, setToggleHeart] = useState(false);
-  console.dir(progetto);
+
   //if(progetto?.funds == 0 && )
   useEffect(() => {
     setToggleHeart(

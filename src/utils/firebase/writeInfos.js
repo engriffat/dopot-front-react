@@ -147,8 +147,9 @@ export async function addFavorites(addressProject) {
   try {
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address.toLowerCase()]);
     if(!result[0] || !result[0].data){
-      console.dir(address.toLowerCase())
-      await db.add({addressUser: address.toLowerCase(), addressProjects: [ addressProject ], shippingNft: {}}, "users", identity)
+      const obj = {addressUser: address.toLowerCase(), addressProjects: [ addressProject ], shippingNft: {}}
+      console.dir(obj, identity)
+      await db.add(obj, "users", identity)
     }
     else{
       let addressProjects = result[0].data.addressProjects;

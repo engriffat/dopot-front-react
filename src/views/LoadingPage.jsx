@@ -18,8 +18,6 @@ function LoadingPage(props) {
     asyncFn();
   }, []);
 
-  console.log("i fire once");
-
   return (
     <div style={{ background: "black" }}>
       <img src={gifLoading} alt="" srcset="" class="center" />

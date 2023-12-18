@@ -48,7 +48,6 @@ const Profile = () => {
       for (const project of projects) {
         if(!project.investors) continue;
         let tiers = project.investors[address];
-        console.log(tiers);
         for (const tierId in tiers) {
           if (tiers.hasOwnProperty(tierId) /* && tiers[tierId] !== 0*/) {
             tempCard.push(
