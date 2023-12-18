@@ -213,7 +213,7 @@ export async function retriveFavorites() {
     await getProvider()
     //await init()
     let addressLogged=getRecoil(addressState)    
-    const progettiFavourites =  await db.get("users", ["addressUser"], ["addressUser", "==", addressLogged.toString()]);
+    const progettiFavourites =  await db.get("users", ["addressUser"], ["addressUser", "==", addressLogged.toString().toLowerCase()]);
     return (progettiFavourites && progettiFavourites.length > 0) ? progettiFavourites[0].addressProjects : [];
 }
 

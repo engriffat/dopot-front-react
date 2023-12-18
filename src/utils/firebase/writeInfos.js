@@ -141,7 +141,8 @@ export async function addproj(inputs) {
 }
 
 export async function addFavorites(addressProject) {
-  const address = await getProvider();
+  let address = await getProvider();
+  address = address.toLowerCase();
   let identity = await getIdentity(address)
   identity.linkedAccount = identity.address
   try {
@@ -149,7 +150,7 @@ export async function addFavorites(addressProject) {
     if(!result[0] || !result[0].data){
       const obj = {addressUser: address, addressProjects: [ addressProject ], shippingNft: {}}
       console.dir(obj, identity)
-      await db.add(obj, "users", identity)
+      await db.set(obj, "users", address, identity)
     }
     else{
       let addressProjects = result[0].data.addressProjects;
