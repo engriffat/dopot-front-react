@@ -7,7 +7,7 @@ import "../styles/globals.css";
 import Header from "../components/Header";
 import "../styles/components/header.css";
 import "../styles/components/header.css";
-import { MdMenu, MdClear, MdSearch, MdFilterList } from "react-icons/md";
+import { MdMenu, MdClear, MdSearch, MdFilterList, MdRefresh } from "react-icons/md";
 import LogoWhite from "../assets/img/logo-white.svg";
 import Card from "../components/PaginaCard/Card";
 import "react-circular-progressbar/dist/styles.css";
@@ -30,17 +30,17 @@ const Home = () => {
   const [progettiFavourites, setProgettiFavourites] = useState([]);
   const [insuranceState, setInsuranceState] = useState(0);
   const cards = [];
-
-  useEffect(() => {
-    (async () => {
-      await downloadProjects();
+  async function load(){
+    await downloadProjects(t);
       const newData = await retriveFavorites();
       let insuranceFunds = await getInsuranceFunds();
       insuranceFunds = ethers.utils.formatEther(insuranceFunds.toString());
       insuranceFunds = insuranceFunds.substring(0, insuranceFunds.indexOf("."));
       setInsuranceState(insuranceFunds);
       setProgettiFavourites(newData);
-    })();
+  }
+  useEffect(() => {
+    load();
   }, []);
 
   let progetti = getRecoil(progettiState);
@@ -218,6 +218,9 @@ const Home = () => {
               <div onClick={handleSearch} className="das-search-btn">
                 <MdSearch />
               </div>
+            </div> 
+            <div onClick={load} className="das-refresh-btn">
+              <MdRefresh />
             </div>
             {/*<form className="dash-sel-opt-content" style={{ margin: 0 }}>
               <label style={{ borderRadius: "2rem" }}>{t("dashorder")}</label>

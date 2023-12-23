@@ -25,7 +25,7 @@ const Header = (props) => {
   useEffect(() => {
     (async () => {
       setWalletState(await isWalletConnected());
-      getAddr(setwalletText, true);
+      getAddr(setwalletText, true, t);
     })();
   });
   return (
@@ -119,7 +119,7 @@ const Header = (props) => {
 
             <button
               className="purple-border-btn dopot-btn-sm"
-              onClick={() => getAddr(setwalletText, false)}
+              onClick={() => getAddr(setwalletText, false, t)}
             >
               {walletText}
             </button>

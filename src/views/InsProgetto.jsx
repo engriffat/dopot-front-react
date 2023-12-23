@@ -122,7 +122,7 @@ const InsProgetto = () => {
     if (event.target.id === "submit") {
       event.preventDefault();
       try {
-        await toast.promise(addproj(inputs), {
+        await toast.promise(addproj(inputs, t), {
           pending: t("confirm"),
           success: t("created"),
           error: t("error"),

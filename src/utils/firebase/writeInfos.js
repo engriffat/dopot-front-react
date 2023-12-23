@@ -75,7 +75,7 @@ async function pushChatSend(pushUser, projectCreatorAddress, messageContent) {
   console.dir(response);
 }
 
-export async function addproj(inputs) {
+export async function addproj(inputs, t) {
   const address = await getProvider();
   await init();
   setRecoil(providerState, provider);
@@ -93,7 +93,7 @@ export async function addproj(inputs) {
 
   console.log("Adding project")
   inputs.addressCreator = address
-  let identity = await getIdentity()
+  let identity = await getIdentity(t)
   identity.linkedAccount = identity.address
   inputs.address = await genproj(inputs);
   async function updateListFiles(listFiles, contentType) {
@@ -133,17 +133,17 @@ export async function addproj(inputs) {
     console.log(result);
     await optInNotifications();
 
-    await downloadProjects();
+    await downloadProjects(t);
   } catch (e) {
     console.log(e)
   }
   
 }
 
-export async function addFavorites(addressProject) {
+export async function addFavorites(addressProject, t) {
   let address = await getProvider();
   address = address.toLowerCase();
-  let identity = await getIdentity()
+  let identity = await getIdentity(t)
   identity.linkedAccount = address
   identity.signer = address
   identity.address = address
@@ -225,7 +225,7 @@ export async function postpone(project) {
   }
 }
 
-export async function addInvestment(pAddress, numTier, price, title, shippingPrompt) {
+export async function addInvestment(pAddress, numTier, price, title, t) {
   const amount = ethers.utils.parseEther(price);
   numTier--;
   let addressLogged=getRecoil(addressState)
@@ -244,10 +244,10 @@ export async function addInvestment(pAddress, numTier, price, title, shippingPro
     }
     const tx = await pWithSigner.invest(numTier);
     await tx.wait(1);
-    const shippingDetails = window.prompt(shippingPrompt);
+    const shippingDetails = window.prompt(t("shippingDetails"));
     await addShippingDetailsNft(pAddress, title, shippingDetails, title);
     await optInNotifications();
-    await downloadProjects();
+    await downloadProjects(t);
   } catch (e) {
     console.error(e);
   }

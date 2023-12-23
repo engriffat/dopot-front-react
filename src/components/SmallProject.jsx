@@ -88,7 +88,7 @@ const SmallProject = (props) => {
         </button>
 
         {/* <button
-          onClick={() => addFavorites(progetto.address)}
+          onClick={() => addFavorites(progetto.address, t)}
           className="grd-btn-favorites"
         >
           <img src={IconHeart} alt="IconHeart" />

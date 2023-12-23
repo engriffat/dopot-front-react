@@ -142,7 +142,7 @@ const Card = (props) => {
           ) : (
             <button
               onClick={() => {
-                addFavorites(address);
+                addFavorites(address, t);
                 toggleHeart
                   ? progettiFavourites.splice(
                       progettiFavourites.indexOf(address),

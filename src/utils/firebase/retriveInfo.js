@@ -50,7 +50,7 @@ export async function getProvider(){ let signer;
     return await signer.getAddress();
 }
 
-export async function getAddr(setState, dontAutoConnect) {
+export async function getAddr(setState, dontAutoConnect, t) {
     let address;
     if(dontAutoConnect){ //Just get stored address
         provider = getRecoil(providerState);
@@ -69,7 +69,7 @@ export async function getAddr(setState, dontAutoConnect) {
         setRecoil(addressState, address)
         setState(address.toString().substring(0, 7) + "...")
         await init();
-        await getIdentity();
+        await getIdentity(t);
     }
 }
 
@@ -113,11 +113,11 @@ export async function getInsuranceFunds(){
     return await dai.balanceOf(addressProjectFactory);
 }
 
-export async function downloadProjects() {
+export async function downloadProjects(t) {
     const address = await getProvider()
     setRecoil(addressState, address)
     await init()
-    const identity = await getIdentity()
+    const identity = await getIdentity(t)
     const identityObj = { wallet: address, privateKey: identity.privateKey };
     try{
         let projects = getRecoil(progettiState)
@@ -193,10 +193,10 @@ export async function getNftImage(tokenId) {
     return {image: data.image, addressDopotReward};
 }
 
-export async function retriveInvestment() {
+export async function retriveInvestment(t) {
     let address = await getProvider()
     const provider = await getRecoil(providerState)
-    await downloadProjects()
+    await downloadProjects(t)
     const dopotReward = new Contract(addressDopotReward, abiDopotReward, provider);
     let projects = getRecoil(progettiState)
     console.dir(projects)

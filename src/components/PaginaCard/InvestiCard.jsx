@@ -11,7 +11,7 @@ const InvestiCard = (props) => {
 
   async function invest(){
     try {
-      await toast.promise(addInvestment(props.address, props.numTier, price, titolo, t("shippingDetails")), {
+      await toast.promise(addInvestment(props.address, props.numTier, price, titolo, t), {
         pending: t("confirm"),
         success: t("invested"),
         error: t("error"),

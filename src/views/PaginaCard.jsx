@@ -41,7 +41,7 @@ const PaginaCard = () => {
   let { address } = useParams();
   useEffect(() => {
     (async () => {
-      await downloadProjects();
+      await downloadProjects(t);
       const fav = await retriveFavorites();
       setToggleHeart(fav ? fav.includes(address) : false);
     })();
@@ -136,7 +136,7 @@ const PaginaCard = () => {
                 <div className="pc-btn-box">
                   <button
                     onClick={() => {
-                      addFavorites(address);
+                      addFavorites(address, t);
                       setToggleHeart(!toggleHeart);
                     }}
                     // className="grd-btn dopot-btn-lg"

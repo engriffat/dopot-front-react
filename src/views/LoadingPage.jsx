@@ -4,9 +4,11 @@ import "../styles/loading.css";
 // import {DownloadProj} from "../utils/downloadProj";
 import { downloadProjects } from "../utils/firebase/retriveInfo";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function LoadingPage(props) {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const asyncFn = async () => {
