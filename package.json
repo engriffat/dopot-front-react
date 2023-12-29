@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@adraffy/ens-normalize": "^1.9.1",
-    "@bundlr-network/client": "^0.11.8",
+    "@bundlr-network/client": "^0.11.17",
     "@chainsafe/libp2p-noise": "^11.0.4",
     "@chainsafe/libp2p-yamux": "^4.0.0",
     "@helia/ipns": "^1.1.0",

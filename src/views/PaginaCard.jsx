@@ -55,7 +55,7 @@ const PaginaCard = () => {
         const response = await fetch(
           tier["image"].replace("ar://", "https://arweave.net/")
         );
-        const data = await response.text();
+        const data = await response.blob();
         setBase64Data((prevData) => [...prevData, data]);
       }
     };

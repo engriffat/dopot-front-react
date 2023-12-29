@@ -6,6 +6,7 @@ const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
 const { ethers } = require("ethers");
 export let bundlr;
+const { Readable } = require('stream');
 
 export const initialiseBundlr = async (provider) => { 
   bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider); //"https://node2.bundlr.network"
@@ -48,6 +49,17 @@ async function contrattoprojectFactory(quota, giorniCampagna){
       console.log(e, contentType);
     }
   }
+
+  export async function bundlrAddFile(obj, contentType){ 
+    try{
+      const bundlrtx = await bundlr.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
+      console.log(`Data uploaded ==> https://arweave.net/${bundlrtx.id}`);
+      return bundlrtx;
+    }
+    catch (e){
+      console.log(e, contentType);
+    }
+  }
   
   export async function contrattoProjectAddTier(inputs) {
     const provider = getRecoil(providerState);
@@ -57,7 +69,14 @@ async function contrattoprojectFactory(quota, giorniCampagna){
     let objs = [];
     let i = 1;
     while (inputs["name"+i] != null) {
-      const nftimgtx = await bundlrAdd(inputs["imageNftDefListFiles"][i-1], { name: "Content-Type", value: "image/png" });
+      const imageString = inputs["imageNftDefListFiles"][i-1];
+      const base64Data = imageString.replace(/^data:image\/png;base64,/, '');
+      const buffer = Buffer.from(base64Data, 'base64');
+      const stream = new Readable();
+      stream.push(buffer);
+      stream.push(null);
+
+      const nftimgtx = await bundlrAddFile(stream, { name: "Content-Type", value: "image/png" });
       const temp = {
         name: inputs["name"+i],
         description:  inputs["description"+i],

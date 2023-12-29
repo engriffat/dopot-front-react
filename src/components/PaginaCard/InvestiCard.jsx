@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import { addInvestment } from "../../utils/firebase/writeInfos";
 import addressDopotReward from '../../abi/dopotReward/address.js';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
 
-const InvestiCard = (props) => {
-  const { state, titolo, price, spec, img, currentSupply, supply } = props;
-  const { t, i18n } = useTranslation();
 
+const InvestiCard = (props) => {
+  const { state, titolo, price, spec, currentSupply, supply } = props;
+  let { img } = props;
+  const { t, i18n } = useTranslation();
   async function invest(){
     try {
       await toast.promise(addInvestment(props.address, props.numTier, price, titolo, t), {
@@ -21,11 +22,27 @@ const InvestiCard = (props) => {
     }
     
   }
+  const [imageSrc, setImageSrc] = useState(null);
+  const binaryString = img;
+
+  useEffect(() => {
+    if (!binaryString) {
+      return;
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(binaryString); 
+    reader.onloadend = function() {
+      var base64data = reader.result;                
+      setImageSrc(base64data);
+    }    
+  }, [binaryString]);
+  
+
   return (
     <div className="investi-card">
       <input type="checkbox" id="click-invest" />
-      <label for="click-invest" style={{ cursor: "pointer", display: "block" }}>
-        <img src={img} alt="BlogImg" />
+      <label htmlFor="click-invest" style={{ cursor: "pointer", display: "block" }}>
+      {imageSrc && <img src={imageSrc} alt="" />}
 
         <div className="investi-card-box">
           <h3 className="box-bk-over-logo">{titolo}</h3>
@@ -44,7 +61,7 @@ const InvestiCard = (props) => {
       </label>
 
       <div class="content-invest ">
-        <img src={img} alt="BlogImg" />
+        <img src={imageSrc} alt="BlogImg" />
         <div class="text-invest">
           <h3 className="box-bk-over-logo">{titolo}</h3>
           <p className="box-bk-over-logo">{spec}</p>
