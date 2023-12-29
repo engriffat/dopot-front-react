@@ -6,7 +6,7 @@ const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
 const { ethers } = require("ethers");
 export let bundlr;
-const { Readable } = require('stream');
+const { Readable } = require('stream-browserify');
 
 export const initialiseBundlr = async (provider) => { 
   bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider); //"https://node2.bundlr.network"
