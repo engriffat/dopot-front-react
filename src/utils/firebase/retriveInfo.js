@@ -45,7 +45,7 @@ export async function getProvider(){ let signer;
         provider = new ethers.providers.Web3Provider(window.ethereum);
         await provider.send("eth_requestAccounts", [])
         signer = await provider.getSigner();
-        await setRecoil(providerState, provider);
+        setRecoil(providerState, provider);
     } catch (e){ console.log(e)}
     return await signer.getAddress();
 }

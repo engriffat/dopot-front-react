@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-loop-func */
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
@@ -40,38 +40,46 @@ const Profile = () => {
   const [isActive2, setActive2] = useState(true);
 
   useEffect(() => {
+    let isMounted = true; // Flag to check if the component is mounted
+  
     async function fetchData() {
       let tempCard = [];
       for (const project of projects) {
-        //console.log(project)
         let tiers = project.investors[address];
-        //console.dir(tiers)
         let tierId = 0;
         for (const tokenId in tiers) {
-          if (tiers.hasOwnProperty(tokenId) /* && tiers[tokenId] !== 0*/) {
-            let obj = await getNftImage(tokenId);
-            const response = await fetch(
-              obj.image.replace("ar://", "https://arweave.net/")
-            );
-            const data = await response.text();
-            tempCard.push({
-              tierId,
-              addressCreator: project.addressCreator,
-              image: data,
-              project: project.address,
-              addressDopotReward: obj.addressDopotReward,
-              title:
-                project.imageNftDefListFiles[tokenId] &&
-                project.imageNftDefListFiles[tokenId].name,
-            });
+          if (tiers.hasOwnProperty(tokenId)) {
+            try {
+              let obj = await getNftImage(tokenId);
+              const response = await fetch(obj.image.replace("ar://", "https://arweave.net/"));
+              const data = await response.blob();
+              let reader = new FileReader();
+              reader.readAsDataURL(data);
+              reader.onloadend = function () {
+                if (isMounted) {
+                  let base64data = reader.result;
+                  tempCard.push({
+                    tokenId,
+                    addressCreator: project.addressCreator,
+                    image: base64data,
+                    project: project.address,
+                    addressDopotReward: obj.addressDopotReward,
+                    title: project.imageNftDefListFiles[tokenId]?.name,
+                  });
+                  setinvestedCard([...tempCard]); // Assuming setinvestedCard is a state updater function
+                }
+              };
+            } catch (error) {
+              console.error("Error fetching data:", error);
+              // Handle error as needed
+            }
           }
           tierId++;
         }
       }
-      setinvestedCard(tempCard);
     }
-
-    fetchData();
+    if(projects)
+      fetchData();
   }, []);
 
   async function setShippingDetails(project, tokenId, title) {
@@ -227,7 +235,7 @@ const Profile = () => {
                             onClick={() =>
                               setShippingDetails(
                                 card.project,
-                                card.tierId,
+                                card.tokenId,
                                 card.title
                               )
                             }
@@ -242,7 +250,7 @@ const Profile = () => {
                             <div>Chat</div>
                           </a>
                           <a
-                            onClick={() => refundNft(card.project, card.tierId, t, navigate)}
+                            onClick={() => refundNft(card.project, card.tokenId, t, navigate)}
                           >
                             <div>Refund</div>
                           </a>
@@ -251,7 +259,7 @@ const Profile = () => {
                       <div className="pmg-btn-box-nft">
                         {/* <input type="checkbox" id="click" /> */}
                         <a
-                          href={`https://testnets.opensea.io/assets/mumbai/${card.addressDopotReward}/${card.tierId}`}
+                          href={`https://testnets.opensea.io/assets/mumbai/${card.addressDopotReward}/${card.tokenId}`}
                           target="_blank"
                           class="grd-btn dopot-btn-lg"
                           rel="noreferrer"
