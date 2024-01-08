@@ -95,6 +95,8 @@ const DopotPower = () => {
             <ul>
               <li>{t("dptlist01")}</li>
               <li>{t("dptlist02")}</li>
+              <li>{t("dptlist03")}</li>
+              <li>{t("dptlist04")}</li>
             </ul>
           </div>
         </div>

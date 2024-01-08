@@ -3,6 +3,8 @@ import HeroImg from "../assets/img/hero.png";
 import LogoWhite from "../assets/img/logo-white.svg";
 import IconWhitePaper from "../assets/img/icon-whitepaper.svg";
 import IconPlane from "../assets/img/icon-plane.svg";
+import IconCamelot from "../assets/img/camelot.svg";
+import IconUniswap from "../assets/img/uniswap.png";
 import IconArrowGrd from "../assets/img/icon-arrow-02-02.svg";
 import IconDollarGrd from "../assets/img/icon-dollar-02.svg";
 import IconPersonGrd from "../assets/img/icon-person-02.svg";
@@ -107,13 +109,41 @@ const Home = () => {
                         <img src={IconPlane} alt="IconPlane" /> {t("discovery")}
                       </button>
                     </a>
-                    {/* <a href={Pdf}>
-                      <button className="purple-border-btn dopot-btn-lg">
+                    <a href={"https://app.camelot.exchange"}>
+                      <button className="grd-btn dopot-btn-lg"
+                        data-aos="fade-down"
+                        data-aos-easing="linear"
+                        data-aos-duration="650"
+                        data-aos-delay="1500">
                       {" "}
-                      <img src={IconWhitePaper} alt="IconWhitePaper" />{" "}
-                      Whitepaper
+                      <img src={IconCamelot} alt="" />{" "}
+                      Buy DPT
                     </button>
-                    </a> */}
+                    </a>
+                  </div>
+                  <div style={{marginTop:"2%"}}className="mbb-content">
+                  <a href={"https://app.camelot.exchange/nitro"}>
+                      <button className="purple-border-transparent-btn dopot-btn-lg"
+                        data-aos="fade-down"
+                        data-aos-easing="linear"
+                        data-aos-duration="650"
+                        data-aos-delay="2000">
+                      {" "}
+                      <img src={IconCamelot} alt="" />{" "}
+                      Stake
+                    </button>
+                    </a>
+                    <a href={"https://app.uniswap.org/pools"}>
+                      <button className="purple-border-transparent-btn dopot-btn-lg"
+                        data-aos="fade-down"
+                        data-aos-easing="linear"
+                        data-aos-duration="650"
+                        data-aos-delay="2500">
+                      {" "}
+                      <img src={IconUniswap} alt="" />{" "}
+                      Pool
+                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

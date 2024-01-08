@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-loop-func */
 import "../styles/globals.css";
 import "../styles/paginacard.css";
@@ -240,19 +241,26 @@ const Profile = () => {
                               )
                             }
                           >
-                            <div>Set Shipping Details</div>
+                            <div>{t("setshipping")}</div>
                           </a>
                           <a
                             href={`https://staging.push.org/chat/${card.addressCreator}`}
                             target="_blank"
                             rel="noreferrer"
                           >
-                            <div>Chat</div>
+                            <div>{t("contactcreator")}</div>
                           </a>
                           <a
                             onClick={() => refundNft(card.project, card.tokenId, t, navigate)}
                           >
-                            <div>Refund</div>
+                            <div>{t("getrefund")}</div>
+                          </a>
+                          <a
+                            href={`https://resolve.kleros.io/create/`} // TODO: update for kleros 2.0 if needed
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <div>{t("opencase")}</div>
                           </a>
                         </div>
                       </div>
@@ -261,7 +269,7 @@ const Profile = () => {
                         <a
                           href={`https://testnets.opensea.io/assets/mumbai/${card.addressDopotReward}/${card.tokenId}`}
                           target="_blank"
-                          class="grd-btn dopot-btn-lg"
+                          className="grd-btn dopot-btn-lg"
                           rel="noreferrer"
                         >
                           Swap

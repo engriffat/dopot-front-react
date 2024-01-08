@@ -86,6 +86,20 @@ body {
   width: fit-content;
   cursor: pointer;
 }
+.purple-border-transparent-btn {
+  font-size: 1.85rem;
+  color: var(--white);
+  border: 2px solid var(--main-purple);
+  outline: 0;
+  background-color: transparent;
+  color: white;
+  border-radius: 1000px;
+  box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.5);
+  transition: var(--trns1);
+  border-radius: 1000px;
+  width: fit-content;
+  cursor: pointer;
+}
 .react-tabs__tab--selected {
   background: linear-gradient(30deg, #fca040, #c22e80) !important;
   border-color: #fff !important;
@@ -97,10 +111,13 @@ body {
   font-size: 1.6rem !important;
 }
 .grd-btn:hover,
-.purple-border-btn:hover {
+.purple-border-btn:hover
+.purple-border-transparent-btn:hover
+{
   box-shadow: 0 0 15px 5px rgba(255, 67, 161, 0.4);
 }
 .purple-border-btn img,
+.purple-border-transparent-btn img,
 .grd-btn img {
   width: 2.25rem;
   height: 2.25rem;
