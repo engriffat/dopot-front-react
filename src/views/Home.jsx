@@ -100,7 +100,7 @@ const Home = () => {
                   <div className="mbb-content">
                     <a href={"/#/loading"}>
                       <button
-                        className="grd-btn dopot-btn-lg"
+                        className="grd-btn dopot-btn-lg-2"
                         data-aos="fade-down"
                         data-aos-easing="linear"
                         data-aos-duration="650"
@@ -109,8 +109,8 @@ const Home = () => {
                         <img src={IconPlane} alt="IconPlane" /> {t("discovery")}
                       </button>
                     </a>
-                    <a href={"https://app.camelot.exchange"}>
-                      <button className="grd-btn dopot-btn-lg"
+                    <a style={{marginLeft:"5px"}} href={"https://app.camelot.exchange"}>
+                      <button className="grd-btn dopot-btn-lg-2"
                         data-aos="fade-down"
                         data-aos-easing="linear"
                         data-aos-duration="650"
@@ -123,7 +123,7 @@ const Home = () => {
                   </div>
                   <div style={{marginTop:"2%"}} className="mbb-content">
                   <a href={"https://app.camelot.exchange/nitro"}>
-                      <button className="purple-border-transparent-btn dopot-btn-lg"
+                      <button className="purple-border-transparent-btn dopot-btn-sm"
                         data-aos="fade-down"
                         data-aos-easing="linear"
                         data-aos-duration="650"
@@ -134,7 +134,7 @@ const Home = () => {
                     </button>
                     </a>
                     <a href={"https://app.uniswap.org/pools"}>
-                      <button className="purple-border-transparent-btn dopot-btn-lg"
+                      <button className="purple-border-transparent-btn dopot-btn-sm"
                         data-aos="fade-down"
                         data-aos-easing="linear"
                         data-aos-duration="650"

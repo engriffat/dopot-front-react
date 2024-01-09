@@ -64,7 +64,7 @@
 .mbb-content {
   width: 100%;
   display: flex;
-  align-items: self-start; /*center;*/
+  align-items: normal; /*center;*/
 }
 /* Scorpi Section */
 .scorpi-section {
@@ -512,7 +512,7 @@
 }
 /* Temporary Message */
 .temp-msg {
-  width: 100%;
+  width: 50%;
   max-width: 60rem;
   background-color: rgb(206, 26, 26);
   padding: 1.5rem 1.5rem;
@@ -621,14 +621,13 @@
   .main-btns-box {
     flex-direction: column;
     justify-content: center;
-    margin: 0 0 0 -15%;
+    margin: 0 0 0 0;
   }
   .main-btns-box button {
     width: 100%;
-    min-height: 5.25rem;
   }
   .main-btns-box > * {
-    margin: 0 0 3.5rem 0;
+    margin: 0 0 1.5rem 0;
   }
   .scorpi-section {
     margin: 7.5rem 0 0 0;
@@ -708,7 +707,7 @@
   }
 
   .hero-content img {
-    width: 5.5rem;
+    width: 3.5rem;
   }
   .hero-bg {
     object-position: unset;
@@ -754,7 +753,7 @@
     object-position: top center;
   }
   .mbb-content {
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
   }
   .mbb-content button {

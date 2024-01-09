@@ -126,11 +126,15 @@ body {
 }
 .dopot-btn-sm {
   padding: 0.5rem 2rem;
-  font-size: 1.65rem;
+  font-size: 1.15rem;
 }
 .dopot-btn-lg {
   padding: 1.25rem 3.5rem;
   font-size: 1.75rem;
+}
+.dopot-btn-lg-2 {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
 }
 .section-heading {
   width: 100%;
