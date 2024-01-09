@@ -121,7 +121,7 @@ const Home = () => {
                     </button>
                     </a>
                   </div>
-                  <div style={{marginTop:"2%"}} className="mbb-content">
+                  <div style={{marginTop:"2rem"}} className="mbb-content">
                   <a href={"https://app.camelot.exchange/nitro"}>
                       <button className="purple-border-transparent-btn dopot-btn-sm"
                         data-aos="fade-down"
