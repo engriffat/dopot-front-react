@@ -69,14 +69,15 @@ async function contrattoprojectFactory(quota, giorniCampagna){
     let objs = [];
     let i = 1;
     while (inputs["name"+i] != null) {
-      const imageString = inputs["imageNftDefListFiles"][i-1];
-      const base64Data = imageString.replace(/^data:image\/png;base64,/, '');
+      const imgObj = inputs["imageNftDefListFiles"][i-1]
+      const imageString = imgObj.base64;
+      const base64Data = imageString.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
       const buffer = Buffer.from(base64Data, 'base64');
       const stream = new Readable();
       stream.push(buffer);
       stream.push(null);
 
-      const nftimgtx = await bundlrAddFile(stream, { name: "Content-Type", value: "image/png" });
+      const nftimgtx = await bundlrAddFile(stream, { name: "Content-Type", value: "image/"+imgObj.fileExtension });
       const temp = {
         name: inputs["name"+i],
         description:  inputs["description"+i],

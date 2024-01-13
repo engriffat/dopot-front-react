@@ -72,3 +72,12 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.stakeInput{
+  color:white;
+  font-size:2em;
+  padding-left: 1em;
+  margin: 1em 0 1em 0;
+  width: 10em;
+  border-radius: 1em;
+}

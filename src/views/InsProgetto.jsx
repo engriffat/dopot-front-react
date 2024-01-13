@@ -31,6 +31,20 @@ import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
 const { ethers } = require("ethers");
 
+function getFileExtension(filename) {
+  // Find the last occurrence of a dot (.) in the filename
+  const dotIndex = filename.lastIndexOf('.');
+
+  // Check if a dot was found and ensure it is not the last character
+  if (dotIndex !== -1 && dotIndex < filename.length - 1) {
+    // Extract the substring after the last dot as the file extension
+    return filename.slice(dotIndex + 1).toLowerCase();
+  } else {
+    // No dot or dot is the last character, indicating no valid extension
+    return null;
+  }
+}
+
 const InsProgetto = () => {
   const { t, i18n } = useTranslation();
   var step = [];
@@ -64,12 +78,14 @@ const InsProgetto = () => {
       const propName = name + "ListFiles";
       console.dir(selectedFiles);
       selectedFiles.forEach((file, i) => {
+        const fileExtension = getFileExtension(file.name);
         const reader = new FileReader();
         reader.readAsArrayBuffer(file);
         reader.onload = () => {
+          const buff = Buffer.from(reader.result);
           setInputs((prevState) => ({
             ...prevState,
-            [propName]: [...prevState[propName], Buffer.from(reader.result)],
+            [propName]: [...prevState[propName], fileExtension ? {buff, fileExtension} : buff],
           }));
           console.dir(inputs);
         };
@@ -111,8 +127,9 @@ const InsProgetto = () => {
     reader.onload = () => {
       const base64 = reader.result;
       setInputs((prevState) => {
+        const fileExtension = getFileExtension(file.name)
         const updatedInputs = [...prevState.imageNftDefListFiles];
-        updatedInputs[nProdotto] = base64;
+        updatedInputs[nProdotto] = {base64, fileExtension};
         return { ...prevState, imageNftDefListFiles: updatedInputs };
       });
     };

@@ -270,5 +270,13 @@
 
   "feesConfirm": "Do you want to pay fees with $DPT to get a discount?",
   "shippingDetails": "Enter your physical or digital shipping details:",
-  "insuranceFunds": "Insurance funds"
+  "insuranceFunds": "Insurance funds",
+
+  "loading1": "Loading projects...",
+  "loading2": "Scanning blockchain...",
+  "loading3": "Merging data...",
+  "loading4": "Finalizing...",
+
+  "stakeDptProject": "Stake DPT on this project",
+  "stakeDone": "Stake completed!"
 }

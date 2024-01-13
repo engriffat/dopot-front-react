@@ -271,5 +271,13 @@
 
   "feesConfirm": "Vuoi pagare le commissioni con $DPT per ottenere uno sconto?",
   "shippingDetails": "Inserisci i tuoi dati di spedizione fisici o virtuali:",
-  "insuranceFunds": "Fondi assicurazione"
+  "insuranceFunds": "Fondi assicurazione",
+
+  "loading1": "Caricamento progetti...",
+  "loading2": "Analisi blockchain...",
+  "loading3": "Unione dati...",
+  "loading4": "Finalizzando...",
+
+  "stakeDptProject": "Fai stake di DPT su questo progetto",
+  "stakeDone": "Stake completato!"
 }

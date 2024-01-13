@@ -201,7 +201,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "projectDiscountedWithdrawalFee",
+            "name": "projectStakingReward",
             "type": "uint256"
           },
           {
@@ -409,7 +409,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "projectDiscountedWithdrawalFee",
+        "name": "projectStakingReward",
         "type": "uint256"
       },
       {
@@ -486,6 +486,38 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "stake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "stakes",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "state",
     "outputs": [
@@ -506,6 +538,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "totalStaked",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -519,13 +564,14 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "bool",
-        "name": "discountDPT",
-        "type": "bool"
-      }
-    ],
+    "inputs": [],
+    "name": "unstake",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",

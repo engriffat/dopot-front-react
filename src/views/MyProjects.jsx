@@ -33,11 +33,8 @@ const Profile = () => {
   let projects = getRecoil(progettiState);
 
   async function handleWithdraw(projectAddress) {
-    const response = window.confirm(
-      t("feesConfirm")
-    );
     try {
-      await toast.promise(withdraw(projectAddress, response),{
+      await toast.promise(withdraw(projectAddress),{
         pending: t("confirm"),
         success: t("withdrawn"),
         error: t("error"),

@@ -279,6 +279,7 @@ const PaginaCard = () => {
                           fotoVisionListFiles={progetto.fotoVisionListFiles}
                           storia={progetto.storia}
                           fotoStoriaListFiles={progetto.fotoStoriaListFiles}
+                          address={progetto.address}
                         />
                       );
                     case 1:

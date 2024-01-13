@@ -7,7 +7,7 @@ import MyProjects from "./views/MyProjects";
 import Profile from "./views/Profile";
 import Swap from "./views/Swap";
 import LoadingPage from "./views/LoadingPage";
-import DopotPower from "./views/DopotPower";
+import DopotToken from "./views/DopotToken";
 import DopotShare from "./views/DopotShare";
 import XDao from "./views/XDao";
 import Impostazioni from "./views/Impostazioni";
@@ -33,7 +33,7 @@ function App() {
         <Route path="dao" element={<XDao />} />
         <Route path="impostazioni" element={<Impostazioni />} />
         <Route path="loading" element={<LoadingPage />} />
-        <Route path="dopotpower" element={<DopotPower />} />
+        <Route path="dopottoken" element={<DopotToken />} />
         <Route path="FaqEng" element={<FaqEng />} />
         <Route path="FaqIta" element={<FaqIta />} />
       </Routes>

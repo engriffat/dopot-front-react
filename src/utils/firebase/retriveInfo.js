@@ -80,7 +80,7 @@ async function getInvestors(projdb, dopotReward){
     const contract = new ethers.Contract(addressProjectFactory, abiProjectFactory, provider);
     let currentBlock = await provider.getBlockNumber();
     const endBlock = currentBlock;
-    currentBlock = currentBlock - (39272 * 120); // Polygon blocks per day * 120 days
+    currentBlock = currentBlock - (39272 * 120); // Polygon blocks per day * 120 days TODO: change to arbitrum
     const batchSize = 3500;
     if (blockHeight > currentBlock) currentBlock = blockHeight;
 
@@ -146,6 +146,8 @@ export async function downloadProjects(t) {
                 projdb.fundRaisingDeadline = days;
                 projdb.minInvestment = Math.min(...projdb.imageNftDefListFiles.map(item => parseInt(item.price)));
                 projdb.state = await project.state();
+                projdb.totalStaked = typeof project.totalStaked === 'function' ? (await project.totalStaked()).toString().replace(/\d{18}$/, '') : 0;
+
                 if(days < 0 && projdb.state !== 0) projdb.state = 4;
                 switch(projdb.state){
                     case 0:

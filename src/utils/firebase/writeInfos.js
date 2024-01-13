@@ -57,7 +57,7 @@ async function getPushChatUser() {
 
 async function pushChatSend(pushUser, projectCreatorAddress, messageContent) {
   const signer = getRecoil(providerState).getSigner();
-  const address = await signer.getAddress();
+  //const address = await signer.getAddress();
 
   const pgpDecryptedPvtKey = await PushAPI.chat.decryptPGPKey({
     encryptedPGPPrivateKey: pushUser.encryptedPrivateKey, 
@@ -99,6 +99,7 @@ export async function addproj(inputs, t) {
   async function updateListFiles(listFiles, contentType) {
     const updatedElements = await Promise.all(
       listFiles.map(async (element) => {
+        if(element.buff) element = element.buff;
         const { id } = await bundlrAdd(element, { 
           name: "Content-Type", 
           value: contentType 
@@ -111,12 +112,12 @@ export async function addproj(inputs, t) {
   
   let inputKeys = [
     { key: 'documentazioneListFiles', contentType: 'application/pdf' },
-    { key: 'fotoProdotto1ListFiles', contentType: 'image/png' },
+    { key: 'fotoProdotto1ListFiles', contentType: 'image/' + inputs.fotoProdotto1ListFiles[0].fileExtension },
     { key: 'logoAziendaListFiles', contentType: 'image/png' },
   ];
-  inputs.fotoProdotto2ListFiles && inputKeys.push({ key: 'fotoProdotto2ListFiles', contentType: 'image/png' });
-  inputs.fotoProdotto3ListFiles && inputKeys.push({ key: 'fotoProdotto3ListFiles', contentType: 'image/png' });
-  inputs.fotoProdotto4ListFiles && inputKeys.push({ key: 'fotoProdotto4ListFiles', contentType: 'image/png' });
+  inputs.fotoProdotto2ListFiles && inputKeys.push({ key: 'fotoProdotto2ListFiles', contentType: 'image/' + inputs.fotoProdotto2ListFiles[0].fileExtension });
+  inputs.fotoProdotto3ListFiles && inputKeys.push({ key: 'fotoProdotto3ListFiles', contentType: 'image/' + inputs.fotoProdotto3ListFiles[0].fileExtension });
+  inputs.fotoProdotto4ListFiles && inputKeys.push({ key: 'fotoProdotto4ListFiles', contentType: 'image/' + inputs.fotoProdotto4ListFiles[0].fileExtension });
 
   await bundlrFund();
   for (const input of inputKeys) {
@@ -188,15 +189,11 @@ export async function refundNft(project, tokenId, t, navigate) {
   }
 }
 
-export async function withdraw(project, discountDPT) {
+async function allowDptPay(signer, projectContract, project){
   const address = await getProvider();
-  const provider = getRecoil(providerState);
-  const signer = provider.getSigner();
-  const projectContract = new ethers.Contract(project, abiProject, provider);
-  const pWithSigner = projectContract.connect(signer);
-
-  const infinite = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
-  if(discountDPT){
+  const dptTokenAddress = (await projectContract.addrParams()).dptTokenAddress;
+  if(dptTokenAddress !== "0x0000000000000000000000000000000000000000"){
+    const infinite = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
     const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
     const fWithSigner = dptContract.connect(signer);
     const allowance = await dptContract.allowance(address, project);
@@ -204,10 +201,32 @@ export async function withdraw(project, discountDPT) {
       const tx = await fWithSigner.approve(project, infinite);
       await tx.wait(1);
     }
-  }
+  } else console.log("Skipping dpt allowance")
+}
+
+export async function withdraw(project) {
+  const provider = getRecoil(providerState);
+  const signer = provider.getSigner();
+  const projectContract = new ethers.Contract(project, abiProject, provider);
+  const pWithSigner = projectContract.connect(signer);
+
+  await allowDptPay(signer, projectContract, project);
 
   try {
-    await pWithSigner.withdraw(discountDPT);
+    await pWithSigner.withdraw();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function stakeProject(project, amount) {
+  const provider = getRecoil(providerState);
+  const projectContract = new ethers.Contract(project, abiProject, provider);
+  const signer = provider.getSigner()
+  const pWithSigner = projectContract.connect(signer);
+  await allowDptPay(signer, projectContract, project);
+  try {
+    await pWithSigner.stake(ethers.utils.parseUnits(amount.toString(), 18));
   } catch (e) {
     console.error(e);
   }
@@ -215,9 +234,11 @@ export async function withdraw(project, discountDPT) {
 
 export async function postpone(project) {
   const provider = getRecoil(providerState);
+  const address = await getProvider();
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
+  await allowDptPay(address, signer, projectContract, project);
   try {
     await pWithSigner.postponeDeadline();
   } catch (e) {

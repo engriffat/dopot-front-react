@@ -32,12 +32,12 @@ const Home = () => {
   const cards = [];
   async function load(){
     await downloadProjects(t);
-      const newData = await retriveFavorites();
-      let insuranceFunds = await getInsuranceFunds();
-      insuranceFunds = ethers.utils.formatEther(insuranceFunds.toString());
-      insuranceFunds = insuranceFunds.substring(0, insuranceFunds.indexOf("."));
-      setInsuranceState(insuranceFunds);
-      setProgettiFavourites(newData);
+    const newData = await retriveFavorites();
+    let insuranceFunds = await getInsuranceFunds();
+    insuranceFunds = ethers.utils.formatEther(insuranceFunds.toString());
+    if(insuranceFunds>=1) insuranceFunds = insuranceFunds.substring(0, insuranceFunds.indexOf("."));
+    setInsuranceState(insuranceFunds);
+    setProgettiFavourites(newData);
   }
   useEffect(() => {
     load();
@@ -76,6 +76,7 @@ const Home = () => {
           progetto.minInvestment <= parseInt(value.split("-")[1])
         : true)
   );
+  if(state === "ongoing") progetti.sort((a, b) => b.totalStaked - a.totalStaked);
 
   progetti.forEach((element) => {
     cards.push(

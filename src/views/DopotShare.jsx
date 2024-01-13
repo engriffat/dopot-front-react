@@ -23,7 +23,7 @@ import PBottom from "../assets/img/pc-hero-img.png";
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
-import "../styles/dopotpower.css";
+import "../styles/dopottoken.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
@@ -48,10 +48,10 @@ const DopotShare = () => {
                   padding: "8px 15px",
                   boxShadow: "none",
                 }}
-                onClick={(e) => navigate("/dopotpower")}
+                onClick={(e) => navigate("/dopottoken")}
                 className="purple-border-btn dopot-btn-lg"
               >
-                Dopotpower
+                Dopot token
               </button>
               <button
                 style={{

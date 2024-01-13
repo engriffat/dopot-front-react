@@ -487,7 +487,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_projectDiscountedWithdrawalFee",
+        "name": "_projectStakingReward",
         "type": "uint256"
       }
     ],

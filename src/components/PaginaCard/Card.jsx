@@ -54,6 +54,11 @@ const Card = (props) => {
               justifyContent: "space-between",
             }}
           >
+          {progetto.totalStaked !== "0" && (
+          <div style={{ marginBottom: "1rem" }} className="settore">
+              <span className="box-bk-over-logo">{progetto.totalStaked} DPT staked</span>
+          </div>
+          )}
             <div className="settore">
               {/* <span className="box-bk-over-logo">{props.progetto.settore}</span> */}
             </div>
@@ -124,6 +129,7 @@ const Card = (props) => {
             </div>
           </div>
         </div>
+        
         <div className="pmg-btn-box">
           {isMyProject ? (
             <div className="menu-nav">
@@ -161,7 +167,7 @@ const Card = (props) => {
               )}
             </button>
           )}
-
+          
           <button onClick={handleRedirect} className="grd-btn dopot-btn-lg">
             {t("findoutmore")}
           </button>
