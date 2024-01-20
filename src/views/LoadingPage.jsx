@@ -15,7 +15,7 @@ function LoadingPage(props) {
 
   useEffect(() => {
     const asyncFn = async () => {
-      var status = await downloadProjects();
+      var status = await downloadProjects(t);
       if (status === true) {
         navigate("/dashboard");
       }

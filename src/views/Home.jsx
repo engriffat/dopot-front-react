@@ -44,16 +44,24 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { checkAdBlock } from "adblock-checker";
 
 const Home = () => {
   const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
   AOS.init();
+  
 
   useEffect(() => {
     if (typeof window.ethereum === "undefined") {
-      toast.info("Dopot needs a Web3 wallet to work");
+      toast.info(t("web3Notice"));
     }
+    const checkAdblock = async () => {
+      if (await checkAdBlock()) 
+        toast.info(t("adblockNotice"));
+    };
+    checkAdblock();
+   
   }, []);
 
   return (
@@ -363,7 +371,7 @@ const Home = () => {
                     <h4>01</h4>
                     <div>
                       <h6>{t("01title")}</h6>
-                      <p>DAO Launch & Dopot Token (DPT) private sale</p>
+                      <p>DAO Launch & DPT Token ILO with vesting (presale)</p>
                     </div>
                   </div>
                 </div>

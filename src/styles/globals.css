@@ -27,6 +27,10 @@
   background: rgba(57, 57, 66, 255);
 }
 
+p, h3{
+  color: white;
+}
+
 html,
 body {
   width: 100%;

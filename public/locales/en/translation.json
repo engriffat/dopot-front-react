@@ -86,7 +86,7 @@
   "healthcare": "Health care",
   "socialhealthass": "Social health assistance",
   "educationtraining": "Education-education-training",
-  "environmental ": "Environmental and ecosystem protection",
+  "environmental": "Environmental and ecosystem protection",
   "enhancementcultural": "Enhancement of cultural heritage",
   "socialtourism": "Social tourism",
   "universitypost": "University-post-graduate training",
@@ -242,7 +242,7 @@
   "investors": "investors",
   "daysremaining": "days remaining",
   "investmentcard": "Investment",
-  "completedat": "complete at",
+  "completedat": "progress",
   "withdrawfunds": "Withdraw funds",
   "postponedeadline": "Postpone the deadline",
   "findoutmore": "Find out more",
@@ -278,5 +278,10 @@
   "loading4": "Finalizing...",
 
   "stakeDptProject": "Stake DPT on this project",
-  "stakeDone": "Stake completed!"
+  "stakeDone": "Stake completed!",
+  "unstakeDone": "Unstake done!",
+
+
+  "web3Notice": "The platform requires a web3 wallet",
+  "adblockNotice": "Disable ad blocker to ensure full functionality of the platform"
 }

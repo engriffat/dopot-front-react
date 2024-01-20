@@ -340,7 +340,7 @@ button {
   z-index: 1;
 }
 a {
-  color: black !important;
+  color: rgb(183, 200, 255) !important;
 }
 .pts-content {
   width: 100%;

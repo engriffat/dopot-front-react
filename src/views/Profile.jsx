@@ -154,7 +154,7 @@ const Profile = () => {
                   <div className="pts-right-grid-card">
                     <a
                       href={
-                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                        "https://app.aragon.org/#/daos/mumbai/0xc49a8a1f52e7bb17b0656f985b03ae5ef153d844/dashboard"
                       }
                       target="_blank"
                       rel="noreferrer"
@@ -163,7 +163,7 @@ const Profile = () => {
                     </a>
                     <a
                       href={
-                        "https://app.aragon.org/#/daos/mumbai/0x74faaa177dfd30343616c7bf2ccae6d7f91f32ed/dashboard"
+                        "https://app.aragon.org/#/daos/mumbai/0xc49a8a1f52e7bb17b0656f985b03ae5ef153d844/dashboard"
                       }
                       target="_blank"
                       rel="noreferrer"

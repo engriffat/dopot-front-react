@@ -151,15 +151,38 @@ export async function addFavorites(addressProject, t) {
   try {
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address]);
     if(!result[0] || !result[0].data){
-      const obj = {addressUser: address, addressProjects: [ addressProject ], shippingNft: {}}
-      console.dir(obj)
-      console.dir(identity)
+      const obj = {addressUser: address, addressProjects: [ addressProject ], shippingNft: {}, projectStakes: []}
       await db.set(obj, "users", address, identity)
     }
     else{
       let addressProjects = result[0].data.addressProjects;
       addressProjects && addressProjects.includes(addressProject) ? addressProjects.splice(addressProjects.indexOf(addressProject), 1) : addressProjects.push(addressProject);
-      console.dir(result[0].data)
+      await db.update(result[0].data, "users", result[0].id, identity)
+    }
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+export async function addProjectStake(addressProject, amount, t) {
+  let address = await getProvider();
+  address = address.toLowerCase();
+  let identity = await getIdentity(t)
+  identity.linkedAccount = address
+  identity.signer = address
+  identity.address = address
+  try {
+    const newStake = { timestamp: new Date().getTime(), amount, address: addressProject }
+    let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address]);
+    if(!result[0] || !result[0].data){
+      const obj = {addressUser: address, addressProjects: [], shippingNft: {}, projectStakes: [ newStake ]};
+      console.dir(obj);
+      await db.set(obj, "users", address, identity)
+    }
+    else{
+      let projectStakes = result[0].data.projectStakes;
+      if(projectStakes) projectStakes.push(newStake);
+      else result[0].data.projectStakes = [ newStake ];
       await db.update(result[0].data, "users", result[0].id, identity)
     }
   } catch (e) {
@@ -191,8 +214,7 @@ export async function refundNft(project, tokenId, t, navigate) {
 
 async function allowDptPay(signer, projectContract, project){
   const address = await getProvider();
-  const dptTokenAddress = (await projectContract.addrParams()).dptTokenAddress;
-  if(dptTokenAddress !== "0x0000000000000000000000000000000000000000"){
+  if(await projectContract.dptAddressesSet()){
     const infinite = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
     const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
     const fWithSigner = dptContract.connect(signer);
@@ -209,24 +231,39 @@ export async function withdraw(project) {
   const signer = provider.getSigner();
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const pWithSigner = projectContract.connect(signer);
-
-  await allowDptPay(signer, projectContract, project);
-
+  if(await pWithSigner.dptAddressesSet()) console.log(await pWithSigner.getWithdrawalFee()+await pWithSigner.getStakingRewards())
   try {
+    await allowDptPay(signer, projectContract, project);
     await pWithSigner.withdraw();
   } catch (e) {
     console.error(e);
   }
 }
 
-export async function stakeProject(project, amount) {
+export async function stakeProject(project, amount, t) {
   const provider = getRecoil(providerState);
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
   await allowDptPay(signer, projectContract, project);
   try {
-    await pWithSigner.stake(ethers.utils.parseUnits(amount.toString(), 18));
+    const tx = await pWithSigner.stake(ethers.utils.parseUnits(amount.toString(), 18));
+    await tx.wait(1);
+    await addProjectStake(project, amount, t) 
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function unstakeProject(project) {
+  const provider = getRecoil(providerState);
+  const projectContract = new ethers.Contract(project, abiProject, provider);
+  const signer = provider.getSigner()
+  const pWithSigner = projectContract.connect(signer);
+  await allowDptPay(signer, projectContract, project);
+  try {
+    const tx = await pWithSigner.unstake();
+    await tx.wait(1);
   } catch (e) {
     console.error(e);
   }

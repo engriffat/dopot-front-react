@@ -29,7 +29,8 @@ import { addFavorites } from "../utils/firebase/writeInfos";
 import {
   downloadProjects,
   retriveFavorites,
-  RetriveProjectTypes
+  RetriveProjectTypes,
+  retriveProjectStakes
 } from "../utils/firebase/retriveInfo";
 import IconHeart from "../assets/img/heart-fav.svg";
 import IconHeartActive from "../assets/img/heart-fav-active.svg";
@@ -37,6 +38,7 @@ import { useTranslation } from "react-i18next";
 const PaginaCard = () => {
   const { t, i18n } = useTranslation();
   const [toggleHeart, setToggleHeart] = useState(false);
+  const [progettiStakes, setProgettiStakes] = useState([]);
 
   let { address } = useParams();
   useEffect(() => {
@@ -44,6 +46,7 @@ const PaginaCard = () => {
       await downloadProjects(t);
       const fav = await retriveFavorites();
       setToggleHeart(fav ? fav.includes(address) : false);
+      setProgettiStakes(await retriveProjectStakes(address));
     })();
   });
   let progetto = getRecoil(progettiState).find((x) => x.address === address);
@@ -280,6 +283,7 @@ const PaginaCard = () => {
                           storia={progetto.storia}
                           fotoStoriaListFiles={progetto.fotoStoriaListFiles}
                           address={progetto.address}
+                          progettiStakes={progettiStakes}
                         />
                       );
                     case 1:

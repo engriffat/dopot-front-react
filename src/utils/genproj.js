@@ -9,7 +9,7 @@ export let bundlr;
 const { Readable } = require('stream-browserify');
 
 export const initialiseBundlr = async (provider) => { 
-  bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider); //"https://node2.bundlr.network"
+  bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider); //"https://node2.bundlr.network" TODO: change for arbitrum mainnet
   await bundlr.ready();
 };
 
@@ -35,7 +35,7 @@ async function contrattoprojectFactory(quota, giorniCampagna){
 
   export async function bundlrFund(){
     const nodeBalance = bundlr.utils.fromAtomic(await bundlr.getLoadedBalance());
-    if(nodeBalance < 0.05)
+    if(nodeBalance < 0.05) // TODO: change to eth for arbitrum mainnet
       await bundlr.fund(10 ** 18/2/10); //0.05 matic
   }
 

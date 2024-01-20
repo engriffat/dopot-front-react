@@ -20,7 +20,7 @@ export async function getProvider(){ let signer;
             params: [{ chainId: '0x13881' }],
         });
     } catch (switchError) {
-        if (switchError.code === 4902) {
+        if (switchError.code === 4902) { // TODO: change for arbitrum mainnet
             try {
             await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
@@ -217,6 +217,14 @@ export async function retriveFavorites() {
     let addressLogged=getRecoil(addressState)    
     const progettiFavourites =  await db.get("users", ["addressUser"], ["addressUser", "==", addressLogged.toString().toLowerCase()]);
     return (progettiFavourites && progettiFavourites.length > 0) ? progettiFavourites[0].addressProjects : [];
+}
+
+export async function retriveProjectStakes(projectAddress) {
+    await getProvider()
+    //await init()
+    let addressLogged=getRecoil(addressState)    
+    const progettiStakes =  await db.get("users", ["addressUser"], ["addressUser", "==", addressLogged.toString().toLowerCase()]);
+    return (progettiStakes && progettiStakes.length > 0) ? progettiStakes[0].projectStakes?.filter(e => e.address === projectAddress) : [];
 }
 
 export function RetriveProjectTypes(tipoKey){

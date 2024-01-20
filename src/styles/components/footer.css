@@ -65,6 +65,7 @@ footer {
 }
 .link-social-new {
   font-weight: bold;
+  color: rgb(183, 200, 255) !important;
 }
 
 @media screen and (max-width: 650px) {
@@ -80,4 +81,18 @@ footer {
   margin: 1em 0 1em 0;
   width: 10em;
   border-radius: 1em;
+}
+
+.stakes{
+  color: white;
+  padding-top: 2em;
+}
+
+.button-container {
+  display: flex; /* Use flexbox to make the buttons appear in the same line */
+}
+
+/* Optionally, add some spacing or styling for the buttons */
+.grd-btn {
+  margin-right: 10px; /* Adjust the margin as needed */
 }

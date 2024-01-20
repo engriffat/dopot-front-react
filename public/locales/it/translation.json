@@ -87,7 +87,7 @@
   "healthcare": "Assistenza sanitaria",
   "socialhealthass": "Assistenza socio-sanitaria",
   "educationtraining": "Educazione-istruzione-formazione",
-  "environmental ": "Tutela ambiente ed ecosistema",
+  "environmental": "Tutela ambiente ed ecosistema",
   "enhancementcultural": "Valorizzazione patrimonio culturale",
   "socialtourism": "Turismo sociale",
   "universitypost": "Formazione universitaria-post universitaria",
@@ -279,5 +279,9 @@
   "loading4": "Finalizzando...",
 
   "stakeDptProject": "Fai stake di DPT su questo progetto",
-  "stakeDone": "Stake completato!"
+  "stakeDone": "Stake completato!",
+  "unstakeDone": "Unstake completato!",
+
+  "web3Notice": "La piattaforma richiede un wallet web3",
+  "adblockNotice": "Disattiva adblocker per garantire la piena funzionalità della piattaforma"
 }
