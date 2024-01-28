@@ -60,9 +60,9 @@ const InvestiCard = (props) => {
         </div>
       </label>
 
-      <div class="content-invest ">
+      <div className="content-invest ">
         <img src={imageSrc} alt="BlogImg" />
-        <div class="text-invest">
+        <div className="text-invest">
           <h3 className="box-bk-over-logo">{titolo}</h3>
           <p className="box-bk-over-logo">{spec}</p>
           <br />

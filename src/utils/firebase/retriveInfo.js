@@ -123,7 +123,7 @@ export async function downloadProjects(t) {
         let projects = getRecoil(progettiState)
         const dopotReward = new Contract(addressDopotReward, abiDopotReward, getRecoil(providerState));
         //if(!projects || projects.length === 0){
-            projects = await db.get("projects", identityObj)
+            projects = await db.get("projects", identity);
             for(let projdb of projects){
                 if(!projdb.address) continue;
                 const project = new Contract(projdb.address, abiProject, getRecoil(providerState));
@@ -172,6 +172,7 @@ export async function downloadProjects(t) {
                     default: break;
                   }
             //}
+            
             setRecoil(progettiState, projects)
         }
     }   catch(e){console.log(e)}

@@ -7,6 +7,7 @@ import Pdf from "../assets/dopot.pdf";
 import { SocialIcon } from "react-social-icons";
 import IconDown from "../assets/img/arr-menu.svg";
 import { useTranslation } from "react-i18next";
+import { FaTimes } from 'react-icons/fa';
 
 //import GetAccount from "../utils/ethersUtils.js";
 import { getAddr } from "../utils/firebase/retriveInfo";
@@ -15,6 +16,35 @@ import { ethers } from "ethers";
 async function isWalletConnected() {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   return provider && (await provider.send("eth_accounts", [])).length > 0;
+}
+
+function deleteCookiesAndReload() {
+  localStorage.clear();
+  // Delete all cookies
+  document.cookie.split(";").forEach(function(c) {
+    document.cookie = c
+      .replace(/^ +/, "")
+      .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+  });
+  // Clear IndexedDB
+  const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+  function deleteDatabase(dbName) {
+    return new Promise((resolve, reject) => {
+      const deleteRequest = indexedDB.deleteDatabase(dbName);
+      deleteRequest.onsuccess = () => resolve(`Deleted ${dbName} successfully`);
+      deleteRequest.onerror = (event) => reject(`Error deleting ${dbName}: ${event.target.errorCode}`);
+    });
+  }
+    indexedDB.databases().then((dbs) => {
+    const deletePromises = dbs.map((db) => deleteDatabase(db.name));
+    return Promise.all(deletePromises);
+  }).then((results) => {
+    console.log(results);
+    //window.location.reload();
+  }).catch((error) => {
+    console.error(error);
+    //window.location.reload();
+  });
 }
 
 const Header = (props) => {
@@ -34,24 +64,24 @@ const Header = (props) => {
         {/* Header for PC */}
         <div className="header-content">
           <div className="header-left">
-            <a href="#">
+            <a href="/#/">
               <img src={LogoWhite} alt="LogoWhite" />
             </a>
           </div>
           <div className="header-right">
-            <a href="#">Home</a>
+            <a href="/#/">Home</a>
             <a href="/#/FaqIta">Tutorials</a>
             <a href={"/#/dopottoken"}>Dopot Token</a>
 
-            <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
-              <button class="dropbtn">
+            <div style={{ marginRight: "1.5rem" }} className="dropdown_menu">
+              <button className="dropbtn">
                 Community{" "}
                 <span>
                   <img className="arrow-menu-dr" src={IconDown} alt="" />{" "}
                 </span>
               </button>
 
-              <div class="dropdown-content-menu">
+              <div className="dropdown-content-menu">
                 <a>
                   <SocialIcon
                     fgColor="white"
@@ -94,8 +124,8 @@ const Header = (props) => {
                 </a>
               </div>
             </div>
-            <div style={{ marginRight: "3.5rem" }} class="dropdown_menu">
-              <button class="dropbtn">
+            <div style={{ marginRight: "3.5rem" }} className="dropdown_menu">
+              <button className="dropbtn">
                 {t("document")}{" "}
                 <span>
                   <img
@@ -106,7 +136,7 @@ const Header = (props) => {
                   />
                 </span>
               </button>
-              <div class="dropdown-content-menu">
+              <div className="dropdown-content-menu">
                 <a href={Pdf}>Whitepaper</a>
                 <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
               </div>
@@ -123,6 +153,9 @@ const Header = (props) => {
             >
               {walletText}
             </button>
+            <a href="/#/" onClick={deleteCookiesAndReload}>
+              <FaTimes />
+            </a>
           </div>
         </div>
         {/* Header for Mobile Devices */}
@@ -156,15 +189,15 @@ const Header = (props) => {
               <a href="#">Home</a>
               <a href="/#/FaqIta">Tutorials</a>
               <a href={"/#/dopottoken"}>Dopot Token</a>
-              <div style={{ marginRight: "1.5rem" }} class="dropdown_menu">
-                <button class="dropbtn">
+              <div style={{ marginRight: "1.5rem" }} className="dropdown_menu">
+                <button className="dropbtn">
                   Community{" "}
                   <span>
                     <img className="arrow-menu-dr" src={IconDown} alt="" />{" "}
                   </span>
                 </button>
 
-                <div class="dropdown-content-menu">
+                <div className="dropdown-content-menu">
                   <a>
                     <SocialIcon
                       fgColor="white"
@@ -207,8 +240,8 @@ const Header = (props) => {
                   </a>
                 </div>
               </div>
-              <div style={{ marginRight: "3.5rem" }} class="dropdown_menu">
-                <button class="dropbtn">
+              <div style={{ marginRight: "3.5rem" }} className="dropdown_menu">
+                <button className="dropbtn">
                   {t("document")}{" "}
                   <span>
                     <img
@@ -219,7 +252,7 @@ const Header = (props) => {
                     />
                   </span>
                 </button>
-                <div class="dropdown-content-menu">
+                <div className="dropdown-content-menu">
                   <a href={Pdf}>Whitepaper</a>
                   <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
                 </div>

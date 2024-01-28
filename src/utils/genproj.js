@@ -1,20 +1,24 @@
 import { providerState } from "../recoilState";
 import { getRecoil  } from 'recoil-nexus';
 import addressProjectFactory from '../abi/projectFactory/address';
-import { WebBundlr } from "@bundlr-network/client";
+import { WebIrys } from "@irys/sdk";
 const abiProjectFactory = require('../abi/projectFactory/1.json');
 const abiProject = require('../abi/project/1.json');
 const { ethers } = require("ethers");
-export let bundlr;
+export let webIrys;
 const { Readable } = require('stream-browserify');
 
-export const initialiseBundlr = async (provider) => { 
-  bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider); //"https://node2.bundlr.network" TODO: change for arbitrum mainnet
-  await bundlr.ready();
+export const initialiseBundlr = async (provider) => {  
+	const url = "https://devnet.irys.xyz"; //"https://node2.irys.xyz" TODO: change for arbitrum mainnet
+	const token = "matic";
+	const rpcURL = "https://endpoints.omniatech.io/v1/matic/mumbai/public";
+ 	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider };
+  webIrys = new WebIrys({ url, token, wallet });
+	await webIrys.ready();
 };
 
 export async function genproj(params) {  
-    return await contrattoprojectFactory(params.quota, Number(params.giorniCampagna) * 86400);
+    return await contrattoprojectFactory(ethers.utils.parseUnits(params.quota.toString(), 18), Number(params.giorniCampagna) * 86400);
 }
 
 async function contrattoprojectFactory(quota, giorniCampagna){
@@ -34,14 +38,14 @@ async function contrattoprojectFactory(quota, giorniCampagna){
   }
 
   export async function bundlrFund(){
-    const nodeBalance = bundlr.utils.fromAtomic(await bundlr.getLoadedBalance());
+    const nodeBalance = webIrys.utils.fromAtomic(await webIrys.getLoadedBalance());
     if(nodeBalance < 0.05) // TODO: change to eth for arbitrum mainnet
-      await bundlr.fund(10 ** 18/2/10); //0.05 matic
+      await webIrys.fund(10 ** 18/2/10); //0.05 matic
   }
 
   export async function bundlrAdd(obj, contentType){ 
     try{
-      const bundlrtx = await bundlr.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
+      const bundlrtx = await webIrys.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
       console.log(`Data uploaded ==> https://arweave.net/${bundlrtx.id}`);
       return bundlrtx;
     }
@@ -52,7 +56,7 @@ async function contrattoprojectFactory(quota, giorniCampagna){
 
   export async function bundlrAddFile(obj, contentType){ 
     try{
-      const bundlrtx = await bundlr.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
+      const bundlrtx = await webIrys.upload(contentType.value === "application/json" ? JSON.stringify( obj ) : obj, [contentType]);
       console.log(`Data uploaded ==> https://arweave.net/${bundlrtx.id}`);
       return bundlrtx;
     }

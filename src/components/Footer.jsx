@@ -9,7 +9,7 @@ const BADGE_ID = "fb48ca1409e7f6fe";
 let ALCHEMY_URL = `https://alchemyapi.io/?r=badge:${BADGE_ID}`;
 const ALCHEMY_ANALYTICS_URL = `https://analytics.alchemyapi.io/analytics`;
 
-function logBadgeClick() {
+/*function logBadgeClick() {
   fetch(`${ALCHEMY_ANALYTICS_URL}/badge-click`, {
     method: "POST",
     headers: {
@@ -52,7 +52,7 @@ var intervalId = setInterval(() => {
     clearInterval(intervalId);
   }
 }, 2000);
-
+*/
 const Footer = () => {
   const { t, i18n } = useTranslation();
   return (
@@ -114,7 +114,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <a href="#">
+          {/*<a href="#">
             <img
               onClick={logBadgeClick}
               id="badge-button"
@@ -123,7 +123,7 @@ const Footer = () => {
               alt="Alchemy Supercharged"
             />
           </a>
-
+              */}
           <h6>DOPOT.FI</h6>
           {/* <p>Copyright © 2021 tutti diritti riservati a Dopot.ﬁ</p> */}
         </div>

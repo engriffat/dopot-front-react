@@ -66,15 +66,15 @@ const Card = (props) => {
 
           <input
             type="checkbox"
-            class="read-more-state"
+            className="read-more-state"
             id="post-{progetto.nomeAzienda}"
           />
-          <p class="read-more-target box-bk-over-logo">{desc}</p>
+          <p className="read-more-target box-bk-over-logo">{desc}</p>
 
           {desc.length > 200 ? (
             <label
               for="post-{progetto.nomeAzienda}"
-              class="read-more-trigger"
+              className="read-more-trigger"
             ></label>
           ) : null}
         </div>

@@ -332,7 +332,7 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "projectAddress",
+        "name": "",
         "type": "address"
       }
     ],

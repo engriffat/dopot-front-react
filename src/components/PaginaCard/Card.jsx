@@ -13,6 +13,8 @@ import { addFavorites, postpone } from "../../utils/firebase/writeInfos";
 import IconHeart from "../../assets/img/heart-fav.svg";
 import IconHeartActive from "../../assets/img/heart-fav-active.svg";
 import { useTranslation } from "react-i18next";
+import { getWithdrawalFees, getPWithSigner } from "../../utils/firebase/writeInfos";
+const { ethers } = require("ethers");
 
 const Card = (props) => {
   const { t, i18n } = useTranslation();
@@ -33,6 +35,21 @@ const Card = (props) => {
         : false
     );
   }, [progettiFavourites]);
+
+  const [fees, setFees] = useState(null);
+  useEffect(() => {
+    // Define an async function to retrieve the value
+    const fetchFees = async () => {
+      try {
+        const result = await getWithdrawalFees(await getPWithSigner(address));
+        setFees(ethers.utils.formatUnits(result.toString(), 18)); 
+      } catch (error) {
+        console.error('Error fetching fees:', error);
+        setFees(0);
+      }
+    };
+    fetchFees();
+  }, []); 
 
   function handleRedirect(e) {
     navigate(`/card/${address}`);
@@ -81,15 +98,15 @@ const Card = (props) => {
 
           <input
             type="checkbox"
-            class="read-more-state"
+            className="read-more-state"
             id="post-{props.progetto.nomeAzienda}"
           />
-          <p class="read-more-target box-bk-over-logo">{desc}</p>
+          <p className="read-more-target box-bk-over-logo">{desc}</p>
 
           {desc.length > 200 ? (
             <label
               for="post-{props.progetto.nomeAzienda}"
-              class="read-more-trigger"
+              className="read-more-trigger"
             ></label>
           ) : null}
         </div>
@@ -137,7 +154,7 @@ const Card = (props) => {
                 <div className="three-dots box-bk-over-logo"></div>
                 <div className="dropdown">
                   <a onClick={() => props.withdraw(address)}>
-                    <div>{t("withdrawfunds")}</div>
+                    <div>{t("withdrawfunds")} {fees} DPT)</div>
                   </a>
                   <a onClick={() => postpone(address)}>
                     <div>{t("postponedeadline")}</div>

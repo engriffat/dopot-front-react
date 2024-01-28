@@ -101,21 +101,21 @@ const Home = () => {
           <div className="dashboard-select-btn">
             <div className="dashboard-select-opt">
               <div className="dash-sel-opt-content">
-                <label for="sel1">{t("dashlabel1")}</label>
+                <label htmlFor="sel1">{t("dashlabel1")}</label>
                 <select name="sel1" id="sel1">
                   <option value="ongoing">Live Crowdfounding</option>
                   <option value="successful">Closed Crowdfunding</option>
                 </select>
               </div>
               <div className="dash-sel-opt-content">
-                <label for="sel2">{t("dashlabel2")}</label>
+                <label htmlFor="sel2">{t("dashlabel2")}</label>
                 <select name="sel2" id="sel2">
                   <option value="reward">Reward Crowdfounding</option>
                   <option value="equity">Equity</option>
                 </select>
               </div>
               <div className="dash-sel-opt-content">
-                <label for="sel3">{t("dashlabel3")}</label>
+                <label htmlFor="sel3">{t("dashlabel3")}</label>
                 <select name="sel3" id="sel3">
                   <option selected value="any">
                     {t("dashcategselected")}
@@ -201,7 +201,7 @@ const Home = () => {
                 </select>
               </div>
               <div className="dash-sel-opt-content">
-                <label for="sel4">{t("dashrange")}</label>
+                <label forhtml="sel4">{t("dashrange")}</label>
                 <select name="sel4" id="sel4">
                   <option value="0-25">0$ - 25$</option>
                   <option value="25-50">25$ - 50$</option>
@@ -261,7 +261,7 @@ const Home = () => {
               {cards.length} {t("results")}
             </h2>
           </div>
-          <div class="profile-dash-cards">{cards}</div>
+          <div className="profile-dash-cards">{cards}</div>
           <label style={{color: "white"}}>{t("insuranceFunds") + ": " + insuranceState + " DAI"}</label>
         </div>
         <Footer />

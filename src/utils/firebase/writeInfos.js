@@ -1,7 +1,7 @@
 import { db, getIdentity, init } from "./firebaseInit"
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import { addressState, providerState, progettiState } from '../../recoilState';
-import { genproj, bundlrFund, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, bundlr } from "../genproj"
+import { genproj, bundlrFund, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, webIrys } from "../genproj"
 import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
 import addressDpt from '../../abi/dpt/address.js';
@@ -80,7 +80,7 @@ export async function addproj(inputs, t) {
   await init();
   setRecoil(providerState, provider);
   setRecoil(addressState, address);
-  !bundlr && await initialiseBundlr(getRecoil(providerState));
+  !webIrys && await initialiseBundlr(getRecoil(providerState));
   let domanda = [];
   Object.keys(inputs).forEach(key => {
     if (key.startsWith("domanda")) {
@@ -94,7 +94,8 @@ export async function addproj(inputs, t) {
   console.log("Adding project")
   inputs.addressCreator = address
   let identity = await getIdentity(t)
-  identity.linkedAccount = identity.address
+  console.dir(identity)
+  //identity.linkedAccount = identity.address
   inputs.address = await genproj(inputs);
   async function updateListFiles(listFiles, contentType) {
     const updatedElements = await Promise.all(
@@ -145,9 +146,9 @@ export async function addFavorites(addressProject, t) {
   let address = await getProvider();
   address = address.toLowerCase();
   let identity = await getIdentity(t)
-  identity.linkedAccount = address
-  identity.signer = address
-  identity.address = address
+  //identity.linkedAccount = address
+  //identity.signer = address
+  //identity.address = address
   try {
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address]);
     if(!result[0] || !result[0].data){
@@ -168,9 +169,10 @@ export async function addProjectStake(addressProject, amount, t) {
   let address = await getProvider();
   address = address.toLowerCase();
   let identity = await getIdentity(t)
-  identity.linkedAccount = address
-  identity.signer = address
-  identity.address = address
+  console.dir(identity);
+  //identity.linkedAccount = address
+  //identity.signer = address
+  //identity.address = address
   try {
     const newStake = { timestamp: new Date().getTime(), amount, address: addressProject }
     let result =  await db.cget("users", ["addressUser"], ["addressUser", "==", address]);
@@ -183,6 +185,7 @@ export async function addProjectStake(addressProject, amount, t) {
       let projectStakes = result[0].data.projectStakes;
       if(projectStakes) projectStakes.push(newStake);
       else result[0].data.projectStakes = [ newStake ];
+      console.log(result[0].data)
       await db.update(result[0].data, "users", result[0].id, identity)
     }
   } catch (e) {
@@ -212,18 +215,31 @@ export async function refundNft(project, tokenId, t, navigate) {
   }
 }
 
-async function allowDptPay(signer, projectContract, project){
+async function allowDptPay(signer, projectContract, project, amount){
   const address = await getProvider();
   if(await projectContract.dptAddressesSet()){
-    const infinite = "115792089237316195423570985008687907853269984665640564039457584007913129639935";
+    const infinite = ethers.BigNumber.from(amount || "115792089237316195423570985008687907853269984665640564039457584007913129639935");
     const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
     const fWithSigner = dptContract.connect(signer);
     const allowance = await dptContract.allowance(address, project);
-    if (allowance.lt(ethers.BigNumber.from(infinite))){
+    if (allowance.lt(infinite)){
       const tx = await fWithSigner.approve(project, infinite);
       await tx.wait(1);
-    }
+    } else console.log("Skipping dpt allowance")
   } else console.log("Skipping dpt allowance")
+}
+
+export async function getPWithSigner(project){
+  const provider = getRecoil(providerState);
+  const signer = provider.getSigner();
+  const projectContract = new ethers.Contract(project, abiProject, provider);
+  return projectContract.connect(signer);
+}
+
+export async function getWithdrawalFees(pWithSigner){
+  const fees = (await pWithSigner.getWithdrawalFee()).add((await pWithSigner.getStakingRewards()));
+  console.log(fees.toString());
+  return fees;
 }
 
 export async function withdraw(project) {
@@ -231,10 +247,19 @@ export async function withdraw(project) {
   const signer = provider.getSigner();
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const pWithSigner = projectContract.connect(signer);
-  if(await pWithSigner.dptAddressesSet()) console.log(await pWithSigner.getWithdrawalFee()+await pWithSigner.getStakingRewards())
+
+  /*const amount = await getWithdrawalFees(pWithSigner);
+  const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
+  console.log((await dptContract.balanceOf(await getProvider())).toString())
+  console.log(amount.toString())
+  console.log( (amount.lte(await dptContract.balanceOf(await getProvider())) ));*/
+
+  if(await pWithSigner.dptAddressesSet()) {
+    const amount = await getWithdrawalFees(pWithSigner);
+    await allowDptPay(signer, projectContract, project, amount);
+  }
   try {
-    await allowDptPay(signer, projectContract, project);
-    await pWithSigner.withdraw();
+    await pWithSigner.withdraw(); // still asking me to pay way to much dpt
   } catch (e) {
     console.error(e);
   }
@@ -245,7 +270,7 @@ export async function stakeProject(project, amount, t) {
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
-  await allowDptPay(signer, projectContract, project);
+  await allowDptPay(signer, projectContract, project, amount);
   try {
     const tx = await pWithSigner.stake(ethers.utils.parseUnits(amount.toString(), 18));
     await tx.wait(1);
