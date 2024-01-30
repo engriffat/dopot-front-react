@@ -371,7 +371,7 @@ const Home = () => {
                     <h4>01</h4>
                     <div>
                       <h6>{t("01title")}</h6>
-                      <p>DAO Launch & DPT Token ILO with vesting (presale)</p>
+                      <p>Mainnet Launch & Private Sale with Vesting start: March 2024</p>
                     </div>
                   </div>
                 </div>
@@ -394,7 +394,7 @@ const Home = () => {
                     <h4>02</h4>
                     <div>
                       <h6>{t("02title")}</h6>
-                      <p>DPT public sale</p>
+                      <p>ILO (Pre Sale) with Vesting start: July/August 2024</p>
                     </div>
                   </div>
                 </div>
@@ -417,7 +417,7 @@ const Home = () => {
                     <h4>03</h4>
                     <div>
                       <h6>{t("03title")}</h6>
-                      <p>Reward Crowdfunding protocol launch </p>
+                      <p>Public Sale start: when ILO is done</p>
                     </div>
                   </div>
                 </div>
@@ -440,7 +440,7 @@ const Home = () => {
                     <h4>04</h4>
                     <div>
                       <h6>{t("04title")}</h6>
-                      <p>Equity protocol launch</p>
+                      <p>Equity protocol launch target for 2030</p>
                     </div>
                   </div>
                 </div>
