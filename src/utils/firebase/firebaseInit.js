@@ -4,7 +4,7 @@ import { Buffer } from "buffer"
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const contractTxId = "87UyXJ4X-nyR7RvQkcuNIkdr2z5tAxP4iYwFh-BpKe0";
+const contractTxId = "VcY3m0ZZ1OBWmvtVWmCSFAxqIcqT86Vy4cymX2gDZo8";
 export let db;
 
 export async function init ()  {

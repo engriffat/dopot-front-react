@@ -218,7 +218,7 @@ export async function refundNft(project, tokenId, t, navigate) {
 async function allowDptPay(signer, projectContract, project, amount){
   const address = await getProvider();
   if(await projectContract.dptAddressesSet()){
-    const infinite = ethers.BigNumber.from(amount || "115792089237316195423570985008687907853269984665640564039457584007913129639935");
+    const infinite = /*amount ||*/ "115792089237316195423570985008687907853269984665640564039457584007913129639935";
     const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
     const fWithSigner = dptContract.connect(signer);
     const allowance = await dptContract.allowance(address, project);
@@ -285,7 +285,6 @@ export async function unstakeProject(project) {
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
-  await allowDptPay(signer, projectContract, project);
   try {
     const tx = await pWithSigner.unstake();
     await tx.wait(1);
@@ -300,7 +299,7 @@ export async function postpone(project) {
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
-  await allowDptPay(address, signer, projectContract, project);
+  await allowDptPay(signer, projectContract, project);
   try {
     await pWithSigner.postponeDeadline();
   } catch (e) {
