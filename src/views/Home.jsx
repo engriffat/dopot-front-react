@@ -371,7 +371,7 @@ const Home = () => {
                     <h4>01</h4>
                     <div>
                       <h6>{t("01title")}</h6>
-                      <p>Mainnet Launch & Private Sale with Vesting start: March 2024</p>
+                      <p>Mainnet Launch & Private Sale: Q2 2024</p>
                     </div>
                   </div>
                 </div>
@@ -394,7 +394,7 @@ const Home = () => {
                     <h4>02</h4>
                     <div>
                       <h6>{t("02title")}</h6>
-                      <p>ILO (Pre Sale) with Vesting start: July/August 2024</p>
+                      <p>ILO (Pre Sale) with Vesting: Q1 2025</p>
                     </div>
                   </div>
                 </div>
@@ -417,7 +417,7 @@ const Home = () => {
                     <h4>03</h4>
                     <div>
                       <h6>{t("03title")}</h6>
-                      <p>Public Sale start: when ILO is done</p>
+                      <p>Public Sale: Q2 2025</p>
                     </div>
                   </div>
                 </div>
@@ -440,7 +440,8 @@ const Home = () => {
                     <h4>04</h4>
                     <div>
                       <h6>{t("04title")}</h6>
-                      <p>Equity protocol launch target for 2030</p>
+                      <p>Listing on CEX in Q4 2025 
+                      <br />and Equity launch in Q2 2026</p>
                     </div>
                   </div>
                 </div>
