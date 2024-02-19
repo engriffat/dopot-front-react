@@ -41,19 +41,15 @@ const PaginaCard = () => {
   const [progettiStakes, setProgettiStakes] = useState([]);
 
   let { address } = useParams();
-  useEffect(() => {
-    (async () => {
-      await downloadProjects(t);
-      const fav = await retriveFavorites();
-      setToggleHeart(fav ? fav.includes(address) : false);
-      setProgettiStakes(await retriveProjectStakes(address));
-    })();
-  });
   let progetto = getRecoil(progettiState).find((x) => x.address === address);
   const [base64Data, setBase64Data] = useState([]);
 
   useEffect(() => {
     const fetchBase64Data = async () => {
+      await downloadProjects(t);
+      const fav = await retriveFavorites();
+      setToggleHeart(fav ? fav.includes(address) : false);
+      setProgettiStakes(await retriveProjectStakes(address));
       for (const tier of progetto.imageNftDefListFiles) {
         const response = await fetch(
           tier["image"].replace("ar://", "https://arweave.net/")
@@ -64,7 +60,7 @@ const PaginaCard = () => {
     };
 
     fetchBase64Data();
-  }, []);
+  }, [progetto.imageNftDefListFiles, address, t]);
 
   const cards = [];
   let i = 1;
@@ -90,10 +86,7 @@ const PaginaCard = () => {
   const [tab, setTab] = useState(0);
 
   function isCurrentState(i) {
-    if (tab == i) {
-      return true;
-    }
-    return false;
+    return tab == i;
   }
 
   return (
@@ -122,7 +115,7 @@ const PaginaCard = () => {
                     <a
                       className="link-social-new "
                       href={progetto.sito}
-                      target="_blank"
+                      target="_blank" rel="noreferrer"
                     >
                       {progetto.sito}
                     </a>
