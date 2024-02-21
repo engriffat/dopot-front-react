@@ -65,6 +65,7 @@ const DopotShare = () => {
               </button>
             </div>
           </div>
+          {/* 
           <p>
             <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/6LJEa0nVHwM?si=Wpb7qapoZJUtU2_z" title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -92,7 +93,7 @@ const DopotShare = () => {
           <p>
             <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/bPraP1eXWIs?si=c2B-XCqhWhJF9ylE" title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </p>
+          </p>*/}
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />

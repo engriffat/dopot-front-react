@@ -69,6 +69,7 @@ const DopotToken = () => {
               </div>
             }
           </div>
+          {/* 
           <p>
             <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/neIUbrXIFQM?si=dAjEIhSioIqEJmhu" title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -96,7 +97,7 @@ const DopotToken = () => {
           <p>
             <iframe width="100%" height="250" src="https://www.youtube-nocookie.com/embed/P2fESTmoG8w?si=7gUBZ9mzJX5ikjJv" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </p>
+          </p>*/}
         </div>
         {/* <img className="dopot-power-img" src={PBottom} alt="PBottom" /> */}
         <Footer />

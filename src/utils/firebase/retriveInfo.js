@@ -118,12 +118,13 @@ export async function downloadProjects(t) {
     setRecoil(addressState, address)
     await init()
     const identity = await getIdentity(t)
-    const identityObj = { wallet: address, privateKey: identity.privateKey };
+    //const identityObj = { wallet: address, privateKey: identity.privateKey };
     try{
         let projects = getRecoil(progettiState)
         const dopotReward = new Contract(addressDopotReward, abiDopotReward, getRecoil(providerState));
         //if(!projects || projects.length === 0){
-            projects = await db.get("projects", identity);
+            projects = await db.get("projects"/*, identity*/);
+            console.dir(projects)
             for(let projdb of projects){
                 if(!projdb.address) continue;
                 const project = new Contract(projdb.address, abiProject, getRecoil(providerState));
