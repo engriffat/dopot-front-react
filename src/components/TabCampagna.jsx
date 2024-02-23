@@ -11,7 +11,7 @@ import { stakeProject, unstakeProject } from "../utils/firebase/writeInfos";
 const TabCampagna = (props) => {
   const { t, i18n } = useTranslation();
   const [stakedValue, setStakedValue] = useState(0);
-  const { progettiStakes } = props;
+  const { progettiStakes, state } = props;
 
   const handleChange = (e) => {
     setStakedValue(e.target.value);
@@ -60,7 +60,8 @@ const TabCampagna = (props) => {
       />
       <div className="button-container">
         <input className="grd-btn dopot-btn-sm" type="button" value="Stake" onClick={stake} />
-        <input style={{border:"0px"}} className="grd-btn dopot-btn-sm" type="button" value="Unstake All" onClick={unstake} />
+        {state && (state === "Successful" || state === "Expired" || state === "Cancelled") && 
+        <input style={{border:"0px"}} className="grd-btn dopot-btn-sm" type="button" value="Unstake All" onClick={unstake} />}
       </div>
       <div className="stakes">
       <h3>Stakes</h3>
