@@ -117,7 +117,8 @@ const Home = () => {
                         <img src={IconPlane} alt="IconPlane" /> {t("discovery")}
                       </button>
                     </a>
-                    <a style={{marginLeft:"5px"}} href={"https://app.camelot.exchange"}>
+                    
+                    {/*<a style={{marginLeft:"5px"}} href={"https://app.camelot.exchange"}>
                       <button className="grd-btn dopot-btn-lg-2"
                         data-aos="fade-down"
                         data-aos-easing="linear"
@@ -127,9 +128,25 @@ const Home = () => {
                       <img src={IconCamelot} alt="" />{" "}
                       Buy DPT
                     </button>
+                    </a>*/}
+                  </div>
+                  <div style={{marginTop:"2rem", display: 'flex', alignItems: 'center'}} className="mbb-content">
+                    <a href="https://www.dx.app/dxsale/view?address=0x9672876A9B1D3cB60E6942B068f432fA85CF3EE3&chain=42161" target="_blank" rel="noreferrer">
+                      <h4
+                        data-aos="fade-right"
+                        data-aos-delay="700"
+                        data-aos-duration="750"
+                        style={{ color: "white", fontWeight: "bold,", textDecoration: "underline" }}
+                      >
+                        {t("privateSaleLaunch")}
+                      </h4>
+                      <img data-aos="fade-right"
+                      data-aos-delay="700"
+                      data-aos-duration="750"
+                      style={{ maxWidth: "70px", width: "100%", height: "100%" }} src="https://i.ibb.co/BjTc2Qt/dxsale-logo.png" alt="dx-logo" />
                     </a>
                   </div>
-                  <div style={{marginTop:"2rem"}} className="mbb-content">
+                  {/*<div style={{marginTop:"2rem"}} className="mbb-content">
                   <a href={"https://app.camelot.exchange/nitro"}>
                       <button className="purple-border-transparent-btn dopot-btn-sm"
                         data-aos="fade-down"
@@ -152,7 +169,7 @@ const Home = () => {
                       Pool
                     </button>
                     </a>
-                  </div>
+                  </div>*/}
                 </div>
               </div>
             </div>

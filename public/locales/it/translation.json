@@ -284,5 +284,7 @@
   "unstakeDone": "Unstake completato!",
 
   "web3Notice": "La piattaforma richiede un wallet web3",
-  "adblockNotice": "Disattiva adblocker per garantire la piena funzionalità della piattaforma"
+  "adblockNotice": "Disattiva adblocker per garantire la piena funzionalità della piattaforma",
+
+  "privateSaleLaunch": "Vendita Privata Aperta Su"
 }

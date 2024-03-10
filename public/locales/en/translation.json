@@ -284,5 +284,7 @@
 
 
   "web3Notice": "The platform requires a web3 wallet",
-  "adblockNotice": "Disable ad blocker to ensure full functionality of the platform"
+  "adblockNotice": "Disable ad blocker to ensure full functionality of the platform",
+
+  "privateSaleLaunch": "Private Sale launched On"
 }
