@@ -106,13 +106,13 @@ const Header = (props) => {
                     bgColor="#EE1D52"
                     url="https://www.tiktok.com/@dopotfi"
                   />
-                </a> */}
+                </a> 
                 <a>
                   <SocialIcon
                     fgColor="white"
                     url="https://reddit.com/r/dopotfi/s/qWC4ui9Fl9"
                   />
-                </a>
+                </a>*/}
                 <a>
                   <SocialIcon
                     fgColor="white"
@@ -222,13 +222,13 @@ const Header = (props) => {
                       bgColor="#EE1D52"
                       url="https://www.tiktok.com/@dopotfi"
                     /> 
-                  </a>*/}
+                  </a>
                   <a>
                     <SocialIcon
                       fgColor="white"
                       url="https://reddit.com/r/dopotfi/s/qWC4ui9Fl9"
                     />
-                  </a>
+                  </a>*/}
                   <a>
                     <SocialIcon
                       fgColor="white"

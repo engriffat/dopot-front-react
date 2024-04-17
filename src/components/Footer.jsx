@@ -88,15 +88,16 @@ const Footer = () => {
                 fgColor="white"
                 bgColor="#EE1D52"
                 url="https://www.tiktok.com/@dopotfi"
-              /> */}
+              /> 
               <SocialIcon
                 fgColor="white"
                 url="https://reddit.com/r/dopotfi/s/qWC4ui9Fl9"
-              />
+              />*/}
               <SocialIcon fgColor="white" url="https://discord.gg/j8xxZFsyvd" />
+              <SocialIcon fgColor="white" url="https://t.me/dopotfi" />
             </div>
             <div className="footer-social-div">
-              <SocialIcon fgColor="white" url="https://t.me/dopotfi" />
+              
             </div>
           </div>
           <div className="footer-grid-box">
