@@ -9,7 +9,7 @@ export let webIrys;
 const { Readable } = require('stream-browserify');
 
 export const initialiseBundlr = async (provider) => {  
-	const url = "https://devnet.irys.xyz"; //"https://node2.irys.xyz" TODO: change for arbitrum mainnet
+	const url = "https://arweave.mainnet.irys.xyz";
 	const token = "matic";
 	const rpcURL = "https://endpoints.omniatech.io/v1/matic/mumbai/public";
  	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider };
@@ -39,8 +39,7 @@ async function contrattoprojectFactory(quota, giorniCampagna){
 
   export async function bundlrFund(){
     const nodeBalance = webIrys.utils.fromAtomic(await webIrys.getLoadedBalance());
-    if(nodeBalance < 0.05) // TODO: change to eth for arbitrum mainnet
-      await webIrys.fund(10 ** 18/2/10); //0.05 matic
+    if(nodeBalance < 0.0001) await webIrys.fund(10 ** 18 / 10000); // eth
   }
 
   export async function bundlrAdd(obj, contentType){ 

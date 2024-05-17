@@ -256,7 +256,7 @@ const Profile = () => {
                             <div>{t("getrefund")}</div>
                           </a>
                           <a
-                            href={`https://resolve.kleros.io/create/`} // TODO: update for kleros 2.0 if needed
+                            href={`https://resolve.kleros.io/create/`} // update for kleros 2.0 if needed
                             target="_blank"
                             rel="noreferrer"
                           >

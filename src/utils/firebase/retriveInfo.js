@@ -17,23 +17,23 @@ export async function getProvider(){ let signer;
     try {
         await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x13881' }],
+            params: [{ chainId: '0xa4b1' }],
         });
     } catch (switchError) {
-        if (switchError.code === 4902) { // TODO: change for arbitrum mainnet
+        if (switchError.code === 4902) {
             try {
             await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
                 params: [{
-                chainId: "0x13881",
-                rpcUrls: ["https://polygon-mumbai.gateway.tenderly.co"],
-                 chainName: "Mumbai Testnet",
+                chainId: "0xa4b1",
+                rpcUrls: ["https://arbitrum.llamarpc.com"],
+                 chainName: "Arbitrum One",
                 nativeCurrency: {
-                    name: "MATIC",
-                    symbol: "MATIC",
+                    name: "ETH",
+                    symbol: "ETH",
                     decimals: 18
                 },
-                blockExplorerUrls: ["https://mumbai.polygonscan.com"]
+                blockExplorerUrls: ["https://arbiscan.io"]
             }]
             });
             } catch (addError) {
@@ -80,7 +80,7 @@ async function getInvestors(projdb, dopotReward){
     const contract = new ethers.Contract(addressProjectFactory, abiProjectFactory, provider);
     let currentBlock = await provider.getBlockNumber();
     const endBlock = currentBlock;
-    currentBlock = currentBlock - (39272 * 120); // Polygon blocks per day * 120 days TODO: change to arbitrum
+    currentBlock = currentBlock - (337510 * 120); // Arbitrum blocks per day * 120 days
     const batchSize = 3500;
     if (blockHeight > currentBlock) currentBlock = blockHeight;
 
