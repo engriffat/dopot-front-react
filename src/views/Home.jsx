@@ -71,7 +71,7 @@ const Home = () => {
         {/* Temporary Message */}
         {isTempMsgHidden ? null : (
           <div className="temp-msg">
-            <p>Currently in testing phase 🔨</p>
+            <p>Dopot is live on Arbitrum One!</p>
             <div
               onClick={() => {
                 setIsTempMsgHidden(true);
