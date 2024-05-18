@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import addressDpt from '../../abi/dpt/address.js';
 
-const contractTxId = "VcY3m0ZZ1OBWmvtVWmCSFAxqIcqT86Vy4cymX2gDZo8";
+const contractTxId = "NkYdataKkg9KYtjbopSyjqeFTfBGEa6h66zHSdB33W8";
 export let db;
 
 async function addDptToken() {
