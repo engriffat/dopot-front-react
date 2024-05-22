@@ -351,7 +351,7 @@ const InsProgetto = () => {
                   <div className="pts-right-grid-card">
                     <a
                       href={
-                        "https://app.aragon.org/#/daos/mumbai/0xc49a8a1f52e7bb17b0656f985b03ae5ef153d844/dashboard"
+                        "https://app.aragon.org/#/daos/arbitrum/0x8115cf635a71fe591b9c74d706a6d028ba44a776/dashboard"
                       }
                       target="_blank"
                       rel="noreferrer"
@@ -360,7 +360,7 @@ const InsProgetto = () => {
                     </a>
                     <a
                       href={
-                        "https://app.aragon.org/#/daos/mumbai/0xc49a8a1f52e7bb17b0656f985b03ae5ef153d844/dashboard"
+                        "https://app.aragon.org/#/daos/arbitrum/0x8115cf635a71fe591b9c74d706a6d028ba44a776/dashboard"
                       }
                       target="_blank"
                       rel="noreferrer"
