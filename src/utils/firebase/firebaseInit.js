@@ -34,7 +34,7 @@ export async function init ()  {
   try{
     window.Buffer = Buffer
     if(!db){
-      db = new WeaveDB({ contractTxId, remoteStateSyncSource: "https://dre-3.warp.cc/contract", type: 2 });
+      db = new WeaveDB({ contractTxId, remoteStateSyncEnabled: true, remoteStateSyncSource: "https://dre-1.warp.cc/contract" });
       await db.init();
     }
   } catch (e) { console.log(e)}
