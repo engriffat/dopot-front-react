@@ -11,6 +11,7 @@ import DopotToken from "./views/DopotToken";
 import DopotShare from "./views/DopotShare";
 import XDao from "./views/XDao";
 import Impostazioni from "./views/Impostazioni";
+import Ambassador from './views/Ambassador';
 import FaqIta from "./views/FaqIta";
 import FaqEng from "./views/FaqEng";
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="impostazioni" element={<Impostazioni />} />
         <Route path="loading" element={<LoadingPage />} />
         <Route path="dopottoken" element={<DopotToken />} />
+        <Route path="ambassador" element={<Ambassador />} />
         <Route path="FaqEng" element={<FaqEng />} />
         <Route path="FaqIta" element={<FaqIta />} />
       </Routes>

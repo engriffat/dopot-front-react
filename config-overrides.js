@@ -15,6 +15,14 @@ module.exports = function override(config) {
         "zlib": require.resolve("browserify-zlib"),
         "fs": false,
     })
+    config.module = config.module || {};
+    config.module.rules = (config.module.rules || []).concat([
+        {
+          test: /\.pdf$/,
+          use: 'file-loader',
+        },
+    ]);
+    
     config.resolve.fallback = fallback;
     config.plugins = (config.plugins || []).concat([
         new webpack.ProvidePlugin({
