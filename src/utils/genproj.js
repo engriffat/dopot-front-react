@@ -10,10 +10,10 @@ const { Readable } = require('stream-browserify');
 
 export const initialiseBundlr = async (provider) => {  
 	const url = "https://arweave.mainnet.irys.xyz";
-	const token = "matic";
-	const rpcURL = "https://endpoints.omniatech.io/v1/matic/mumbai/public";
+	const token = "arbitrum";
+	const rpcURL = "https://arbitrum.llamarpc.com";
  	const wallet = { rpcUrl: rpcURL, name: "ethersv5", provider };
-  webIrys = new WebIrys({ url, token, wallet });
+  webIrys = new WebIrys({ network: "arbitrum", url, token, wallet });
 	await webIrys.ready();
 };
 
