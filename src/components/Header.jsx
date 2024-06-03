@@ -71,7 +71,8 @@ const Header = (props) => {
           <div className="header-right">
             <a href="/#/">Home</a>
             <a href="/#/FaqIta">Tutorials</a>
-            <a href={"/#/dopottoken"}>Dopot Token</a>
+            <a href="/#/ambassador">Ambassador</a>
+            <a href={"/#/dopottoken"}>Dpt Token</a>
 
             <div style={{ marginRight: "1.5rem" }} className="dropdown_menu">
               <button className="dropbtn">
@@ -140,7 +141,6 @@ const Header = (props) => {
                 <a href={Pdf}>Whitepaper</a>
                 <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
                 <a href="https://github.com/solidproof/projects/blob/main/2024/Dopot/SmartContract_Audit_Solidproof_DopotFi.pdf">Audit</a>
-                <a href="/#/ambassador">Ambassador Program</a>
               </div>
             </div>
             {walletState && (
@@ -190,7 +190,8 @@ const Header = (props) => {
             <div className="header-mob-box">
               <a href="#">Home</a>
               <a href="/#/FaqIta">Tutorials</a>
-              <a href={"/#/dopottoken"}>Dopot Token</a>
+              <a href={"/#/dopottoken"}>DPT Token</a>
+              <a href="/#/ambassador">Ambassador</a>
               <div style={{ marginRight: "1.5rem" }} className="dropdown_menu">
                 <button className="dropbtn">
                   Community{" "}
@@ -257,6 +258,7 @@ const Header = (props) => {
                 <div className="dropdown-content-menu">
                   <a href={Pdf}>Whitepaper</a>
                   <a href="https://dopot.gitbook.io/dopot/">Gitbook</a>
+                  <a href="https://github.com/solidproof/projects/blob/main/2024/Dopot/SmartContract_Audit_Solidproof_DopotFi.pdf">Audit</a>
                 </div>
               </div>
 
