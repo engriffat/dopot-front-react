@@ -38,8 +38,9 @@ async function contrattoprojectFactory(quota, giorniCampagna){
   }
 
   export async function bundlrFund(){
-    const nodeBalance = webIrys.utils.fromAtomic(await webIrys.getLoadedBalance());
-    if(nodeBalance < 0.0001) await webIrys.fund(10 ** 18 / 10000); // eth
+    const nodeBalance = webIrys.utils.fromAtomic(await webIrys.getLoadedBalance()).toString();
+    console.log(nodeBalance);
+    if(nodeBalance < 0.00008) await webIrys.fund(webIrys.utils.toAtomic(0.00008)); // eth
   }
 
   export async function bundlrAdd(obj, contentType){ 

@@ -96,6 +96,7 @@ const Faq = (props) => {
       })()}
 
       <div className="proceed-btn-box">
+        <p style={{fontSize: 15, alignSelf: 'center', marginRight: 10}}>Min ~0.0008 eth</p>
         <input className="grd-btn dopot-btn-lg" type="submit" />
       </div>
     </>
