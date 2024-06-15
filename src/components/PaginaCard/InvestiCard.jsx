@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const InvestiCard = (props) => {
   const { state, titolo, price, spec, currentSupply, supply } = props;
   let { img } = props;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   async function invest(){
     try {
       await toast.promise(addInvestment(props.address, props.numTier, price, titolo, t), {

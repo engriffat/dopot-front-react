@@ -6,15 +6,12 @@ import PCUserIcon from "../assets/img/pc-person-icon.png";
 import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { progettiState } from "../recoilState";
-import { getRecoil, setRecoil } from "recoil-nexus";
+import { getRecoil } from "recoil-nexus";
 import { useNavigate } from "react-router-dom";
-import { addFavorites } from "../utils/firebase/writeInfos";
-import IconPlane from "../assets/img/icon-plane.svg";
-import IconHeart from "../assets/img/pc-heart-icon-02.svg";
 import {RetriveProjectTypes} from "../utils/firebase/retriveInfo";
 
 const SmallProject = (props) => {
-  var progetto = getRecoil(progettiState).find(
+  let progetto = getRecoil(progettiState).find(
     (x) => x.address === props.address
   );
 
@@ -54,14 +51,14 @@ const SmallProject = (props) => {
 
         <input
           type="checkbox"
-          class="read-more-state"
+          className="read-more-state"
           id="post-{progetto.nomeAzienda}"
         />
-        <p class="read-more-target box-bk-over-logo">{progetto.introduzione}</p>
+        <p className="read-more-target box-bk-over-logo">{progetto.introduzione}</p>
         {progetto.introduzione.length > 200 ? (
           <label
             for="post-{progetto.nomeAzienda}"
-            class="read-more-trigger"
+            className="read-more-trigger"
           ></label>
         ) : null}
       </div>

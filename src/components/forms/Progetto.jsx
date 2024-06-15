@@ -3,7 +3,7 @@ import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 import { useTranslation } from "react-i18next";
 
 const Progetto = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [campagna, setcampagna] = useState("reward");
   const [giorniCampagna, setgiorniCampagna] = useState("45");
   const [val, setVal] = useState([]);
@@ -237,35 +237,34 @@ const Progetto = (props) => {
 };
 
 const ProgettoHeader = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
-    <>
-      <div className="ins-progress">
-        <div className="ins-circle ins-circle-done">
-          <p>{t("infobase")}</p>
-        </div>
-        <div className="ins-line ins-line-done"></div>
-        <div className="ins-circle ins-circle-done">
-          <p>{t("survey")}</p>
-        </div>
-        <div className="ins-line ins-line-done"></div>
-        <div className="ins-circle ins-circle-active">
-          <p>{t("project")}</p>
-        </div>
-        <div className="ins-line ins-line-pending"></div>
-        <div className="ins-circle ins-circle-pending">
-          <p>{t("product")}</p>
-        </div>
-        <div className="ins-line ins-line-pending"></div>
-        <div className="ins-circle ins-circle-pending">
-          <p>NFTs Mint</p>
-        </div>
-        <div className="ins-line ins-line-pending"></div>
-        <div className="ins-circle ins-circle-pending">
-          <p>FAQ</p>
-        </div>
+    <div className="ins-progress">
+      <div className="ins-circle ins-circle-done">
+        <p>{t("infobase")}</p>
       </div>
-    </>
+      <div className="ins-line ins-line-done"></div>
+      <div className="ins-circle ins-circle-done">
+        <p>{t("survey")}</p>
+      </div>
+      <div className="ins-line ins-line-done"></div>
+      <div className="ins-circle ins-circle-active">
+        <p>{t("project")}</p>
+      </div>
+      <div className="ins-line ins-line-pending"></div>
+      <div className="ins-circle ins-circle-pending">
+        <p>{t("product")}</p>
+      </div>
+      <div className="ins-line ins-line-pending"></div>
+      <div className="ins-circle ins-circle-pending">
+        <p>NFTs Mint</p>
+      </div>
+      <div className="ins-line ins-line-pending"></div>
+      <div className="ins-circle ins-circle-pending">
+        <p>FAQ</p>
+      </div>
+    </div>
+    
   );
 };
 

@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../styles/components/header.css";
 import { MdMenu, MdClear } from "react-icons/md";
 import LogoWhite from "../assets/img/logo-white.svg";
-import { Outlet, Link } from "react-router-dom";
 import Pdf from "../assets/dopot.pdf";
 import { SocialIcon } from "react-social-icons";
 import IconDown from "../assets/img/arr-menu.svg";
 import { useTranslation } from "react-i18next";
 import { FaTimes } from 'react-icons/fa';
-
-//import GetAccount from "../utils/ethersUtils.js";
 import { getAddr } from "../utils/firebase/retriveInfo";
 import { ethers } from "ethers";
 
@@ -40,10 +37,8 @@ function deleteCookiesAndReload() {
     return Promise.all(deletePromises);
   }).then((results) => {
     console.log(results);
-    //window.location.reload();
   }).catch((error) => {
     console.error(error);
-    //window.location.reload();
   });
 }
 

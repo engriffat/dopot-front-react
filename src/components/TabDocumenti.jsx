@@ -5,9 +5,8 @@ import { pdfjs, Document, Page } from "react-pdf";
 import { useTranslation } from "react-i18next";
 
 const TabDocumenti = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
   const [showPdfs, setShowPdfs] = useState(
     Array(props.progetto.documentazioneListFiles.length).fill(false)
   );
