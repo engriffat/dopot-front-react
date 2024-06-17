@@ -8,12 +8,12 @@ import Profile from "./views/Profile";
 import Swap from "./views/Swap";
 import LoadingPage from "./views/LoadingPage";
 import DopotToken from "./views/DopotToken";
+import DopotShare from "./views/DopotShare";
 import XDao from "./views/XDao";
 import Impostazioni from "./views/Impostazioni";
 import Ambassador from './views/Ambassador';
 import FaqIta from "./views/FaqIta";
 import FaqEng from "./views/FaqEng";
-import Weavetry from "./views/weavetry";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { HashRouter, Routes, Route } from "react-router-dom";
@@ -38,10 +38,11 @@ function App() {
         <Route path="ambassador" element={<Ambassador />} />
         <Route path="FaqEng" element={<FaqEng />} />
         <Route path="FaqIta" element={<FaqIta />} />
-        <Route path="weavetry" element={<Weavetry />} />
       </Routes>
     </HashRouter>
   );
+
+  return <Page />;
 }
 
 export default App;

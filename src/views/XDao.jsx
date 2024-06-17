@@ -1,17 +1,32 @@
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
+import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
+import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
 import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
 import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/impostazioni.png";
-import React from "react";
-import { getRecoil } from "recoil-nexus";
+import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
+import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
+import BlogImg from "../assets/img/void.jpg";
+import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
+import React, { useState, useEffect } from "react";
+import { getRecoil, setRecoil } from "recoil-nexus";
 import { addressState } from "../recoilState";
+
 import "react-circular-progressbar/dist/styles.css";
+import SmallProject from "../components/SmallProject";
+import SmallTier from "../components/SmallTier";
+import {
+  retriveFavorites,
+  retriveInvestment,
+} from "../utils/firebase/retriveInfo";
+
+
 
 const Profile = () => {
   const address = getRecoil(addressState);

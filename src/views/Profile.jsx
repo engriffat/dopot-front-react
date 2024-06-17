@@ -2,7 +2,9 @@ import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
+import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
+// import ProfileIcon2 from "../assets/img/profile-icon-camp.png";
 import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
 import ProfileIcon4 from "../assets/img/profile-icon-4.png";
@@ -11,7 +13,7 @@ import ProfileIcon6 from "../assets/img/identity.png";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import React, { useState, useEffect } from "react";
-import { getRecoil } from "recoil-nexus";
+import { getRecoil, setRecoil } from "recoil-nexus";
 import {
   addressState,
   progettiState,
@@ -22,10 +24,14 @@ import "react-circular-progressbar/dist/styles.css";
 import CardPref from "../components/PaginaCard/CardPref";
 import { useTranslation } from "react-i18next";
 
-import { retriveFavorites } from "../utils/firebase/retriveInfo";
+import {
+  retriveFavorites,
+  retriveInvestment,
+} from "../utils/firebase/retriveInfo";
+import IconDown from "../assets/img/arr-menu.svg";
 
 const Profile = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [investedCard, setinvestedCard] = useState([]);
   const [favoriteCard, setfavoriteCard] = useState([]);
   const [isActive, setActive] = useState(true);
@@ -38,6 +44,7 @@ const Profile = () => {
     async function fetchData() {
       let tempCard = [];
       const favorites = await retriveFavorites();
+      //console.dir(projects);
       for (const project of projects) {
         if(!project.investors) continue;
         let tiers = project.investors[address];

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/globals.css";
 import "../styles/ins-progetto.css";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { InfBase, InfBaseHeader } from "../components/forms/InfBase";
 import {
   Questionario,
@@ -10,12 +11,15 @@ import {
 import { Progetto, ProgettoHeader } from "../components/forms/Progetto";
 import { Prodotto, ProdottoHeader } from "../components/forms/Prodotto";
 import { Faq, FaqHeader } from "../components/forms/Faq";
+import { NftMint, NftMintHeader } from "../components/forms/NftMint";
 
 import { addproj } from "../utils/firebase/writeInfos";
 import Footer from "../components/Footer";
 
-import { getRecoil } from "recoil-nexus";
+import { getRecoil, setRecoil } from "recoil-nexus";
 import { addressState } from "../recoilState";
+import ProfileHero from "../assets/img/pc-hero-img.png";
+import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
 import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
@@ -25,6 +29,7 @@ import ProfileIcon6 from "../assets/img/identity.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+const { ethers } = require("ethers");
 
 function getFileExtension(filename) {
   // Find the last occurrence of a dot (.) in the filename
@@ -41,8 +46,8 @@ function getFileExtension(filename) {
 }
 
 const InsProgetto = () => {
-  const { t } = useTranslation();
-  let step = [];
+  const { t, i18n } = useTranslation();
+  var step = [];
   const [inputs, setInputs] = useState({
     logoAziendaListFiles: [],
     documentazioneListFiles: [],
@@ -58,6 +63,7 @@ const InsProgetto = () => {
     rispostaDomanda: [],
   });
   const [progressionStep, setprogressionStep] = useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     let name = e.target.name;
@@ -241,6 +247,9 @@ const InsProgetto = () => {
             handleChangeNft={handleChangeNft}
           ></Prodotto>
         );
+        /*step[4] = (
+          <NftMint inputs={inputs} handleChange={handleChange}></NftMint>
+        );*/
         step[4] = (
           <Faq
             inputs={inputs}

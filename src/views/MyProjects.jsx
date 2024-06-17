@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
+import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
 import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
@@ -10,6 +11,7 @@ import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/identity.png";
 import IconPlane from "../assets/img/icon-plane.svg";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
+import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
 import React, { useState, useEffect } from "react";
 import { getRecoil } from "recoil-nexus";
 import {
@@ -25,7 +27,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [projectsCard, setProjectsCard] = useState([]);
   const address = getRecoil(addressState);
   let projects = getRecoil(progettiState);

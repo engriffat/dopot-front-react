@@ -3,7 +3,9 @@
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
+import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
+import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
 import ProfileIcon2 from "../assets/img/ins-project-def.png";
 import ProfileIcon3 from "../assets/img/profile-icon-3.png";
@@ -12,21 +14,30 @@ import ProfileIcon5 from "../assets/img/widget.png";
 import ProfileIcon6 from "../assets/img/identity.png";
 import ProfileIconGrd1 from "../assets/img/profile-icon-grd-1.png";
 import ProfileIconGrd2 from "../assets/img/profile-icon-grd-2.png";
+import BlogImg from "../assets/img/void.jpg";
+import ProfileCardLeft from "../components/Profile/ProfileCardLeft";
 import React, { useState, useEffect } from "react";
-import { getRecoil } from "recoil-nexus";
+import { getRecoil, setRecoil } from "recoil-nexus";
 import { addressState, progettiState } from "../recoilState";
 import { useNavigate } from "react-router-dom";
 import "react-circular-progressbar/dist/styles.css";
+import SmallProject from "../components/SmallProject";
+import SmallTier from "../components/SmallTier";
 import { useTranslation } from "react-i18next";
-import { getNftImage } from "../utils/firebase/retriveInfo";
+import {
+  retriveFavorites,
+  retriveInvestment,
+  getNftImage,
+} from "../utils/firebase/retriveInfo";
 import { addShippingDetailsNft, refundNft } from "../utils/firebase/writeInfos";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [investedCard, setinvestedCard] = useState([]);
   let projects = getRecoil(progettiState);
   const address = getRecoil(addressState);
+  const [isActive, setActive] = useState(false);
   const [isActive2, setActive2] = useState(true);
 
   useEffect(() => {

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import HeroImg from "../assets/img/hero.png";
+import LogoWhite from "../assets/img/logo-white.svg";
+import IconWhitePaper from "../assets/img/icon-whitepaper.svg";
 import IconPlane from "../assets/img/icon-plane.svg";
+import IconCamelot from "../assets/img/camelot.svg";
+import IconUniswap from "../assets/img/uniswap.png";
 import IconArrowGrd from "../assets/img/icon-arrow-02-02.svg";
+import IconDollarGrd from "../assets/img/icon-dollar-02.svg";
 import IconPersonGrd from "../assets/img/icon-person-02.svg";
 import IconCommentsGrd from "../assets/img/icon-comments-02.svg";
 import PlaneLaptopPlanet from "../assets/img/plane-laptop-planet-full-2.png";
@@ -9,6 +14,10 @@ import BitcoinPeople from "../assets/img/bitcoin-people.png";
 import ScelgonoImg1 from "../assets/img/scelgono-img-1.png";
 import ScelgonoImg2 from "../assets/img/scelgono-img-2.png";
 import ScelgonoImg3 from "../assets/img/scelgono-img-3.png";
+import HandToHand from "../assets/img/hand-to-hand.png";
+import LeftWave from "../assets/img/left-wave-02.svg";
+import RightWave from "../assets/img/right-wave-02.svg";
+import PlanetCoreImg from "../assets/img/planet-core-img.png";
 import RoboImg from "../assets/img/robo-img.png";
 import DaiBg from "../assets/img/dai-bg.png";
 import ProfitIcon from "../assets/img/profit-icon-02.svg";
@@ -23,12 +32,14 @@ import Planet1 from "../assets/img/planet-1-02.svg";
 import Planet2 from "../assets/img/planet-2-02.svg";
 import Planet3 from "../assets/img/planet-3-02.svg";
 import Planet4 from "../assets/img/planet-4-02.svg";
+import Planet5 from "../assets/img/planet-5-02.svg";
 import "../styles/home.css";
 import "../styles/globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { MdClear } from "react-icons/md";
+import { MdMenu, MdClear } from "react-icons/md";
 import { useTranslation } from "react-i18next";
+import Pdf from "../assets/dopot.pdf";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -36,7 +47,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { checkAdBlock } from "adblock-checker";
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isTempMsgHidden, setIsTempMsgHidden] = useState(false);
   AOS.init();
   
@@ -107,6 +118,17 @@ const Home = () => {
                       </button>
                     </a>
                     
+                    {/*<a style={{marginLeft:"5px"}} href={"https://app.camelot.exchange"}>
+                      <button className="grd-btn dopot-btn-lg-2"
+                        data-aos="fade-down"
+                        data-aos-easing="linear"
+                        data-aos-duration="650"
+                        data-aos-delay="1500">
+                      {" "}
+                      <img src={IconCamelot} alt="" />{" "}
+                      Buy DPT
+                    </button>
+                    </a>*/}
                   </div>
                   <div style={{marginTop:"2rem", display: 'flex', alignItems: 'center'}} className="mbb-content">
                     <a href="https://www.dx.app/dxsale/view?address=0x9672876A9B1D3cB60E6942B068f432fA85CF3EE3&chain=42161" target="_blank" rel="noreferrer">
@@ -124,6 +146,30 @@ const Home = () => {
                       style={{ maxWidth: "70px", width: "100%", height: "100%" }} src="https://i.ibb.co/BjTc2Qt/dxsale-logo.png" alt="dx-logo" />
                     </a>
                   </div>
+                  {/*<div style={{marginTop:"2rem"}} className="mbb-content">
+                  <a href={"https://app.camelot.exchange/nitro"}>
+                      <button className="purple-border-transparent-btn dopot-btn-sm"
+                        data-aos="fade-down"
+                        data-aos-easing="linear"
+                        data-aos-duration="650"
+                        data-aos-delay="2000">
+                      {" "}
+                      <img src={IconCamelot} alt="" />{" "}
+                      Stake
+                    </button>
+                    </a>
+                    <a href={"https://app.uniswap.org/pools"}>
+                      <button className="purple-border-transparent-btn dopot-btn-sm"
+                        data-aos="fade-down"
+                        data-aos-easing="linear"
+                        data-aos-duration="650"
+                        data-aos-delay="2500">
+                      {" "}
+                      <img src={IconUniswap} alt="" />{" "}
+                      Pool
+                    </button>
+                    </a>
+                  </div>*/}
                 </div>
               </div>
             </div>

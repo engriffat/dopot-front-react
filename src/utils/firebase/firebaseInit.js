@@ -34,7 +34,7 @@ export async function init ()  {
   try{
     window.Buffer = Buffer
     if(!db){
-      db = new WeaveDB({ contractTxId });
+      db = new WeaveDB({ contractTxId, remoteStateSyncEnabled: true, remoteStateSyncSource: "https://dre-1.warp.cc/contract" });
       await db.init();
     }
   } catch (e) { console.log(e)}
@@ -46,7 +46,6 @@ export async function getIdentity(t){
     const storedIdentity = await get("weavedb-identity");
     if(!storedIdentity){
       toast.info(t("sign"));
-      console.dir(db);
       let { identity } = await db.createTempAddress();
       await set("weavedb-identity", identity);
       await addDptToken();

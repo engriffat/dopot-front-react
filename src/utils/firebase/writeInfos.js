@@ -2,10 +2,12 @@ import { db, getIdentity, init } from "./firebaseInit"
 import { getRecoil, setRecoil } from 'recoil-nexus';
 import { addressState, providerState, progettiState } from '../../recoilState';
 import { genproj, bundlrFund, bundlrAdd, contrattoProjectAddTier, initialiseBundlr, webIrys } from "../genproj"
-import { getProvider, provider, downloadProjects } from "./retriveInfo";
+import { getProvider, provider } from "./retriveInfo";
 import addressFundingToken  from '../../abi/fundingToken/address.js';
 import addressDpt from '../../abi/dpt/address.js';
+import { downloadProjects } from "./retriveInfo";
 import * as PushAPI from '@pushprotocol/restapi'; // prod/staging
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const abiProject = require('../../abi/project/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
@@ -246,6 +248,12 @@ export async function withdraw(project) {
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const pWithSigner = projectContract.connect(signer);
 
+  /*const amount = await getWithdrawalFees(pWithSigner);
+  const dptContract = new ethers.Contract(addressDpt, abiDpt, signer);
+  console.log((await dptContract.balanceOf(await getProvider())).toString())
+  console.log(amount.toString())
+  console.log( (amount.lte(await dptContract.balanceOf(await getProvider())) ));*/
+
   if(await pWithSigner.dptAddressesSet()) {
     const amount = await getWithdrawalFees(pWithSigner);
     await allowDptPay(signer, projectContract, project, amount);
@@ -287,7 +295,7 @@ export async function unstakeProject(project) {
 
 export async function postpone(project) {
   const provider = getRecoil(providerState);
-  await getProvider();
+  const address = await getProvider();
   const projectContract = new ethers.Contract(project, abiProject, provider);
   const signer = provider.getSigner()
   const pWithSigner = projectContract.connect(signer);
@@ -302,6 +310,7 @@ export async function postpone(project) {
 export async function addInvestment(pAddress, numTier, price, title, t) {
   const amount = ethers.utils.parseEther(price);
   numTier--;
+  let addressLogged=getRecoil(addressState)
   try {
     const address = await getProvider();
     const provider = getRecoil(providerState);

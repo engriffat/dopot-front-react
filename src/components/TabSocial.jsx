@@ -1,5 +1,15 @@
 import React from "react";
 import "../styles/components/footer.css";
+import {
+  InstagramEmbedm,
+  FacebookEmbedm,
+  TikTokEmbed,
+  TwitterEmbed,
+  YouTubeEmbed,
+  LinkedInEmbed,
+  InstagramEmbed,
+  FacebookEmbed,
+} from "react-social-media-embed";
 
 const TabSocial = (props) => {
   var socialList = [];

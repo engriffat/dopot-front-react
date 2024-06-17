@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import "../styles/dashboard.css";
 import "../styles/globals.css";
 import Header from "../components/Header";
 import "../styles/components/header.css";
-import { MdSearch, MdRefresh } from "react-icons/md";
+import "../styles/components/header.css";
+import { MdMenu, MdClear, MdSearch, MdFilterList, MdRefresh } from "react-icons/md";
+import LogoWhite from "../assets/img/logo-white.svg";
 import Card from "../components/PaginaCard/Card";
 import "react-circular-progressbar/dist/styles.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
 import { progettiState, progettiImageState } from "../recoilState";
-import { getRecoil } from "recoil-nexus";
+import { getRecoil, setRecoil } from "recoil-nexus";
 import Footer from "../components/Footer";
 import {
   downloadProjects,
@@ -20,10 +22,10 @@ import {
   getInsuranceFunds
 } from "../utils/firebase/retriveInfo";
 import useSearchForm from "./useSearchForm";
-const { ethers } = require("ethers");
+const { ethers, parseEther } = require("ethers");
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const handleSearch = useSearchForm();
   const [progettiFavourites, setProgettiFavourites] = useState([]);
   const [insuranceState, setInsuranceState] = useState(0);

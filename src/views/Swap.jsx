@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/globals.css";
 import "../styles/paginacard.css";
 import "../styles/profile.css";
+import ProfileHero from "../assets/img/pc-hero-img.png";
 import ProfileIconArrowLeft from "../assets/img/profile-icon-arrow-left.png";
 import ProfileImg from "../assets/img/profile-img.png";
 import ProfileIcon1 from "../assets/img/profile-icon-1.png";
@@ -16,6 +17,7 @@ import SwapBtn from "../assets/img/swap-btn.png";
 import "react-circular-progressbar/dist/styles.css";
 import { MdKeyboardArrowDown } from "react-icons/md";
 const Swap = () => {
+  const percentage = 65;
   return (
     <div className="app">
       <main className="profile-page">

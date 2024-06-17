@@ -1,5 +1,5 @@
 import { getRecoil, setRecoil } from 'recoil-nexus';
-import { addressState , progettiState, blockHeightState, providerState } from '../../recoilState';
+import { addressState , progettiState, blockHeightState, providerState, favouritesState } from '../../recoilState';
 import { db, getIdentity, init } from './firebaseInit';
 import addressProjectFactory from '../../abi/projectFactory/address.js';
 import addressFundingToken from '../../abi/fundingToken/address.js';
@@ -10,6 +10,7 @@ const abiProject = require('../../abi/project/1.json');
 const abiProjectFactory = require('../../abi/projectFactory/1.json');
 const abiFundingToken = require('../../abi/fundingToken/1.json');
 const abiDopotReward = require('../../abi/dopotReward/1.json');
+const ascii85 = require('ascii85');
 export let provider;
 
 export async function getProvider(){ let signer;
@@ -116,6 +117,8 @@ export async function downloadProjects(t) {
     const address = await getProvider()
     setRecoil(addressState, address)
     await init()
+    const identity = await getIdentity(t)
+    //const identityObj = { wallet: address, privateKey: identity.privateKey };
     try{
         let projects = getRecoil(progettiState)
         const dopotReward = new Contract(addressDopotReward, abiDopotReward, getRecoil(providerState));

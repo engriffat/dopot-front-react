@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "../styles/globals.css";
 import "../styles/paginacard.css";
+import PaginaCardHero from "../assets/img/pc-hero-img.png";
 import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
 import PCUserIcon from "../assets/img/pc-person-icon.png";
 import IconInfoDai from "../components/PaginaCard/IconInfoDai";
 
 import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
+import PC70 from "../assets/img/pc-70.png";
+import IconPlane from "../assets/img/icon-plane.svg";
 
 import ImageIcon from "../assets/img/pc-img-icon.png";
+import ImageBackLogo from "../assets/img/logo_Mentadent-2.png";
 import IconInfoCard from "../components/PaginaCard/IconInfoCard";
 import InvestiCard from "../components/PaginaCard/InvestiCard";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router-dom";
-import { progettiState } from "../recoilState";
-import { getRecoil } from "recoil-nexus";
+import { progettiState, progettiImageState } from "../recoilState";
+import { getRecoil, setRecoil } from "recoil-nexus";
 import TabCampagna from "../components/TabCampagna";
 import TabRoadmap from "../components/TabRoadmap";
 import TabFaq from "../components/TabFaq";
@@ -32,7 +36,7 @@ import IconHeart from "../assets/img/heart-fav.svg";
 import IconHeartActive from "../assets/img/heart-fav-active.svg";
 import { useTranslation } from "react-i18next";
 const PaginaCard = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [toggleHeart, setToggleHeart] = useState(false);
   const [progettiStakes, setProgettiStakes] = useState([]);
 
@@ -82,7 +86,7 @@ const PaginaCard = () => {
   const [tab, setTab] = useState(0);
 
   function isCurrentState(i) {
-    return tab === i;
+    return tab == i;
   }
 
   return (
@@ -135,9 +139,9 @@ const PaginaCard = () => {
                     style={{ background: "none", width: "10%" }}
                   >
                     {!toggleHeart ? (
-                      <img alt="Favourite" src={IconHeart} />
+                      <img src={IconHeart} />
                     ) : (
-                      <img alt="Unfavourite" src={IconHeartActive} />
+                      <img src={IconHeartActive} />
                     )}
                   </button>
                   {/* <button className="grd-btn dopot-btn-lg">
@@ -304,7 +308,7 @@ const PaginaCard = () => {
                   <div className="basic-info-box">
                     <div className="pmg-btn-box-nft">
                       <input type="checkbox" id="click" />
-                      <label htmlFor="click" style={{ cursor: "pointer" }}>
+                      <label for="click" style={{ cursor: "pointer" }}>
                         <img
                           src={(() => {
                             if (progetto.logoAziendaListFiles[0] != null) {
@@ -317,7 +321,7 @@ const PaginaCard = () => {
                           alt="ImageIcon"
                         />
                       </label>
-                      <div className="content logo-center">
+                      <div class="content logo-center">
                         <img
                           src={(() => {
                             if (progetto.logoAziendaListFiles[0] != null) {
@@ -329,8 +333,8 @@ const PaginaCard = () => {
                           })()}
                           alt="ImageIcon"
                         />
-                        <div className="text"></div>
-                        <label htmlFor="click" id="temp">
+                        <div class="text"></div>
+                        <label for="click" id="temp">
                           x
                         </label>
                       </div>
@@ -343,7 +347,6 @@ const PaginaCard = () => {
                         <a
                           className="link-social-new "
                           href={progetto.sito}
-                          rel="noreferrer"
                           target="_blank"
                         >
                           {progetto.sito}

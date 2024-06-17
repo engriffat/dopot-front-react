@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import IconInfoCard from "./IconInfoCard";
 import IconInfoDai from "./IconInfoDai";
 import PCDollarIcon from "../../assets/img/pc-dollar-icon.png";
@@ -7,13 +8,14 @@ import PCCalendarIcon from "../../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom";
 import Flag from "react-world-flags";
-import { addFavorites } from "../../utils/firebase/writeInfos";
+import { addFavorites, postpone } from "../../utils/firebase/writeInfos";
+// import IconHeart from "../../assets/img/pc-heart-icon-02.svg";
 import IconHeart from "../../assets/img/heart-fav.svg";
 import IconHeartActive from "../../assets/img/heart-fav-active.svg";
 import { useTranslation } from "react-i18next";
 
 const Card = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { progetto } = props;
   const percentage = (progetto.funds / progetto.quota) * 100;
@@ -55,7 +57,6 @@ const Card = (props) => {
               <a
                 className="link-social-new  box-bk-over-logo"
                 href={progetto.sito}
-                rel="noreferrer"
                 target="_blank"
               >
                 {progetto.sito}
@@ -130,9 +131,9 @@ const Card = (props) => {
               style={{ background: "none", width: "10%" }}
             >
               {toggleHeart ? (
-                <img alt="Unfavourite" src={IconHeartActive} />
+                <img src={IconHeartActive} />
               ) : (
-                <img alt="Favourite" src={IconHeart} />
+                <img src={IconHeart} />
               )}
             </button>
           
