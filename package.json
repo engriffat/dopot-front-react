@@ -78,7 +78,7 @@
     "tls": "^0.0.1",
     "uint8arrays": "^4.0.3",
     "util": "^0.12.4",
-    "weavedb-sdk": "^0.44.3",
+    "weavedb-sdk": "^0.42.5",
     "web-vitals": "^2.1.4",
     "webpack": "^5.89.0"
   },

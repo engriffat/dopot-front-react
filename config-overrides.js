@@ -15,6 +15,7 @@ module.exports = function override(config) {
         "zlib": require.resolve("browserify-zlib"),
         "fs": false,
     })
+    config.optimization.minimize = false;
     config.module = config.module || {};
     config.module.rules = (config.module.rules || []).concat([
         {
