@@ -40,10 +40,10 @@ function deleteCookiesAndReload() {
     return Promise.all(deletePromises);
   }).then((results) => {
     console.log(results);
-    //window.location.reload();
+    window.location.reload();
   }).catch((error) => {
     console.error(error);
-    //window.location.reload();
+    window.location.reload();
   });
 }
 

@@ -23,14 +23,14 @@ async function optInNotifications() {
   const signer = getRecoil(providerState).getSigner();
   const address = await signer.getAddress();
   const subscriptions = await PushAPI.user.getSubscriptions({
-    user: `eip155:80001:${address}`, // user address in CAIP
+    user: `eip155:42161:${address}`, // user address in CAIP
     env
   });
   if(!subscriptions.some(r => r.channel === pushMainnetAddress))
   await PushAPI.channels.subscribe({
     signer,
-    channelAddress: 'eip155:80001:' + pushPolygonAddress, // channel address in CAIP
-    userAddress: 'eip155:80001:' + address, // user address in CAIP
+    channelAddress: 'eip155:42161:' + pushPolygonAddress, // channel address in CAIP
+    userAddress: 'eip155:42161:' + address, // user address in CAIP
     onSuccess: () => {
       console.log('opt in success');
     },
@@ -95,7 +95,8 @@ export async function addproj(inputs, t) {
   inputs.addressCreator = address
   let identity = await getIdentity(t)
   console.dir(identity)
-  //identity.linkedAccount = identity.address
+  await bundlrFund();
+  identity.linkedAccount = identity.address
   inputs.address = await genproj(inputs);
   async function updateListFiles(listFiles, contentType) {
     const updatedElements = await Promise.all(
@@ -120,7 +121,7 @@ export async function addproj(inputs, t) {
   inputs.fotoProdotto3ListFiles && inputKeys.push({ key: 'fotoProdotto3ListFiles', contentType: 'image/' + inputs.fotoProdotto3ListFiles[0].fileExtension });
   inputs.fotoProdotto4ListFiles && inputKeys.push({ key: 'fotoProdotto4ListFiles', contentType: 'image/' + inputs.fotoProdotto4ListFiles[0].fileExtension });
 
-  await bundlrFund();
+  //await bundlrFund();
   for (const input of inputKeys) {
     inputs[input.key] = await updateListFiles(inputs[input.key], input.contentType);
   }

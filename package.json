@@ -11,7 +11,7 @@
     "@helia/json": "^1.0.0",
     "@helia/unixfs": "^1.2.2",
     "@ipld/dag-pb": "^4.0.2",
-    "@irys/sdk": "^0.2.1",
+    "@irys/sdk": "^0.2.4",
     "@libp2p/bootstrap": "^7.0.0",
     "@libp2p/interface-peer-discovery": "^1.1.0",
     "@libp2p/ipni-content-routing": "^1.0.0",
