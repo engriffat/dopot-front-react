@@ -1,31 +1,26 @@
+"use client"
 import React, { useEffect } from "react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import IconInfoCard from "../../components/PaginaCard/IconInfoCard";
 import IconInfoDai from "../../components/PaginaCard/IconInfoDai";
-import PCDollarIcon from "../../assets/img/pc-dollar-icon.png";
-import PCUserIcon from "../../assets/img/pc-person-icon.png";
-import PCCalendarIcon from "../../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useNavigate } from "react-router-dom";
 import Flag from "react-world-flags";
 import { addFavorites, postpone } from "../../utils/firebase/writeInfos";
-// import IconHeart from "../../assets/img/pc-heart-icon-02.svg";
-import IconHeart from "../../assets/img/heart-fav.svg";
-import IconHeartActive from "../../assets/img/heart-fav-active.svg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "../../i18n/client";
 import { getWithdrawalFees, getPWithSigner } from "../../utils/firebase/writeInfos";
 const { ethers } = require("ethers");
+import { useRouter } from "next/router"; // Import useRouter
 
 const Card = (props) => {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const { progetto } = props;
+  const { t } = useTranslation();
+  const { progetto, loadFees } = props;
   const percentage = (progetto.funds / progetto.quota) * 100;
   const fundRaisingDeadline = progetto.fundRaisingDeadline;
   const isMyProject = props.isMyProject;
   const { address } = progetto;
   const { progettiFavourites } = props;
   const [toggleHeart, setToggleHeart] = useState(false);
+  const router = useRouter(); // Initialize useRouter
 
   //if(progetto?.funds == 0 && )
   useEffect(() => {
@@ -48,11 +43,11 @@ const Card = (props) => {
         setFees(0);
       }
     };
-    fetchFees();
+    if(loadFees) fetchFees();
   }, []); 
 
   function handleRedirect(e) {
-    navigate(`/card/${address}`);
+    router.push(`/Card/${address}`);
     window.scrollTo(0, -1000000);
   }
   let desc = String(progetto.descProgetto);
@@ -114,17 +109,17 @@ const Card = (props) => {
         <div className="pmg-rc-right">
           <div className="pc-hero-icon-grid">
             <IconInfoDai
-              img={PCDollarIcon}
+              img={"/assets/img/pc-dollar-icon.png"}
               text={progetto.funds}
               text2={`${t("of")} ${progetto.quota}`}
             />
             <IconInfoCard
-              img={PCUserIcon}
-              text={`${progetto.investorsNumber} ${t("investors")}`}
+              img={"/assets/img/pc-person-icon.png"}
+              text={`${progetto.investorsNumber || 0} ${t("investors")}`}
             />
             {
               <IconInfoCard
-                img={PCCalendarIcon}
+                img={"/assets/img/pc-calendar-icon.png"}
                 text={
                   isMyProject
                     ? progetto.stateText
@@ -178,9 +173,9 @@ const Card = (props) => {
               style={{ background: "none", width: "10%" }}
             >
               {toggleHeart ? (
-                <img src={IconHeartActive} />
+                <img src={"/assets/img/heart-fav-active.svg"} />
               ) : (
-                <img src={IconHeart} />
+                <img src={"/assets/img/heart-fav.svg"} />
               )}
             </button>
           )}

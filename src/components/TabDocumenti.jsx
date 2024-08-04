@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from "react";
-import "../styles/components/footer.css";
-import { pdfjs, Document, Page } from "react-pdf";
-import { useTranslation } from "react-i18next";
+"use client"
+import React, { useState, useEffect, useMemo } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
+import { useTranslation } from "../i18n/client";
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const TabDocumenti = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
   const [showPdfs, setShowPdfs] = useState(
     Array(props.progetto.documentazioneListFiles.length).fill(false)
   );
@@ -17,15 +17,12 @@ const TabDocumenti = (props) => {
     setNumPages(numPages);
   }
 
-  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    "pdfjs-dist/build/pdf.worker.min.js",
-    import.meta.url
-  ).toString();
+  const documentazioneListFiles = useMemo(() => props.progetto.documentazioneListFiles, [props.progetto.documentazioneListFiles]);
 
   useEffect(() => {
     const fetchPdfs = async () => {
       const blobs = await Promise.all(
-        props.progetto.documentazioneListFiles.map(async (data) => {
+        documentazioneListFiles.map(async (data) => {
           const url = `https://arweave.net/${data}`;
           const response = await fetch(url);
           if (response.ok) {
@@ -39,7 +36,7 @@ const TabDocumenti = (props) => {
     };
 
     fetchPdfs();
-  }, [props.progetto.documentazioneListFiles]);
+  }, [documentazioneListFiles]);
 
   const handleClick = (index) => {
     const newIsVisible = [...showPdfs];

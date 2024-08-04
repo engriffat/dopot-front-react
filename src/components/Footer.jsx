@@ -1,74 +1,24 @@
+"use client"
 import React from "react";
-import "../styles/components/footer.css";
 import { SocialIcon } from "react-social-icons";
-import Pdf from "../assets/dopot.pdf";
-import { useTranslation } from "react-i18next";
-import openSourceImg from "../assets/img/open-source.png";
+import { useTranslation } from "../i18n/client";
+import Link from 'next/link';
 
-const BADGE_ID = "fb48ca1409e7f6fe";
-let ALCHEMY_URL = `https://alchemyapi.io/?r=badge:${BADGE_ID}`;
-const ALCHEMY_ANALYTICS_URL = `https://analytics.alchemyapi.io/analytics`;
-
-/*function logBadgeClick() {
-  fetch(`${ALCHEMY_ANALYTICS_URL}/badge-click`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      badge_id: BADGE_ID,
-    }),
-  });
-  window.open(ALCHEMY_URL, "_blank").focus();
-}
-
-function logBadgeView() {
-  fetch(`${ALCHEMY_ANALYTICS_URL}/badge-view`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      badge_id: BADGE_ID,
-    }),
-  });
-}
-
-function isBadgeInViewpoint(bounding) {
-  return (
-    bounding.top >= 0 &&
-    bounding.left >= 0 &&
-    bounding.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    bounding.right <=
-      (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
-
-var intervalId = setInterval(() => {
-  const badge = document.getElementById("badge-button");
-  if (badge && isBadgeInViewpoint(badge.getBoundingClientRect())) {
-    logBadgeView();
-    clearInterval(intervalId);
-  }
-}, 2000);
-*/
 const Footer = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <footer>
       <div className="box">
         <div className="footer-grid">
           <div className="footer-grid-box">
             <h4>{t("contact")}</h4>
-            <a href="mailto:info@dopot.fi ">info@dopot.fi </a>
+            <Link href="mailto:info@dopot.fi ">info@dopot.fi </Link>
           </div>
           <div className="footer-grid-box">
             <h4>{t("services")}</h4>
-            <a href="/#/insprogetto">{t("createcampaign")}</a>
-            <a href="/#/dopottoken">Dopot Token</a>
-            {/* <a href="#">{t('learn')}</a> */}
-            <a href="/#/FaqIta">Tutorials</a>
+            <Link href="/DopotToken">Dopot Token</Link>
+            {/* <Link href="/">{t('learn')}</Link> */}
+            <Link href="/FaqIta">Tutorials</Link>
           </div>
           <div className="footer-grid-box">
             <h4>Community</h4>
@@ -102,20 +52,20 @@ const Footer = () => {
           </div>
           <div className="footer-grid-box">
             <h4>{t("document")}</h4>
-            <a href={Pdf}>Whitepaper </a>
-            <a href="https://dopot.gitbook.io/dopot/">GitBook </a>
-            <a href="https://github.com/Dopot-Labs">
+            <Link href="/assets/dopot.pdf">Whitepaper </Link>
+            <Link href="https://dopot.gitbook.io/dopot/">GitBook </Link>
+            <Link href="https://github.com/Dopot-Labs">
               <img
                 id="badge-button"
                 style={{ marginBottom: "2rem" }}
-                src={openSourceImg}
+                src={"/assets/img/open-source.png"}
                 alt="Open Source"
               />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="footer-bottom">
-          {/*<a href="#">
+          {/*<Link href="/">
             <img
               onClick={logBadgeClick}
               id="badge-button"
@@ -123,7 +73,7 @@ const Footer = () => {
               src="https://static.alchemyapi.io/images/marketing/badge.png"
               alt="Alchemy Supercharged"
             />
-          </a>
+          </Link>
               */}
           <h6>DOPOT.FI</h6>
           {/* <p>Copyright © 2021 tutti diritti riservati a Dopot.ﬁ</p> */}

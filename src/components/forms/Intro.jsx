@@ -1,5 +1,7 @@
+"use client"
 import React from "react";
-import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
+import PlusGrdIcon from "../../../../public/assets/img/plus-grd-icon.png";
+import Link from 'next/link';
 
 const Intro = (props) => {
     return(<><div className="ins-input-box">

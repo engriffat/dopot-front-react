@@ -1,15 +1,6 @@
+"use client"
 import React from "react";
-import "../styles/components/footer.css";
-import {
-  InstagramEmbedm,
-  FacebookEmbedm,
-  TikTokEmbed,
-  TwitterEmbed,
-  YouTubeEmbed,
-  LinkedInEmbed,
-  InstagramEmbed,
-  FacebookEmbed,
-} from "react-social-media-embed";
+import Link from 'next/link';
 
 const TabSocial = (props) => {
   var socialList = [];

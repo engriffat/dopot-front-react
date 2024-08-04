@@ -1,22 +1,15 @@
-import React from "react";
-import { useState, useEffect } from "react";
+"use client"
+import React, { useState, useEffect } from "react";
 import IconInfoCard from "./IconInfoCard";
 import IconInfoDai from "./IconInfoDai";
-import PCDollarIcon from "../../assets/img/pc-dollar-icon.png";
-import PCUserIcon from "../../assets/img/pc-person-icon.png";
-import PCCalendarIcon from "../../assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { useNavigate } from "react-router-dom";
 import Flag from "react-world-flags";
-import { addFavorites, postpone } from "../../utils/firebase/writeInfos";
-// import IconHeart from "../../assets/img/pc-heart-icon-02.svg";
-import IconHeart from "../../assets/img/heart-fav.svg";
-import IconHeartActive from "../../assets/img/heart-fav-active.svg";
-import { useTranslation } from "react-i18next";
+import { addFavorites } from "../../utils/firebase/writeInfos";
+import { useTranslation } from "../../i18n/client";
+import { useRouter } from "next/router"; // Import useRouter
 
 const Card = (props) => {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
+  const { t } = useTranslation();
   const { progetto } = props;
   const percentage = (progetto.funds / progetto.quota) * 100;
   const fundRaisingDeadline = progetto.fundRaisingDeadline;
@@ -24,11 +17,13 @@ const Card = (props) => {
   const address = progetto.address;
   const { progettiFavourites } = props;
   const [toggleHeart, setToggleHeart] = useState(true);
+  const router = useRouter(); // Initialize useRouter
+
   useEffect(() => {
     setToggleHeart(progettiFavourites && Array.isArray(progettiFavourites) ? progettiFavourites.includes(address) : false)
   }, [progettiFavourites, address]);
   function handleRedirect(e) {
-    navigate(`/card/${address}`);
+    router.push(`/Card/${address}`);
     window.scrollTo(0, -1000000);
   }
   let desc = String(progetto.descProgetto);
@@ -57,6 +52,7 @@ const Card = (props) => {
               <a
                 className="link-social-new  box-bk-over-logo"
                 href={progetto.sito}
+                rel="noreferrer"
                 target="_blank"
               >
                 {progetto.sito}
@@ -82,17 +78,17 @@ const Card = (props) => {
         <div className="pmg-rc-right">
           <div className="pc-hero-icon-grid">
             <IconInfoDai
-              img={PCDollarIcon}
+              img={"/assets/img/pc-dollar-icon.png"}
               text={progetto.funds}
               text2={`${t("of")} ${progetto.quota}`}
             />
             <IconInfoCard
-              img={PCUserIcon}
+              img={"/assets/img/pc-person-icon.png"}
               text={`${progetto.investorsNumber} ${t("investors")}`}
             />
             {
               <IconInfoCard
-                img={PCCalendarIcon}
+                img={"/assets/img/pc-calendar-icon.png"}
                 text={
                   isMyProject
                     ? progetto.stateText
@@ -131,9 +127,9 @@ const Card = (props) => {
               style={{ background: "none", width: "10%" }}
             >
               {toggleHeart ? (
-                <img src={IconHeartActive} />
+                <img alt="Unfavourite" src={"/assets/img/heart-fav-active.svg"} />
               ) : (
-                <img src={IconHeart} />
+                <img alt="Favourite" src={"/assets/img/heart-fav.svg"} />
               )}
             </button>
           

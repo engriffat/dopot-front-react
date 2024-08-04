@@ -1,6 +1,6 @@
+"use client"
 import React from "react";
-import IconDai from "../../assets/img/dai.png";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "../../i18n/client";
 
 const IconInfoDai = (props) => {
   const { t, i18n } = useTranslation();
@@ -9,10 +9,10 @@ const IconInfoDai = (props) => {
       <img src={props.img} alt="Icon Info" />
       <p style={{ margin: 0 }}>
         {props.text}
-        <img style={{ margin: 0, height: "20px" }} src={IconDai} alt="" />
+        <img style={{ margin: 0, height: "20px" }} src={"/assets/img/dai.png"} alt="" />
         {props.text2}
         <span>
-          <img style={{ margin: 0, height: "20px" }} src={IconDai} alt="" />
+          <img style={{ margin: 0, height: "20px" }} src={"/assets/img/dai.png"} alt="" />
         </span>
         <span>{t("raised")}</span>
       </p>

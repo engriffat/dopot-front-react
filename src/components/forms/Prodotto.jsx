@@ -1,12 +1,12 @@
+"use client"
 import React, { useState } from "react";
-import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
-import { NftMint, NftMintHeader } from "./NftMint";
-import { useTranslation } from "react-i18next";
+import { NftMint } from "./NftMint";
+import { useTranslation } from "../../i18n/client";
+import Link from 'next/link';
 
 const Prodotto = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [numeroProdotti, setnumeroProdotti] = useState(1);
 
   function toggleNumeroProdotti(event) {
@@ -19,7 +19,7 @@ const Prodotto = (props) => {
 
   return (
     <>
-      <div class="ins-input-box">
+      <div className="ins-input-box">
         <h1>{t("prodcuttitle")}</h1>
         <h4>{t("productquantity")}</h4>
         <div className="ins-btn-box">
@@ -79,7 +79,7 @@ const Prodotto = (props) => {
           return (
             <div className="add-btn-box">
               <a onClick={props.setState}>
-                <img src={PlusGrdIcon} alt="PlusGrdIcon" />
+                <img src={"/assets/img/plus-grd-icon.png"} alt="PlusGrdIcon" />
               </a>
             </div>
           );
@@ -175,35 +175,33 @@ function convertToVariable(str) {
 }
 
 const ProdottoHeader = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
-    <>
-      <div className="ins-progress">
-        <div className="ins-circle ins-circle-done">
-          <p>{t("infobase")}</p>
-        </div>
-        <div className="ins-line ins-line-done"></div>
-        <div className="ins-circle ins-circle-done">
-          <p>{t("survey")}</p>
-        </div>
-        <div className="ins-line ins-line-done"></div>
-        <div className="ins-circle ins-circle-done">
-          <p>{t("project")}</p>
-        </div>
-        <div className="ins-line ins-line-done"></div>
-        <div className="ins-circle ins-circle-active">
-          <p>{t("product")}</p>
-        </div>
-        <div className="ins-line ins-line-pending"></div>
-        <div className="ins-circle ins-circle-pending">
-          <p>NFTs Mint</p>
-        </div>
-        <div className="ins-line ins-line-pending"></div>
-        <div className="ins-circle ins-circle-pending">
-          <p>FAQ</p>
-        </div>
+    <div className="ins-progress">
+      <div className="ins-circle ins-circle-done">
+        <p>{t("infobase")}</p>
       </div>
-    </>
+      <div className="ins-line ins-line-done"></div>
+      <div className="ins-circle ins-circle-done">
+        <p>{t("survey")}</p>
+      </div>
+      <div className="ins-line ins-line-done"></div>
+      <div className="ins-circle ins-circle-done">
+        <p>{t("project")}</p>
+      </div>
+      <div className="ins-line ins-line-done"></div>
+      <div className="ins-circle ins-circle-active">
+        <p>{t("product")}</p>
+      </div>
+      <div className="ins-line ins-line-pending"></div>
+      <div className="ins-circle ins-circle-pending">
+        <p>NFTs Mint</p>
+      </div>
+      <div className="ins-line ins-line-pending"></div>
+      <div className="ins-circle ins-circle-pending">
+        <p>FAQ</p>
+      </div>
+    </div>
   );
 };
 

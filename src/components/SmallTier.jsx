@@ -1,5 +1,6 @@
+"use client"
 import React from "react";
-import BlogImg from "../assets/img/void.jpg";
+import BlogImg from "../../../public/assets/img/void.jpg";
 import ProfileCardLeft from "./Profile/ProfileCardLeft";
 import { progettiState, progettiImageState} from "../recoilState";
 import { getRecoil, setRecoil } from 'recoil-nexus';

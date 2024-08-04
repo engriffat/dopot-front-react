@@ -1,8 +1,7 @@
-import { atom, selector } from "recoil";
+import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist'
 
 const { persistAtom } = recoilPersist()
-
 
 const addressState = atom({
   key: "address",

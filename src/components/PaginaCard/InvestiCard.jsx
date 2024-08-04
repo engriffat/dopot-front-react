@@ -1,15 +1,15 @@
+"use client"
 import React, { useEffect, useState } from 'react';
 import { addInvestment } from "../../utils/firebase/writeInfos";
 import addressDopotReward from '../../abi/dopotReward/address.js';
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "../../i18n/client";
 
 
 const InvestiCard = (props) => {
   const { state, titolo, price, spec, currentSupply, supply } = props;
   let { img } = props;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   async function invest(){
     try {
       await toast.promise(addInvestment(props.address, props.numTier, price, titolo, t), {
@@ -52,7 +52,7 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + price}</h5>
           <button
-            onClick={() => (state === "Ongoing" ? invest() : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
+            onClick={() => (state === "Ongoing" ? invest() : window.location.href = (`https://opensea.io/assets/arbitrum/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
             {state === "Ongoing" ? "Invest" : "Buy NFT"}
@@ -70,7 +70,7 @@ const InvestiCard = (props) => {
 
           <h5>{"DAI " + price}</h5>
           <button
-            onClick={() => (state === "Ongoing" ? invest() : window.location.href = (`https://testnets.opensea.io/assets/mumbai/${addressDopotReward}`))}
+            onClick={() => (state === "Ongoing" ? invest() : window.location.href = (`https://opensea.io/assets/arbitrum/${addressDopotReward}`))}
             className="grd-btn dopot-btn-sm"
           >
             {state === "Ongoing" ? "Invest" : "Buy NFT"}

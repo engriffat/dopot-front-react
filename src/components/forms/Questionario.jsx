@@ -1,6 +1,6 @@
+"use client"
 import React from "react";
-import PlusGrdIcon from "../../assets/img/plus-grd-icon.png";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "../../i18n/client";
 
 const Questionario = (props) => {
   const { t, i18n } = useTranslation();
@@ -93,7 +93,7 @@ const Questionario = (props) => {
           return (
             <div className="add-btn-box">
               <a onClick={props.setState}>
-                <img src={PlusGrdIcon} alt="PlusGrdIcon" />
+                <img src={"/assets/img/plus-grd-icon.png"} alt="PlusGrdIcon" />
               </a>
             </div>
           );

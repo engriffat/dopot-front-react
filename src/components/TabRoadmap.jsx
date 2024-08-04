@@ -1,8 +1,6 @@
+"use client"
 import React from "react";
-import "../styles/components/footer.css";
 import BlogPost from "./PaginaCard/BlogPost";
-import BlogImg from "../assets/img/void.jpg";
-import ImageIcon from "../assets/img/pc-img-icon.png";
 
 const TabRoadmap = (props) => {// foreach titolo blogpost heading titolo text desc[i]
   return (

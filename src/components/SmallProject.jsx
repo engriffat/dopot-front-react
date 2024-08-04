@@ -1,28 +1,25 @@
+"use client"
 import React from "react";
 import IconInfoCard from "./PaginaCard/IconInfoCard";
 import IconInfoDai from "./PaginaCard/IconInfoDai";
-import PCDollarIcon from "../assets/img/pc-dollar-icon.png";
-import PCUserIcon from "../assets/img/pc-person-icon.png";
-import PCCalendarIcon from "../assets/img/pc-calendar-icon.png";
+import PCDollarIcon from "../../../public/assets/img/pc-dollar-icon.png";
+import PCUserIcon from "../../../public/assets/img/pc-person-icon.png";
+import PCCalendarIcon from "../../../public/assets/img/pc-calendar-icon.png";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { progettiState } from "../recoilState";
-import { getRecoil, setRecoil } from "recoil-nexus";
-import { useNavigate } from "react-router-dom";
-import { addFavorites } from "../utils/firebase/writeInfos";
-import IconPlane from "../assets/img/icon-plane.svg";
-import IconHeart from "../assets/img/pc-heart-icon-02.svg";
 import {RetriveProjectTypes} from "../utils/firebase/retriveInfo";
+import { useRouter } from "next/router"; // Import useRouter
 
 const SmallProject = (props) => {
-  var progetto = getRecoil(progettiState).find(
+  const router = useRouter(); // Initialize useRouter
+  let progetto = getRecoil(progettiState).find(
     (x) => x.address === props.address
   );
 
   const percentage = (progetto.funds / progetto.quota) * 100;
-  const navigate = useNavigate();
 
   function handleRedirect(e) {
-    navigate(`/card/${props.address}`);
+    router.push(`/Card/${props.address}`);
     window.scrollTo(0, -1000000);
   }
 
@@ -54,14 +51,14 @@ const SmallProject = (props) => {
 
         <input
           type="checkbox"
-          class="read-more-state"
+          className="read-more-state"
           id="post-{progetto.nomeAzienda}"
         />
-        <p class="read-more-target box-bk-over-logo">{progetto.introduzione}</p>
+        <p className="read-more-target box-bk-over-logo">{progetto.introduzione}</p>
         {progetto.introduzione.length > 200 ? (
           <label
             for="post-{progetto.nomeAzienda}"
-            class="read-more-trigger"
+            className="read-more-trigger"
           ></label>
         ) : null}
       </div>
